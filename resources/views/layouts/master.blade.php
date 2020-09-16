@@ -27,6 +27,10 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  {{-- Assets New Slider --}}
+  {{-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/slider.css') }}">
+
   <!-- =======================================================
   * Template Name: Resi - v2.1.0
   * Template URL: https://bootstrapmade.com/resi-free-bootstrap-html-template/
@@ -67,19 +71,18 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1>Easy Marketing Solutions For Your Business</h1>
+            <h1>Car Community Platfrom Komunitas Otomotif</h1>
             <ul>
-              <li><i class="ri-check-line"></i> Dolorem ratione dolorum</li>
-              <li><i class="ri-check-line"></i> Quo nihil natus ea non pariatur optio occaecati</li>
-              <li><i class="ri-check-line"></i> Duis aute irure dolor in reprehenderit in</li>
+              <li><i class="ri-check-line"></i> Banyak Event</li>
+              <li><i class="ri-check-line"></i> Berita Seputar Otomotif</li>
+              <li><i class="ri-check-line"></i> Perkumpulan Komunitas</li>
             </ul>
             <div class="mt-3">
-              <a href="#about" class="btn-get-started scrollto">Get Started</a>
-              <a href="" class="btn-get-quote">Request a Quote</a>
+              <a href="{{ '/register' }}" class="btn-get-started scrollto">Bergabung</a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+            <img src="assets/img/fast_car.png" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -94,8 +97,8 @@
   
           <div class="row content">
             <div class="col-lg-6">
-              <h2>Eum ipsam laborum deleniti velitena</h2>
-              <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
+              <h2>Car Community</h2>
+              <h3>Menyatukan komunitas otomotif dan menyalurkan hobi dengan event-event yang seru</h3>
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0">
               <p>
@@ -161,25 +164,25 @@
   
             <div class="col-lg-3 col-md-6">
               <div class="count-box">
-                <i class="icofont-simple-smile"></i>
+                <i class="icofont-people"></i>
                 <span data-toggle="counter-up">232</span>
-                <p>Happy Clients</p>
+                <p>User</p>
               </div>
             </div>
   
             <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
               <div class="count-box">
-                <i class="icofont-document-folder"></i>
-                <span data-toggle="counter-up">521</span>
-                <p>Projects</p>
+                <i class="icofont-speech-comments"></i>
+                <span data-toggle="counter-up">64</span>
+                <p>Event</p>
               </div>
             </div>
   
             <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
               <div class="count-box">
-                <i class="icofont-live-support"></i>
-                <span data-toggle="counter-up">1,463</span>
-                <p>Hours Of Support</p>
+                <i class="icofont-gears"></i>
+                <span data-toggle="counter-up">35</span>
+                <p>Bengkel Cabang</p>
               </div>
             </div>
   
@@ -187,7 +190,7 @@
               <div class="count-box">
                 <i class="icofont-users-alt-5"></i>
                 <span data-toggle="counter-up">15</span>
-                <p>Hard Workers</p>
+                <p>Komunitas</p>
               </div>
             </div>
   
@@ -199,76 +202,125 @@
       <!-- ======= Services Section ======= -->
       <section id="services" class="services">
         <div class="container">
-  
-          <div class="section-title">
-            <h2>Services</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
-  
-          <div class="row">
-            <div class="content col-xl-5 d-flex flex-column justify-content-center">
-              <img src="assets/img/services.png" class="img-fluid" alt="">
+            <div class="text-center">
+                <h1 class="heading-title">News</h1>
             </div>
-            <div class="col-xl-7">
-              <div class="icon-boxes d-flex flex-column justify-content-center">
-                <div class="row">
-                  <div class="col-lg-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-blue">
-                      <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></path>
-                        </svg>
-                        <i class="bx bxl-dribbble"></i>
-                      </div>
-                      <h4><a href="">Lorem Ipsum</a></h4>
-                      <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="news-slider" class="owl-carousel">
+                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
+                            <div class="post-header">
+                                <h4 class="title">
+                                    <h3>Judul 1</h3>
+                                </h4>
+                                <ul class="post-bar">
+                                    <li><a href="#">Williamson</a></li>
+                                    <li><i class="fa fa-calendar"></i>02 June 2016</li>
+                                </ul>
+                            </div>
+                            <div class="pic">
+                                <img src="assets/img/team/team-1.jpg" alt=""/>
+                                <ul class="post-category">
+                                    <li><a href="#">html</a></li>
+                                    <li><a href="#">css</a></li>
+                                </ul>
+                            </div>
+                            <p class="post-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
+                            </p>
+                        </div>
+
+                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
+                            <div class="post-header">
+                                <h4 class="title">
+                                    <h3>Judul 2</h3>
+                                </h4>
+                                <ul class="post-bar">
+                                    <li><a href="#">Kristiana</a></li>
+                                    <li><i class="fa fa-calendar"></i>05 June 2016</li>
+                                </ul>
+                            </div>
+                            <div class="pic">
+                                <img src="assets/img/team/team-2.jpg" alt=""/>
+                                <ul class="post-category">
+                                    <li><a href="#">html</a></li>
+                                    <li><a href="#">css</a></li>
+                                </ul>
+                            </div>
+                            <p class="post-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
+                            </p>
+                        </div>
+
+                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
+                            <div class="post-header">
+                                <h4 class="title">
+                                    <h3>Judul 3</h3>
+                                </h4>
+                                <ul class="post-bar">
+                                    <li><a href="#">Steve Thomas</a></li>
+                                    <li><i class="fa fa-calendar"></i>09 June 2016</li>
+                                </ul>
+                            </div>
+                            <div class="pic">
+                                <img src="assets/img/team/team-3.jpg" alt=""/>
+                                <ul class="post-category">
+                                    <li><a href="#">html</a></li>
+                                    <li><a href="#">css</a></li>
+                                </ul>
+                            </div>
+                            <p class="post-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
+                            </p>
+                        </div>
+
+                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
+                            <div class="post-header">
+                                <h4 class="title">
+                                    <h3>Judul 4</h3>
+                                </h4>
+                                <ul class="post-bar">
+                                    <li><a href="#">Miranda joy</a></li>
+                                    <li><i class="fa fa-calendar"></i>12 June 2016</li>
+                                </ul>
+                            </div>
+                            <div class="pic">
+                                <img src="assets/img/team/team-4.jpg" alt=""/>
+                                <ul class="post-category">
+                                    <li><a href="#">html</a></li>
+                                    <li><a href="#">css</a></li>
+                                </ul>
+                            </div>
+                            <p class="post-description">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
+                            </p>
+                        </div>
                     </div>
-                  </div>
-  
-                  <div class="col-lg-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box iconbox-orange ">
-                      <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
-                        </svg>
-                        <i class="bx bx-file"></i>
-                      </div>
-                      <h4><a href="">Sed Perspiciatis</a></h4>
-                      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                  </div>
-  
-                  <div class="col-lg-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-pink">
-                      <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"></path>
-                        </svg>
-                        <i class="bx bx-tachometer"></i>
-                      </div>
-                      <h4><a href="">Magni Dolores</a></h4>
-                      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                  </div>
-  
-                  <div class="col-lg-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-teal">
-                      <div class="icon">
-                        <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"></path>
-                        </svg>
-                        <i class="bx bx-layer"></i>
-                      </div>
-                      <h4><a href="">Nemo Enim</a></h4>
-                      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                  </div>
                 </div>
-              </div><!-- End .content-->
             </div>
-          </div>
-  
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                ...
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- End Modal -->
       </section><!-- End Services Section -->
   
       <!-- ======= Features Section ======= -->
@@ -506,7 +558,7 @@
         <div class="container">
   
           <div class="section-title">
-            <h2>Team</h2>
+            <h2>Event</h2>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
           </div>
   
@@ -588,130 +640,6 @@
   
         </div>
       </section><!-- End Team Section -->
-  
-      <!-- ======= Pricing Section ======= -->
-      <section id="pricing" class="pricing">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Pricing</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
-  
-          <div class="row no-gutters">
-  
-            <div class="col-lg-4 box">
-              <h3>Free</h3>
-              <h4>$0<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <a href="#" class="btn-buy">Get Started</a>
-            </div>
-  
-            <div class="col-lg-4 box featured">
-              <h3>Business</h3>
-              <h4>$29<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-              </ul>
-              <a href="#" class="btn-buy">Get Started</a>
-            </div>
-  
-            <div class="col-lg-4 box">
-              <h3>Developer</h3>
-              <h4>$49<span>per month</span></h4>
-              <ul>
-                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-              </ul>
-              <a href="#" class="btn-buy">Get Started</a>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Pricing Section -->
-  
-      <!-- ======= Frequently Asked Questions Section ======= -->
-      <section id="faq" class="faq">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Frequently Asked Questions</h2>
-          </div>
-  
-          <ul class="faq-list">
-  
-            <li>
-              <a data-toggle="collapse" class="" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="icofont-simple-up"></i></a>
-              <div id="faq1" class="collapse show" data-parent=".faq-list">
-                <p>
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                </p>
-              </div>
-            </li>
-  
-            <li>
-              <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="icofont-simple-up"></i></a>
-              <div id="faq2" class="collapse" data-parent=".faq-list">
-                <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                </p>
-              </div>
-            </li>
-  
-            <li>
-              <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="icofont-simple-up"></i></a>
-              <div id="faq3" class="collapse" data-parent=".faq-list">
-                <p>
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                </p>
-              </div>
-            </li>
-  
-            <li>
-              <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="icofont-simple-up"></i></a>
-              <div id="faq4" class="collapse" data-parent=".faq-list">
-                <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                </p>
-              </div>
-            </li>
-  
-            <li>
-              <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="icofont-simple-up"></i></a>
-              <div id="faq5" class="collapse" data-parent=".faq-list">
-                <p>
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                </p>
-              </div>
-            </li>
-  
-            <li>
-              <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="icofont-simple-up"></i></a>
-              <div id="faq6" class="collapse" data-parent=".faq-list">
-                <p>
-                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                </p>
-              </div>
-            </li>
-  
-          </ul>
-  
-        </div>
-      </section><!-- End Frequently Asked Questions Section -->
   
       <!-- ======= Contact Section ======= -->
       <section id="contact" class="contact section-bg">
@@ -876,6 +804,18 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
     <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#news-slider").owlCarousel({
+                items:3,
+                itemsDesktop:[1199,3],
+                itemsDesktopSmall:[1000,2],
+                itemsMobile : [650,1],
+                navigationText:false,
+                autoPlay:true
+            });
+            });
+    </script>
   
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
