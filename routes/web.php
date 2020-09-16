@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
 // use App\Http\Controllers;
 
 /*
@@ -14,9 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Admin routes
+Route::get('/admin', function () {return view('auth/login');});
+
+//News routes
+Route::get('admin/news', function () { return view('auth/admin_manage/addnews'); });
+Route::post('/addnews', [NewsController::class, 'store'])->name('storeNews');
+
+//endAdmin routes
+
+//View routes
+Route::get('/news', [NewsController::class, 'show']);
+//endView routes
