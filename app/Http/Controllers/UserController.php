@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class ApiController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class ApiController extends Controller
      */
     public function index()
     {
-        return "Welcome to API Endpoint";
+        $data = User::all();
+        return view('admin.User', ['data' => $data]);
     }
 
     /**
@@ -24,7 +25,7 @@ class ApiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.CreateUser');
     }
 
     /**
@@ -35,7 +36,7 @@ class ApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = New User;
     }
 
     /**

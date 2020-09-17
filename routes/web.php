@@ -1,7 +1,8 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/admin', function(){
-    return view('admin.dashboard');
-});
+// Route::get('/admin', function(){
+//     return view('admin.dashboard');
+// });
 
-Auth::routes();
-Route::get('/dashboard', 'HomeController@index')->name('home');
+// Admin
+Route::get('/news', 'NewsController@index');
+Route::get('/user/list', 'UserController@index');
+Route::get('/user/add', 'UserController@create');
+Route::post('/user/add', 'UserController@store');
+
+
+Auth::routes(['verify' => true]);
+Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
