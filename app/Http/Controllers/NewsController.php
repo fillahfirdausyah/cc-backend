@@ -5,21 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
 use App\Models\News;
 
 class NewsController extends Controller
 {
 
 
-  public function show()
+  protected function show()
   {
     $news = News::all()->except('id');
-    return view('news',['news'=>$news]);
+    return view('/auth/admin_manage/news',['news'=>$news]);
   }
 
 
- 	public function store(Request $request)
+ 	protected function store(Request $request)
   {
   	$request->validate([
   		  'judul' => 'required|string|max:255',
@@ -39,16 +38,16 @@ class NewsController extends Controller
        'tanggal'=>$request->tanggal,
        'aset'=>$profileImage
     ));		
-  	return redirect('/news')->with('status', 'Data Berhasil Ditambahkan!');
+  	return redirect('/admin/news')->with('status', 'Data Berhasil Ditambahkan!');
   }
  
- 	public function edit($id)
+ 	protected function edit($id)
  	{
  		$news = News::find($id);
  		return view('auth/admin_manage/changenews',['news'=>$news]);
  	}
 
-  public function update($id, Request $request)
+  protected function update($id, Request $request)
   {
     $request->validate([
         'judul' => 'required|string|max:255',
@@ -69,13 +68,13 @@ class NewsController extends Controller
     $news->aset = $profileImage;
     $news->save();
 
-    return redirect('/news'); 
+    return redirect('/admin/news'); 
   }
 
-  public function delete($id)
+  protected function delete($id)
   {
       $news = News::find($id);
       $news->delete();
-    return redirect('/news');
+    return redirect('/admin/news');
   }
 }
