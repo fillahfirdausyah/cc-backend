@@ -11,16 +11,20 @@
                       @foreach($news as $berita)
                       <tr>
                           <th>{{ $berita->judul }}</th>
-                          <th>{{ $berita->aset }}</th>
-                      </tr>
-                      <tr>
+                          <th><img width="150px" src="{{url('public/image/'.$berita->aset)}}"></th>
                           <td>{{ $berita->content }}</td>
-                      </tr>
-                      <tr>
                           <td>{{ $berita->tanggal }}</td>
+                          <td>
+                              <a href="{{'admin/editnews/'.$berita->id}}">Edit</a>
+                              <form action="{{'admin/deletenews/'.$berita->id}}" method="POST">
+                                @csrf
+                                <button type="submit">Hapus</button>
+                              </form>
+                          </td>
                       </tr>
                       @endforeach
-                  </table>   
+                  </table>
+                  <a href="{{route('storePage')}}">Tambah berita</a>   
                 </div>
             </div>
         </div>

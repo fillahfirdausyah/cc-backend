@@ -20,12 +20,17 @@ Auth::routes();
 //Admin routes
 Route::get('/admin', function () {return view('auth/login');});
 
-//News routes
-Route::get('admin/news', function () { return view('auth/admin_manage/addnews'); });
-Route::post('/addnews', [NewsController::class, 'store'])->name('storeNews');
+//add news
+Route::get('/admin/addnews/form', function () {return view('auth/admin_manage/addnews');})->name('storePage');
+Route::post('/admin/addnews', [NewsController::class, 'store'])->name('storeNews');
 
-//endAdmin routes
+//update news
+Route::get('/admin/editnews/{id}',[NewsController::class, 'edit']);
+Route::post('/admin/updatenews/{id}', [NewsController::class, 'update'])->name('updateNews');
 
-//View routes
-Route::get('/news', [NewsController::class, 'show']);
-//endView routes
+//delete news
+Route::post('/admin/deletenews/{id}', [NewsController::class, 'delete'])->name('deleteNews');
+
+//show news
+Route::get('/news', [NewsController::class, 'show'])->name('showNews');
+
