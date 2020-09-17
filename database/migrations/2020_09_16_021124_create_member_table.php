@@ -19,6 +19,7 @@ class CreateMemberTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('foto')->nullable(1);
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }

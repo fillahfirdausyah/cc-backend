@@ -7,22 +7,26 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Event;
 
-class EventController extends Controller
+class EventControllers extends Controller
 {
-    protected function show()
+    public function index()
     {
-      $event = Event::all()->except('id');
-      return view('auth/admin_manage/Event/event',['event'=>$event]);
+        //
     }
 
-    protected function store(Request $request)
+    public function create()
     {
-      $request->validate([
+        //
+    }
+
+    public function store(Request $request)
+    {
+    $request->validate([
         'judul'=>'required|string|max:255',
         'content'=>'required',
         'tanggal'=>'required',
         'aset'=>'required|image|mimes:jpg,jpeg,png',
-      ]);
+    ]);
 
         $files = $request->file('aset');
         $image_name ="image_E".rand(0000,9999).".".$files->getClientOriginalExtension();
@@ -30,30 +34,41 @@ class EventController extends Controller
         $files->move($destinationPath,$image_name);
       
     
-      Event::create([
+    Event::create([
         'judul'=> $request->judul,
         'content'=> $request->content,
         'tanggal'=> $request->tanggal,
         'aset'=> $image_name
-      ]);
+    ]);
 
-      return redirect("/admin/event");
+    return redirect("/admin/event");
     }
 
-    protected function edit($id)
+    public function show()
     {
-      $event = Event::find($id);
-      return view('auth/admin_manage/Event/changeevent',['event'=>$event]);
+        $event = Event::all()->except('id');
+    
+    return view('auth/admin_manage/Event/event',['event'=>$event]);
     }
 
-    protected function update($id,Request $request)
+    public function edit($id)
     {
-      $request->validate([
+    
+        $event = Event::find($id);
+    
+    return view('auth/admin_manage/Event/changeevent',['event'=>$event]);
+    }
+
+    
+    public function update(Request $request, $id)
+    {
+        //
+    $request->validate([
         'judul'=>'required|string|max:255',
         'content'=>'required',
         'tanggal'=>'required',
         'aset'=>'required|image|mimes:jpg,jpeg,png',
-      ]);
+    ]);
 
         $files = $request->file('aset');
         $image_name ="image_E".rand(0000,9999).".".$files->getClientOriginalExtension();
@@ -61,20 +76,21 @@ class EventController extends Controller
         $files->move($destinationPath,$image_name);
       
     
-      $event = Event::find($id);
-      $event->judul= $request->judul;
-      $event->content= $request->content;
-      $event->tanggal= $request->tanggal;
-      $event->aset= $image_name;
-      $event->save();
+        $event = Event::find($id);
+        $event->judul= $request->judul;
+        $event->content= $request->content;
+        $event->tanggal= $request->tanggal;
+        $event->aset= $image_name;
+        $event->save();
 
-      return redirect("/admin/event");
+    return redirect("/admin/event");
     }
 
-    protected function delete($id)
+    public function destroy($id)
     {
-      $event = Event::find($id);
-      $event->delete();
-      return redirect('admin/event');
+        $event = Event::find($id);
+        $event->delete();
+    
+    return redirect('admin/event');
     }
 }
