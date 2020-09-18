@@ -7,5 +7,5 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-<p align="center">Progress Project</p>
-<p align="center"><img src="https://freeimage.host/i/2xmXrF"></p>
+## <p align="center">Progress Project</p>
+<p align="center"><a href="https://freeimage.host/i/2xmXrF"><img src="https://iili.io/2xmXrF.md.png" alt="2xmXrF.md.png" border="0"></a></p>
