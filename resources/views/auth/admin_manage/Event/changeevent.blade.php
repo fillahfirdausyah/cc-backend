@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Edit Event') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ '/admin/updateevent/'.$event->id }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ '/admin/event/update/'.$event->id }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="judul" class="col-md-4 col-form-label text-md-right">{{ __('JUDUL') }}</label>
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="aset" class="col-md-4 col-form-label text-md-right">{{ __('ASET') }}</label>
+                            <label for="aset" class="col-md-4 col-form-label text-md-right">{{ __('GAMBAR') }}</label>
 
                             <div class="col-md-6">
                                 <input id="aset" type="file" name="aset" value="{{ $event->aset }}">
@@ -47,8 +47,9 @@
                                     {{ __('Edit') }}
                                 </button>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
+                    <a href="{{route('showEvent')}}">Kembali</a>
                 </div>
             </div>
         </div>

@@ -15,8 +15,8 @@
                           <td>{{ $berita->content }}</td>
                           <td>{{ $berita->tanggal }}</td>
                           <td>
-                              <a href="{{'/editnews/'.$berita->id}}">Edit</a>
-                              <form action="{{'/deletenews/'.$berita->id}}" method="POST">
+                              <a href="{{'/admin/news/edit/'.$berita->id}}">Edit</a>
+                              <form action="{{'/admin/news/delete/'.$berita->id}}" method="POST">
                                 @csrf
                                 <button type="submit">Hapus</button>
                               </form>

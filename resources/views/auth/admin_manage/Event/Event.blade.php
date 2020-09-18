@@ -15,8 +15,8 @@
                           <td>{{ $e->content }}</td>
                           <td>{{ $e->tanggal }}</td>
                           <td>
-                              <a href="{{'/editevent/'.$e->id}}">Edit</a>
-                               <form action="{{'/deleteevent/'.$e->id}}" method="POST"> 
+                              <a href="{{'/admin/event/edit/'.$e->id}}">Edit</a>
+                               <form action="{{'/admin/event/delete/'.$e->id}}" method="POST"> 
                                  @csrf 
                                  <button type="submit">Hapus</button> 
                                </form> 

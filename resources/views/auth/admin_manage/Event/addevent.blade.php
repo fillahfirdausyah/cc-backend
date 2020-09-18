@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="aset" class="col-md-4 col-form-label text-md-right">{{ __('ASET') }}</label>
+                            <label for="aset" class="col-md-4 col-form-label text-md-right">{{ __('GAMBAR') }}</label>
 
                             <div class="col-md-6">
                                 <input id="aset" type="file" name="aset">
@@ -51,6 +51,7 @@
                             </div>
                         </div>
                     </form>
+                    <a href="{{route('showEvent')}}">Kembali</a>
                 </div>
             </div>
         </div>
