@@ -31,7 +31,7 @@
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                        <a href="{{ '/user/add' }}" class="btn btn-primary">Tambah User</a>
+                        <a href="{{ '/admin/user/add' }}" class="btn btn-primary">Tambah User</a>
                     <tr>
                       <th>Nama</th>
                       <th>Email</th>
@@ -46,8 +46,8 @@
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
                             <td>
-                                <a href="" class="btn btn-success">Edit</a>
-                                <a href="" class="btn btn-danger">Hapus</a>
+                                <a href="{{ '/admin/user/edit/'}}{{ $d->id }}" class="btn btn-success">Edit</a>
+                                <a href="{{ '/admin/user/delete/'}}{{ $d->id }}" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
                         

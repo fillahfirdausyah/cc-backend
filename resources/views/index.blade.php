@@ -62,7 +62,7 @@
         
         @if (Route::has('login'))
           @auth
-          <a href="{{ '/dashboard' }}" class="get-started-btn scrollto">Dashboard</a>  
+          <a href="{{ '/dashboard' }}" class="get-started-btn scrollto">Dashboard</a>
         @else
           <a href="{{ '/login' }}" class="get-started-btn scrollto">Login</a>
         @endif

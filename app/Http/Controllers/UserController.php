@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -36,7 +37,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = New User;
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required | email',
+            'password'  => 'required | min:8',
+        ]);
+
+        $user = New User;
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role     = $request->role;
+        $user->save();
+
+        return redirect('/admin/user/list');
+
+        
+        
     }
 
     /**
@@ -47,7 +64,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+       $user = User::find($id);
+
+        return view('admin.EditUser', compact('user'));
     }
 
     /**
@@ -58,7 +77,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+
     }
 
     /**
@@ -70,7 +90,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required | email',
+            'password'  => 'required | min:8',
+        ]);
+
+        $user = User::find($id)->first();
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role     = $request->role;
+        $user->save();
+
+        return redirect('/admin/user/list');
     }
 
     /**
@@ -81,6 +114,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "Hello World";
     }
 }

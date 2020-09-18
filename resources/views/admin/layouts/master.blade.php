@@ -158,7 +158,7 @@
   <!-- Side Bar -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ '/dashboard' }}" class="brand-link">
       <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Car Community</span>
@@ -191,7 +191,7 @@
           </li>
 
           <li class="nav-item has-treeview mt-2">
-            <a href="#" class="nav-link active">
+            <a href="admin/news" class="nav-link active">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Content
@@ -200,13 +200,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ '/news' }}" class="nav-link active">
+                <a href="{{ '/admin/news' }}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>News</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ '#' }}" class="nav-link">
+                <a href="{{ '/admin/event' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Event</p>
                 </a>
@@ -215,7 +215,7 @@
           </li>
 
           <li class="nav-item mt-2">
-            <a href="{{ '/user/list' }}" class="nav-link active">
+            <a href="{{ '/admin/user/list' }}" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
@@ -236,9 +236,9 @@
 {{-- Footer --}}
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.4
+      <b>Car Community Panel Version</b> 1.4.6
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    <strong>Copyright &copy; 2020 <a href="{{ '/' }}">Car Community</a>.</strong> All rights
     reserved.
 </footer>
 

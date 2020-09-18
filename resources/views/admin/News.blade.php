@@ -24,37 +24,34 @@
      <!-- Main content -->
      <section class="content">
       <div class="row">
-        <div class="col-md-12">
-          <div class="card card-outline card-info">
-            <div class="card-header">
-              <h3 class="card-title">
-                Tambahkan Berita
-                <small>Simple and fast</small>
-              </h3>
-              <!-- tools box -->
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-                <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fas fa-times"></i></button>
+        <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
               </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body pad">
-              <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                      <a href="{{ '/admin/news/add' }}" class="btn btn-primary">Tambah News</a>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Content</th>
+                    <th>Tanggal</th>
+                    <th>Preview</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          
+                      </tr>
+                  </tfoot>
+                  </tbody>
+                </table>
               </div>
-              <p class="text-sm mb-0">
-                Editor <a href="https://github.com/bootstrap-wysiwyg/bootstrap3-wysiwyg">Documentation and license
-                information.</a>
-              </p>
+              <!-- /.card-body -->
             </div>
-          </div>
-        </div>
+       </div>
         <!-- /.col-->
       </div>
       <!-- ./row -->

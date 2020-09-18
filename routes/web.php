@@ -15,19 +15,25 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () {  
     return view('index');
 });
-// Route::get('/admin', function(){
-//     return view('admin.dashboard');
-// });
 
-// Admin
-Route::get('/news', 'NewsController@index');
-Route::get('/user/list', 'UserController@index');
-Route::get('/user/add', 'UserController@create');
-Route::post('/user/add', 'UserController@store');
+
+// Admin //
+// News
+Route::get('/admin/news', 'NewsController@index');
+Route::get('/admin/news/add', 'NewsController@create');
+// User
+Route::get('/admin/user/list', 'UserController@index');
+Route::get('/admin/user/add', 'UserController@create');
+Route::get('/admin/user/store', 'UserController@store');
+Route::get('/admin/user/edit/{id}', 'UserController@show');
+Route::post('/admin/user/update', 'UserController@update');
+Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+
+
 
 
 Auth::routes(['verify' => true]);
-Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
+Route::get('/dashboard', 'HomeController@index')->middleware('verified', 'cekrole')->name('home');
