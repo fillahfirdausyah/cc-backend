@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\News;
+use App\Models\Event;
 
-class NewsController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,9 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data = News::all();
-        return view('admin.news.News', compact('data'));
+    {   
+        $data = Event::all();
+        return view('admin.event.Event', compact('data'));
     }
 
     /**
@@ -25,7 +25,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.CreateNews');
+        return view('admin.event.CreateEvent');
     }
 
     /**
@@ -36,19 +36,17 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-       $this->validate($request, [
+        $this->validate($request, [
             'judul'     => 'required',
-            'kategori'  => 'required',
             'content'   => 'required',
-       ]);
+        ]);
 
-       $data = new News;
-       $data->judul     = $request->judul;
-       $data->kategori  = $request->kategori;
-       $data->content   = $request->content;
-       $data->save();
+        $data = new Event;
+        $data->judul    = $request->judul;
+        $data->content  = $request->content; 
+        $data->save();
 
-       return redirect('/admin/news/list')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/event/list')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -70,9 +68,9 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $data = News::find($id);
+        $data = Event::find($id);
 
-        return view('admin.news.EditNews', compact('data'));
+        return view('admin.event.EditEvent', compact('data'));
     }
 
     /**
@@ -86,18 +84,15 @@ class NewsController extends Controller
     {
         $this->validate($request, [
             'judul'     => 'required',
-            'kategori'  => 'required',
-            'content'   => 'required'
+            'content'   => 'required',
         ]);
 
-        $data = News::find($id);
-        $data->judul    = $request->judul;
-        $data->kategori = $request->kategori;
-        $data->content  = $request->content;
+        $data = Event::find($id);
+        $data->judul   = $request->judul;
+        $data->content = $request->content;
         $data->save();
 
-        return redirect('/admin/news/list')->with('success', 'Data Berhasil Diubah');
-        
+        return redirect('/admin/event/list')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -108,9 +103,9 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $data = News::find($id);
+        $data = Event::find($id);
         $data->delete();
 
-        return redirect('/admin/news/list')->with('info', 'Data Berhasil Dihapus');
+        return redirect('/admin/event/list')->with('info', 'Data Berhasil Dihapus');
     }
 }

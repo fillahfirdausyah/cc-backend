@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Tambah User')
+@section('title', 'Edit User')
 
 @section('content')
 <div class="content-wrapper">
@@ -8,12 +8,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Tambah User</h1>
+              <h1>Edit User</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Tambah User</li>
+                <li class="breadcrumb-item active">Edit User</li>
               </ol>
             </div>
           </div>
@@ -30,12 +30,12 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ '/admin/user/store' }}" method="GEt">
+                        <form role="form" action="{{ '/admin/user/update/' }}{{ $user->id }}" method="POST">
                             @csrf
                           <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Nama</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" id="name" placeholder="Nama">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $user->name, old('name') }}" name="name" id="name" placeholder="Nama">
                                 @error('name')
                                     <div class="alert alert-danger">
                                       {{ $message }}  
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group">
                               <label for="email">Email</label>
-                              <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" id="email" placeholder="Enter email">
+                              <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email, old('email') }}" name="email" id="email" placeholder="Enter email">
                               @error('email')
                                     <div class="alert alert-danger">
                                       {{ $message }}  
@@ -62,13 +62,13 @@
                             </div>
                             <div class="form-group">
                               <label for="Role">Role</label>
-                              <input type="Role" class="form-control" value="{{ old('role') }}" name="role" id="Role" placeholder="Role">
+                              <input type="Role" class="form-control" value="{{ $user->role, old('role') }}" name="role" id="Role" placeholder="Role">
                             </div>
                       </div>
                           <!-- /.card-body -->
           
                           <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                           </div>
                         </form>
                       </div>
