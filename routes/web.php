@@ -4,35 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 /*-----------------------------------------------------------------------------------*/
 
-Route::get('/user/index', function () {
-    return view('social_network2/SNapp2');
-});
-
-Route::view('user/index/{any}', 'social_network2/SNapp2')->where('any', '.*');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -41,11 +12,13 @@ Route::view('user/index/{any}', 'social_network2/SNapp2')->where('any', '.*');
 
 
 //layouts
-Route::get('/user/timeline/',function(){ return view('/social_network/timeline'); });
+Route::get('/user/',function(){ return view('/social_network/timeline'); });
 Route::get('/user/chat/',function(){ return view('/social_network/chat'); });
 Route::get('/user/profile/',function(){ return view('/social_network/description'); });
+Route::get('/user/profile/settings',function(){ return view('/social_network/setting'); });
 Route::get('/user/image/',function(){ return view('/social_network/image'); });
 Route::get('/user/friend/',function(){ return view('/social_network/friend'); });
+Route::get('/user/notification/',function(){ return view('/social_network/notification'); });
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

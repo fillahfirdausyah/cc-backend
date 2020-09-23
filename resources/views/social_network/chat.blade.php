@@ -3,31 +3,29 @@
 @section('title', 'Message')
 
 @section('header')
-	<div class="col text-center">
-		<h1>Message</h1>
-	</div>
+	<h1>Message</h1>
 @stop
 
 @section('content')
 <div class="row">
-	<div class="online col-sm-3">
-		<form class="form-inline mb-2">
-		    <input class="form-control mr-sm-2" type="search" placeholder="Cari teman" aria-label="Search">
-		    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
-		<div class="online bg-light text-center" style="font-size: 20px;">Online Friends</div>
-		<div class="online w-100"><!-- new line --></div>
-		<div class="online3">
-			<ul>
-				<li>Irsam</li>
-				<li>Takhjudin</li>
-				<li>Fillah</li>
-			</ul>
+	<div class="col-sm-3">
+		<div class="card" style="padding: 1rem;">
+			<form class="form-inline mb-2">
+			    <input class="form-control mr-sm-2" type="search" placeholder="Cari teman online" aria-label="Search">
+			    <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Search</button>
+			</form>
+			<div class="text-center" style="font-size: 20px; background-color: #CFE8E8;">Online Friends</div>
+			<div class="w-100"><!-- new line --></div>
+				<ul>
+					<li>Irsam</li>
+					<li>Takhjudin</li>
+					<li>Fillah</li>
+				</ul>
 		</div>
 	</div>
 
-	<div class="card bg-light col-sm-9">
-  		<div class="card-header" style="font-size: 20px;">Fillah</div>
+	<div class="card col-sm-9 bg-light" >
+  		<div class="card-header" style="font-size: 20px; background-color: #CFE8E8;">Fillah</div>
   		<div class="card-body">
     		<div class="">
     			

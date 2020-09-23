@@ -3,9 +3,7 @@
 @section('title', 'Friend')
 
 @section('header')
-	<div class="col text-center">
-		<h1>Friend List</h1>
-	</div>
+	<h1>Friend List</h1>
 @stop
 
 @section('content')

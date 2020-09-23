@@ -3,9 +3,7 @@
 @section('title', 'Image')
 
 @section('header')
-	<div class="col text-center">
-		<h1>Image</h1>
-	</div>
+	<h1>Image</h1>
 @stop
 
 @section('content')
