@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>DataTables</h1>
+          <h1>Daftar User</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
+            <li class="breadcrumb-item active">Daftar User</li>
           </ol>
         </div>
       </div>
@@ -24,7 +24,7 @@
          <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
+                  <h3 class="card-title">Daftar User</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -49,7 +49,7 @@
                                   <i class="fas fa-edit" style="color: green"></i>
                                 </a>
                                  | 
-                                <a href="{{ '/admin/user/delete/'}}{{ $d->id }}" id="confirm" onclick="aksi()">
+                                <a href="{{ '/admin/user/delete/'}}{{ $d->id }}" id="confirm" onclick="aksi({{$d->id}})">
                                   <i class="fas fa-trash-alt" style="color: red"></i>
                                 </a>
                             </td>
@@ -73,7 +73,7 @@
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 
 @push('js-page')
@@ -82,7 +82,7 @@
     $(function () {
       $("#example1").DataTable({
         "responsive": true,
-        "autoWidth": false,
+        "autoWidth": true,
         "paging": true,
         "searching": false,
       });
@@ -97,20 +97,18 @@
       });
     });
 
-    function aksi(){
+    function aksi(id){
       event.preventDefault();
-      const url = document.getElementById('confirm').href;
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+      const url = document.getElementById('confirm').getAttribute('href');
+      swal({
+        title: 'Yaking ingin menghapus?',
+        text: "Data akan dihapus permanen",
         icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        buttons: true,
+        dangerMode: false,
       }).then(function(result){
-        if(!result){
-          alert('berhasil');
+        if(result){
+          window.location.href = url + id;
         }
       });
     }

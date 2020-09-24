@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 
 // Admin //
+// Profile
+Route::get('/profile/admin/{id}', 'UserController@show');
 // News
 Route::get('/admin/news/list', 'NewsController@index');
 Route::get('/admin/news/add', 'NewsController@create');
@@ -28,6 +30,7 @@ Route::post('/admin/news/store', 'NewsController@store');
 Route::get('/admin/news/edit/{id}', 'NewsController@edit');
 Route::post('/admin/news/update/{id}', 'NewsController@update');
 Route::get('/admin/news/delete/{id}', 'NewsController@destroy');
+Route::get('//admin/news/show/{id}', 'NewsController@show');
 
 // Event
 Route::get('/admin/event/list', 'EventController@index');
@@ -44,6 +47,10 @@ Route::get('/admin/user/store', 'UserController@store');
 Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+
+
+// Member //
+
 
 
 

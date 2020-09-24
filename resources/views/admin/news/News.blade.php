@@ -33,8 +33,8 @@
                         <a href="{{ '/admin/news/add' }}" class="btn btn-primary">Tambah Berita</a>
                     <tr>
                       <th>Judul</th>
+                      <th>Deskripsi</th>
                       <th>Kategori</th>
-                      <th>Content</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -42,19 +42,41 @@
                     <tbody>
                           <tr>
                               <td>{{ $d->judul }}</td>
+                              <td>{{ $d->deskripsi }}</td>
                               <td>{{ $d->kategori }}</td>
-                              <td>{{ $d->content }}</td>
                               <td>
+                                <a href="#" data-toggle="modal" data-target="#modal-xl">
+                                  <i class="fas fa-eye" style="color: blue"></i>
+                                </a>
                                 <a href="{{ '/admin/news/edit/'}}{{ $d->id }}">
                                   <i class="fas fa-edit" style="color: green"></i>
                                 </a>
-                                 | 
-                                <a href="{{ '/admin/news/delete/'}}{{ $d->id }}">
+                                <a href="{{ '/admin/news/delete/'}}" id="confirm" onclick="aksi({{ $d->id }})">
                                   <i class="fas fa-trash-alt" style="color: red"></i>
                                 </a>
                             </td>
                           </tr>
                     </tbody>
+                    <div class="modal fade" id="modal-xl">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title justify-content-center">Ini Berita</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            {!! $d->content !!}
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                           Tanggal Post: {{ $d->created_at->toDateString() }}
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
                     @endforeach
                   </table>
                 </div>
@@ -64,8 +86,6 @@
      </div>
  </section>
 </div>
-
-    
 @endsection
 
 @push('js-asset')
@@ -73,6 +93,8 @@
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 
 @push('js-page')
@@ -95,5 +117,21 @@
         "responsive": true,
       });
     });
+
+    function aksi(id){
+      event.preventDefault();
+      const url = document.getElementById('confirm').getAttribute('href')
+      swal({
+        title: 'Yaking ingin menghapus?',
+        text: "Data akan dihapus permanen",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: false,
+      }).then(function(result){
+        if(result){
+         window.location.href = url + id;
+        }
+      });
+    }
   </script>
 @endpush

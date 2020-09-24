@@ -36,14 +36,17 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+
        $this->validate($request, [
             'judul'     => 'required',
+            'deskripsi' => 'required | min:8 | max:15',
             'kategori'  => 'required',
             'content'   => 'required',
        ]);
 
        $data = new News;
        $data->judul     = $request->judul;
+       $data->deskripsi = $request->deskripsi;
        $data->kategori  = $request->kategori;
        $data->content   = $request->content;
        $data->save();
