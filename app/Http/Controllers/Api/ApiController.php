@@ -27,7 +27,7 @@ class ApiController extends Controller
     {
         $data = News::all();
         $success["data"] = $data;
-        return response()->json(['success' => $success], $this->successStatus);
+        return response()->json(['success' => $success], 200);
 
         // return response()->json(['Error' => 'Error Bro']);
     }
