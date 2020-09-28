@@ -25,7 +25,8 @@ class CekRole
             $count3 = Event::count();
             return response()->view('admin.Dashboard', compact('count1', 'count2', 'count3'));
         } else {
-            return response()->view('member.dashboard');
+            $user = User::find($request->user()->id);
+            return response()->view('member.Home', compact('user'));
         }
         return $next($request);
     }

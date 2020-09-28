@@ -51,9 +51,15 @@ Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 
 // Member //
 
+Route::get('/member', function(){
+    return view('member.Home');
+});
+
 
 
 
 
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->middleware('verified', 'cekrole')->name('home');
+
+// Route::get('api/login', 'Api\ApiController@login');

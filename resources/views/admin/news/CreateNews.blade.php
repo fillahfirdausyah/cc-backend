@@ -58,7 +58,7 @@
                                     <div class="card-header">
                                       <h3 class="card-title">
                                         Bootstrap WYSIHTML5
-                                        <small>Simple and fast</small>
+                                        <small>Simple and cepat</small>
                                       </h3>
                                       <!-- tools box -->
                                       <div class="card-tools">

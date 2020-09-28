@@ -24,6 +24,8 @@
   <link href="{{ asset('assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
+  @stack('css-asset')
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
