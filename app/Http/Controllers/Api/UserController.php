@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Validator;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -46,13 +47,21 @@ class UserController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-    public function detail() {
+    public function logout (Request $request) 
+    {
+        $token = Auth::user()->token();
+        $token->revoke();
+        $response = ['message' => 'Berhasil Logout'];
 
+        return response()->json($response, 200);
+    }
+
+    public function detail() 
+    {
         $data = Auth::user();
         $success['data'] = $data;
 
         return response()->json(['success' => $success, 200]);
-
     }
 
 }

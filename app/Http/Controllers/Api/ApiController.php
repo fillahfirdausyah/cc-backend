@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\News;
-use Validator;
 use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
@@ -16,12 +15,7 @@ class ApiController extends Controller
 
     
 
-    // public function logout (Request $request) {
-    //     $token = $request->user()->token();
-    //     $token->revoke();
-    //     $response = ['message' => 'You have been successfully logged out!'];
-    //     return response()->json($response, 200);
-    // }
+    
 
     public function news()
     {
