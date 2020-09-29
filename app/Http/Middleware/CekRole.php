@@ -5,8 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\News;
-use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class CekRole
 {
@@ -19,15 +18,11 @@ class CekRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && $request->user()->role == 'admin') {
-            $count1 = User::count();
-            $count2 = News::count(); 
-            $count3 = Event::count();
-            return response()->view('admin.Dashboard', compact('count1', 'count2', 'count3'));
-        } else {
-            $user = User::find($request->user()->id);
-            return response()->view('member.Home', compact('user'));
-        }
+       $user = Auth::user();
+       if($user->role == 'admin') {
         return $next($request);
+       }
+       
+       return redirect()->to('/member/home');
     }
 }

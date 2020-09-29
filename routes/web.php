@@ -50,16 +50,14 @@ Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 
 
 // Member //
-
-Route::get('/member', function(){
-    return view('member.Home');
-});
+Route::get('/member/home', 'MemberController@index');
+Route::get('/member/tentang', 'MemberController@about');
 
 
 
 
 
 Auth::routes(['verify' => true]);
-Route::get('/dashboard', 'HomeController@index')->middleware('verified', 'cekrole')->name('home');
+Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
 
 // Route::get('api/login', 'Api\ApiController@login');

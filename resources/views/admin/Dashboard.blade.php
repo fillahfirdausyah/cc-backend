@@ -31,7 +31,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                       <div class="inner">
-                        <h3>{{ $count2 }}</h3>
+                        <h3>asd</h3>
         
                         <p>Berita</p>
                       </div>
@@ -46,7 +46,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                       <div class="inner">
-                        <h3>{{ $count3 }}</h3>
+                        <h3>aasd</h3>
         
                         <p>Event</p>
                       </div>
@@ -61,7 +61,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
-                        <h3>{{ $count1 }}</h3>
+                        <h3>asd</h3>
         
                         <p>Junlah User</p>
                       </div>

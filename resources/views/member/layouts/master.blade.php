@@ -501,7 +501,7 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li><a href="{{ '/member/home' }}">Timeline</a></li>
+                                            <li><a href="{{ '/dashboard' }}">Timeline</a></li>
                                             <li><a href="{{ '/member/tentang' }}">Tentang</a></li>
                                             <li><a href="{{ '/member/galery' }}">Galery</a></li>
                                             <li><a href="{{ '/member/teman' }}">Teman</a></li>
