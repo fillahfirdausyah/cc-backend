@@ -491,7 +491,7 @@
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
                                     <a href="profile.html">
-                                        <img src="{{ asset('assets/vendor/adda/images/profile/profile-1.jpg') }}" alt="profile picture">
+                                        <img src="{{ asset('/image') }}{{ $user->foto_profile }}" alt="profile picture">
                                     </a>
                                 </figure>
                             </div>
