@@ -249,7 +249,7 @@
                                 <div class="profile-thumb-small">
                                     <a href="javascript:void(0)" class="profile-triger">
                                         <figure>
-                                            <img src="assets/images/profile/profile-small-1.jpg" alt="profile picture">
+                                            <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                     <div class="profile-dropdown">
@@ -439,7 +439,7 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ asset('assets/vendor/adda/images/profile/profile-small-1.jpg') }}" alt="profile picture">
+                                <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
@@ -521,7 +521,7 @@
             </div>
             <!-- profile menu area end -->
 
-        
+            @include('sweetalert::alert')
             @yield('content')
         </div>
 

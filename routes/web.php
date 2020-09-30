@@ -30,7 +30,7 @@ Route::post('/admin/news/store', 'NewsController@store');
 Route::get('/admin/news/edit/{id}', 'NewsController@edit');
 Route::post('/admin/news/update/{id}', 'NewsController@update');
 Route::get('/admin/news/delete/{id}', 'NewsController@destroy');
-Route::get('//admin/news/show/{id}', 'NewsController@show');
+Route::get('//admin/news/show/{slug}', 'NewsController@show');
 
 // Event
 Route::get('/admin/event/list', 'EventController@index');
@@ -52,6 +52,9 @@ Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 // Member //
 Route::get('/member/home', 'MemberController@index');
 Route::get('/member/tentang', 'MemberController@about');
+Route::get('/member/galery', 'MemberController@galery');
+Route::get('/member/teman', 'MemberController@friend');
+Route::get('/member/profile', 'MemberController@profile');
 
 
 

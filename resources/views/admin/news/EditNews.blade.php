@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ '/admin/news/update/' }}{{ $data->id }}" method="POST">
+                        <form role="form" action="{{ '/admin/news/update/' }}{{ $data->id }}" method="POST" enctype="multipart/form-data">
                             @csrf
                           <div class="card-body">
                             <div class="form-group">
@@ -57,35 +57,21 @@
                               </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="card card-outline card-info">
-                                    <div class="card-header">
-                                      <h3 class="card-title">
-                                        Bootstrap WYSIHTML5
-                                        <small>Simple and fast</small>
-                                      </h3>
-                                      <!-- tools box -->
-                                      <div class="card-tools">
-                                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                                                title="Collapse">
-                                          <i class="fas fa-minus"></i></button>
-                                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="remove" data-toggle="tooltip"
-                                                title="Remove">
-                                          <i class="fas fa-times"></i></button>
-                                      </div>
-                                      <!-- /. tools -->
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body pad">
-                                      <div class="mb-3">
-                                        <textarea class="textarea" placeholder="Place some text here" name="content"
-                                                  style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$data->content}}</textarea>
-                                      </div>
-                                    </div>
-                                  </div>
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label>Content</label>
+                                  <textarea class="form-control @error('content') is-invalid @enderror" name="content" rows="3" placeholder="Tulis Artikel....">{{ old('content') }}</textarea>
                                 </div>
+                              </div>
                             </div>
-                            
+                            <div class="form-group">
+                              <label for="image">Cover</label>
+                              <br>
+                              <img src="{{ asset($data->cover) }}" width="120px">
+                              <br>
+                              <br>
+                              <input type="file" id="image" name="cover" class="@error('judul') is-invalid @enderror">
+                            </div>
                       </div>
                           <!-- /.card-body -->
           

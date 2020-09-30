@@ -45,38 +45,20 @@
                               <td>{{ $d->deskripsi }}</td>
                               <td>{{ $d->kategori }}</td>
                               <td>
-                                <a href="#" data-toggle="modal" data-target="#modal-xl">
+                                <a href="{{ '/admin/news/show/' }}{{ $d->slug }}">
                                   <i class="fas fa-eye" style="color: blue"></i>
                                 </a>
+                                 | 
                                 <a href="{{ '/admin/news/edit/'}}{{ $d->id }}">
                                   <i class="fas fa-edit" style="color: green"></i>
                                 </a>
+                                 | 
                                 <a href="{{ '/admin/news/delete/'}}" id="confirm" onclick="aksi({{ $d->id }})">
                                   <i class="fas fa-trash-alt" style="color: red"></i>
                                 </a>
                             </td>
                           </tr>
                     </tbody>
-                    <div class="modal fade" id="modal-xl">
-                      <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title justify-content-center">Ini Berita</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            {!! $d->content !!}
-                          </div>
-                          <div class="modal-footer justify-content-between">
-                           Tanggal Post: {{ $d->created_at->toDateString() }}
-                          </div>
-                        </div>
-                        <!-- /.modal-content -->
-                      </div>
-                      <!-- /.modal-dialog -->
-                    </div>
                     @endforeach
                   </table>
                 </div>

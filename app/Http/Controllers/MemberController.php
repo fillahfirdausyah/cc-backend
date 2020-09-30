@@ -19,4 +19,19 @@ class MemberController extends Controller
         $user = Auth::user();
         return view('member.About', compact('user'));
     }
+
+    public function galery() {
+        $user = Auth::user();
+        return view('member.Galery', compact('user'));
+    }
+
+    public function friend() {
+        $user = Auth::user();
+        return view('member.Friend', compact('user'));
+    }
+
+    public function profile() {
+        $user = Auth::user();
+        return view('member.Profile', compact('user'));
+    }
 }

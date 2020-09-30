@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\News;
 
 class NewsController extends Controller
@@ -36,19 +37,27 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->gambar->extension());
+        // dd();
 
        $this->validate($request, [
             'judul'     => 'required',
-            'deskripsi' => 'required | min:8 | max:15',
+            'deskripsi' => 'required | min:8 | max:25',
             'kategori'  => 'required',
+            'cover'     => 'required | mimes:jpeg,jpg,png,svg',
             'content'   => 'required',
        ]);
+
+       $imgName = 'image/Admin/News/' . $request->cover->getClientOriginalName() . '-' . time() . '.' . $request->cover->extension();
+       $request->cover->move(public_path('image/Admin/News'), $imgName);
 
        $data = new News;
        $data->judul     = $request->judul;
        $data->deskripsi = $request->deskripsi;
        $data->kategori  = $request->kategori;
+       $data->cover     = $imgName;
        $data->content   = $request->content;
+       $data->slug      = Str::slug($request->judul);
        $data->save();
 
        return redirect('/admin/news/list')->with('success', 'Data Berhasil Ditambahkan');
@@ -60,9 +69,11 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $data = News::where('slug', $slug)->first();
+
+        return view('admin.news.Show', compact('data'));
     }
 
     /**
@@ -87,18 +98,38 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->cover->extension());
         $this->validate($request, [
             'judul'     => 'required',
+            'deskripsi' => 'required | min:8 | max:25',
             'kategori'  => 'required',
-            'content'   => 'required'
+            'cover'     => 'mimes:jpeg,jpg,png,svg',
+            'content'   => 'required',
         ]);
 
-        $data = News::find($id);
-        $data->judul    = $request->judul;
-        $data->kategori = $request->kategori;
-        $data->content  = $request->content;
-        $data->save();
+        if($request->file('cover')){
 
+            $imgName = 'image/Admin/News/' . $request->cover->getClientOriginalName() . '-' . time() . '.' . $request->cover->extension();
+            $request->cover->move(public_path('image/Admin/News'), $imgName);
+
+            $data = News::find($id);
+            $data->judul     = $request->judul;
+            $data->deskripsi = $request->deskripsi;
+            $data->kategori  = $request->kategori;
+            $data->cover     = $imgName;
+            $data->content   = $request->content;
+            $data->save();
+
+        }    
+
+        $data = News::find($id);
+        $data->judul     = $request->judul;
+        $data->deskripsi = $request->deskripsi;
+        $data->kategori  = $request->kategori;
+        $data->content   = $request->content;
+        $data->save();
+        
+        // return response($data);
         return redirect('/admin/news/list')->with('success', 'Data Berhasil Diubah');
         
     }

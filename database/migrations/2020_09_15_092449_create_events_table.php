@@ -18,7 +18,8 @@ class CreateEventsTable extends Migration
             $table->string('judul');
             $table->string('deskripsi');
             $table->string('cover')->default('cover');
-            $table->text('content');
+            $table->longText('content');
+            $table->string('slug');
             $table->timestamps();
         });
     }

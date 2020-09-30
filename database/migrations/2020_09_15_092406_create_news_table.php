@@ -19,7 +19,8 @@ class CreateNewsTable extends Migration
             $table->string('deskripsi');
             $table->string('kategori');
             $table->longText('content');
-            $table->string('gambar')->default('nama file');
+            $table->longText('cover')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }
