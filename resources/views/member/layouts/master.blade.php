@@ -479,7 +479,7 @@
 
         <div class="main-wraper">
             <!-- profile banner area start -->
-            <div class="profile-banner-large bg-img" data-bg="{{ asset('assets/vendor/adda/images/banner/profile-banner.jpg') }}">
+            <div class="profile-banner-large bg-img" data-bg="{{ asset($user->foto_sampul) }}">
             </div>
             <!-- profile banner area end -->
 

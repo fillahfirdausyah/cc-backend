@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('pekerjaan')->default('-');
             $table->string('alamat')->default('-');
             $table->string('hobi')->default('-');
-            $table->string('foto_profile')->default('/image/member/profile/profile.png');
-            $table->string('foto_sampul')->default('foto_sampul');
+            $table->string('foto_profile')->default('/image/Member/Profile/profile.png');
+            $table->string('foto_sampul')->default('/image/Member/Profile/sampul.jpeg');
             $table->string('role')->default('member');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

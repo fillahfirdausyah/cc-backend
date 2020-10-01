@@ -12,7 +12,9 @@ class MemberController extends Controller
 
     public function index() {
         $user = Auth::user();
-        return view('member.Home', compact('user'));
+        $post = $user->post()->get();
+        // dd($post);
+        return view('member.Home', compact('user', 'post'));
     }
 
     public function about() {

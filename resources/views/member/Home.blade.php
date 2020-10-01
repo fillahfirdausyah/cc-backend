@@ -13,12 +13,12 @@
                         <h4 class="widget-title">{{ $user->name }}</h4>
                         <div class="widget-body">
                             <div class="about-author">
-                                <p>I Don’t know how? But i believe that it is possible one day if i stay with my dream all time</p>
+                                <p>{{ $user->bio }}</p>
                                 <ul class="author-into-list">
-                                    <li><a href="#"><i class="bi bi-office-bag"></i>Graphic Designer</a></li>
-                                    <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li>
-                                    <li><a href="#"><i class="bi bi-location-pointer"></i>Pulshar, Melbourne</a></li>
-                                    <li><a href="#"><i class="bi bi-heart-beat"></i>Travel, Swimming</a></li>
+                                    <li><a href="#"><i class="bi bi-office-bag"></i>{{ $user->pekerjaan }}</a></li>
+                                    {{-- <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li> --}}
+                                    <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $user->alamat }}</a></li>
+                                    <li><a href="#"><i class="bi bi-heart-beat"></i>{{ $user->hobi }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                         <div class="profile-thumb">
                             <a href="#">
                                 <figure class="profile-thumb-middle">
-                                    <img src="assets/images/profile/profile-small-37.jpg" alt="profile picture">
+                                    <img src="{{ $user->foto_profile }}" alt="profile picture">
                                 </figure>
                             </a>
                         </div>
@@ -54,13 +54,13 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Share Your Mood</h5>
+                                        <h5 class="modal-title">Bagikan Aktivitasmu</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body custom-scroll">
-                                        <textarea name="share" class="share-field-big custom-scroll" placeholder="Say Something"></textarea>
+                                        <textarea name="share" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
@@ -73,7 +73,8 @@
                     </div>
                 </div>
                 <!-- share box end -->
-
+                
+                @foreach ($post as $p)
                 <!-- post status start -->
                 <div class="card">
                     <!-- post title start -->
@@ -89,8 +90,8 @@
                         <!-- profile picture end -->
 
                         <div class="posted-author">
-                            <h6 class="author"><a href="profile.html">Kate Palson</a></h6>
-                            <span class="post-time">35 min ago</span>
+                            <h6 class="author"><a href="profile.html">{{ $user->name }}</a></h6>
+                            <span class="post-time">{{ $p->created_at->format('d F, Y') }}</span>
                         </div>
 
                         <div class="post-settings-bar">
@@ -109,11 +110,9 @@
                     <!-- post title start -->
                     <div class="post-content">
                         <p class="post-desc">
-                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                            default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                            in their infancy.
+                            {{ $p->content }}
                         </p>
-                        <div class="post-thumb-gallery img-gallery">
+                        {{-- <div class="post-thumb-gallery img-gallery">
                             <div class="row no-gutters">
                                 <div class="col-8">
                                     <figure class="post-thumb">
@@ -148,7 +147,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="post-meta">
                             <button class="post-meta-like">
                                 <i class="bi bi-heart-beat"></i>
@@ -173,8 +172,8 @@
                     </div>
                 </div>
                 <!-- post status end -->
-
-                <!-- post status start -->
+                @endforeach
+                {{-- <!-- post status start -->
                 <div class="card">
                     <!-- post title start -->
                     <div class="post-title d-flex align-items-center">
@@ -583,7 +582,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- post status end -->
+                <!-- post status end --> --}}
             </div>
         </div>{{-- End container --}}
     </div>{{-- End COntainer --}}
