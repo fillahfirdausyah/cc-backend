@@ -26,7 +26,14 @@ Route::post('register', 'Api\UserController@register');
 // Route::get('show', 'Api\ApiController@show');
 
 Route::group(['middleware' => 'auth:api'], function(){
+
+    // News
+    Route::post('news/list', 'Api\NewsController@index');
+    Route::post('news/show/{id}', 'Api\NewsController@show');
+    // Member
     Route::post('logout', 'Api\UserController@logout');
-    Route::post('news/show', 'Api\ApiController@news');
+    Route::post('/member/list', 'Api\UserController@list');
+    Route::post('/member/show/{id}', 'Api\UserController@show');
     Route::post('/member/detail', 'Api\UserController@detail');
+
 });

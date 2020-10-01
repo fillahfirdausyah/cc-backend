@@ -56,6 +56,21 @@ class UserController extends Controller
         return response()->json($response, 200);
     }
 
+    public function list() {
+        $data = User::all();
+        $success['data'] = $data;
+
+        return response()->json(['success' => $success, 200]);
+
+    }
+
+    public function show($id) {
+        $data = User::find($id);
+        $success['data'] = $data;
+
+        return response()->json(['success' => $success, 200]);
+    }
+
     public function detail() 
     {
         $data = Auth::user();
