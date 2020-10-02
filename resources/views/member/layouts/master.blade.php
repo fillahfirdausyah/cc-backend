@@ -8,6 +8,7 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     {{-- <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico"> --}}
 
@@ -290,11 +291,6 @@
     <header>
         <div class="mobile-header-wrapper sticky d-block d-lg-none">
             <div class="mobile-header position-relative ">
-                <div class="mobile-logo">
-                    <a href="index.html">
-                        <img src="assets/images/logo/logo-white.png" alt="logo">
-                    </a>
-                </div>
                 <div class="mobile-menu w-100">
                     <ul>
                         <li>
@@ -439,13 +435,13 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
+                                <img src="{{ asset($user->foto_profile) }}" alt="profile picture" class="rounded">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
                             <div class="profile-head">
-                                <h5 class="name"><a href="#">Madison Howard</a></h5>
-                                <a class="mail" href="#">mailnam@mail.com</a>
+                                <h5 class="name"><a href="#">{{ $user->name }}</a></h5>
+                                <a class="mail" href="#">{{ $user->email }}</a>
                             </div>
                             <div class="profile-body">
                                 <ul>
@@ -555,5 +551,8 @@
     <script src="{{ asset('assets/vendor/adda/js/plugins/isotope.pkgd.min.js') }}"></script>
     <!-- Main JS -->
     <script src="{{ asset('assets/vendor/adda/js/main.js') }}"></script>   
+
+    @stack('js-page')
+
     </body>
 </html>

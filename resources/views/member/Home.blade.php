@@ -44,13 +44,13 @@
                         <!-- share content box start -->
                         <div class="share-content-box w-100">
                             <form class="share-text-box">
-                                <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Bagikan Sesuatu" data-toggle="modal" data-target="#textbox" id="email"></textarea>
-                                <button class="btn-share" type="submit">share</button>
+                                <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Bagikan Sesuatu" id="modal"></textarea>
+                                <a href="javascript:void(0)" class="btn-share">Share</a>
                             </form>
                         </div>
                         <!-- share content box end -->
                         <!-- Modal start -->
-                        <div class="modal fade" id="textbox" aria-labelledby="textbox">
+                        <div class="modal fade" id="form-post" aria-labelledby="form-post">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -59,13 +59,15 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body custom-scroll">
-                                        <textarea name="share" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
-                                        <button type="button" class="post-share-btn">post</button>
-                                    </div>
+                                    <form id="post-content" method="POST">
+                                        <div class="modal-body custom-scroll">
+                                                <textarea name="content" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
+                                            <button type="submit" class="post-share-btn" id="tombol-post">post</button>
+                                        </div>
+                                   </form>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +78,7 @@
                 
                 @foreach ($post as $p)
                 <!-- post status start -->
-                <div class="card">
+                <div class="card" id="card-post">
                     <!-- post title start -->
                     <div class="post-title d-flex align-items-center">
                         <!-- profile picture end -->
@@ -100,9 +102,9 @@
                             <span></span>
                             <div class="post-settings arrow-shape">
                                 <ul>
-                                    <li><button>copy link to adda</button></li>
+                                    <li><button>Copy link post</button></li>
                                     <li><button>edit post</button></li>
-                                    <li><button>embed adda</button></li>
+                                    <li><button id="hapus-post">Hapus</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -112,42 +114,6 @@
                         <p class="post-desc">
                             {{ $p->content }}
                         </p>
-                        {{-- <div class="post-thumb-gallery img-gallery">
-                            <div class="row no-gutters">
-                                <div class="col-8">
-                                    <figure class="post-thumb">
-                                        <a class="gallery-selector" href="assets/images/post/post-large-2.jpg">
-                                            <img src="assets/images/post/post-2.jpg" alt="post image">
-                                        </a>
-                                    </figure>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <figure class="post-thumb">
-                                                <a class="gallery-selector" href="assets/images/post/post-large-3.jpg">
-                                                    <img src="assets/images/post/post-3.jpg" alt="post image">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-12">
-                                            <figure class="post-thumb">
-                                                <a class="gallery-selector" href="assets/images/post/post-large-4.jpg">
-                                                    <img src="assets/images/post/post-4.jpg" alt="post image">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                        <div class="col-12">
-                                            <figure class="post-thumb">
-                                                <a class="gallery-selector" href="assets/images/post/post-large-5.jpg">
-                                                    <img src="assets/images/post/post-5.jpg" alt="post image">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="post-meta">
                             <button class="post-meta-like">
                                 <i class="bi bi-heart-beat"></i>
@@ -173,6 +139,42 @@
                 </div>
                 <!-- post status end -->
                 @endforeach
+                {{-- <div class="post-thumb-gallery img-gallery">
+                    <div class="row no-gutters">
+                        <div class="col-8">
+                            <figure class="post-thumb">
+                                <a class="gallery-selector" href="assets/images/post/post-large-2.jpg">
+                                    <img src="assets/images/post/post-2.jpg" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <figure class="post-thumb">
+                                        <a class="gallery-selector" href="assets/images/post/post-large-3.jpg">
+                                            <img src="assets/images/post/post-3.jpg" alt="post image">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="col-12">
+                                    <figure class="post-thumb">
+                                        <a class="gallery-selector" href="assets/images/post/post-large-4.jpg">
+                                            <img src="assets/images/post/post-4.jpg" alt="post image">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="col-12">
+                                    <figure class="post-thumb">
+                                        <a class="gallery-selector" href="assets/images/post/post-large-5.jpg">
+                                            <img src="assets/images/post/post-5.jpg" alt="post image">
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
                 {{-- <!-- post status start -->
                 <div class="card">
                     <!-- post title start -->
@@ -588,3 +590,63 @@
     </div>{{-- End COntainer --}}
     
 @endsection
+
+@push('js-page')
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+    $('#modal').click(function() {
+        $('#form-post').modal('show');
+    })
+
+
+    if($('#form-post').length > 0) {
+        $('#post-content').validate({
+        submitHandler: function (form) {
+            let actionType = $('#tombol-post').val();
+            $('#tombol-post').html('Memposting....');
+
+            $.ajax({
+                data: $('#post-content').serialize(),
+                url:  '{{ '/member/post/store' }}',
+                type: 'POST',
+                dataType: 'json',
+                success: function(data) {
+                    $('#post-content').trigger('reset');
+                    $('#form-post').modal('hide');
+                    $('#tombol-post').html('Post');
+
+                    $.ajax({
+                        url: '{{ '/member/post/index' }}',
+                        type: 'GET',
+                        success: function(data) {
+                            // $('#card-post').html(data)
+                            
+                        }
+                    })
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                }
+            });
+        }
+    });
+    }
+
+
+
+
+
+
+    $(document).ajaxStop(function(){
+        window.location.reload();
+    });
+</script>
+@endpush

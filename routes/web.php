@@ -48,13 +48,20 @@ Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 
+// ############################################################## //
 
 // Member //
+// Home
 Route::get('/member/home', 'MemberController@index');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
+
+// Post
+Route::get('/member/post/index', 'PostController@index');
+Route::post('/member/post/store', 'PostController@store');
+Route::get('/post', 'PostController@index');
 
 
 

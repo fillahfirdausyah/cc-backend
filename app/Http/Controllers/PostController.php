@@ -16,8 +16,9 @@ class PostController extends Controller
      */
     public function index()
     {
-       
+       $user = Auth::user()->post()->get();
 
+       return response()->json($user);
     }
 
     /**
@@ -37,8 +38,15 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {      
+        // $id = $request->id;
+
+        $post = new Post;
+        $post->user_id  = Auth::user()->id;
+        $post->content  = $request->content;
+        $post->save();
+
+        return  response()->json('Success');
     }
 
     /**

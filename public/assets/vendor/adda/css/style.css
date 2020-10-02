@@ -1257,7 +1257,6 @@ textarea:focus {
   width: 80px;
   height: 100%;
   text-align: center;
-  background-color: #5a5af3;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1274,7 +1273,7 @@ textarea:focus {
 
 .mobile-logo .profile-thumb-middle,
 .mobile-header-profile .profile-thumb-middle {
-  border-radius: 0;
+  border-radius: 50%;
 }
 
 .mobile-menu ul {
