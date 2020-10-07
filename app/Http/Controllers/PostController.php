@@ -68,7 +68,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Post::find($id);
+
+        return response()->json($data);
     }
 
     /**
@@ -80,7 +82,10 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->user_id  = Auth::user()->id;
+        $post->content  = $request->content;
+        $post->save();
     }
 
     /**
@@ -91,6 +96,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+
     }
 }

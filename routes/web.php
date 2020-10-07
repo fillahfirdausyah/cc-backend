@@ -52,15 +52,21 @@ Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 
 // Member //
 // Home
-Route::get('/member/home', 'MemberController@index');
+Route::get('/member/home', 'MemberController@index')->middleware('auth');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
 
+// DetailMember
+Route::get('/member/{username}', 'DetailMemberController@detail');
+
 // Post
 Route::get('/member/post/index', 'PostController@index');
 Route::post('/member/post/store', 'PostController@store');
+Route::get('/member/post/edit/{id}', 'PostController@edit');
+Route::post('/member/post/update/{id}', 'PostController@update');
+Route::get('/member/post/delete/{id}', 'PostController@destroy');
 Route::get('/post', 'PostController@index');
 
 

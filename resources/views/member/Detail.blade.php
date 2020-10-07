@@ -1,4 +1,4 @@
-@extends('member.layouts.master')
+@extends('member.layouts.detail')
 
 
 @section('title', 'Home')
@@ -28,77 +28,6 @@
             </div>
 
             <div class="col-lg-6 order-1 order-lg-2">
-                <!-- share box start -->
-                <div class="card card-small">
-                    <div class="share-box-inner">
-                        <!-- profile picture end -->
-                        <div class="profile-thumb">
-                            <a href="#">
-                                <figure class="profile-thumb-middle">
-                                    <img src="{{ $user->foto_profile }}" alt="profile picture">
-                                </figure>
-                            </a>
-                        </div>
-                        <!-- profile picture end -->
-
-                        <!-- share content box start -->
-                        <div class="share-content-box w-100">
-                            <form class="share-text-box">
-                                <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Bagikan Sesuatu" id="modal"></textarea>
-                                <a href="javascript:void(0)" class="btn-share">Share</a>
-                            </form>
-                        </div>
-                        <!-- share content box end -->
-                        @foreach ($post as $p)
-                        <!-- Modal start -->
-                        {{-- Post --}}
-                        <div class="modal fade" id="form-post" aria-labelledby="form-post">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Bagikan Aktivitasmu</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form id="post-content" method="POST">
-                                        <div class="modal-body custom-scroll">
-                                                <textarea name="content" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
-                                            <button type="submit" class="post-share-btn" id="tombol-post">post</button>
-                                        </div>
-                                   </form>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Edit --}}
-                        <div class="modal fade" id="edit-post" aria-labelledby="form-post">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit Postingan</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form id="edit-content" action="{{ '/member/post/' }}{{ $p->id }}" method="POST">
-                                        <div class="modal-body custom-scroll">
-                                                <textarea id="content-edit" name="content" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
-                                            <button type="submit" class="post-share-btn" id="tombol-post">Edit</button>
-                                        </div>
-                                   </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal end -->
-                        @endforeach
-                    </div>
-                </div>
                 <!-- share box end -->
                 @foreach ($post as $p)
                 <!-- post status start -->
