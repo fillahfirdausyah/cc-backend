@@ -13,15 +13,18 @@
 			<form>
 				<div class="form-group mb-1">
 					<div class="custom-file col-md-6">
-					  	<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFile03">
+					  	<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFile03" name="input_image">
 					  	<label class="custom-file-label" for="inputGroupFile03">Pilih Gambar Gan!</label>
 					</div>
+				</div>
+				<div class="form-group mb-1">
+				    <input type="text" class="form-control" placeholder="Judulnya apa nih gan?(Optional)">
 				</div>
 				<div class="form-group mb-1">
 				    <textarea id="caption_image" class="form-control" placeholder="Captionnya Juga Gan! ..."></textarea>
 				</div>
 				<div class="form-group mb-1" style="float: right;">
-			    	<button type="submit" class="btn btn-primary">Kirim</button>
+			    	<button type="submit" class="btn btn-primary" name="send">Kirim</button>
 			 	</div>
 			</form>
 		</div>
@@ -41,21 +44,28 @@
 </div>
 
 <div class="row">
-	<div class="col-md-3">
-		<img src="https://s1.bukalapak.com/img/1810988512/large/Wing_Spoiler_Honda_Civic_Turbo_Type_R_Sedan___Plastik_Import.jpg" class="rounded img-thumbnail" alt="#">
-	</div>
-	<div class="col-md-9">
-		<div class="card" style="width: 90%;">
+	<div class="col-md-11">
+		<div class="card">
 		  	<div class="card-body">
+		  		<div class="user">
+		  			<a href="#"><span id="user_name">Reynaldi Shihab</span></a><br>
+		  			has posted at <span id="user_time">5pm</span>
+		  		</div>
+		  		<img src="https://s1.bukalapak.com/img/1810988512/large/Wing_Spoiler_Honda_Civic_Turbo_Type_R_Sedan___Plastik_Import.jpg" class="rounded img-thumbnail" alt="#">
 		    	<h5 class="card-title">Civic Turbo</h5>
 		    	<p class="card-text">Nih gan jagoan gue!</p>
 		    	<form class="form-inline">
-		    		<textarea class="form-control" rows="2" cols="50" placeholder="Komentar"></textarea>
+			    	<button type="submit" class="btn btn-sm btn-outline-primary mr-1">Like</button>
+			    	<button type="submit" class="btn btn-sm btn-outline-primary mr-1">Dislike</button>
+			    	<button type="submit" class="btn btn-sm btn-outline-danger">Report</button>
+		    	</form>
+		    	<form class="form-inline">
+		    		<textarea class="form-control" rows="2" cols="50" placeholder="Komentar"></textarea>		    		
 		    		<button type="submit" class="btn btn-primary mb-2">Kirim</button>
 		    	</form>
 		  	</div>
 		</div>
-	</div>	
+	</div>		
 </div>
 @stop
 

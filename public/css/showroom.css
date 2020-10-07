@@ -1,0 +1,178 @@
+* {box-sizing: border-box;}
+
+/*General*/
+nav{ 
+	margin-bottom: 15px;
+	background-color: #007bff;
+	height:80px;
+}
+
+nav #icon{display: none;}
+
+nav .btn{
+	margin: 10px;
+	background: none;
+	color: #FAFAFA; 
+	font-size: 150%; 
+}
+
+nav button[type=submit]{
+	background-color: #FAFAFA; 
+	color: #007bff;
+}
+
+nav button[type=submit]:hover{
+	background-color: #007bff;
+	color: #FAFAFA;
+}
+
+nav .btn:hover{
+	background: #FAFAFA;
+	color: #007bff;
+}
+
+main{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.col-1{
+	margin: auto;
+}
+.card{
+	border: 1px solid #9E9D9E;
+	box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin: 5px;
+}
+
+.content2{
+	margin-top: 20px;
+}
+
+ul a{
+	text-decoration: none;
+	color: #0E1414;
+}
+
+.list-group-item:hover{
+	background-color: #007bff;
+	color: #FAFAFA;
+}
+
+.cc{
+	font-size: 200%;
+}
+/*recommend*/
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+
+#recipeCarousel .active{
+	background-color: #FAFAFA;	
+}
+
+/*slideshow*/
+.mySlide {display: none}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 1.0s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+.mySlide {
+  -webkit-animation-name: sliding;
+  -webkit-animation-duration: 1.5s;
+  animation-name: sliding;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes sliding {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes sliding {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media (min-width: 768px){
+	.content2{
+		border-right: 2px solid #717171;
+	}
+}
+
+/*---------Mobile-------*/
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+
+	main{margin-top: 80px;}
+
+	nav{ 
+		height: auto;
+		background-color: #007bff;
+	}
+
+	nav .btn{
+		margin: 20px;
+		background: none;
+		color: #FAFAFA; 
+		font-size: 100%; 
+	}
+
+	nav #icon{
+		cursor: pointer;
+		display: inline;
+		border: none;  
+		margin-right: 10em;
+	}	
+
+	nav #myTopnav{
+		display: none;
+  		overflow: hidden;
+	    text-align: left;
+	    float: none;
+	    font-size: 80%;
+	}
+
+	.col-8, .col-4{
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.mySlide{
+		width: auto;
+	}
+
+	.col-lg-10{
+		border-right: none;
+	}
+
+	.category{
+		margin-top: 20px;
+	}
+
+	.content2{
+		border: none;
+	}
+}

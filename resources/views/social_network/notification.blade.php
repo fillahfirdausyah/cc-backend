@@ -1,9 +1,9 @@
 @extends('layouts.SNapp')
 
-@section('title', 'Friend')
+@section('title', 'Notification')
 
 @section('header')
-	<h1>Friend List</h1>
+	<h1>Notification</h1>
 @stop
 
 @section('content')

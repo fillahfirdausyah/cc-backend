@@ -7,12 +7,16 @@
 @stop
 
 @section('content')
-<div class="row card" style="width: 60%; margin: auto;">
-	<ul>
-		<li>
-			<div class="col"><a href="">Nama</a></div>
-			<div class="col"><img src=""></div>	
-		</li>
-	</ul>
+<div class="row card mx-auto" style="width: 100%;">
+	<div class="col-8">
+		<ul>
+			<li>
+				<div class="col"><a href="">Nama</a></div>
+				<form>
+					<button class="form-control btn btn-sm">Delete Friend</button>
+				</form>
+			</li>
+		</ul>
+	</div>
 </div>
 @stop
