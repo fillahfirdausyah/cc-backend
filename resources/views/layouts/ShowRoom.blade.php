@@ -20,7 +20,6 @@
 			<div class="col-8 d-flex justify-content-center">
 				<button class="btn sm-btn" id="defaultOpen" onclick="openPage(event, 'mobil')">Mobil</button>
 				<button class="btn sm-btn" onclick="openPage(event, 'sparepart')">Spare Parts</button>
-				<button class="btn sm-btn" onclick="openPage(event, 'service')">Bengkel</button>
 			</div>
 			<div class="col-4 d-flex justify-content-end">
 				<form class="form-inline my-2 my-lg-0">

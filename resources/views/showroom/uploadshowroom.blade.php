@@ -25,48 +25,37 @@
 <main>
 <div class="container">
 	<div class="card">
-		<form>
+		<form method="POST" action="">
 			<div class="form-row">
 				<div class="form-group col-md-2">
 		      		<label for="inputCategory">Upload Apa nih?</label>
-		      		<select id="inputCategory" class="form-control">
-		        		<option selected>Mobil</option>
-		        		<option>Spare Parts</option>
-		        		<option>Bengkel</option>
+		      		<select id="inputCategory" class="form-control dagangan" name="dagangan" >
+		        		<option id="MBL" onclick="changeCategory('MBL')">Mobil</option>
+		        		<option id="SP" onclick="changeCategory('SP')">Spare Parts</option>
 		      		</select>
 		      	</div>
 		     </div>
 		  	<div class="form-row">
 		    	<div class="form-group col-md-6">
 		      	<label for="inputEmail4">Judul</label>
-		      	<input type="Text" class="form-control" id="inputEmail4" placeholder="Judul">
+		      	<input type="Text" class="form-control" id="inputEmail4" name="judul" placeholder="judul">
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
 		    	<label for="inputAddress">Deskripsi</label>
-		    	<textarea type="text" class="form-control" id="inputAddress" placeholder="Deskripsi"></textarea>
+		    	<textarea type="text" class="form-control" id="inputAddress" name="deskripsi" placeholder="Deskripsi"></textarea>
 		  	</div>
 		  	<div class="form-row">
-		    	<div class="form-group col-md-2">
-		      		<label for="inputCategory">Kategori</label>
-		      		<select id="inputCategory" class="form-control">
-		        		<option selected>SUV</option>
-		        		<option>MPV</option>
-		        		<option>Hatcback</option>
-		        		<option>Coupe</option>
-		        		<option>Minivan</option>
-		      		</select>
-		      	</div>
 			    <div class="form-group">
 			      	<label for="inputPrice">Harga</label>
-			      	<input type="text" class="form-control" id="inputPrice" placeholder="Rupiah">
+			      	<input type="text" class="form-control" id="inputPrice" name="harga" placeholder="Rupiah">
 			    </div>
 		    </div>
 		    <div class="form-group">
 		    	<label for="picts">Gambar</label>
-				<input type="file" class="form-control" id="picts" multiple>
+				<input type="file" class="form-control" id="picts" name="gambar" multiple>
 		    </div>
-		    <button type="submit" class="btn btn-primary">POST</button>
+		    <button type="submit" class="btn btn-primary" name="submit">POST</button>
 		</form>
 	</div>
 </div>

@@ -16,6 +16,10 @@
 	padding: 15px;
 }
 
+.KSP{
+	display:none;
+}
+
 @media only screen and (max-width: 650px){
 	.back{
 		position: relative;

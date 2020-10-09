@@ -18,6 +18,9 @@ for (i = 0; i < coll.length; i++) {
 document.getElementById("defaultOpen").click();
 
 function openPage(event, ID){
+  $('html, body').animate({
+       scrollTop: $(".content2").offset().top
+    }, 750);
 	$(".content2").load("../html/"+ ID + ".html");
 }
 

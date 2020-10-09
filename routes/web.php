@@ -6,9 +6,6 @@ use App\Http\Controllers;
 
 Route::get('/', function () {return view('layouts/ShowRoom');});
 Route::get('/visit', function () {return view('layouts/visit');});
-Route::get('/visitmobil', function () {return view('showroom/visitmobil');});
-Route::get('/visitsp', function () {return view('showroom/visitsp');});
-Route::get('/visitbengkel', function () {return view('showroom/visitbengkel');});
 Route::get('/upload', function () {return view('showroom/uploadshowroom');});
 // //layouts
 // Route::get('/user', function () {return view('layouts.Social_Network');});
