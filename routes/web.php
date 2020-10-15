@@ -4,9 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 /*-----------------------------------------------------------------------------------*/
 
-Route::get('/', function () {return view('layouts/ShowRoom');});
+Route::get('/', 'ShowroomController@show');
 Route::get('/visit', function () {return view('layouts/visit');});
 Route::get('/upload', function () {return view('showroom/uploadshowroom');});
+Route::post('/upload/proccess', 'ShowroomController@store');
+Route::get('/image', function(){ return "../../public/public/image/"; })->name('takeImage');
+Route::get('/visit/{id}', 'VisitController@show');
+Route::post('/search', 'ShowroomController@search');
 // //layouts
 // Route::get('/user', function () {return view('layouts.Social_Network');});
 

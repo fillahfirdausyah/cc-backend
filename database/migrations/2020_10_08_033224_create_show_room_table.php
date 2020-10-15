@@ -19,7 +19,6 @@ class CreateShowRoomTable extends Migration
             $table->string('dagangan');
             $table->longtext('deskripsi');
             $table->string('harga');
-            $table->string('kategori');
             $table->text('gambar');
             $table->timestamps();
         });

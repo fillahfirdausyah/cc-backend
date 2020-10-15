@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use App\Models\News;
+use App\Models\SR;
 
 
 class ShowroomController extends Controller
@@ -30,6 +30,29 @@ class ShowroomController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('query');
+        $data = DB::table('show_room')->where('judul', 'LIKE', "%{$search}%")
+            ->get();
+        foreach($data as $row)
+        {
+        $output =   "<div class='col-md-4 card-group'>".
+                        "<div class='card' style='padding: 5px;'>".
+                            "<div class='card-body'>".
+                                "<h5 class='card-title'><a href='/visit/".$row->id."'>".$row->judul."</a></h5>".
+                                "<p class='card-text'><strong>Rp.".$row->harga."</strong></p>".
+                                "<p class='card-text'>".$row->deskripsi."</p>".
+                                "<p class='card-text'><small class='text-muted'>Updated on ". $row->created_at."</small></p>".
+                            "</div>".
+                        "</div>".
+                    "</div>";
+            
+        }
+        echo $output;
+    }
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,34 +61,34 @@ class ShowroomController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $request->validate([
         'judul' => 'required',
         'deskripsi' => 'required',
         'dagangan' => 'required',
-        'harga' => 'required|integer'
-        'gambar' => 'required|min:3|max:6|mimes:jpg,jpeg,png|max:5120',
+        'harga' => 'required|integer',
         ]);
 
-        if($validator->fails()){
-            return view('/upload');
-        }else{
-            $files[] = $request->file('gambar');
-            $total = count($files);
-            for($i = 0; i<$total; i++){
-                $destinationPath = 'public/image';  //upload path
-                $profileImage[$i] ="image".rand(0000,9999).".".$file[$i]->getClientOriginalExtension();
-                $file[$i]->move($destinationPath, $profileImage);
-                Showroom::create(array(
-                    'judul' => $request->judul,
-                    'deskripsi' => $request->deskripsi,
-                    'dagangan' => $request->dagangan,
-                    'harga' => $request->harga,
-                    'gambar' => $profileImage[$i]
-                ));
-            }
+        $count = count($request->file('gambar'));
+        
+        foreach ($request->file('gambar') as $file) { 
+            $destinationPath = 'public/image'; 
+            $profileImage ="image".rand(0000,9999).".".$file->extension();
+            $file->move($destinationPath, $profileImage);
+            $name[] = $profileImage;
         }
 
-        return view('/');
+        $SR = new SR();
+        $SR->judul = $request->judul;
+        $SR->deskripsi = $request->deskripsi;
+        $SR->dagangan = $request->dagangan;
+        $SR->harga = $request->harga;
+        $SR->gambar = json_encode($name);
+        $SR->save();
+
+        // dd($SR->gambar);
+        
+        return redirect('/')->with('status', 'data sudah berhasil ditambahkan!');
+
     }
 
     /**
@@ -74,11 +97,19 @@ class ShowroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $SR = Showroom::all();
+        $SR = SR::all();
+        $conv = [];
+        $conv[] = $SR[0]->gambar;
+        $picts = implode(", ", $conv);
+        $takePict = trim($picts, '[%22]"');
+        $takePict2 = preg_replace("/[^a-zA-Z0-9.,]/", '', $takePict);
+        $explode = explode(",", $takePict2);
+        $show[] = $explode[0];
 
-        return view('/',['SR' = $SR]);
+
+        return view('layouts/ShowRoom',['SR' => $SR], compact('show'));
     }
 
     /**
@@ -91,7 +122,7 @@ class ShowroomController extends Controller
     {
         $SR = Showroom::find($id);
 
-        return view('/upload');
+        return redirect('/');
     }
 
     /**
@@ -107,28 +138,26 @@ class ShowroomController extends Controller
         'judul' => 'required',
         'deskripsi' => 'required',
         'dagangan' => 'required',
-        'harga' => 'required|integer'
-        'gambar' => 'required|min:3|max:6',
+        'harga' => 'required|integer',
         ]);
 
-        if($validator->fails()){
-            return view('/upload')
-        }else{
-            $files[] = $request->file('gambar');
-            $total = count($files);
-            for($i = 0; i<$total; i++){
-                $destinationPath = 'public/image';  //upload path
-                $profileImage[$i] ="image".rand(0000,9999).".".$file[$i]->getClientOriginalExtension();
-                $file[$i]->move($destinationPath, $profileImage);
-                $SR = Showroom::find($id)
-                    $SR->judul => $request->judul;
-                    $SR->deskripsi => $request->deskripsi;
-                    $SR->dagangan => $request->dagangan;
-                    $SR->harga => $request->harga;
-                    $SR->gambar => $profileImage[$i];
-                $SR->save();
-            }
+        $count = count($request->file('gambar'));
+        
+        foreach ($request->file('gambar') as $file) { 
+            $destinationPath = 'public/image'; 
+            $profileImage ="image".rand(0000,9999).".".$file->extension();
+            $file->move($destinationPath, $profileImage);
         }
+
+        $SR = SR::find($id);
+        $SR->judul = $request->judul;
+        $SR->deskripsi = $request->deskripsi;
+        $SR->dagangan = $request->dagangan;
+        $SR->harga = $request->harga;
+        $SR->gambar = $profileImage;
+        $SR->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -139,7 +168,7 @@ class ShowroomController extends Controller
      */
     public function destroy($id)
     {
-        $SR = Showroom::find($id);
+        $SR = SR::find($id);
         $SR->delete();
 
         return redirect('/');

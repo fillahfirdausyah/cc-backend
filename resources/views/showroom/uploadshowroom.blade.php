@@ -25,13 +25,14 @@
 <main>
 <div class="container">
 	<div class="card">
-		<form method="POST" action="">
+		<form method="POST" action="{{'/upload/proccess'}}" enctype="multipart/form-data">
+			@csrf
 			<div class="form-row">
 				<div class="form-group col-md-2">
 		      		<label for="inputCategory">Upload Apa nih?</label>
 		      		<select id="inputCategory" class="form-control dagangan" name="dagangan" >
-		        		<option id="MBL" onclick="changeCategory('MBL')">Mobil</option>
-		        		<option id="SP" onclick="changeCategory('SP')">Spare Parts</option>
+		        		<option id="MBL" value="mobil" selected>Mobil</option>
+		        		<option id="SP" value="spare parts">Spare Parts</option>
 		      		</select>
 		      	</div>
 		     </div>
@@ -52,10 +53,10 @@
 			    </div>
 		    </div>
 		    <div class="form-group">
-		    	<label for="picts">Gambar</label>
-				<input type="file" class="form-control" id="picts" name="gambar" multiple>
+		    	<label for="gambar">Gambar</label>
+				<input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
 		    </div>
-		    <button type="submit" class="btn btn-primary" name="submit">POST</button>
+		    <input type="submit" class="btn btn-primary" name="POST">
 		</form>
 	</div>
 </div>

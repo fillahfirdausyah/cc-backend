@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta charset="utf-8">
 	<title>@yield('title')</title>
+
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/visitSR.css')}}">
 </head>
-<body>
+<body style="margin-bottom: 10px;">
 
 <header>
 	<div class="back">
@@ -22,15 +25,11 @@
 			<div class="card">
 				<div class="container-fluid" style="background-color: #FAFAFA;">
 					<div class="">
+						@foreach( $explode as $pict )
 						<div class="mySlide sliding">
-							<img width="100%" src="{{ asset('image/1.jpg') }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
+							<img width="100%" src="{{ asset('public/image/' . $pict) }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
 						</div>
-						<div class="mySlide sliding">
-							<img width="100%" src="{{ asset('image/2.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
-						</div>
-						<div class="mySlide sliding">
-							<img width="100%" src="{{ asset('image/3.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
-						</div>
+						@endforeach
 					</div>
 					<div class="row">
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -38,11 +37,11 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<div class="card-title"><h2><strong>Nama Barang</strong></h2></div>
-					<p class="card-text">Harga <strong>Rp.10000</strong></p>
-					<p class="card-text">Deskripsi Barang</p>
+					<div class="card-title"><h2><strong>{{ $SR->judul }}</strong></h2></div>
+					<p class="card-text">Harga <strong>Rp.{{ $SR->harga }}</strong></p>
+					<p class="card-text">{{ $SR->deskripsi }}</p>
 					<br>
-					<p class="card-text"><small>Last Updated 3 hours ago</small></p>
+					<p class="card-text"><small>Last Updated {{ $SR->created_at }}</small></p>
 					<div class="card-footer">
 						<form>
 							<div class="form-group">
@@ -61,12 +60,12 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="card-title"><strong>Nama komentator</strong></div>
-						<p class="card-text isi-komentar">isi komentar</p>
+						<p>isi komentar</p>
 						<button class="btn sm-btn tombol_reply"> Reply </button>
 						<div class="reply">
 							<form>
 								<div class="form-group">
-								<textarea class="form-control" placeholder="Balas Pesan dari komentator"></textarea>
+								 <textarea placeholder="Balas..." cols="50" rows="3"></textarea>
 								</div>
 								<div class="form-group tombol">
 								<input type="submit" class="btn sm-btn" name="kirim" value="Kirim">
