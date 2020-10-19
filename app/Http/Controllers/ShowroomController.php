@@ -35,21 +35,14 @@ class ShowroomController extends Controller
         $search = $request->get('query');
         $data = DB::table('show_room')->where('judul', 'LIKE', "%{$search}%")
             ->get();
+        $output = "<ul class='list-group'>";
         foreach($data as $row)
         {
-        $output =   "<div class='col-md-4 card-group'>".
-                        "<div class='card' style='padding: 5px;'>".
-                            "<div class='card-body'>".
-                                "<h5 class='card-title'><a href='/visit/".$row->id."'>".$row->judul."</a></h5>".
-                                "<p class='card-text'><strong>Rp.".$row->harga."</strong></p>".
-                                "<p class='card-text'>".$row->deskripsi."</p>".
-                                "<p class='card-text'><small class='text-muted'>Updated on ". $row->created_at."</small></p>".
-                            "</div>".
-                        "</div>".
-                    "</div>";
-            
+        $output .= "<a href='/visit/".$row->id."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
         }
-        echo $output;
+        $output .= ".</ul>";
+
+        return $output;
     }
     
 

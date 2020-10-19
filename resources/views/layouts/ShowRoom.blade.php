@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{{asset('css/showroom.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/visitSR.css')}}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Showroom</title>
 </head>
 <body>
@@ -15,22 +16,32 @@
 	<!-- Navigation Bar -->
 	<nav class="fixed-top" id="navigation">
 		<button id="icon" class="btn icon_btn" type="button"><img src="{{ asset('bootstrap-icons/list.svg') }}" width="20" height="20"></button>
-		<div class="row justify-content-center" id="myTopnav">
-			<div class="col-6 mt-3 d-flex justify-content-center">
+		<div class="row justify-content-start" id="myTopnav">
+			<div class="col-3 d-flex justify-content-start">
+				<a href=""><h3>Car Community</h3></a>
+			</div>
+			<div class="col-5 d-flex justify-content-center">
+				<button type="button" class="btn btn-sm direction" onclick="direction('event')"> Event </button>
+				<button type="button" class="btn btn-sm direction" onclick="direction('news')"> News </button>
+				<button type="button" class="btn btn-sm direction" onclick="direction('commerce')"> E-Commerce </button>
+			</div>
+			<div class="col-3 mt-3 d-flex justify-content-center">
 				<form class="form-inline my-2 my-lg-0">
 					@csrf
-			      	<input class="form-control mr-sm-2 text-center" id="search" name="search" type="search" placeholder="Search" aria-label="Search" style="width:300px;">
+					<div class="container">
+						<input class="form-control text-center" id="search" type="text" placeholder="Cari">
+						<div id="result"></div>
+						<br>
+					</div>
 			    </form>
 			</div>
 		</div>
-	</nav>
-	<!-- <div class="container" id="resultfield">
-		<div class="row justify-content-center fixed-top" style="margin-top: 50px;">
-			<div id="result" class="col-6"></div>
-		</div>
-	</div> -->
-	<!-- Sponsor -->
-	<div class="container-fluid" style="background-color: #FAFAFA;">
+	</nav>	
+</header>
+
+<main class="container">
+<!-- News -->
+	<div class="container-fluid" id="news" style="background-color: #FAFAFA;">
 		<div class="">
 			<div class="mySlide sliding">
 				<img width="100%" src="{{ asset('image/1.jpg') }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
@@ -48,12 +59,16 @@
 			</div>
 		</div>
 	</div>
-</header>
 
-<main class="container">
+<hr>
+
 <div class="container text-center my-3">
-   	<!-- Update -->
-   	<h2 class="font-weight-light">Update Terbaru</h2>
+   	<!-- Event -->
+   	<div class="row justify-content-center mb-2" id="event">
+   		<div class="col-4 justify-content-center">
+   			<h2 class="font-weight-normal" style="color:#434175;">Event</h2>
+   		</div>
+   	</div>
    	<div>
 	    <div class="row mx-auto my-auto">
 	        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
@@ -119,8 +134,18 @@
 		        {{ session('status') }}
 		    </div>
 		@endif
-	    <h5 class="mt-2 cc">COMMERCE</h5>
-	    <a href="/upload"><button class="btn btn-primary" type="button">Mau jualan juga gan? Klik sini</button></a>
+	    <div class="row justify-content-center cc" id="commerce">
+	    	<div class="col-2 justify-content-end cart_icon">
+	    		<img src="{{ asset('bootstrap-icons/cart_shop2.png')}}" width="100" height="100">
+	    	</div>
+	    	<div class="col-4 justify-content-start cc">
+	    		<h2 class="font-weight-normal" style="color:#434175;">E-Commerce</h2>
+	    		<a href="/upload"><button class="btn btn-primary" type="button">Mau jualan juga gan? Klik sini</button></a>
+	    	</div>
+	    	<div class="col-2 justify-content-start cart_icon">
+	    		<img src="{{ asset('bootstrap-icons/cart_shop.png')}}" width="100" height="100">
+	    	</div>
+	    </div>
 	    </div>
 	</div>
 </div>
@@ -128,12 +153,12 @@
 		<!-- Content -->
 		<div class="col-lg-10 content2">
 			<!-- Spare Parts Section -->
-			<section id="spare_parts" class="content">
-					<div class="row" id="result">
+			<section class="content">
+					<div class="row">
 						@foreach($SR as $sr)
 							@foreach($show as $tampil)
 								<div class="col-md-4 card-group">
-									<div class="card" style="padding: 5px;">
+									<div class="card" style="padding: 5px; margin-top:10px;">
 										<img class="card-img-top" src="{{ url('public/image/'.$tampil) }}" width="250" height="180" alt="">
 										<div class="card-body">
 											<h5 class="card-title"><a href="{{'/visit/'.$sr->id }}">{{ $sr->judul }}</a></h5>
@@ -148,20 +173,31 @@
 					</div>
 			</section>	
 		</div>
-		
 		<!-- Kategori -->
-		<div class="col-lg-2 category text-center">
-			<h3>Kategori</h3>
+		<div class="col-lg-2 text-center" id="category">
+			<h3 style="color:#434175;display: block;">Kategori</h3>
 			<ul class="list-group list-group-flush">
-				<a href=""><li class="list-group-item">SUV</li></a>
-				<a href=""><li class="list-group-item">MPV</li></a>
-				<a href=""><li class="list-group-item">Hatcback</li></a>
-				<a href=""><li class="list-group-item">Coupe</li></a>
-				<a href=""><li class="list-group-item">Minivan</li></a>
+				<a href="#" id="MBL">
+					<li class="list-group-item">
+					<img src="{{asset('bootstrap-icons/car-icon.png')}}" width="75" height="50"><br>MOBIL
+					</li>
+				</a>
+				<a href="#" id="SP">
+					<li class="list-group-item">
+					<img id="gear_icon" src="{{asset('bootstrap-icons/gear-icon.png')}}" width="50" height="50"><br>
+					SPARE PART
+					</li>
+				</a>
 			</ul>
 		</div>
 	</div>
 </main>
+<hr>
+<footer>
+	<div class="container text-center">
+		<h4>@COPYRIGHT CAR COMMUNITY</h4>
+	</div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>

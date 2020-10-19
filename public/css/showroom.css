@@ -1,39 +1,31 @@
 * {box-sizing: border-box;}
 
-/*General*/
-nav{ 
-	margin-bottom: 15px;
-	background-color: #007bff;
-	height:80px;
+html{
+	scroll-behavior: smooth;
 }
 
-nav #icon{display: none;}
-
-nav .btn{
-	margin: 10px;
-	background: none;
-	color: #FAFAFA; 
-	font-size: 150%; 
+a:link{
+	text-decoration: none;
 }
 
-nav button[type=submit]{
-	background-color: #FAFAFA; 
-	color: #007bff;
-}
-
-nav button[type=submit]:hover{
-	background-color: #007bff;
-	color: #FAFAFA;
-}
-
-nav .btn:hover{
-	background: #FAFAFA;
-	color: #007bff;
+body{
+	background-color: #fff;
 }
 
 main{
-	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+footer{
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	color: #1A1821;
+	background-color: #E6E8F5;
+	@font-face {
+    	font-family: OptimusPrinceps;
+    	src: url('/fonts/OptimusPrinceps.tff');
+	}
 }
 
 .col-1{
@@ -100,6 +92,11 @@ ul a{
   animation-duration: 1.5s;
 }
 
+.mySlide img{
+	border: 1px solid #f8f9fa;
+	border-radius: 10px;
+}
+
 @-webkit-keyframes sliding {
   from {opacity: .4} 
   to {opacity: 1}
@@ -111,9 +108,47 @@ ul a{
 }
 
 @media (min-width: 768px){
+
+	/*General*/
+	nav{ 
+		margin-bottom: 15px;
+		background-color: #fff;
+		height:80px;
+	}
+
+	nav #icon{display: none;}
+
 	.content2{
 		border-right: 2px solid #717171;
 	}
+
+	nav .btn-sm{
+		margin: 10px;
+		height: 40px;
+		background: none;
+		color: #434175;
+		font-size: 15px;
+		border-right: 2px solid #5a5af3;
+		line-height: 1.6;
+		letter-spacing: 2px;
+		font-weight: 80%;
+		font-family: "Open Sans", sans-serif
+	}
+
+	nav .btn-sm:hover{
+		background: #5a5af3;
+		color: #FAFAFA;
+	}
+
+	nav h3{
+		margin: 15px;
+		font-weight: bolder;
+		color: #5a5af3;
+		line-height: 1;
+		letter-spacing: 2px;
+		font-family: "Poppins", sans-serif;
+	}
+
 }
 
 /*---------Mobile-------*/
@@ -132,29 +167,46 @@ ul a{
 		background-color: #007bff;
 	}
 
-	nav .btn{
-		margin: 20px;
-		background: none;
-		color: #FAFAFA; 
-		font-size: 100%; 
-	}
-
 	nav #icon{
 		cursor: pointer;
 		display: inline;
 		border: none;  
-		margin-right: 10em;
+		margin-left: 1em;
+		margin-top: 20px;
 	}	
 
 	nav #myTopnav{
 		display: none;
   		overflow: hidden;
-	    text-align: left;
+	    text-align: center;
 	    float: none;
 	    font-size: 80%;
+	 	margin: auto;
 	}
 
-	.col-8, .col-4{
+	.cart_icon{
+		display: none;
+	}
+
+	nav .btn-sm{
+		background: none;
+		font-size: 180%;
+		line-height: 1.6;
+		letter-spacing: 2px;
+		font-weight: 80%;
+		font-family: "Open Sans", sans-serif;
+	}
+
+	nav .btn-sm:hover{
+		background: #5a5af3;
+		color: #FAFAFA;
+	}
+
+	nav h3{
+		display: none;
+	}
+
+	.col-5, .col-3{
 		margin: auto;
 		display: flex;
 		flex-direction: column;
@@ -168,10 +220,18 @@ ul a{
 		border-right: none;
 	}
 
-	.category{
+	#category{
 		margin-top: 20px;
 	}
 
+	.cc{
+		display: table;
+		margin: auto;
+	}
+
+	.cc h5{
+		font-size: 50%;
+	}
 	.content2{
 		border: none;
 	}

@@ -11,6 +11,7 @@ Route::post('/upload/proccess', 'ShowroomController@store');
 Route::get('/image', function(){ return "../../public/public/image/"; })->name('takeImage');
 Route::get('/visit/{id}', 'VisitController@show');
 Route::post('/search', 'ShowroomController@search');
+Route::post('/category', 'ShowroomController@showCategory');
 // //layouts
 // Route::get('/user', function () {return view('layouts.Social_Network');});
 

@@ -9,28 +9,19 @@ for (i = 0; i < coll.length; i++) {
     if (content.style.display === "block") {
       	content.style.display = "none";
     } else {
-      	content.style.display = "block";
+      	content.style.display = "table";
     }
   });
 }
 
-// load HTML
-// document.getElementById("defaultOpen").click();
 
-// function openPage(event, ID){
-//   $('html, body').animate({
-//        scrollTop: $(".content2").offset().top
-//     }, 750);
-// 	$(".content2").load("../html/"+ ID + ".html");
-// }
-
-// scrolling
+// scrolling navbar
 window.onscroll = function() {myFunction()};
 
 function myFunction() {
 	if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
 	   document.getElementById("navigation").style.height = "70px";
-	   document.getElementById("navigation").style.boxShadow = "2px 3px 3px #FAFAFA";
+	   document.getElementById("navigation").style.boxShadow = "1px 1px 5px #444444";
 	} else {
 	   document.getElementById("navigation").style.boxShadow = "none";
 	   document.getElementById("navigation").style.height = "80px";
@@ -84,28 +75,31 @@ function showSlides(n) {
   	dots[slideIndex-1].className += " active";
 }
 
-
+//search
 $(document).ready(function(){
-    $('#search').keyup(function(){ 
-      var query = $(this).val();
-        if(query != '')
-        {
-          var _token = $('input[name="_token"]').val();
-          $.ajax({
-            url:"/search",
-            method:"POST",
-            data:{query:query, _token:_token},
-            success:function(data){
-              $('#result').fadeIn();  
-              $('#result').html(data);
-
-            }
-          });
+  
+  $('#search').keyup(function(){
+    var query = $(this).val();     
+    var _token = $('input[name="_token"]').val();
+    if(query != ''){
+      $.ajax({
+        url:"/search",
+        method:"POST",
+        data:{query:query, _token:_token},
+        success:function(data){
+        $('#result').html(data);  
         }
-    });
-
-    $(document).on('click', 'li', function(){  
-        $('#search').val($(this).text());  
-        $('#result').fadeOut();  
-    });  
+      });
+    }else{  
+        $('#result').html('');
+    }
+  });
 });
+
+
+function direction(ID){
+  setTimeout(function(){
+    window.location.href = '#'+ ID;
+    window.fadeIn();
+  },500)
+}
