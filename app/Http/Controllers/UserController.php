@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        return view('admin.User', ['data' => $data]);
+        return view('admin.user.User', ['data' => $data]);
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.CreateUser');
+        return view('admin.user.CreateUser');
     }
 
     /**
@@ -36,7 +37,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = New User;
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required | email',
+            'password'  => 'required | min:8',
+        ]);
+
+        $user = New User;
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role     = $request->role;
+        $user->save();
+
+        return redirect('/admin/user/list')->with('success', 'Data Berhasil Ditambahkan');
+        
+        
     }
 
     /**
@@ -47,7 +63,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+       $user = User::find($id);
+
+       return view(admin.Profile)->middleware('cekrole');
     }
 
     /**
@@ -58,7 +76,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+    
+        $user = User::find($id);
+
+        return view('admin.user.EditUser', compact('user'));
+
     }
 
     /**
@@ -70,7 +92,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required | email',
+            'password'  => 'required | min:8',
+        ]);
+
+        $user = User::find($id)->first();
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role     = $request->role;
+        $user->save();
+
+        return redirect('/admin/user/list')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -81,6 +116,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/admin/user/list')->with('info', 'Data Berhasil Dihapus');
     }
 }

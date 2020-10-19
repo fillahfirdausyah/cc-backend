@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('cekrole');
     }
 
     /**
@@ -24,8 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-
-        return view('admin.Dashboard', ['name' => $user]);
+       
+        return view('admin.Dashboard');
     }
 }

@@ -24,6 +24,8 @@
   <link href="{{ asset('assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
+  @stack('css-asset')
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -62,7 +64,7 @@
         
         @if (Route::has('login'))
           @auth
-          <a href="{{ '/dashboard' }}" class="get-started-btn scrollto">Dashboard</a>  
+          <a href="{{ '/dashboard' }}" class="get-started-btn scrollto">Dashboard</a>
         @else
           <a href="{{ '/login' }}" class="get-started-btn scrollto">Login</a>
         @endif
