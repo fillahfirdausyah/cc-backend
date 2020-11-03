@@ -31,7 +31,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" action="{{ '/admin/event/store' }}" method="POST">
+                        <form role="form" action="{{ '/admin/event/store' }}" method="POST" enctype="multipart/form-data">
                             @csrf
                           <div class="card-body">
                             <div class="form-group">
@@ -42,6 +42,16 @@
                                       {{ $message }}  
                                     </div>                                    
                                 @enderror
+                            </div>
+                            <div class="row">
+                              <div class="col-6">
+                                <label for="tanggal">Tanggal</label>
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" name="tanggal" id="tanggal">
+                              </div>
+                              <div class="col-6">
+                                <label for="cover">Cover</label>
+                                <input type="file" class="form-control @error('cover') is-invalid @enderror" value="{{ old('cover') }}" name="cover" id="cover">
+                              </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">

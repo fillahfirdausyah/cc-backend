@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Like;
 
-class PostController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-       $user = Auth::user()->post()->get();
-
-       return response()->json($user);
+        return view('admin.gallery.Gallery');
     }
 
     /**
@@ -39,15 +33,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {      
-        // $id = $request->id;
-
-        $post = new Post;
-        $post->user_id  = Auth::user()->id;
-        $post->content  = $request->content;
-        $post->save();
-
-        return  response()->json('Success');
+    {
+        //
     }
 
     /**
@@ -69,9 +56,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $data = Post::find($id);
-
-        return response()->json($data);
+        //
     }
 
     /**
@@ -83,10 +68,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
-        $post->user_id  = Auth::user()->id;
-        $post->content  = $request->content;
-        $post->save();
+        //
     }
 
     /**
@@ -97,19 +79,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::find($id)->delete();
-
-    }
-
-    public function like($id) 
-    {
-        $like = new Like;
-        $like->post_id = $id;
-        $like->user_id = Auth::user()->id;
-        $like->like = 1;
-        $like->save();
-        $likes = Like::where('post_id', $id)->count();
-
-        return response()->json($likes);
+        //
     }
 }

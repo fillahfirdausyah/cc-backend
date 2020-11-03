@@ -31,7 +31,7 @@
 
   {{-- Assets New Slider --}}
   {{-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> --}}
-  <link rel="stylesheet" href="{{ asset('assets/css/slider.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('assets/css/slider.css') }}"> --}}
 
   <!-- =======================================================
   * Template Name: Resi - v2.1.0
@@ -53,10 +53,10 @@
         <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li class="active"><a href="#header">Home</a></li>
-            <li><a href="#about">About</a></li>
             <li><a href="#services">News</a></li>
-            <li><a href="#portfolio">Gallery</a></li>
             <li><a href="#team">Event</a></li>
+            <li><a href="#portfolio">Gallery</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
   
           </ul>
@@ -98,6 +98,209 @@
     </section><!-- End Hero -->
   
     <main id="main">
+
+       <!-- ======= Team Section ======= -->
+      <section id="team" class="team section-bg">
+        <div class="container">
+          <div class="section-title">
+            <h2>Event</h2>
+          </div>
+          <div class="row">
+            @foreach ($event as $e)
+            <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+              <div class="member">
+                <div class="member-img">
+                  <img src="{{ asset($e->cover) }}" class="img-fluid" alt="">
+                  <div class="social">
+                    <a href=""><i class="icofont-twitter"></i></a>
+                    <a href=""><i class="icofont-facebook"></i></a>
+                    <a href=""><i class="icofont-instagram"></i></a>
+                    <a href=""><i class="icofont-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>{{ $e->judul }}</h4>
+                  <span>{{ date('d F y', strtotime($e->tanggal)) }}</span>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </section><!-- End Team Section -->
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="heading-title">News</h1>
+            </div>
+            <div class="row mt-5 news-cc">
+              @foreach ($news as $n)
+              <div class="col-lg-4 col-md-4 align-items-stretch">
+                <div class="img">
+                  <center><img src="{{ asset($n->cover) }}" class="img-fluid"></center>
+                </div>
+                  <center><a href="{{ '/news/' }}{{ $n->slug }}" class="mt-2 desk" style="font-weight: bold;">{{ $n->judul }}</a></center>
+                  <center><p class="mt-1">{{ \carbon\Carbon::parse($n->created_at)->diffForHumans() }}</p></center>
+              </div>
+              @endforeach
+            </div>
+            <div class="text-center">
+              <a href="" class="btn-more-details scrollto">Selengkapnya</a>
+            </div>
+        </div>
+      </section><!-- End Services Section -->
+
+            <!-- ======= Portfolio Section ======= -->
+            <section id="portfolio" class="portfolio">
+              <div class="container">
+                <div class="text-center">
+                  <h1 class="heading-title">Gallery</h1>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                      <li data-filter="*" class="filter-active">All</li>
+                      <li data-filter=".filter-app">App</li>
+                      <li data-filter=".filter-card">Card</li>
+                      <li data-filter=".filter-web">Web</li>
+                    </ul>
+                  </div>
+                </div>
+        
+                <div class="row portfolio-container">
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>App 1</h4>
+                        <p>App</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Web 3</h4>
+                        <p>Web</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>App 2</h4>
+                        <p>App</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Card 2</h4>
+                        <p>Card</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Web 2</h4>
+                        <p>Web</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>App 3</h4>
+                        <p>App</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Card 1</h4>
+                        <p>Card</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Card 3</h4>
+                        <p>Card</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-wrap">
+                      <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                      <div class="portfolio-info">
+                        <h4>Web 3</h4>
+                        <p>Web</p>
+                        <div class="portfolio-links">
+                          <a href="assets/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
+                          <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        
+                </div>
+        
+              </div>
+            </section><!-- End Portfolio Section -->
   
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
@@ -207,131 +410,7 @@
         </div>
       </section><!-- End Counts Section -->
   
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services">
-        <div class="container">
-            <div class="text-center">
-                <h1 class="heading-title">News</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="news-slider" class="owl-carousel">
-                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
-                            <div class="post-header">
-                                <h4 class="title">
-                                    <h3>Judul 1</h3>
-                                </h4>
-                                <ul class="post-bar">
-                                    <li><a href="#">Williamson</a></li>
-                                    <li><i class="fa fa-calendar"></i>02 June 2016</li>
-                                </ul>
-                            </div>
-                            <div class="pic">
-                                <img src="assets/img/team/team-1.jpg" alt=""/>
-                                <ul class="post-category">
-                                    <li><a href="#">html</a></li>
-                                    <li><a href="#">css</a></li>
-                                </ul>
-                            </div>
-                            <p class="post-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
-                            </p>
-                        </div>
-
-                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
-                            <div class="post-header">
-                                <h4 class="title">
-                                    <h3>Judul 2</h3>
-                                </h4>
-                                <ul class="post-bar">
-                                    <li><a href="#">Kristiana</a></li>
-                                    <li><i class="fa fa-calendar"></i>05 June 2016</li>
-                                </ul>
-                            </div>
-                            <div class="pic">
-                                <img src="assets/img/team/team-2.jpg" alt=""/>
-                                <ul class="post-category">
-                                    <li><a href="#">html</a></li>
-                                    <li><a href="#">css</a></li>
-                                </ul>
-                            </div>
-                            <p class="post-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
-                            </p>
-                        </div>
-
-                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
-                            <div class="post-header">
-                                <h4 class="title">
-                                    <h3>Judul 3</h3>
-                                </h4>
-                                <ul class="post-bar">
-                                    <li><a href="#">Steve Thomas</a></li>
-                                    <li><i class="fa fa-calendar"></i>09 June 2016</li>
-                                </ul>
-                            </div>
-                            <div class="pic">
-                                <img src="assets/img/team/team-3.jpg" alt=""/>
-                                <ul class="post-category">
-                                    <li><a href="#">html</a></li>
-                                    <li><a href="#">css</a></li>
-                                </ul>
-                            </div>
-                            <p class="post-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
-                            </p>
-                        </div>
-
-                        <div class="post-slide" data-toggle="modal" data-target="#exampleModalLong">
-                            <div class="post-header">
-                                <h4 class="title">
-                                    <h3>Judul 4</h3>
-                                </h4>
-                                <ul class="post-bar">
-                                    <li><a href="#">Miranda joy</a></li>
-                                    <li><i class="fa fa-calendar"></i>12 June 2016</li>
-                                </ul>
-                            </div>
-                            <div class="pic">
-                                <img src="assets/img/team/team-4.jpg" alt=""/>
-                                <ul class="post-category">
-                                    <li><a href="#">html</a></li>
-                                    <li><a href="#">css</a></li>
-                                </ul>
-                            </div>
-                            <p class="post-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida nulla eu massa efficitur, eu hendrerit ipsum efficitur. Morbi vitae velit ac.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                ...
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Modal -->
-      </section><!-- End Services Section -->
-  
-      <!-- ======= Features Section ======= -->
+      {{-- <!-- ======= Features Section ======= -->
       <section id="features" class="features">
         <div class="container">
   
@@ -411,244 +490,7 @@
           </div>
   
         </div>
-      </section><!-- End Features Section -->
-  
-      <!-- ======= Portfolio Section ======= -->
-      <section id="portfolio" class="portfolio">
-        <div class="container">
-  
-          <div class="row">
-            <div class="col-lg-12 d-flex justify-content-center">
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
-              </ul>
-            </div>
-          </div>
-  
-          <div class="row portfolio-container">
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 1</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 2</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 2</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 2</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>App 3</h4>
-                  <p>App</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 1</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Card 3</h4>
-                  <p>Card</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-              <div class="portfolio-wrap">
-                <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Web 3</h4>
-                  <p>Web</p>
-                  <div class="portfolio-links">
-                    <a href="assets/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Portfolio Section -->
-  
-      <!-- ======= Team Section ======= -->
-      <section id="team" class="team section-bg">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Event</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
-  
-          <div class="row">
-  
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-              <div class="member">
-                <div class="member-img">
-                  <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                  <div class="social">
-                    <a href=""><i class="icofont-twitter"></i></a>
-                    <a href=""><i class="icofont-facebook"></i></a>
-                    <a href=""><i class="icofont-instagram"></i></a>
-                    <a href=""><i class="icofont-linkedin"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-              <div class="member">
-                <div class="member-img">
-                  <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                  <div class="social">
-                    <a href=""><i class="icofont-twitter"></i></a>
-                    <a href=""><i class="icofont-facebook"></i></a>
-                    <a href=""><i class="icofont-instagram"></i></a>
-                    <a href=""><i class="icofont-linkedin"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-              <div class="member">
-                <div class="member-img">
-                  <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                  <div class="social">
-                    <a href=""><i class="icofont-twitter"></i></a>
-                    <a href=""><i class="icofont-facebook"></i></a>
-                    <a href=""><i class="icofont-instagram"></i></a>
-                    <a href=""><i class="icofont-linkedin"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-              <div class="member">
-                <div class="member-img">
-                  <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                  <div class="social">
-                    <a href=""><i class="icofont-twitter"></i></a>
-                    <a href=""><i class="icofont-facebook"></i></a>
-                    <a href=""><i class="icofont-instagram"></i></a>
-                    <a href=""><i class="icofont-linkedin"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Team Section -->
-  
+      </section><!-- End Features Section --> --}}
       <!-- ======= Contact Section ======= -->
       <section id="contact" class="contact section-bg">
         <div class="container">
@@ -732,7 +574,7 @@
           <div class="row">
   
             <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>Resi.</h3>
+              <h3>Car Community.</h3>
               <p>
                 A108 Adam Street <br>
                 New York, NY 535022<br>
@@ -812,18 +654,6 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
     <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#news-slider").owlCarousel({
-                items:3,
-                itemsDesktop:[1199,3],
-                itemsDesktopSmall:[1000,2],
-                itemsMobile : [650,1],
-                navigationText:false,
-                autoPlay:true
-            });
-            });
-    </script>
   
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>

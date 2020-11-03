@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Event;
 
 class EventController extends Controller
@@ -38,12 +39,20 @@ class EventController extends Controller
     {
         $this->validate($request, [
             'judul'     => 'required',
+            'tanggal'   => 'required',
+            'cover'     => 'required | mimes:jpeg,jpg,png,svg',
             'content'   => 'required',
         ]);
 
+        $imgName = 'image/Admin/Event/' . $request->cover->getClientOriginalName() . '-' . time() . '.' . $request->cover->extension();
+        $request->cover->move(public_path('image/Admin/Event'), $imgName);
+
         $data = new Event;
         $data->judul    = $request->judul;
-        $data->content  = $request->content; 
+        $data->cover    = $imgName;
+        $data->content  = $request->content;
+        $data->tanggal  = $request->tanggal;
+        $data->slug      = Str::slug($request->judul);
         $data->save();
 
         return redirect('/admin/event/list')->with('success', 'Data Berhasil Ditambahkan');

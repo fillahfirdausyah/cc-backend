@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->date('tanggal');
-            $table->string('cover')->default('cover');
-            $table->longText('content');
-            $table->string('slug');
+            $table->integer('post_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->integer('like')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('likes');
     }
 }

@@ -139,9 +139,9 @@
                             {{ $p->content }}
                         </p>
                         <div class="post-meta">
-                            <button class="post-meta-like">
+                            <button class="post-meta-like" data-postid="{{ $p->id }}">
                                 <i class="bi bi-heart-beat"></i>
-                                <span>You and 207 people like this</span>
+                                <span class="countLike-{{ $p->id }}">{{ $like->where('post_id', $p->id)->count() }}</span>
                                 <strong>207</strong>
                             </button>
                             <ul class="comment-share-meta">
@@ -679,5 +679,19 @@
 
         return id;
     }
+
+    $('.post-meta-like').on('click', function(event) {
+        event.preventDefault();
+        const postId = event.target.parentNode.dataset['postid'];
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ '/member/post/like/' }}' + postId,
+            success: function(data) {
+                // console.log(data);
+                $('.countLike-' + postId).html(data);
+            }
+        });
+    });
 </script>
 @endpush

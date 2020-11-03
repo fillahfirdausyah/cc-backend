@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\News;
+use App\Models\Event;
 class HomeController extends Controller
 {
     /**
@@ -25,7 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-       
-        return view('admin.Dashboard');
+        $news  = News::count();
+        $event = Event::count();
+        $user  = User::count();
+        return view('admin.Dashboard', compact('news', 'event', 'user'));
     }
 }

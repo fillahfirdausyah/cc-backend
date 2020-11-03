@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 use App\Models\User;
+use App\Models\Post;
 
 class MemberController extends Controller
 {
@@ -15,8 +16,9 @@ class MemberController extends Controller
     public function index() {
         $user    = Auth::user();
         $post    = $user->post()->get();
+        $like    = $user->like();
 
-        return view('member.Home', compact('user', 'post'));
+        return view('member.Home', compact('user', 'post', 'like'));
     }
 
     public function about() {

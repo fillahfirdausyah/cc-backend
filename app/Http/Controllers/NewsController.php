@@ -42,7 +42,6 @@ class NewsController extends Controller
 
        $this->validate($request, [
             'judul'     => 'required',
-            'deskripsi' => 'required | min:8 | max:25',
             'kategori'  => 'required',
             'cover'     => 'required | mimes:jpeg,jpg,png,svg',
             'content'   => 'required',

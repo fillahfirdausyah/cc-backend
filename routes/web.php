@@ -14,10 +14,12 @@ use App\Http\Controllers\Controller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {  
-    return view('index');
-}); 
+// Home //
+Route::get('/', 'IndexController@index');
+Route::get('/news/{slug}', 'IndexController@news');
+Route::get('/master', function() {
+    return view('layouts.master');
+});
 
 
 // Admin //
@@ -40,6 +42,9 @@ Route::get('/admin/event/edit/{id}', 'EventController@edit');
 Route::post('/admin/event/update/{id}', 'EventController@update');
 Route::get('/admin/event/delete/{id}', 'EventController@destroy');
 
+// Gallery
+Route::get('/admin/gallery/list', 'GalleryController@index');
+
 // User
 Route::get('/admin/user/list', 'UserController@index');
 Route::get('/admin/user/add', 'UserController@create');
@@ -47,6 +52,12 @@ Route::get('/admin/user/store', 'UserController@store');
 Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+
+// Keuangan
+Route::get('/admin/keuangan', 'KeuanganController@show');
+Route::get('/admin/keuangan/add', 'KeuanganController@create');
+Route::post('/admin/keuangan/store', 'KeuanganController@store');
+Route::get('/admin/keuangan/details', 'KeuanganController@show');
 
 // ############################################################## //
 
@@ -68,6 +79,9 @@ Route::get('/member/post/edit/{id}', 'PostController@edit');
 Route::post('/member/post/update/{id}', 'PostController@update');
 Route::get('/member/post/delete/{id}', 'PostController@destroy');
 Route::get('/post', 'PostController@index');
+
+// Like
+Route::post('/member/post/like/{id}', 'PostController@like');
 
 
 

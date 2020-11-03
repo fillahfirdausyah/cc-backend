@@ -33,7 +33,7 @@
                         <a href="{{ '/admin/event/add' }}" class="btn btn-primary">Tambah Event</a>
                     <tr>
                       <th>Judul</th>
-                      <th>Content</th>
+                      <th>Tanggal</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -41,7 +41,7 @@
                     <tbody>
                           <tr>
                               <td>{{ $d->judul }}</td>
-                              <td>{{ $d->content }}</td>
+                              <td>{{ $d->tanggal }}</td>
                               <td>
                                 <a href="{{ '/admin/event/edit/'}}{{ $d->id }}">
                                   <i class="fas fa-edit" style="color: green"></i>

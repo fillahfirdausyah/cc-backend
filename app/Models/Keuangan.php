@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Keuangan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['judul', 'tanggal', 'cover', 'content', 'slug'];
+    protected $fillable = ['nama', 'jumlah', 'kategori'];
 }

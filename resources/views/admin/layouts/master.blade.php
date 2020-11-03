@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  @stack('css-page')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -193,6 +194,12 @@
                   <p>Event</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ '/admin/gallery/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gallery</p>
+                </a>
+              </li>
             </ul>
           </li>
 
@@ -204,6 +211,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item mt-2">
+            <a href="{{ '/admin/keuangan/' }}" class="nav-link active">
+              <i class="fas fa-money-check-alt"></i>
+              <p>
+                Keuangan
+              </p>
+            </a>
+          </li>          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
