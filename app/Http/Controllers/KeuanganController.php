@@ -15,8 +15,8 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $keuangan = Keuangan::latest()->get();
-        return view('admin.keuangan.Keuangan', compact('keuangan'));
+        $data = Keuangan::latest()->get();
+        return view('admin.keuangan.Keuangan', compact('data'));
     }
 
     /**
@@ -87,7 +87,9 @@ class KeuanganController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Keuangan::find($id);
+
+        return view('admin.keuangan.EditKeuangan', compact('data'));
     }
 
     /**
@@ -99,7 +101,19 @@ class KeuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama'   => 'required',
+            'jumlah' => 'required | numeric'
+        ]);
+
+        $data = Keuangan::find($id);
+        $data->nama     = $request->nama;
+        $data->jumlah   = $request->jumlah;
+        $data->kategori = $request->kategori;
+        $data->save();
+
+        return redirect('/admin/keuangan')->with('success', 'Data Berhasil Disimpan');
+
     }
 
     /**
@@ -110,6 +124,9 @@ class KeuanganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Keuangan::find($id);
+        $data->delete();
+
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
 }

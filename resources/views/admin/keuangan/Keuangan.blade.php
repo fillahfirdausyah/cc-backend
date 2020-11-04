@@ -83,7 +83,14 @@
                             <td>-Rp.@convert($d->jumlah)</td>
                             <td>{{ $d->kategori }}</td>
                             <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
-                            <td></td>
+                            <td>
+                              <a href="{{ '/admin/keuangan/edit/'}}{{ $d->id }}">
+                                <i class="fas fa-edit" style="color: green"></i>
+                              </a>
+                              <a href="{{ '/admin/keuangan/delete/'}}"  id="confirm" class="ml-2" onclick="aksi({{ $d->id }})">
+                                <i class="fas fa-trash-alt" style="color: red"></i>
+                              </a>
+                            </td>
                           </tr>
                           @empty
                           <tr>
@@ -112,11 +119,6 @@
 @endpush
 
 @push('js-asset')
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush
 
@@ -150,7 +152,7 @@ $(function() {
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [10,230,420,283,82,28]
+          data                : [10, 230, 420, 283, 82, 28]
         },
         {
           label               : 'Event',
@@ -197,5 +199,20 @@ $(function() {
     })
 }) 
 
+function aksi(id){
+      event.preventDefault();
+      const url = document.getElementById('confirm').getAttribute('href')
+      swal({
+        title: 'Yaking ingin menghapus?',
+        text: "Data akan dihapus permanen",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: false,
+      }).then(function(result){
+        if(result){
+         window.location.href = url + id;
+        }
+      });
+    }
 </script>  
 @endpush

@@ -219,7 +219,16 @@
                 Keuangan
               </p>
             </a>
-          </li>          
+          </li>
+          
+          <li class="nav-item mt-2">
+            <a href="{{ '/admin/undian/' }}" class="nav-link active">
+              <i class="fas fa-dharmachakra"></i>
+              <p>
+                Undian
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

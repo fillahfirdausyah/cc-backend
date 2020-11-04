@@ -54,10 +54,16 @@ Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 
 // Keuangan
-Route::get('/admin/keuangan', 'KeuanganController@show');
+Route::get('/admin/keuangan', 'KeuanganController@index');
 Route::get('/admin/keuangan/add', 'KeuanganController@create');
 Route::post('/admin/keuangan/store', 'KeuanganController@store');
+Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
+Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
+Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
+
+// Undian
+Route::get('/admin/undian', 'UndianController@index');
 
 // ############################################################## //
 
