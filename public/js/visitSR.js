@@ -14,8 +14,30 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+//like
+function like(){
+  var like = 1;
+  // var user_id = $("#user_id").val();
+  var post_id = $("#post_id").val();
+  $.ajax({
+    url:"/like",
+    method:"GET",
+    data:{ like:like, post_id:post_id },
+    success: function(data){
+      $("#total_like").html(data);
+    }
+  });
+}
+
+
 function cancel(){
-	$(".reply").css("display", "none");
+  $(".reply").css("display", "none");
 	$(".tombol_reply").css("display", "block");
 }
 

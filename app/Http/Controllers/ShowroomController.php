@@ -5,30 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use App\Models\SR;
+use App\Models\Comments;
 
 
 class ShowroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function index(){}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function create(){}
 
     public function search(Request $request)
     {
@@ -38,31 +25,59 @@ class ShowroomController extends Controller
         $output = "<ul class='list-group'>";
         foreach($data as $row)
         {
-        $output .= "<a href='/visit/".$row->id."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
+        $output .= "<a href='/".$row->id."-".$row->slug."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
         }
         $output .= ".</ul>";
 
         return $output;
     }
     
+     public function category(Request $request)
+    {
+        $category = $request->get('query');
+        
+        if($category == "All"){
+            $SR = SR::paginate(20);    
+        }else{
+            $SR = DB::table('show_room')->where('dagangan', 'LIKE', "%{$category}%")->get();
+        }
+        
+        foreach ($SR as $sr) {
+             $conv[] = json_decode($sr->gambar);
+        }
+        $count = count($conv);
+        for ($i=0; $i < $count; $i++) { 
+            $collect[] = $conv[$i][0];
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+        $output = "<div class='row'>";
+        foreach($SR as $sr => $key){
+            $output .= "<div class='col-md-4 card-group'><div class='card' style='padding: 5px; margin-top:10px;'><img class='card-img-top' src='../../../public/image/".$collect[$sr]."' width='250' height='180'><div class='card-body'><h4 class='card-title'><a href='/".$key->id."-".$key->slug."'> ".$key->judul." </a></h4><p class='card-text'><strong>Rp. ".$key->harga." </strong></p><p class='card-text'>".$key->deskripsi."</p><p class='card-text'><small class='text-muted'>Updated on ".$key->created_at."</small></p></div></div></div>";   
+        }
+        $output .= "<div>";
+
+    return $output;
+    }
+
     public function store(Request $request)
     {
-        $request->validate([
+        $input_data = $request->all();
+
+        $validator = Validator::make($input_data, [
         'judul' => 'required',
         'deskripsi' => 'required',
         'dagangan' => 'required',
         'harga' => 'required|integer',
+        'gambar' => 'required',
+        'gambar.*' => 'mimes:jpg,png,jpeg',
         ]);
 
-        $count = count($request->file('gambar'));
-        
+        if ($validator->fails()) {
+            return redirect('/upload')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'public/image'; 
             $profileImage ="image".rand(0000,9999).".".$file->extension();
@@ -76,55 +91,33 @@ class ShowroomController extends Controller
         $SR->dagangan = $request->dagangan;
         $SR->harga = $request->harga;
         $SR->gambar = json_encode($name);
+        $SR->slug = Str::slug($request->judul, '-');
         $SR->save();
 
-        // dd($SR->gambar);
-        
         return redirect('/')->with('status', 'data sudah berhasil ditambahkan!');
-
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
-        $SR = SR::all();
-        $conv = [];
-        $conv[] = $SR[0]->gambar;
-        $picts = implode(", ", $conv);
-        $takePict = trim($picts, '[%22]"');
-        $takePict2 = preg_replace("/[^a-zA-Z0-9.,]/", '', $takePict);
-        $explode = explode(",", $takePict2);
-        $show[] = $explode[0];
+        $SR = DB::table('show_room')->paginate(20);
+        foreach ($SR as $sr) {
+             $conv[] = json_decode($sr->gambar);
+        }
+        $count = count($conv);
+        for ($i=0; $i < $count; $i++) { 
+            $collect[] = $conv[$i][0];
+        }
 
-
-        return view('layouts/ShowRoom',['SR' => $SR], compact('show'));
+        return view('layouts/ShowRoom',['SR' => $SR], compact('collect'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $SR = Showroom::find($id);
 
-        return redirect('/');
+        return redirect('/update');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
@@ -134,8 +127,6 @@ class ShowroomController extends Controller
         'harga' => 'required|integer',
         ]);
 
-        $count = count($request->file('gambar'));
-        
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'public/image'; 
             $profileImage ="image".rand(0000,9999).".".$file->extension();
@@ -153,12 +144,6 @@ class ShowroomController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $SR = SR::find($id);

@@ -5,13 +5,16 @@ use App\Http\Controllers;
 /*-----------------------------------------------------------------------------------*/
 
 Route::get('/', 'ShowroomController@show');
-Route::get('/visit', function () {return view('layouts/visit');});
+// Route::get('/visit', function () {return view('layouts/visit');});
 Route::get('/upload', function () {return view('showroom/uploadshowroom');});
 Route::post('/upload/proccess', 'ShowroomController@store');
 Route::get('/image', function(){ return "../../public/public/image/"; })->name('takeImage');
-Route::get('/visit/{id}', 'VisitController@show');
+Route::get('/{id}-{slug}', 'VisitController@show');
 Route::post('/search', 'ShowroomController@search');
-Route::post('/category', 'ShowroomController@showCategory');
+Route::post('/comment', 'VisitController@comment');
+Route::get('/like', 'VisitController@like');
+Route::post('/category', 'ShowroomController@category');
+
 // //layouts
 // Route::get('/user', function () {return view('layouts.Social_Network');});
 

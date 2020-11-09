@@ -18,11 +18,11 @@
 		<button id="icon" class="btn icon_btn" type="button"><img src="{{ asset('bootstrap-icons/list.svg') }}" width="20" height="20"></button>
 		<div class="row justify-content-start" id="myTopnav">
 			<div class="col-3 d-flex justify-content-start">
-				<a href=""><h3>Car Community</h3></a>
+				<a href="http://cc.buanalintas.co.id/"><h3>Car Community</h3></a>
 			</div>
 			<div class="col-5 d-flex justify-content-center">
-				<button type="button" class="btn btn-sm direction" onclick="direction('event')"> Event </button>
 				<button type="button" class="btn btn-sm direction" onclick="direction('news')"> News </button>
+				<button type="button" class="btn btn-sm direction" onclick="direction('event')"> Event </button>
 				<button type="button" class="btn btn-sm direction" onclick="direction('commerce')"> E-Commerce </button>
 			</div>
 			<div class="col-3 mt-3 d-flex justify-content-center">
@@ -152,42 +152,45 @@
 	<div class="row">	
 		<!-- Content -->
 		<div class="col-lg-10 content2">
-			<!-- Spare Parts Section -->
 			<section class="content">
-					<div class="row">
-						@foreach($SR as $sr)
-							@foreach($show as $tampil)
-								<div class="col-md-4 card-group">
-									<div class="card" style="padding: 5px; margin-top:10px;">
-										<img class="card-img-top" src="{{ url('public/image/'.$tampil) }}" width="250" height="180" alt="">
-										<div class="card-body">
-											<h5 class="card-title"><a href="{{'/visit/'.$sr->id }}">{{ $sr->judul }}</a></h5>
-											<p class="card-text"><strong>Rp.{{ $sr->harga }}</strong></p>
-											<p class="card-text">{{ $sr->deskripsi }}</p>
-											<p class="card-text"><small class="text-muted">Updated on {{ $sr->created_at }}</small></p>
-										</div>
-									</div>
-								</div>
-							@endforeach
-						@endforeach
-					</div>
+				<div class="row">
+					@foreach($SR as $item => $key)
+					<div class="col-md-4 card-group">
+						<div class="card" style="padding: 5px; margin-top:10px;">
+							<img class="card-img-top" src="{{ url('public/image/'.$collect[$item]) }}" width="250" height="180" alt="">
+							<div class="card-body">
+								<h4 class="card-title"><a href="{{'/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h4>
+								<p class="card-text"><strong>Rp.{{ $key->harga }}</strong></p>
+								<p class="card-text">{{ \Str::limit($key->deskripsi,50) }}</p>
+								<p class="card-text"><small class="text-muted">Updated on {{ $key->created_at }}</small></p>
+							</div>
+						</div>
+					</div>	
+					@endforeach
+				</div>
 			</section>	
 		</div>
+
 		<!-- Kategori -->
 		<div class="col-lg-2 text-center" id="category">
-			<h3 style="color:#434175;display: block;">Kategori</h3>
+			<h3 style="color:#434175; display: block;">Kategori</h3>
 			<ul class="list-group list-group-flush">
-				<a href="#" id="MBL">
+				<button class="btn category" onclick="category('All')">
 					<li class="list-group-item">
-					<img src="{{asset('bootstrap-icons/car-icon.png')}}" width="75" height="50"><br>MOBIL
+					<h1>All</h1>
 					</li>
-				</a>
-				<a href="#" id="SP">
+				</button>	
+				<button class="btn category" onclick="category('mobil')">
 					<li class="list-group-item">
-					<img id="gear_icon" src="{{asset('bootstrap-icons/gear-icon.png')}}" width="50" height="50"><br>
+					<img src="{{asset('bootstrap-icons/car-icon.png')}}" width="auto" height="50"><br>CAR
+					</li>
+				</button>
+				<button class="btn category" onclick="category('spare parts')">
+					<li class="list-group-item">
+					<img id="gear_icon" src="{{asset('bootstrap-icons/gear-icon.png')}}" width="auto" height="50"><br>
 					SPARE PART
 					</li>
-				</a>
+				</button>	
 			</ul>
 		</div>
 	</div>

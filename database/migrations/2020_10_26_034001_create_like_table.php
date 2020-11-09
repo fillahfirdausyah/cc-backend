@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShowRoomTable extends Migration
+class CreateLikeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateShowRoomTable extends Migration
      */
     public function up()
     {
-        Schema::create('show_room', function (Blueprint $table) {
+        Schema::create('like', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('slug');
-            $table->string('dagangan');
-            $table->longtext('deskripsi');
-            $table->string('harga');
-            $table->text('gambar');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('post_id');
+            $table->integer('like')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateShowRoomTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('show_room');
+        Schema::dropIfExists('like');
     }
 }

@@ -27,34 +27,43 @@
 	<div class="card">
 		<form method="POST" action="{{'/upload/proccess'}}" enctype="multipart/form-data">
 			@csrf
+			@if ($errors->any())
+			    <div class="alert alert-danger">
+			        <ul>
+			            @foreach ($errors->all() as $error)
+			                <li>{{ $error }}</li>
+			            @endforeach
+			        </ul>
+			    </div>
+			@endif
 			<div class="form-row">
 				<div class="form-group col-md-2">
-		      		<label for="inputCategory">Upload Apa nih?</label>
-		      		<select id="inputCategory" class="form-control dagangan" name="dagangan" >
-		        		<option id="MBL" value="mobil" selected>Mobil</option>
-		        		<option id="SP" value="spare parts">Spare Parts</option>
-		      		</select>
+	      		<label for="dagangan">Upload Apa nih?</label>
+	      		<select id="dagangan" class="form-control dagangan" name="dagangan" >
+	        		<option value="mobil" selected>Mobil</option>
+	        		<option value="spare parts">Spare Parts</option>
+	      		</select>
 		      	</div>
 		     </div>
 		  	<div class="form-row">
 		    	<div class="form-group col-md-6">
 		      	<label for="inputEmail4">Judul</label>
-		      	<input type="Text" class="form-control" id="inputEmail4" name="judul" placeholder="judul">
+		      	<input type="Text" class="form-control" id="title" name="judul" placeholder="judul" value="{{ old('title') }}">
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
 		    	<label for="inputAddress">Deskripsi</label>
-		    	<textarea type="text" class="form-control" id="inputAddress" name="deskripsi" placeholder="Deskripsi"></textarea>
+		    	<textarea type="text" id="description" class="form-control" id="inputAddress" name="deskripsi" placeholder="Deskripsi"></textarea>
 		  	</div>
 		  	<div class="form-row">
 			    <div class="form-group">
-			      	<label for="inputPrice">Harga</label>
-			      	<input type="text" class="form-control" id="inputPrice" name="harga" placeholder="Rupiah">
+		      	<label for="price">Harga</label>
+		      	<input type="text" class="form-control" id="price" name="harga" placeholder="Rupiah" value="{{ old('price') }}">
 			    </div>
 		    </div>
 		    <div class="form-group">
-		    	<label for="gambar">Gambar</label>
-				<input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
+		    	<label for="image">Gambar</label>
+				<input type="file" class="form-control" id="image" name="gambar[]" value="{{ old('image') }}" multiple>
 		    </div>
 		    <input type="submit" class="btn btn-primary" name="POST">
 		</form>

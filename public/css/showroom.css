@@ -22,10 +22,6 @@ footer{
 	margin-top: 20px;
 	color: #1A1821;
 	background-color: #E6E8F5;
-	@font-face {
-    	font-family: OptimusPrinceps;
-    	src: url('/fonts/OptimusPrinceps.tff');
-	}
 }
 
 .col-1{
@@ -41,6 +37,7 @@ footer{
 	margin-top: 20px;
 }
 
+
 ul a{
 	text-decoration: none;
 	color: #0E1414;
@@ -50,6 +47,7 @@ ul a{
 	background-color: #007bff;
 	color: #FAFAFA;
 }
+
 
 .cc{
 	font-size: 200%;
@@ -90,6 +88,11 @@ ul a{
   -webkit-animation-duration: 1.5s;
   animation-name: sliding;
   animation-duration: 1.5s;
+}
+
+.category{
+	 border: none; 
+	 background: none;
 }
 
 .mySlide img{
@@ -147,8 +150,8 @@ ul a{
 		line-height: 1;
 		letter-spacing: 2px;
 		font-family: "Poppins", sans-serif;
+		font-size: 32px;
 	}
-
 }
 
 /*---------Mobile-------*/

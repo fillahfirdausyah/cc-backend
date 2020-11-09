@@ -1,13 +1,7 @@
 * {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
-.mySlide {display: none}
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+.mySlide {display: none}
 
 /* Next & previous buttons */
 .prev, .next {
@@ -24,6 +18,13 @@ body {font-family: Verdana, sans-serif; margin:0}
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
 }
 
 /* Position the "next button" to the right */
@@ -55,6 +56,27 @@ body {font-family: Verdana, sans-serif; margin:0}
   .prev, .next,.text {font-size: 11px}
 }
 
+h4{
+  margin: auto;
+  font-weight: 500;
+  color: #5a5af3;
+  text-shadow: 0px 0px 1px #021312;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-family: "Arial", sans-serif;
+}
+
+.child_comment{
+  border: 0px solid #FAFAFA;
+  background-color: #FAFAFA;
+  margin: 10px;
+}
+
+blockquote p{
+  margin: auto;
+  padding: 5px;
+}
+
 .row{
 	margin-top: 5px;
 }
@@ -79,15 +101,40 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 .back{
     position: fixed;
-    border: 1px solid #FFFFFF;
+    border: 2px solid #FFFFFF;
     border-radius: 10%; 
     background-color: #007bff;
 }
 
 .back:hover{
-	border: 1px solid #000000;
-    border-radius: 10%; 
-    background-color: #FFFFFF;
+	border: none;
+  border-radius: 10%; 
+  background-color: #FFFFFF;
+}
+
+.rekomendasi img{
+  width: 150px;
+  height: 100px;
+  margin-top: 10px;
+  border: 1px solid #697070;
+  border-radius: 10px;
+}
+
+.recommend_body a{
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #FAFAFA;
+  text-decoration: none;
+  color: #5a5af3;
+}
+
+
+.recommend_body a:hover{
+  text-decoration: none;
+  background-color: #5a5af3;;
+  font-size: 120%;
+  color: #FAFAFA;
 }
 
 .sesi_komentar{

@@ -7,27 +7,40 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/visitSR.css')}}">
 </head>
 <body style="margin-bottom: 10px;">
 
 <header>
-	<div class="back">
+	<div class="back" style="margin-left: ">
 		<a href="/"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
 	</div>
 </header>
-
 <main>
 <section>
 <div class="container">
 	<div class="row">
+		<div class="col-3">
+			<div class="card mb-2 recommend_head">
+				<h4>Recomended</h4>
+			</div>
+			<div class="card recommend_body">
+				@foreach($recomendations as $recommend =>$key)
+					<div class="rekomendasi img-rounded"><img src="{{ asset('public/image/'.$recommend_img[$recommend]) }}"></div>
+					<h5 class="card-title mt-2"><a href="{{'/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h5>
+					<hr>
+				@endforeach
+			</div>
+		</div>
 		<div class="col-8">
 			<div class="card">
 				<div class="container-fluid" style="background-color: #FAFAFA;">
-					<div class="">
-						@foreach( $explode as $pict )
+					<!-- Content -->
+					<div>
+						@foreach($collect as $pict)
 						<div class="mySlide sliding">
-							<img width="100%" src="{{ asset('public/image/' . $pict) }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
+							<img width="100%" src="{{ asset('public/image/'.$pict) }}" height="350" style="margin-top: 20px;  margin-bottom: 5px;">
 						</div>
 						@endforeach
 					</div>
@@ -42,11 +55,20 @@
 					<p class="card-text">{{ $SR->deskripsi }}</p>
 					<br>
 					<p class="card-text"><small>Last Updated {{ $SR->created_at }}</small></p>
+					<!-- LIKE -->
+					<p class="card-text" class="like">
+						<input type="hidden" id="post_id" name="post_id" value="{{ $SR->id }}" class="form-control">
+						<input type="hidden" id="user_id" name="user_id" value="" class="form-control">
+						<button class="btn-sm btn-primary" onclick="like()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like <span id="total_like" class="badge badge-primary" style="font-size: 12px;">{{ $likes }}</span></button>
+					</p>
+					<!-- Comment -->
 					<div class="card-footer">
-						<form>
+						<form  method="post" action="{{ url('/comment') }}">
+							@csrf
 							<div class="form-group">
+								<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
 						    	<label for="comment">Komentar</label>
-						    	<textarea class="form-control" id="comment" rows="3"></textarea>
+						    	<textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
 						  	</div>
 						  	<div class="form-group">
 						  		<input type="submit" class="btn" name="send" value="Kirim">
@@ -58,34 +80,42 @@
 			<div class="sesi_komentar">Komentar</div>
 			<div class="field-comment">
 				<div class="card">
-					<div class="card-body">
-						<div class="card-title"><strong>Nama komentator</strong></div>
-						<p>isi komentar</p>
-						<button class="btn sm-btn tombol_reply"> Reply </button>
-						<div class="reply">
-							<form>
-								<div class="form-group">
-								 <textarea placeholder="Balas..." cols="50" rows="3"></textarea>
-								</div>
-								<div class="form-group tombol">
-								<input type="submit" class="btn sm-btn" name="kirim" value="Kirim">
-								<button class="btn sm-btn" onclick="cancel()">Batal</button>
-								</div>
-							</form>
+					@if( $comment != NULL)
+						@foreach( $comment->comment as $com)
+						<div class="card-body">
+							<div class="card-title"><strong>Nama komentator</strong></div>
+							<p>{{ $com->comment }}</p>
+							<button class="btn btn-sm tombol_reply"> Balas </button>
+							<div class="reply">
+								<form method="post" action="{{url('/comment')}}">
+									@csrf
+									<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $com->id }}">
+									<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
+									<div class="form-group">
+									 	<textarea name="comment" placeholder="Balas..." cols="50" rows="3" id="reply_comment"></textarea>
+									</div>
+									<div class="form-group tombol">
+										<input type="submit" class="btn btn-sm" value="Kirim">
+										<button class="btn btn-sm" onclick="cancel()">Batal</button>
+									</div>
+								</form>
+							</div>
+							@foreach( $com->child as $child)
+							<div class="card-title"><strong>Nama komentator pembalas</strong></div>
+							<div class="child_comment">
+								<blockquote>
+									<p>{{ $child->comment}}</p>	
+								</blockquote>
+							</div>
+							@endforeach
 						</div>
-					</div>
+						@endforeach
+					@else
+						<div class="card mx-auto">Komentar Kosong</div>
+					@endif
 				</div>
 			</div>
 		</div>
-		<div class="col-3">
-			<div class="card profil">
-				<img src="" width=" 50" height="50" style="border: 1px solid #0000; border-radius: 50%; margin: auto;">
-				<div class="card-body">
-					<p>Mahmudi</p><br>
-					<p>Tanya Penjual <a href="">penjual</a></p>
-				</div>
-			</div>
-		</div>	
 	</div>
 </div>
 </section>

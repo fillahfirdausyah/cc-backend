@@ -16,6 +16,23 @@ class SR extends Model
     						'deskripsi',
     						'gambar',
     						'harga',
-    						'dagangan'
+    						'dagangan',
+    						'slug'
     						];
+
+
+   public function getRouteKeyName(){
+   		return 'judul';
+   }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comments', 'post_id')->whereNull('parent_id');
+    }
+
+    public function like()
+    {
+        return $this->hasMany('App\Models\Like', 'post_id');
+    }
+
 }
