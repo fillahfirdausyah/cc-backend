@@ -162,6 +162,7 @@
 		<div class="col-lg-10 content2">
 			<section class="content">
 				<div class="row">
+					@if($SR != NULL)
 					@foreach($SR as $item => $key)
 					<div class="col-md-4 card-group">
 						<div class="card" style="padding: 5px; margin-top:10px;">
@@ -175,6 +176,7 @@
 						</div>
 					</div>	
 					@endforeach
+					@endif
 				</div>
 			</section>	
 		</div>

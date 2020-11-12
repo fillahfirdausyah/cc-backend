@@ -27,12 +27,12 @@ class SR extends Model
 
     public function comment()
     {
-        return $this->hasMany('App\Models\Comments', 'post_id')->whereNull('parent_id');
+        return $this->hasMany('App\Models\Comments_SR', 'post_id')->whereNull('parent_id');
     }
 
     public function like()
     {
-        return $this->hasMany('App\Models\Like', 'post_id');
+        return $this->hasMany('App\Models\Like_SR', 'post_id');
     }
 
 }

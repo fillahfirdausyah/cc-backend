@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use App\Models\SR;
-use App\Models\Comments;
-use App\Models\Like;
+use App\Models\Comments_SR;
+use App\Models\Like_SR;
 
 class VisitController extends Controller
 {
@@ -37,7 +37,7 @@ class VisitController extends Controller
         $comment = SR::with(['comment','comment.child'])->where('id', $id)->first();        
 
         //show like
-        $like = Like::select('like')->where('post_id', '=', $id)->get();
+        $like = Like_SR::select('like')->where('post_id', '=', $id)->get();
         $likes = count($like);
 
         return view('layouts/visit', compact('SR', 'collect','comment', 'likes', 'recommend_img', 'recomendations'));
@@ -49,7 +49,7 @@ class VisitController extends Controller
             'comment' => 'required'
         ]);
 
-            $comment = new Comments();
+            $comment = new Comments_SR();
             $comment->post_id = $request->id;
             //uncomment ketika sudah ada auth
             //$comments->user_id = $request->user_id;
@@ -62,13 +62,13 @@ class VisitController extends Controller
 
     public function like(Request $request)
     {
-        $like = new Like();
+        $like = new Like_SR();
         $like->like = $request->get('like');
         $like->user_id = 1 ;//$request->get('user_id');
         $like->post_id = $request->get('post_id');
         $like->save();
 
-        $like = Like::select('like')->where('post_id', '=', $request->get('post_id'))->get();
+        $like = Like_SR::select('like')->where('post_id', '=', $request->get('post_id'))->get();
         $likes = count($like);
 
         echo $likes;

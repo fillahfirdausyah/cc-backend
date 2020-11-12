@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use App\Models\SR;
-use App\Models\Comments;
+use App\Models\Comments_SR;
 
 
 class ShowroomController extends Controller
@@ -100,15 +100,19 @@ class ShowroomController extends Controller
     public function show()
     {
         $SR = DB::table('show_room')->paginate(20);
-        foreach ($SR as $sr) {
-             $conv[] = json_decode($sr->gambar);
-        }
-        $count = count($conv);
-        for ($i=0; $i < $count; $i++) { 
-            $collect[] = $conv[$i][0];
-        }
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $conv[] = json_decode($sr->gambar);
+            }
+            $count = count($conv);
+            for ($i=0; $i < $count; $i++) { 
+                $collect[] = $conv[$i][0];
+            }
 
-        return view('layouts/ShowRoom',['SR' => $SR], compact('collect'));
+            return view('layouts/ShowRoom',['SR' => $SR], compact('collect'));
+        }else{
+            return view('layouts/ShowRoom');
+        }
     }
 
     public function edit($id)
