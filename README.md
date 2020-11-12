@@ -9,3 +9,5 @@
 
 ## About Car Community
     Car Community adalah aplikasi komunitas untuk mengumpulkan dan mnyatukan semua komunitas Mobil di Indonesia
+<p align="center" style="bold">Progress Project</p>
+<p align="center"><a href="https://freeimage.host/i/2xp0an"><img src="https://iili.io/2xp0an.md.png" alt="2xp0an.md.png" border="0"></a></p>

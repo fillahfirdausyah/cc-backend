@@ -6,10 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    // use HasFactory, Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -38,6 +40,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function comment()
     {
         return $this->hasMany('App\Models\Comments', 'user_id');
@@ -46,5 +49,9 @@ class User extends Authenticatable
     public function like()
     {
         return $this->hasOne('App\Models\Like', 'user_id');
+
+    public function post()
+    {
+        return $this->hasMany(Post::class)->latest();
     }
 }
