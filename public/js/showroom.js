@@ -89,7 +89,7 @@ $('#search').keyup(function(){
     var _token = $('input[name="_token"]').val();
     if(query != ''){
       $.ajax({
-        url:"/search",
+        url:"/showroom/search",
         method:"post",
         data:{query:query, _token:_token},
         success:function(data){
@@ -107,7 +107,7 @@ function category(category) {
   var query = category;
   var _token = $('input[name="_token"]').val();
   $.ajax({
-    url:"/category",
+    url:"/showroom/category",
     method:"post",
     data:{query:query, _token:_token},
     success:function(data){

@@ -26,7 +26,7 @@ function like(){
   // var user_id = $("#user_id").val();
   var post_id = $("#post_id").val();
   $.ajax({
-    url:"/like",
+    url:"/showroom/like",
     method:"GET",
     data:{ like:like, post_id:post_id },
     success: function(data){

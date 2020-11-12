@@ -4,16 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 /*-----------------------------------------------------------------------------------*/
 
-Route::get('/', 'ShowroomController@show');
+Route::get('/showroom', 'ShowroomController@show');
 // Route::get('/visit', function () {return view('layouts/visit');});
-Route::get('/upload', function () {return view('showroom/uploadshowroom');});
-Route::post('/upload/proccess', 'ShowroomController@store');
-Route::get('/image', function(){ return "../../public/public/image/"; })->name('takeImage');
-Route::get('/{id}-{slug}', 'VisitController@show');
-Route::post('/search', 'ShowroomController@search');
-Route::post('/comment', 'VisitController@comment');
-Route::get('/like', 'VisitController@like');
-Route::post('/category', 'ShowroomController@category');
+Route::get('/showroom/upload', function () {return view('showroom/uploadshowroom');});
+Route::post('/showroom/upload/proccess', 'ShowroomController@store');
+Route::get('/showroom/image', function(){ return "../../public/public/image/"; })->name('takeImage');
+Route::get('/showroom/{id}-{slug}', 'VisitController@show');
+Route::post('/showroom/search', 'ShowroomController@search');
+Route::post('/showroom/comment', 'VisitController@comment');
+Route::get('/showroom/like', 'VisitController@like');
+Route::post('/showroom/category', 'ShowroomController@category');
+Route::delete('/showroom/{id}', 'ShowroomController@destroy')->name('delete');
+Route::post('/showroom/edit/{id}', 'ShowroomController@edit');
+Route::post('/showroom/edit/proccess/{id}', 'ShowroomController@update');
 
 // //layouts
 // Route::get('/user', function () {return view('layouts.Social_Network');});

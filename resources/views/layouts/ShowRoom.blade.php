@@ -18,12 +18,20 @@
 		<button id="icon" class="btn icon_btn" type="button"><img src="{{ asset('bootstrap-icons/list.svg') }}" width="20" height="20"></button>
 		<div class="row justify-content-start" id="myTopnav">
 			<div class="col-3 d-flex justify-content-start">
-				<a href="http://cc.buanalintas.co.id/"><h3>Car Community</h3></a>
+				<div><h3>Car Community</h3></div>
 			</div>
 			<div class="col-5 d-flex justify-content-center">
 				<button type="button" class="btn btn-sm direction" onclick="direction('news')"> News </button>
 				<button type="button" class="btn btn-sm direction" onclick="direction('event')"> Event </button>
 				<button type="button" class="btn btn-sm direction" onclick="direction('commerce')"> E-Commerce </button>
+				<div class="dropdown">
+				  	<button class="dropbtn btn-sm directon">Navigation</button>
+				  	<div class="dropdown-content">
+				    	<a href="#">Dashboard</a>
+				    	<a href="#">Social Network</a>
+				    	<a href="http://cc.buanalintas.co.id/">Website</a>
+				  	</div>
+				</div>
 			</div>
 			<div class="col-3 mt-3 d-flex justify-content-center">
 				<form class="form-inline my-2 my-lg-0">
@@ -140,7 +148,7 @@
 	    	</div>
 	    	<div class="col-4 justify-content-start cc">
 	    		<h2 class="font-weight-normal" style="color:#434175;">E-Commerce</h2>
-	    		<a href="/upload"><button class="btn btn-primary" type="button">Mau jualan juga gan? Klik sini</button></a>
+	    		<a href="/showroom/upload"><button class="btn btn-primary" type="button">Mau jualan juga gan? Klik sini</button></a>
 	    	</div>
 	    	<div class="col-2 justify-content-start cart_icon">
 	    		<img src="{{ asset('bootstrap-icons/cart_shop.png')}}" width="100" height="100">
@@ -157,9 +165,9 @@
 					@foreach($SR as $item => $key)
 					<div class="col-md-4 card-group">
 						<div class="card" style="padding: 5px; margin-top:10px;">
-							<img class="card-img-top" src="{{ url('public/image/'.$collect[$item]) }}" width="250" height="180" alt="">
+							<img class="card-img-top" src="{{ url('/public/image/'.$collect[$item]) }}" width="250" height="180" alt="">
 							<div class="card-body">
-								<h4 class="card-title"><a href="{{'/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h4>
+								<h4 class="card-title"><a href="{{'/showroom/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h4>
 								<p class="card-text"><strong>Rp.{{ $key->harga }}</strong></p>
 								<p class="card-text">{{ \Str::limit($key->deskripsi,50) }}</p>
 								<p class="card-text"><small class="text-muted">Updated on {{ $key->created_at }}</small></p>

@@ -16,7 +16,7 @@ class VisitController extends Controller
     public function show($id)
     {
         //show_rekomendasi
-        $recomendations = SR::orderBy('created_at', 'desc')->take(5)->get();
+        $recomendations = SR::orderBy('created_at', 'desc')->limit(5)->get();
         foreach ($recomendations as $sr) {
              $conv[] = json_decode($sr->gambar);
         }

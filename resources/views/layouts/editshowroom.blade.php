@@ -7,7 +7,7 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
-<title>Upload Dagangan</title>
+<title>Edit Dagangan</title>
 </head>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/UPS.css') }}">
 <body>
@@ -17,7 +17,7 @@
 	</div>
 	<div class="container mb-3 mt-2">
 		<div class="card text-center" style="background-color:#007bff; color: #FAFAFA; ">
-			<h5>Upload Sini Gan!</h5>	
+			<h5>Edit</h5>	
 		</div>
 	</div>
 </header>
@@ -25,7 +25,7 @@
 <main>
 <div class="container">
 	<div class="card">
-		<form method="POST" action="{{'/showroom/upload/proccess'}}" enctype="multipart/form-data">
+		<form method="post" action="{{'/showroom/edit/proccess/'.$SR->id}}" enctype="multipart/form-data">
 			@csrf
 			@if ($errors->any())
 			    <div class="alert alert-danger">
@@ -65,7 +65,7 @@
 		    	<label for="image">Gambar</label>
 				<input type="file" class="form-control" id="image" name="gambar[]" value="{{ old('image') }}" multiple>
 		    </div>
-		    <input type="submit" class="btn btn-primary" name="POST">
+		    <input type="submit" class="btn btn-primary">
 		</form>
 	</div>
 </div>

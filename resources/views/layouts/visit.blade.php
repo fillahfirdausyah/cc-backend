@@ -14,7 +14,7 @@
 
 <header>
 	<div class="back" style="margin-left: ">
-		<a href="/"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
+		<a href="/showroom"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
 	</div>
 </header>
 <main>
@@ -28,7 +28,7 @@
 			<div class="card recommend_body">
 				@foreach($recomendations as $recommend =>$key)
 					<div class="rekomendasi img-rounded"><img src="{{ asset('public/image/'.$recommend_img[$recommend]) }}"></div>
-					<h5 class="card-title mt-2"><a href="{{'/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h5>
+					<h5 class="card-title mt-2"><a href="{{'/showroom/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h5>
 					<hr>
 				@endforeach
 			</div>
@@ -50,7 +50,22 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<div class="card-title"><h2><strong>{{ $SR->judul }}</strong></h2></div>
+					<div class="row">
+						<div class="col-md-9 d-flex">
+						<div class="card-title"><h2><strong>{{ $SR->judul }}</strong></h2></div>	
+						</div>
+						<div class="col-md-3 d-flex">	
+						<form method="post" action="{{ url('/showroom/edit/'.$SR->id)}}">
+							@csrf
+							<input type="submit" class="btn-sm btn-success" name="" value="Edit">
+						</form>
+						<form method="post" action="{{ route('delete',['id' => $SR->id]) }}">
+							@method('delete')
+							@csrf
+							<input type="submit" class="btn-sm btn-danger" name="" value="Delete">
+						</form>
+						</div>
+					</div>
 					<p class="card-text">Harga <strong>Rp.{{ $SR->harga }}</strong></p>
 					<p class="card-text">{{ $SR->deskripsi }}</p>
 					<br>
@@ -59,11 +74,11 @@
 					<p class="card-text" class="like">
 						<input type="hidden" id="post_id" name="post_id" value="{{ $SR->id }}" class="form-control">
 						<input type="hidden" id="user_id" name="user_id" value="" class="form-control">
-						<button class="btn-sm btn-primary" onclick="like()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like <span id="total_like" class="badge badge-primary" style="font-size: 12px;">{{ $likes }}</span></button>
+						<button class="btn-sm btn-primary" onclick="like()"><span id="total_like" class="badge badge-primary" style="font-size: 12px;">{{ $likes }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
 					</p>
 					<!-- Comment -->
 					<div class="card-footer">
-						<form  method="post" action="{{ url('/comment') }}">
+						<form  method="post" action="{{ url('/showroom/comment') }}">
 							@csrf
 							<div class="form-group">
 								<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
@@ -87,7 +102,7 @@
 							<p>{{ $com->comment }}</p>
 							<button class="btn btn-sm tombol_reply"> Balas </button>
 							<div class="reply">
-								<form method="post" action="{{url('/comment')}}">
+								<form method="post" action="{{url('/showroom/comment')}}">
 									@csrf
 									<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $com->id }}">
 									<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
