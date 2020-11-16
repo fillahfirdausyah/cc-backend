@@ -33,7 +33,7 @@
 				  	</div>
 				</div>
 			</div>
-			<div class="col-3 mt-3 d-flex justify-content-center">
+			<div class="col-3 mt-3 d-flex justify-content-end">
 				<form class="form-inline my-2 my-lg-0">
 					@csrf
 					<div class="container">
@@ -52,13 +52,13 @@
 	<div class="container-fluid" id="news" style="background-color: #FAFAFA;">
 		<div class="">
 			<div class="mySlide sliding">
-				<img width="100%" src="{{ asset('image/1.jpg') }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
+				<img width="100%" src="{{ asset('image/IMG_20190830_165507.jpg') }}" height="350" style="margin-top: 100px;  margin-bottom: 5px;">
 			</div>
 			<div class="mySlide sliding">
-				<img width="100%" src="{{ asset('image/2.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
+				<img width="100%" src="{{ asset('image/IMG_20190905_163732_051.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
 			</div>
 			<div class="mySlide sliding">
-				<img width="100%" src="{{ asset('image/3.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
+				<img width="100%" src="{{ asset('image/IMG_20191001_145359_455.jpg') }}" height="350" style="margin-top: 110px;  margin-bottom: 5px;">
 			</div>
 			<div style="text-align:center">
 			  	<span class="dot" onclick="currentSlide(1)"></span> 
@@ -84,21 +84,21 @@
 	                <div class="carousel-item active">
 	                    <div class="col-md-4">
 	                        <div class="card card-body">
-	                            <a href=""><img class="img-fluid" src="http://placehold.it/380?text=1"></a>
+	                            <a href=""><img class="img-fluid" src="{{ asset('image/IMG_20191001_145359_455.jpg') }}" ></a>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="carousel-item">
 	                    <div class="col-md-4">
 	                        <div class="card card-body">
-	                            <a href=""><img class="img-fluid" src="http://placehold.it/380?text=2"></a>
+	                            <a href=""><img class="img-fluid" src="{{ asset('image/IMG_20190905_163732_051.jpg') }}"></a>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="carousel-item">
 	                    <div class="col-md-4">
 	                        <div class="card card-body">
-	                            <a href=""><img class="img-fluid" src="http://placehold.it/380?text=3"></a>
+	                            <a href=""><img class="img-fluid" src="{{ asset('image/IMG_20191001_145359_455.jpg') }}"></a>
 	                        </div>
 	                    </div>
 	                </div>
