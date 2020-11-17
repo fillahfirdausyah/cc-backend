@@ -1,0 +1,273 @@
+* {box-sizing: border-box;}
+
+html{
+	scroll-behavior: smooth;
+}
+
+a:link{
+	text-decoration: none;
+}
+
+body{
+	background-color: #fff;
+}
+
+main{
+	margin-bottom: 10px;
+}
+
+footer{
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+	color: #1A1821;
+	background-color: #E6E8F5;
+}
+
+.col-1{
+	margin: auto;
+}
+.card{
+	border: 1px solid #9E9D9E;
+	box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin: 5px;
+}
+
+.content2{
+	margin-top: 20px;
+}
+
+
+ul a{
+	text-decoration: none;
+	color: #0E1414;
+}
+
+.list-group-item:hover{
+	background-color: #007bff;
+	color: #FAFAFA;
+}
+
+
+.cc{
+	font-size: 200%;
+}
+/*recommend*/
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+
+#recipeCarousel .active{
+	background-color: #FAFAFA;	
+}
+
+/*slideshow*/
+.mySlide {display: none}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 1.0s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+.mySlide {
+  -webkit-animation-name: sliding;
+  -webkit-animation-duration: 1.5s;
+  animation-name: sliding;
+  animation-duration: 1.5s;
+}
+
+.category{
+	 border: none; 
+	 background: none;
+}
+
+.mySlide img{
+	border: 1px solid #f8f9fa;
+	border-radius: 10px;
+}
+
+@-webkit-keyframes sliding {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes sliding {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media (min-width: 768px){
+
+	/*General*/
+	nav{ 
+		margin-bottom: 15px;
+		background-color: #fff;
+		height:80px;
+	}
+
+	nav #icon{display: none;}
+
+	.content2{
+		border-right: 2px solid #717171;
+	}
+
+	nav .btn-sm{
+		margin: 10px;
+		height: 40px;
+		background: none;
+		color: #434175;
+		font-size: 15px;
+		border-right: 2px solid #5a5af3;
+		line-height: 1.6;
+		letter-spacing: 2px;
+		font-weight: 80%;
+		font-family: "Open Sans", sans-serif
+	}
+
+	nav .btn-sm:hover{
+		background: #5a5af3;
+		color: #FAFAFA;
+	}
+
+	nav h3{
+		margin: 15px;
+		font-weight: bolder;
+		color: #5a5af3;
+		line-height: 1;
+		letter-spacing: 2px;
+		font-family: "Poppins", sans-serif;
+		font-size: 32px;
+	}
+
+	.dropbtn {
+		background: none;
+	  	border: none;
+	}
+
+	.dropdown {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.dropdown-content {
+	  display: none;
+	  position: absolute;
+	  background-color: #fff;
+	  min-width: 300px;
+	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	  z-index: 1;
+	}
+	
+	.dropdown-content a {
+	  color: #2B3333;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+	}
+	.dropdown-content a:hover {background-color: #ddd;}
+	.dropdown:hover .dropdown-content {display: block;}
+}
+
+/*---------Mobile-------*/
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+
+	main{margin-top: 80px;}
+
+	nav{ 
+		height: auto;
+		background-color: #007bff;
+	}
+
+	nav #icon{
+		cursor: pointer;
+		display: inline;
+		border: none;  
+		margin-left: 1em;
+		margin-top: 20px;
+	}	
+
+	nav #myTopnav{
+		display: none;
+  		overflow: hidden;
+	    text-align: center;
+	    float: none;
+	    font-size: 80%;
+	 	margin: auto;
+	}
+
+	.cart_icon{
+		display: none;
+	}
+
+	nav .btn-sm{
+		background: none;
+		font-size: 180%;
+		line-height: 1.6;
+		letter-spacing: 2px;
+		font-weight: 80%;
+		font-family: "Open Sans", sans-serif;
+	}
+
+	nav .btn-sm:hover{
+		background: #5a5af3;
+		color: #FAFAFA;
+	}
+
+	nav h3{
+		display: none;
+	}
+
+	.dropdown {
+	  	display: none;
+	}
+
+	.col-5, .col-3{
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.mySlide{
+		width: auto;
+	}
+
+	.col-lg-10{
+		border-right: none;
+	}
+
+	#category{
+		margin-top: 20px;
+	}
+
+	.cc{
+		display: table;
+		margin: auto;
+	}
+
+	.cc h5{
+		font-size: 50%;
+	}
+	.content2{
+		border: none;
+	}
+}
