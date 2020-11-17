@@ -89,7 +89,19 @@ Route::get('/post', 'PostController@index');
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');
 
-
+// Showroom
+Route::get('/showroom', 'ShowroomController@show');
+Route::get('/showroom/upload', function () {return view('showroom/uploadshowroom');});
+Route::post('/showroom/upload/proccess', 'ShowroomController@store');
+Route::get('/showroom/image', function(){ return "../../public/public/image/"; })->name('takeImage');
+Route::get('/showroom/{id}-{slug}', 'VisitSRController@show');
+Route::post('/showroom/search', 'ShowroomController@search');
+Route::post('/showroom/comment', 'VisitSRController@comment');
+Route::get('/showroom/like', 'VisitSRController@like');
+Route::post('/showroom/category', 'ShowroomController@category');
+Route::delete('/showroom/{id}', 'ShowroomController@destroy')->name('delete');
+Route::post('/showroom/edit/{id}', 'ShowroomController@edit');
+Route::post('/showroom/edit/proccess/{id}', 'ShowroomController@update');
 
 
 
