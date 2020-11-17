@@ -119,7 +119,7 @@ class ShowroomController extends Controller
     {
         $SR = SR::find($id);
 
-        return view('showroom/editshowroom',['SR' => $SR]);
+        return view('showroom/editSR',['SR' => $SR]);
     }
 
     public function update(Request $request, $id)
