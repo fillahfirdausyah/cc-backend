@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Keuangan;
+use App\Models\Regional1;
 
-class KeuanganController extends Controller
+class KeuanganRegional1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $data = Keuangan::latest()->get();
-        return view('admin.keuangan.Keuangan', compact('data'));
+        $data = Regional1::latest()->get();
+        return view('admin.keuangan.Region1', compact('data'));
     }
 
     /**
@@ -26,8 +26,7 @@ class KeuanganController extends Controller
      */
     public function create()
     {
-        $route = "/admin/keuangan/store/";
-        // dd($route);
+        $route = "/admin/keuangan/store/regional1";
         return view('admin.keuangan.CreateKeuangan', compact('route'));
     }
 
@@ -45,13 +44,13 @@ class KeuanganController extends Controller
             'kategori'  => 'required'
         ]);
 
-        $data = new Keuangan;
+        $data = new Regional1;
         $data->nama     = $request->nama;
         $data->jumlah   = $request->jumlah;
         $data->kategori = $request->kategori;
         $data->save();
 
-        return redirect('/admin/keuangan/')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/keuangan/regional1')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -62,7 +61,6 @@ class KeuanganController extends Controller
      */
     public function show()
     {
-
         $start = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
         $end = Carbon::now()->endOfMonth()->format('Y-m-d H:i:s');
 
@@ -74,11 +72,11 @@ class KeuanganController extends Controller
         }
 
         if(request()->kategori == "Semua") {
-            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->get();
+            $data = Regional1::latest()->whereBetween('created_at', [$start, $end])->get();
         }else {
-            $data = Keuangan::latest()->where('kategori', request()->kategori)->whereBetween('created_at', [$start, $end])->get();
+            $data = Regional1::latest()->where('kategori', request()->kategori)->whereBetween('created_at', [$start, $end])->get();
         }
-        return view('admin.keuangan.Keuangan', compact('data'));
+        return view('admin.keuangan.Region1', compact('data'));
     }
 
     /**
@@ -89,7 +87,7 @@ class KeuanganController extends Controller
      */
     public function edit($id)
     {
-        $data = Keuangan::find($id);
+        $data = Regional1::find($id);
 
         return view('admin.keuangan.EditKeuangan', compact('data'));
     }
@@ -108,14 +106,13 @@ class KeuanganController extends Controller
             'jumlah' => 'required | numeric'
         ]);
 
-        $data = Keuangan::find($id);
+        $data = Regional1::find($id);
         $data->nama     = $request->nama;
         $data->jumlah   = $request->jumlah;
         $data->kategori = $request->kategori;
         $data->save();
 
         return redirect('/admin/keuangan')->with('success', 'Data Berhasil Disimpan');
-
     }
 
     /**
@@ -126,7 +123,7 @@ class KeuanganController extends Controller
      */
     public function destroy($id)
     {
-        $data = Keuangan::find($id);
+        $data = Regional1::find($id);
         $data->delete();
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');

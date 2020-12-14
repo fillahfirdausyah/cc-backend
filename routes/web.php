@@ -22,7 +22,9 @@ Route::get('/master', function() {
 });
 
 
-// Admin //
+Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'privilege'], function () {
+    // Admin //
 // Profile
 Route::get('/profile/admin/{id}', 'UserController@show');
 // News
@@ -52,8 +54,11 @@ Route::get('/admin/user/store', 'UserController@store');
 Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+Route::get('/admin/user/verify/{id}', 'UserController@verify');
+});
 
 // Keuangan
+// Nasional
 Route::get('/admin/keuangan', 'KeuanganController@index');
 Route::get('/admin/keuangan/add', 'KeuanganController@create');
 Route::post('/admin/keuangan/store', 'KeuanganController@store');
@@ -62,8 +67,15 @@ Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
 Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
 
+//Regional
+Route::get('/admin/keuangan/regional1', 'KeuanganRegional1Controller@index');
+Route::get('/admin/keuangan/add/regional1', 'KeuanganRegional1Controller@create');  
+Route::post('/admin/keuangan/store/regional1', 'KeuanganRegional1Controller@store');
+Route::get('/admin/keuangan/details/regional1', 'KeuanganRegional1Controller@show');
+
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
+
 
 // ############################################################## //
 
@@ -89,9 +101,7 @@ Route::get('/post', 'PostController@index');
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');
 
-
-
-
+});
 
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');

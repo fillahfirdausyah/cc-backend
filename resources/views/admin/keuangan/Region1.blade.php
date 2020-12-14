@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Keuangan Nasional</h1>
+            <h1>Keuangan Region 1</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ '/' }}">Home</a></li>
-              <li class="breadcrumb-item active">Keuangan Nasional</li>
+              <li class="breadcrumb-item active">Keuangan Region 1</li>
             </ol>
           </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Nasional</h3>
+                      <h3 class="card-title">Region 1</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -47,12 +47,12 @@
              <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Data Keuangan Nasional</h3>
+                  <h3 class="card-title">Data Keuangan Region 1</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="{{ '/admin/keuangan/details' }}" method="GET">
-                    <a href="{{ '/admin/keuangan/add' }}" class="btn btn-primary">Tambah Data</a>
+                  <form action="{{ '/admin/keuangan/details/regional1' }}" method="GET">
+                    <a href="{{ '/admin/keuangan/add/regional1' }}" class="btn btn-primary">Tambah Data</a>
                     <div class="input-group mb-3 col-sm-4 float-right">
                         <select name="kategori" id="kategori" class="form-control">
                           <option>Semua</option>
@@ -104,7 +104,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  
+                 
                 </div>
               </div>
              </div>

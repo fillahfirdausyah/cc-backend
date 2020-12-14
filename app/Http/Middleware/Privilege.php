@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class CekRole
+class Privilege
 {
     /**
      * Handle an incoming request.
@@ -18,13 +18,11 @@ class CekRole
      */
     public function handle(Request $request, Closure $next)
     {
-       $user = Auth::user();
+        $user = Auth::user();
        if($user->role == 'admin') {
             return $next($request);
-       }else if($user->role == 'bendahara') {
-            return $next($request);
        }
-       
-       return redirect()->to('/member/home');
+
+       return redirect('/dashboard')->with('info', 'Anda Bukan Admin');
     }
 }

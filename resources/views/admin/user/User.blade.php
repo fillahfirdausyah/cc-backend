@@ -35,6 +35,7 @@
                       <th>Nama</th>
                       <th>Email</th>
                       <th>Role</th>
+                      <th>Status Verifikasi.</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -44,6 +45,16 @@
                             <td>{{ $d->name }}</td>
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
+                            <td>
+                              @if ($d->email_verified_at == null)
+                                  Belum Terverifikasi
+                                  <a href="{{ '/admin/user/verify/' }}{{ $d->id }}">
+                                    <i class="fas fa-check" style="color: green"></i>
+                                  </a>
+                              @else
+                                  Sudah Terverifikasi
+                              @endif
+                            </td>
                             <td>
                                 <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
                                   <i class="fas fa-edit" style="color: green"></i>

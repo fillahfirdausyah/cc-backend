@@ -121,4 +121,13 @@ class UserController extends Controller
 
         return redirect('/admin/user/list')->with('info', 'Data Berhasil Dihapus');
     }
+
+    public function verify($id)
+    {
+        $user = User::find($id);
+        $user->email_verified_at = date('Y-m-d, H:i:s');
+        $user->save();
+
+        return redirect('/admin/user/list')->with('success', 'User Terverifikasi');
+    }
 }
