@@ -52,15 +52,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                              <label for="password">Password</label>
-                              <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" id="password" placeholder="Password">
-                              @error('password')
-                                    <div class="alert alert-danger">
-                                      {{ $message }}  
-                                    </div>                                    
-                                @enderror
-                            </div>
-                            <div class="form-group">
                               <label for="Role">Role</label>
                               <select name="role" id="Role" class="form-control">
                                 <option>admin</option>

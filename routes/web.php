@@ -3,7 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +55,10 @@ Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
 Route::get('/admin/user/verify/{id}', 'UserController@verify');
+
+//Region
+Route::post('/admin/region/store', 'RegionController@store');
+Route::get('/admin/region/delete/{id}', 'RegionController@destroy');
 });
 
 // Keuangan
@@ -66,12 +70,13 @@ Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
 Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
 Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
-
 //Regional
-Route::get('/admin/keuangan/regional1', 'KeuanganRegional1Controller@index');
-Route::get('/admin/keuangan/add/regional1', 'KeuanganRegional1Controller@create');  
-Route::post('/admin/keuangan/store/regional1', 'KeuanganRegional1Controller@store');
-Route::get('/admin/keuangan/details/regional1', 'KeuanganRegional1Controller@show');
+Route::get('/admin/keuangan/{region}', function($region) {
+    return "Anda berada dihalaman " . $region;
+});
+////////////////////////
+
+
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');

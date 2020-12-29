@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Keuangan;
+use App\Models\Region;
 
 class KeuanganController extends Controller
 {
@@ -15,8 +16,9 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $data = Keuangan::latest()->get();
-        return view('admin.keuangan.Keuangan', compact('data'));
+        $data   = Keuangan::latest()->get();
+        $region = Region::all(); 
+        return view('admin.keuangan.Keuangan', compact('data', 'region'));
     }
 
     /**

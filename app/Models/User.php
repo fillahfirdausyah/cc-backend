@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime', 
     ];
 
     public function like()
@@ -48,5 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function post()
     {
         return $this->hasMany(Post::class)->latest();
+    }
+
+    public function region()
+    {
+        return $this->belongsToMany(Region::class);
     }
 }
