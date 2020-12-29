@@ -30,7 +30,7 @@ class HomeController extends Controller
         $news    = News::count();
         $event   = Event::count();
         $user    = User::count();
-        $region  = Region::find(2);
+        $region  = Region::all();
 
 
 
