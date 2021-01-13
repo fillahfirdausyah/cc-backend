@@ -37,13 +37,14 @@ class MemberController extends Controller
 
     public function friend($id) {
         $user = Auth::user();
+        $region = Region::all();
         $userRegion = Auth::user()->region()->get();
         $friends = User::whereHas('region', function($q) use($id){
                         $q->where('region_id', $id);
                     })
                     ->where('id', '!=', $user->id)->get();
                     
-        return view('member.Friend', compact('user', 'userRegion', 'friends'));
+        return view('member.Friend', compact('user', 'userRegion', 'friends', 'region'));
     }
 
     public function profile() {
