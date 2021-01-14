@@ -18,7 +18,7 @@
           <div class="modal-header">
             <h4 class="modal-title text-center">Welcome</h4>
           </div>
-          <form action="/member/home/newMember" method="post">
+          <form action="/member/daerah/new" method="post">
             @csrf
           <div class="modal-body">
             <p class="text-center">Please choose your region</p>

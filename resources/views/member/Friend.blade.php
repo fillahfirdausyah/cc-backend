@@ -43,33 +43,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="content-box friends-zone">
-                    @if (\Session::has('error'))
-                        <div class="alert alert-error">
-                            <ul>
-                                <li>{!! \Session::get('error') !!}</li>
-                            </ul>
-                        </div>
-                    @endif
                     <div class="row mt--20 friends-list just">
-                        <div class="col-lg-3 col-sm-6 recently request text-center">
-                            <div class="friend-list-view">
-                                <div class="profile-thumb">
-                                    <h4>Add Region</h4>
-                                </div>
-                            <form action="/member/home/newMember" method="post">
-                                @csrf
-                                <input type="submit" class="mb-1 btn-sm btn-primary border" value="Add">
-                                <input type="hidden" name="uid" value="{{ $user->id }}">
-                                <select name="region" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    @foreach($region as $r)
-                                    <option value="{{ $r->id }}">{{ $r->region }}</option>
-                                    @endforeach
-                                </select>
-                            </form>
-                            </div>
-                        </div>
-                    @php $users = DB::table('users')->get(); @endphp
                     <!-- start friend -->
                     @php $users = DB::table('users')->get(); @endphp
                         @foreach ($friends as $f)
@@ -84,7 +58,6 @@
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
-
                                 <div class="posted-author">
                                     <h6 class="author"><a href="{{ '/member/' }}{{ $f->username }}">{{ $f->name }}</a></h6>
                                     @if(Cache::has('is_online' . $f->id))
