@@ -89,11 +89,11 @@ Route::get('/admin/undian', 'UndianController@index');
 Route::get('/member/home', 'MemberController@index')->middleware('auth');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');
-Route::get('/member/teman', 'MemberController@friend');
+Route::get('/member/teman/{id}', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
 
-// DetailMember
-Route::get('/member/{username}', 'DetailMemberController@detail');
+// // DetailMember
+// Route::get('/member/{username}', 'DetailMemberController@detail');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');
@@ -102,6 +102,11 @@ Route::get('/member/post/edit/{id}', 'PostController@edit');
 Route::post('/member/post/update/{id}', 'PostController@update');
 Route::get('/member/post/delete/{id}', 'PostController@destroy');
 Route::get('/post', 'PostController@index');
+
+// Region
+Route::post('/member/daerah/new', 'CrossregionController@create');
+Route::post('/member/daerah/delete', 'CrossregionController@delete');
+Route::get('/member/daerah/', 'CrossregionController@index');
 
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');

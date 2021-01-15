@@ -500,7 +500,10 @@
                                             <li><a href="{{ '/dashboard' }}">Timeline</a></li>
                                             <li><a href="{{ '/member/tentang' }}">Tentang</a></li>
                                             <li><a href="{{ '/member/galery' }}">Galery</a></li>
-                                            <li><a href="{{ '/member/teman' }}">Teman</a></li>
+                                            @if($userRegion->count() > 0)
+                                            <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}">Teman</a></li>
+                                            @endif
+                                            <li><a href="{{ '/member/daerah/' }}">Daerah</a></li>
                                             <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
                                         </ul>
                                     </nav>
