@@ -188,21 +188,9 @@
               <li class="nav-item">
                 <a href="{{ '/admin/keuangan/' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Nasional</p>
+                  <p>Keuangan</p>
                 </a>
               </li>
-              @isset($region)
-              @if (!$region->isEmpty())
-              @foreach ($region as $reg)
-              <li class="nav-item">
-                <a href="{{ '/admin/keuangan/' }}{{ $reg->region }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>{{ $reg->region }}</p>
-                </a>
-              </li>
-              @endforeach
-              @endif
-              @endisset
             </ul>
           </li>
           <li class="nav-item mt-2">

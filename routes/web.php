@@ -71,9 +71,7 @@ Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
 Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
 //Regional
-Route::get('/admin/keuangan/{region}', function($region) {
-    return "Anda berada dihalaman " . $region;
-});
+Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
 ////////////////////////
 
 

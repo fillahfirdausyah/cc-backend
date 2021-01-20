@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Keuangan Nasional</h1>
+            <h1>Keuangan </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ '/' }}">Home</a></li>
-              <li class="breadcrumb-item active">Keuangan Nasional</li>
+              <li class="breadcrumb-item active">Keuangan </li>
             </ol>
           </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Nasional</h3>
+                      <h3 class="card-title">Keuangan</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -54,6 +54,12 @@
                   <form action="{{ '/admin/keuangan/details' }}" method="GET">
                     <a href="{{ '/admin/keuangan/add' }}" class="btn btn-primary">Tambah Data</a>
                     <div class="input-group mb-3 col-sm-4 float-right">
+                      <select name="region" id="region" class="form-control">
+                        <option value="0">Semua</option>
+                        @foreach ($region as $reg)
+                        <option value="{{ $reg->id }}">{{ $reg->region }}</option>
+                        @endforeach
+                      </select>
                         <select name="kategori" id="kategori" class="form-control">
                           <option>Semua</option>
                           <option>Mingguan</option>
@@ -73,6 +79,7 @@
                                 <th>Nama</th>
                                 <th>Jumlah</th>
                                 <th>Kategori</th>
+                                <th>Region</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -83,6 +90,10 @@
                             <td>{{ $d->nama }}</td>
                             <td>-Rp.@convert($d->jumlah)</td>
                             <td>{{ $d->kategori }}</td>
+                             <p hidden>{{ $r = \App\Models\Keuangan::find($d->region_id)->region()->get() }}</p>
+                             @foreach ($r as $re)
+                             <td>{{ $re->region }}</td>
+                             @endforeach
                             <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
                             <td>
                               <a href="{{ '/admin/keuangan/edit/'}}{{ $d->id }}">
@@ -99,16 +110,17 @@
                           </tr>
                           @endforelse
                         </tbody>
-                    </table>
-                </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  
+                        <p class="mt-2">Halaman: {{ $data->currentPage() }}</p>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <center>{{ $data->links() }}</center>
                 </div>
               </div>
              </div>
-           </div>
+          </div>
         </div>
     </section>
 </div>

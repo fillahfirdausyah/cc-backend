@@ -31,9 +31,7 @@ class HomeController extends Controller
         $event   = Event::count();
         $user    = User::count();
         $region  = Region::all();
-
-
-
+        
         return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
     }
 }
