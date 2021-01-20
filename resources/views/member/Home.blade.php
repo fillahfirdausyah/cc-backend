@@ -191,7 +191,7 @@
                                 <li>
                                     <button class="post-comment">
                                         <i class="bi bi-chat-bubble"></i>
-                                        <span>41</span>
+                                        <span>{{ $p->comments->count() }}</span>
                                     </button>
                                 </li>
                                 <li>
@@ -203,6 +203,44 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="row">
+                        <form action="/post/comment" method="post">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $p->id }}">
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                            <label for="komen">Komen</label>
+                            <input type="text" name="comment" id="komen">
+                            <input type="submit" name="" value="kirim">
+                        </form>
+                    </div>
+                    @foreach($p->comments as $c)
+                        @foreach($c->user as $u)
+                            <div class="row mt-2 mb-2 border rounded-top p-1">
+                                <h6 class="author"><a href="">{{ $u->name }}</a></h6>
+                                <div class="post-content">
+                                    <p class="post-desc">{{ $c->comment }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form action="{{'/post/comment/delete/'}}{{$c->id}}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <input type="submit" name="" value="Hapus">
+                                </form>
+                            </div>
+                            <div class="row mt-2 mb-2">
+                            <form action="/post/comment" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $p->id }}">
+                                <input type="hidden" name="parent_id" value="{{ $c->id }}">
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                <label for="komen">Balas</label>
+                                <input type="text" name="comment" id="komen">
+                                <input type="submit" name="" value="kirim">
+                            </form>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
                 <!-- post status end -->
                 @endforeach

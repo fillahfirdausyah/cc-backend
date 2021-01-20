@@ -21,4 +21,9 @@ class Post extends Model
         return $this->belongsTo(Like::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(CommentPost::class)->whereNull('parent_id');
+    }
+
 }

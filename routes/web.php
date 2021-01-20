@@ -93,7 +93,7 @@ Route::get('/member/teman/{id}', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
 
 // // DetailMember
-// Route::get('/member/{username}', 'DetailMemberController@detail');
+//Route::get('/member/{username}', 'DetailMemberController@detail');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');
@@ -102,6 +102,10 @@ Route::get('/member/post/edit/{id}', 'PostController@edit');
 Route::post('/member/post/update/{id}', 'PostController@update');
 Route::get('/member/post/delete/{id}', 'PostController@destroy');
 Route::get('/post', 'PostController@index');
+
+// Comment
+Route::post('/post/comment', 'CommentpostController@store');
+Route::delete('/post/comment/delete/{id}', 'CommentpostController@destroy');
 
 // Region
 Route::post('/member/daerah/new', 'CrossregionController@create');
