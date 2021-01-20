@@ -47,7 +47,7 @@
              <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Data Keuangan Nasional</h3>
+                  <h3 class="card-title">Data Keuangan</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
