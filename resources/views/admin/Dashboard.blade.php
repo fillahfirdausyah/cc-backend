@@ -178,7 +178,6 @@ $(function(){
                 <tr id="${data.id}">
                 <td>${data.region}</td>
                 <td><span class='badge badge-success'>0</span></td>
-                <td><div class='sparkbar' data-color='#00a65a' data-height='20'>Rp90.000</div></td>
                 <td>
                   <a href="{{ '/admin/region/delete/' }}" id="confirm" onclick="aksi(${data.id})" class="btn btn-sm btn-danger">Hapus</a>
                 </td>
