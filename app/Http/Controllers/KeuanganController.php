@@ -87,15 +87,20 @@ class KeuanganController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama'      => 'required',
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
-            'email'     => 'required | email'
+            'email'     => 'required | email',
+            'region'    => 'required'
         ]);
+
+        $name = User::select('name')->where('email', $request->email)->get();
+        foreach ($name as $n) {
+            $nama = $n->name;
+        }
 
         $data = new Keuangan;
         $data->region_id = $request->region; 
-        $data->nama      = $request->nama;
+        $data->nama      = $nama;
         $data->jumlah    = $request->jumlah;
         $data->kategori  = $request->kategori;
         $data->email     = $request->email; 
@@ -156,15 +161,22 @@ class KeuanganController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama'   => 'required',
-            'jumlah' => 'required | numeric',
-            'email'  => 'required | email'
+            'jumlah'    => 'required | numeric',
+            'kategori'  => 'required',
+            'email'     => 'required | email',
+            'region'    => 'required'
         ]);
 
+        $name = User::select('name')->where('email', $request->email)->get();
+        foreach ($name as $n) {
+            $nama = $n->name;
+        }
+        
         $data = Keuangan::find($id);
-        $data->nama     = $request->nama;
-        $data->jumlah   = $request->jumlah;
-        $data->kategori = $request->kategori;
+        $data->region_id = $request->region; 
+        $data->nama      = $nama;
+        $data->jumlah    = $request->jumlah;
+        $data->kategori  = $request->kategori;
         $data->email     = $request->email; 
         $data->save();
 
