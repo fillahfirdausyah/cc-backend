@@ -103,7 +103,7 @@ Route::get('/member/post/edit/{id}', 'PostController@edit');
 Route::post('/member/post/update/{id}', 'PostController@update');
 Route::get('/member/post/delete/{id}', 'PostController@destroy');
 Route::get('/post', 'PostController@index');
-
+  
 // Comment
 Route::post('/post/comment', 'CommentpostController@store');
 Route::delete('/post/comment/delete/{id}', 'CommentpostController@destroy');
