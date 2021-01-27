@@ -4,7 +4,6 @@
 @section('title', 'Home')
 
 @section('content')
-                    @if($user != NULL)
     <div class="container">
         <div class="row">
             <div class="col-lg-3 order-2 order-lg-1">

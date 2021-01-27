@@ -62,11 +62,7 @@
                             </div>
                             <div class="form-group">
                               <label for="Role">Role</label>
-                              <select name="role" id="Role" class="form-control">
-                                <option>admin</option>
-                                <option>bendahara</option>
-                                <option>member</option>
-                              </select>
+                              <input type="Role" class="form-control" value="{{ old('role') }}" name="role" id="Role" placeholder="Role">
                             </div>
                       </div>
                           <!-- /.card-body -->

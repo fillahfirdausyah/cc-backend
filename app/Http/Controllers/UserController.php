@@ -51,8 +51,8 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/admin/user/list')->with('success', 'Data Berhasil Ditambahkan');
-
-
+        
+        
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
+    
         $user = User::find($id);
 
         return view('admin.user.EditUser', compact('user'));
@@ -92,15 +92,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request, [
             'name'      => 'required',
             'email'     => 'required | email',
+            'password'  => 'required | min:8',
         ]);
 
-        $user = User::find($id);
+        $user = User::find($id)->first();
         $user->name     = $request->name;
         $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
         $user->role     = $request->role;
         $user->save();
 
@@ -119,14 +120,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/admin/user/list')->with('info', 'Data Berhasil Dihapus');
-    }
-
-    public function verify($id)
-    {
-        $user = User::find($id);
-        $user->email_verified_at = date('Y-m-d, H:i:s');
-        $user->save();
-
-        return redirect('/admin/user/list')->with('success', 'User Terverifikasi');
     }
 }

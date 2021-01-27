@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
+    
     public $successStatus = 200;
 
     public function login(){
@@ -35,7 +35,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['error'=>$validator->errors()], 401);            
         }
 
         $input = $request->all();
@@ -47,7 +47,7 @@ class UserController extends Controller
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-    public function logout (Request $request)
+    public function logout (Request $request) 
     {
         $token = Auth::user()->token();
         $token->revoke();
@@ -71,7 +71,7 @@ class UserController extends Controller
         return response()->json(['success' => $success, 200]);
     }
 
-    public function detail()
+    public function detail() 
     {
         $data = Auth::user();
         $success['data'] = $data;

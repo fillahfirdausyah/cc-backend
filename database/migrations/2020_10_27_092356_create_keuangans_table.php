@@ -15,8 +15,6 @@ class CreateKeuangansTable extends Migration
     {
         Schema::create('keuangans', function (Blueprint $table) {
             $table->id();
-            $table->integer('region_id')->unsigned();
-            $table->string('email');
             $table->string('nama');
             $table->integer('jumlah');
             $table->string('kategori')->nullable();

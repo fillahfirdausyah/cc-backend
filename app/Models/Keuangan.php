@@ -9,10 +9,5 @@ class Keuangan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['region_id', 'nama', 'jumlah', 'kategori'];
-
-    public function region()
-    {
-        return $this->belongsTo(Region::class);
-    }
+    protected $fillable = ['nama', 'jumlah', 'kategori'];
 }

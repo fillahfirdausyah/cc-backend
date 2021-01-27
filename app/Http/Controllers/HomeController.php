@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\News;
 use App\Models\Event;
-use App\Models\Region;
 class HomeController extends Controller
 {
     /**
@@ -27,11 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $news    = News::count();
-        $event   = Event::count();
-        $user    = User::count();
-        $region  = Region::all();
-        
-        return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
+        $news  = News::count();
+        $event = Event::count();
+        $user  = User::count();
+        return view('admin.Dashboard', compact('news', 'event', 'user'));
     }
 }
