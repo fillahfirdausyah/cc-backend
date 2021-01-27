@@ -112,13 +112,13 @@
                           </tr>
                           @endforelse
                         </tbody>
-                        <p class="mt-2">Halaman: {{ $data->currentPage() }}</p>
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
                       </table>
                     </div>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <center>{{ $data->links() }}</center>
+                    {{-- <center>{{ $data->links() }}</center> --}}
                 </div>
               </div>
              </div>
@@ -164,13 +164,20 @@ $.ajax({
   url: '/admin/keuangan/grafik',
   dataType: 'json',
   success: function(response){
-    let dataChart;
-    for (data1 in response) {
-      for (data2 in response){
+    let dataChart1 = [];
+    let dataChart2 = [];
+
+    response.data1.forEach(element => {
+      dataChart1 = element;
+    });
+
+    response.data2.forEach(element => {
+      dataChart2 = element;
+    });
 
       
-    var areaChartData = {
-          labels  : [response[data1][0].months],
+    let areaChartData = {
+          labels  : [dataChart1.months],
           datasets: [
             {
               label               : 'Iuran Mingguan',
@@ -181,7 +188,7 @@ $.ajax({
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : [response[data2][0].amount_mingguan]
+              data                : [dataChart2.amount_mingguan]
             },
             {
               label               : 'Event',
@@ -192,12 +199,12 @@ $.ajax({
               pointStrokeColor    : '#c1c7d1',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
-              data                : [response[data1][0].amount_event]
+              data                : [dataChart1.amount_event]
             },
           ]
         }
 
-    var areaChartOptions = {
+    let areaChartOptions = {
       maintainAspectRatio : false,
       responsive : true,
       legend: {
@@ -217,16 +224,14 @@ $.ajax({
       }
     }
 
-    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-    var lineChartData = jQuery.extend(true, {}, areaChartData)
-    var lineChart = new Chart(lineChartCanvas, { 
+    let lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+    let lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
+    let lineChartData = jQuery.extend(true, {}, areaChartData)
+    let lineChart = new Chart(lineChartCanvas, { 
       type: 'bar',
       data: lineChartData, 
       options: lineChartOptions
-    }) 
-  }
-  }
+    })
   }
 })
 })
