@@ -49,10 +49,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-                          <label for="member">Nama</label>
-                          <input type="text" class="form-control" id="member" name="nama" placeholder="Nama member" >
-                        </div>
-                        <div class="form-group">
                           <label for="jumalah">Jumlah</label>
                           <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
                         </div>
@@ -79,33 +75,9 @@
 <script src></script>
 @endsection
 
-@push('js-asset')
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@endpush
-
 @push('js-page')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
-  // function filter_nama(){
-  //   var region_id = $('#daerah').children("option:selected").val();
-
-  //     $.ajaxSetup({
-  //       headers: {
-  //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //       }
-  //     });
-
-  //     $.ajax({
-  //       url:'/admin/keuangan/nama/',
-  //       type: 'post',
-  //       data: {id: region_id },
-  //       dataType: "html",
-  //       success: function(response){
-  //         $('#pilihan_nama').html(response);
-  //       }
-  //     });
-  // }
-
    function filter_nama(){
     var region_id = $('#daerah').children("option:selected").val();
 

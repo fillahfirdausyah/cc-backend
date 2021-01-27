@@ -20,7 +20,7 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $data   = Keuangan::latest()->simplePaginate(5);
+        $data   = Keuangan::latest()->get();
         $region = Region::all(); 
 
 
@@ -87,15 +87,20 @@ class KeuanganController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama'      => 'required',
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
-            'email'     => 'required | email'
+            'email'     => 'required | email',
+            'region'    => 'required'
         ]);
+
+        $name = User::select('name')->where('email', $request->email)->get();
+        foreach ($name as $n) {
+            $nama = $n->name;
+        }
 
         $data = new Keuangan;
         $data->region_id = $request->region; 
-        $data->nama      = $request->nama;
+        $data->nama      = $nama;
         $data->jumlah    = $request->jumlah;
         $data->kategori  = $request->kategori;
         $data->email     = $request->email; 
@@ -110,25 +115,25 @@ class KeuanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
         $region = Region::all();
         $start = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
         $end = Carbon::now()->endOfMonth()->format('Y-m-d H:i:s');
 
-        if (request()->date != '') {
+        if ($request->date != '') {
 
-            $date = explode(' - ' ,request()->date);
+            $date = explode(' - ' ,$request->date);
             $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
             $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
         }
 
-        if(request()->region == 0 && request()->kategori == "Semua") {
-            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->simplePaginate(5);
-        }else if(request()->region == request()->region && request()->kategori == "Semua") {
-            $data = Keuangan::latest()->where('region_id', request()->region)->whereBetween('created_at', [$start, $end])->simplePaginate(5);
+        if($request->region == 0 && $request->kategori == "Semua") {
+            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->get();
+        }else if($request->region == $request->region && $request->kategori == "Semua") {
+            $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
         }else {
-            $data = Keuangan::latest()->where('kategori', request()->kategori)->where('region_id', request()->region)->whereBetween('created_at', [$start, $end])->simplePaginate(5);
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
         }
         return view('admin.keuangan.Keuangan', compact('data', 'region'));
     }
@@ -156,15 +161,22 @@ class KeuanganController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama'   => 'required',
-            'jumlah' => 'required | numeric',
-            'email'  => 'required | email'
+            'jumlah'    => 'required | numeric',
+            'kategori'  => 'required',
+            'email'     => 'required | email',
+            'region'    => 'required'
         ]);
 
+        $name = User::select('name')->where('email', $request->email)->get();
+        foreach ($name as $n) {
+            $nama = $n->name;
+        }
+        
         $data = Keuangan::find($id);
-        $data->nama     = $request->nama;
-        $data->jumlah   = $request->jumlah;
-        $data->kategori = $request->kategori;
+        $data->region_id = $request->region; 
+        $data->nama      = $nama;
+        $data->jumlah    = $request->jumlah;
+        $data->kategori  = $request->kategori;
         $data->email     = $request->email; 
         $data->save();
 
