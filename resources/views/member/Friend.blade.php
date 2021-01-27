@@ -13,21 +13,20 @@
                         <h4 class="page-title">member ({{ $friends->count() }})</h4>
                     </div>
                     <div class="filter-menu">
-                        <button class="active" data-filter="*">all</button>
-                        <button data-filter=".recently">recently</button>
-                        <button data-filter=".relative">relative</button>
-                        <button data-filter=".collage">collage</button>
-                        <button data-filter=".request">request</button>
+                        @foreach($userRegion as $ur)
+                        @if($loop->index <= 4)
+                        <a class="ml-2 mr-3" href="{{'/member/teman/'}}{{$ur->id}}"><button>{{ $ur->region }}</button></a>
+                        @endif
+                        @endforeach
                     </div>
                     <div class="post-settings-bar">
-                        <span></span>
-                        <span></span>
-                        <span></span>
                         <div class="post-settings arrow-shape">
                             <ul>
-                                <li><button>edit profile</button></li>
-                                <li><button>activity log</button></li>
-                                <li><button>embed adda</button></li>
+                            @foreach($userRegion as $ur)
+                            @if($loop->index > 4)
+                                <li><a class="ml-2 mr-3" href="{{'/member/teman/'}}{{$ur->id}}"><button>{{ $ur->region }}</button></a></li>
+                            @endif
+                            @endforeach
                             </ul>
                         </div>
                     </div>
@@ -44,8 +43,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="content-box friends-zone">
+                    <div class="row mt--20 friends-list just">
+                    <!-- start friend -->
                     @php $users = DB::table('users')->get(); @endphp
-                    <div class="row mt--20 friends-list">
                         @foreach ($friends as $f)
                         <div class="col-lg-3 col-sm-6 recently request">
                             <div class="friend-list-view">
@@ -58,7 +58,6 @@
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
-
                                 <div class="posted-author">
                                     <h6 class="author"><a href="{{ '/member/' }}{{ $f->username }}">{{ $f->name }}</a></h6>
                                     @if(Cache::has('is_online' . $f->id))
@@ -72,6 +71,7 @@
                             </div>
                         </div>
                         @endforeach
+                        <!-- endfriend -->
                     </div>
                 </div>
             </div>

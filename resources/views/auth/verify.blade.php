@@ -70,15 +70,7 @@
         @endif
         @endif
       </div>
-        <div class="p-3 bg-danger text-white text-center">Anda belum melakukan verifikasi akun. Silahkan buka email <strong>{{ Auth::user()->email }}</strong> untuk melakukan verifikasi. Belum menerima Email?
-            <a class="text-white" href="{{ route('verification.resend') }}" onclick="event.preventDefault(); document.getElementById('submit-form').submit();">kirim ulang</a>
-            <form action="{{ route('verification.resend') }}" id="submit-form" method="POST" class="hidden">
-                @csrf
-            </form>
-            @if (session('resent'))
-                 Email Verifikasi yang baru telah dikirim
-            @endif
-        </div>
+        <div class="p-3 bg-danger text-white text-center">Anda belum diverifikasi oleh admin, Mohon tunggu sampai admin menyetujui</div>
     </header><!-- End Header -->
   
     <!-- ======= Hero Section ======= -->

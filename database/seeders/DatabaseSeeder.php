@@ -26,9 +26,23 @@ class DatabaseSeeder extends Seeder
         $user->email_verified_at = date('d-m-y');
         $user->save();
 
-        $post = new Post;
-        $post->user_id = 1;
-        $post->content = 'Hallo Ini post pertamakuuu';
-        $post->save();
+
+        // $post = new Post;
+
+        // $post->user_id = 2;
+        // $post->user_id = 11;
+        // $post->content = 'Hallo Ini post pertamakuuu';
+        // $post->save();
+
+        // $user->name  = 'Fillah Firdausyah';
+        // $user->email = 'prada1@maillei.net';
+        // $user->password = Hash::make('laskar22');
+        // $user->role = 'admin';
+        // $user->email_verified_at = date('d-m-y');
+        // $user->save();
+
+        $user->region()->create([
+            'region' => 'Aceh'
+        ]);
     }
 }
