@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Region;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\CommentPost;
 
 class MemberController extends Controller
 {
@@ -15,7 +16,8 @@ class MemberController extends Controller
         $user    = Auth::user();
         $userRegion = Auth::user()->region()->get();
         $region = Region::all();
-        $post    = $user->post()->get();
+        //$post = Post::has('Region', '=')
+        $post = Auth::user()->post()->with(['comments', 'comments.child', 'comments.user'])->get();
         $like    = $user->like();
 
         return view('member.Home', compact('user', 'post', 'like', 'userRegion', 'region'));

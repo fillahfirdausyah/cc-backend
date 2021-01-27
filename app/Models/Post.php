@@ -21,4 +21,14 @@ class Post extends Model
         return $this->belongsTo(Like::class);
     }
 
+    public function region()
+    {
+        return $this->hasMany(Region::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentPost::class)->whereNull('parent_id');
+    }
+
 }
