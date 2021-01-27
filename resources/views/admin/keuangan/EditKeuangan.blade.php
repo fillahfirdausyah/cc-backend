@@ -39,6 +39,10 @@
                           <input type="text" class="form-control" id="member" name="nama" placeholder="Nama member" value="{{ $data->nama }}">
                         </div>
                         <div class="form-group">
+                          <label for="member">Email</label>
+                          <input type="email" class="form-control" id="member" name="email" placeholder="Nama member" value="{{ $data->email}}">
+                        </div>
+                        <div class="form-group">
                           <label for="jumalah">Jumlah</label>
                           <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
                         </div>

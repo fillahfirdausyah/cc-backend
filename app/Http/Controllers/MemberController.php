@@ -16,6 +16,7 @@ class MemberController extends Controller
         $user    = Auth::user();
         $userRegion = Auth::user()->region()->get();
         $region = Region::all();
+        //$post = Post::has('Region', '=')
         $post = Auth::user()->post()->with(['comments', 'comments.child', 'comments.user'])->get();
         $like    = $user->like();
 

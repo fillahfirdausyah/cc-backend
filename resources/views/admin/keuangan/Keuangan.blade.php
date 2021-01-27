@@ -77,6 +77,7 @@
                         <thead>
                             <tr>
                                 <th>Nama</th>
+                                <th>E-mail</th>
                                 <th>Jumlah</th>
                                 <th>Kategori</th>
                                 <th>Region</th>
@@ -88,9 +89,10 @@
                           @forelse ($data as $d)
                           <tr>
                             <td>{{ $d->nama }}</td>
+                            <td>{{ $d->email }}</td>
                             <td>-Rp.@convert($d->jumlah)</td>
                             <td>{{ $d->kategori }}</td>
-                             <p hidden>{{ $r = \App\Models\Keuangan::find($d->region_id)->region()->get() }}</p>
+                             <p hidden>{{ $r = \App\Models\Keuangan::find($d->id)->region()->get() }}</p>
                              @foreach ($r as $re)
                              <td>{{ $re->region }}</td>
                              @endforeach
@@ -140,8 +142,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-$(function() {
-
   $(document).ready(function() {
             let start = moment().startOf('month')
             let end = moment().endOf('month')
@@ -151,35 +151,51 @@ $(function() {
                 startDate: start,
                 endDate: end
             });
-        })
+  })
 
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Iuran Mingguan',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [10, 230, 420, 283, 82, 28]
-        },
-        {
-          label               : 'Event',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
+ $(document).ready(function() {
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+  });
+
+$.ajax({
+  url: '/admin/keuangan/grafik',
+  dataType: 'json',
+  success: function(response){
+    let dataChart;
+    for (data1 in response) {
+      for (data2 in response){
+
+      
+    var areaChartData = {
+          labels  : [response[data1][0].months],
+          datasets: [
+            {
+              label               : 'Iuran Mingguan',
+              backgroundColor     : 'rgba(60,141,188,0.9)',
+              borderColor         : 'rgba(60,141,188,0.8)',
+              pointRadius         : false,
+              pointColor          : '#3b8bba',
+              pointStrokeColor    : 'rgba(60,141,188,1)',
+              pointHighlightFill  : '#fff',
+              pointHighlightStroke: 'rgba(60,141,188,1)',
+              data                : [response[data2][0].amount_mingguan]
+            },
+            {
+              label               : 'Event',
+              backgroundColor     : 'rgba(210, 214, 222, 1)',
+              borderColor         : 'rgba(210, 214, 222, 1)',
+              pointRadius         : false,
+              pointColor          : 'rgba(210, 214, 222, 1)',
+              pointStrokeColor    : '#c1c7d1',
+              pointHighlightFill  : '#fff',
+              pointHighlightStroke: 'rgba(220,220,220,1)',
+              data                : [response[data1][0].amount_event]
+            },
+          ]
+        }
 
     var areaChartOptions = {
       maintainAspectRatio : false,
@@ -204,13 +220,17 @@ $(function() {
     var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
     var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
     var lineChartData = jQuery.extend(true, {}, areaChartData)
-
     var lineChart = new Chart(lineChartCanvas, { 
       type: 'bar',
       data: lineChartData, 
       options: lineChartOptions
-    })
-}) 
+    }) 
+  }
+  }
+  }
+})
+})
+    
 
 function aksi(id){
       event.preventDefault();

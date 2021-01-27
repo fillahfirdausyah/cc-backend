@@ -70,6 +70,9 @@ Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
 Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
 Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
+Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
+Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
+
 //Regional
 Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
 ////////////////////////

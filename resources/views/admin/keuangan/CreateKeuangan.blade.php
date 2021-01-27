@@ -27,7 +27,7 @@
               <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Catan Keuangan</h3>
+                      <h3 class="card-title">Catatan Keuangan</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -35,20 +35,26 @@
                       @csrf
                       <div class="card-body">
                         <div class="form-group">
-                          <label for="member">Nama</label>
-                          <input type="text" class="form-control" id="member" name="nama" placeholder="Nama member">
-                        </div>
-                        <div class="form-group">
-                          <label for="jumalah">Jumlah</label>
-                          <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
-                        </div>
-                        <div class="form-group">
                             <label>Region</label>
-                            <select name="region" class="form-control">
+                            <select id="daerah" name="region" class="form-control" onchange="filter_nama()">
+                              <option value="kosong">Pilih...</option>
                               @foreach ($region as $reg)
                                   <option value="{{ $reg->id }}">{{ $reg->region }}</option>
                               @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <select name="email" id="pilihan_email" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="member">Nama</label>
+                          <input type="text" class="form-control" id="member" name="nama" placeholder="Nama member" >
+                        </div>
+                        <div class="form-group">
+                          <label for="jumalah">Jumlah</label>
+                          <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
@@ -70,4 +76,54 @@
         </div>
     </section>
 </div>
+<script src></script>
 @endsection
+
+@push('js-asset')
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@endpush
+
+@push('js-page')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+  // function filter_nama(){
+  //   var region_id = $('#daerah').children("option:selected").val();
+
+  //     $.ajaxSetup({
+  //       headers: {
+  //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //       }
+  //     });
+
+  //     $.ajax({
+  //       url:'/admin/keuangan/nama/',
+  //       type: 'post',
+  //       data: {id: region_id },
+  //       dataType: "html",
+  //       success: function(response){
+  //         $('#pilihan_nama').html(response);
+  //       }
+  //     });
+  // }
+
+   function filter_nama(){
+    var region_id = $('#daerah').children("option:selected").val();
+
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $.ajax({
+        url:'/admin/keuangan/nama/',
+        type: 'post',
+        data: {id: region_id },
+        dataType: "json",
+        success: function(response){
+          $('#pilihan_email').html(response);
+        }
+      });
+  }
+</script>
+@endpush
