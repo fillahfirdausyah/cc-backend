@@ -164,16 +164,6 @@ $.ajax({
   url: '/admin/keuangan/grafik',
   dataType: 'json',
   success: function(response){
-<<<<<<< HEAD
-    let dataChart  = response.data1;
-    let dataChart2 = response.data2;
-    // for (data1 in response) {
-    //   for (data2 in response){
-
-  Object.keys(dataChart).forEach( function (key) {   
-    var areaChartData = {
-          labels  : [dataChart[key].months],
-=======
     let dataChart1 = [];
     let dataChart2 = [];
 
@@ -188,7 +178,6 @@ $.ajax({
       
     let areaChartData = {
           labels  : [dataChart1.months],
->>>>>>> c63762e67261ffd5165ff20bcc048793f21cf491
           datasets: [
             {
               label               : 'Iuran Mingguan',
@@ -199,11 +188,7 @@ $.ajax({
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-<<<<<<< HEAD
-              data                : [dataChart2[key].amount_mingguan]
-=======
               data                : [dataChart2.amount_mingguan]
->>>>>>> c63762e67261ffd5165ff20bcc048793f21cf491
             },
             {
               label               : 'Event',
@@ -214,11 +199,7 @@ $.ajax({
               pointStrokeColor    : '#c1c7d1',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
-<<<<<<< HEAD
-              data                : [dataChart[key].amount_event]
-=======
               data                : [dataChart1.amount_event]
->>>>>>> c63762e67261ffd5165ff20bcc048793f21cf491
             },
           ]
         }
@@ -250,14 +231,7 @@ $.ajax({
       type: 'bar',
       data: lineChartData, 
       options: lineChartOptions
-<<<<<<< HEAD
-    }) 
-  // }
-  // }
-   } );
-=======
     })
->>>>>>> c63762e67261ffd5165ff20bcc048793f21cf491
   }
 })
 })
