@@ -89,8 +89,13 @@ class RegionController extends Controller
     public function destroy($id)
     {
         $region = Region::find($id);
-        $region->delete();
-
+        
+        if($region->keuangan()->count() > 0) {
+            return response()->json(1, 200);
+        }else {
+            $region->delete();
+        }
         return response()->json($id);
+
     }
 }

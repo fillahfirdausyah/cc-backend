@@ -213,17 +213,30 @@ function aksi(id){
           type: 'GET',
           dataType: 'json',
           success: function(data) {
-           let row = $("#table-daerah > tbody > tr").attr("id");
-           row = data;
-           $("#"+row).remove();
-            console.log(data, row);
-            swal({
-              title: 'Berhasil Menghapus',
-              text: "Data Berhasil Dihapus",
-              icon: 'success',
-              buttons: false,
-              dangerMode: false,
-            })
+            if(data == 1) {
+              console.log("true")
+              swal({
+                title: 'Region ini Mempunyai Data',
+                text:  "tidak bisa menghapus, silahkan pindahkan data terlebih dahulu",
+                icon: 'warning',
+                buttons: false,
+                dangerMode: true,
+              })
+            }else {
+              console.log("false")
+              let row = $("#table-daerah > tbody > tr").attr("id");
+              row = data;
+              $("#"+row).remove();
+                console.log(data, row);
+                swal({
+                  title: 'Berhasil Menghapus',
+                  text: "Data Berhasil Dihapus",
+                  icon: 'success',
+                  buttons: false,
+                  dangerMode: false,
+                })
+            }
+          
           }
          });
         }
