@@ -164,20 +164,23 @@ $.ajax({
   url: '/admin/keuangan/grafik',
   dataType: 'json',
   success: function(response){
-    let dataChart1 = [];
-    let dataChart2 = [];
+    // console.log(response)
+    let event     = [];
+    let bulan     = [];
+    let mingguan  = [];
 
     response.data1.forEach(element => {
-      dataChart1 = element;
+      event.push(element.amount_event);
+      bulan.push(element.months);
     });
+
 
     response.data2.forEach(element => {
-      dataChart2 = element;
+      mingguan.push(element.amount_mingguan);
     });
-
       
     let areaChartData = {
-          labels  : [dataChart1.months],
+          labels  : bulan,
           datasets: [
             {
               label               : 'Iuran Mingguan',
@@ -188,7 +191,7 @@ $.ajax({
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : [dataChart2.amount_mingguan]
+              data                : mingguan
             },
             {
               label               : 'Event',
@@ -199,7 +202,7 @@ $.ajax({
               pointStrokeColor    : '#c1c7d1',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
-              data                : [dataChart1.amount_event]
+              data                : event
             },
           ]
         }

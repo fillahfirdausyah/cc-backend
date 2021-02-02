@@ -34,10 +34,11 @@ class KeuanganController extends Controller
                    DB::raw('sum(jumlah) as amount_event'),
                    DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
                     )
-                  ->where("kategori", "Event")
-                  ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                  ->groupBy('months')
-                  ->get();
+                    ->where("kategori", "Event")
+                    ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
+                    ->groupBy('months')
+                    ->orderBy('created_at', 'asc')
+                    ->get();
 
         $mingguan_money = Keuangan::select(
                         DB::raw("sum(jumlah) as amount_mingguan"),
@@ -48,7 +49,7 @@ class KeuanganController extends Controller
                         ->groupBy("month")
                         ->get();
 
-        return response()->json(["data1" => $event_money, "data2" => $mingguan_money]);
+        return response()->json(["data1" => $event_money, "data2" => $mingguan_money], 200);
     }
 
     /**

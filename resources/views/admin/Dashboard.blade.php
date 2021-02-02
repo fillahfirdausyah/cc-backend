@@ -50,6 +50,7 @@
                     <tr>
                       <th>Nama Region</th>
                       <th>Anggota</th>
+                      <th>Keuangan</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -58,6 +59,7 @@
                     <tr id="{{ $reg->id }}">
                       <td>{{ $reg->region }}</td>
                       <td><span class="badge badge-success">{{ $reg->user->count() }}</span></td>
+                      <td>{{ $reg->keuangan->count() }}</td>
                       <td>
                         <a href="{{ '/admin/region/delete/' }}" id="confirm" onclick="aksi({{ $reg->id }})" class="btn btn-sm btn-danger">Hapus</a>
                       </td>

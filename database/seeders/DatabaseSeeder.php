@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         // $user->save();
 
         $user->region()->create([
-            'region' => 'Aceh'
+            'region' => 'Ponorogo'
         ]);
     }
 }

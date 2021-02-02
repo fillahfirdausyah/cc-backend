@@ -94,7 +94,7 @@ Route::get('/member/teman/{id}', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
 
 // // DetailMember
-//Route::get('/member/{username}', 'DetailMemberController@detail');
+Route::get('/member/{username}', 'DetailMemberController@detail');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');
