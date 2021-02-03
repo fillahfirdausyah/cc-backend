@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Gallery;
 
 class GalleryController extends Controller
 {
@@ -13,7 +14,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('admin.gallery.Gallery');
+        $gallery = Gallery::take(10)->get();
+
+        return view('admin.gallery.Gallery', compact('gallery'));
     }
 
     /**
@@ -23,7 +26,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.gallery.CreateGallery');
     }
 
     /**
@@ -34,7 +37,23 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $this->validate($request, [
+            'judul' => 'required',
+            'image' => 'required | mimes:jpeg,jpg,png,svg'
+        ]);
+
+        $imgName = $request->judul . '-' . time() . '.' . $request->image->extension();
+
+        $request->image->move(public_path('image/Admin/Gallery'), $imgName);
+
+        $gallery = new Gallery();
+        $gallery->judul = $request->judul;
+        $gallery->gambar = $imgName;
+        $gallery->save();
+
+        return redirect('/admin/gallery/list')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**

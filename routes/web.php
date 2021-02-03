@@ -46,6 +46,8 @@ Route::get('/admin/event/delete/{id}', 'EventController@destroy');
 
 // Gallery
 Route::get('/admin/gallery/list', 'GalleryController@index');
+Route::get('/admin/gallery/tambah', 'GalleryController@create');
+Route::post('/admin/gallery/store', 'GalleryController@store');
 
 // User
 Route::get('/admin/user/list', 'UserController@index');
