@@ -46,6 +46,8 @@ Route::get('/admin/event/delete/{id}', 'EventController@destroy');
 
 // Gallery
 Route::get('/admin/gallery/list', 'GalleryController@index');
+Route::get('/admin/gallery/tambah', 'GalleryController@create');
+Route::post('/admin/gallery/store', 'GalleryController@store');
 
 // User
 Route::get('/admin/user/list', 'UserController@index');
@@ -93,8 +95,8 @@ Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman/{id}', 'MemberController@friend');
 Route::get('/member/profile', 'MemberController@profile');
 
-// // DetailMember
-Route::get('/member/{username}', 'DetailMemberController@detail');
+// DetailMember
+ Route::get('/member/details/{username}', 'DetailMemberController@detail');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');
