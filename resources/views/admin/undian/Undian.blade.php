@@ -47,6 +47,7 @@
 @endsection
 
 @push('js-asset')
+{{-- <script src="{{ asset('assets/js/undian.min.js') }}"></script> --}}
 <script src="https://www.jaypung.com/js/luckyball/lotteryMachine.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush

@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('judul');
             $table->date('tanggal');
+            $table->string('kategori');
             $table->string('cover')->default('cover');
             $table->longText('content');
             $table->string('slug');

@@ -20,7 +20,9 @@ class CekRole
     {
        $user = Auth::user();
        if($user->role == 'admin') {
-        return $next($request);
+            return $next($request);
+       }else if($user->role == 'bendahara') {
+            return $next($request);
        }
        
        return redirect()->to('/member/home');

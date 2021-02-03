@@ -4,6 +4,7 @@
 @section('title', 'Home')
 
 @section('content')
+                    @if($user != NULL)
     <div class="container">
         <div class="row">
             <div class="col-lg-3 order-2 order-lg-1">
@@ -92,7 +93,7 @@
                 </div>
                 <!-- post status end -->
                 @endforeach
-                {{-- <div class="post-thumb-gallery img-gallery">
+                <div class="post-thumb-gallery img-gallery">
                     <div class="row no-gutters">
                         <div class="col-8">
                             <figure class="post-thumb">
@@ -128,7 +129,7 @@
                         </div>
                     </div>
                 </div> --}}
-                {{-- <!-- post status start -->
+                <!-- post status start -->
                 <div class="card">
                     <!-- post title start -->
                     <div class="post-title d-flex align-items-center">
@@ -537,10 +538,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- post status end --> --}}
+                <!-- post status end -->
             </div>
         </div>{{-- End container --}}
     </div>{{-- End COntainer --}}
+    @endif
     
 @endsection
 
@@ -587,7 +589,7 @@
     function hapusPost(id) {
 
         $.ajax({
-            url: '{{ '/member/post/delete/' }}' + id,
+            url: "{{ '/member/post/delete/' }}" + id,
             type: 'GET',
             success: function(data) {
                 console.log('berhasil');

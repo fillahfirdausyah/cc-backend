@@ -18,7 +18,7 @@ class DetailMemberController extends Controller
     public function detail($username) {
         $auth = Auth::user();
         $user = User::where('username', $username)->first();
-        $post = $user->post()->get();
+        $post = $auth->post()->get();
 
         return view('member.Detail', compact('user', 'post', 'auth'));
     }
