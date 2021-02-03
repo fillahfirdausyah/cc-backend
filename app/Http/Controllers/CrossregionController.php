@@ -18,6 +18,7 @@ class CrossregionController extends Controller
         $region = Region::all();
         
         return view('member.Region', compact('userRegion', 'region', 'user'));
+        
     }
 
     public function create(Request $request)

@@ -23,7 +23,6 @@ class KeuanganController extends Controller
         $data   = Keuangan::latest()->get();
         $region = Region::all(); 
 
-
         return view('admin.keuangan.Keuangan', compact('data', 'region'));
     }
 
@@ -31,14 +30,14 @@ class KeuanganController extends Controller
     {
 
         $event_money = Keuangan::select(
-                   DB::raw('sum(jumlah) as amount_event'),
-                   DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
-                    )
-                    ->where("kategori", "Event")
-                    ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                    ->groupBy('months')
-                    ->orderBy('created_at', 'asc')
-                    ->get();
+                    DB::raw('sum(jumlah) as amount_event'),
+                    DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+                        )
+                        ->where("kategori", "Event")
+                        ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
+                        ->groupBy('months')
+                        ->orderBy('created_at', 'asc')
+                        ->get();
 
         $mingguan_money = Keuangan::select(
                         DB::raw("sum(jumlah) as amount_mingguan"),
@@ -131,11 +130,15 @@ class KeuanganController extends Controller
 
         if($request->region == 0 && $request->kategori == "Semua") {
             $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->get();
-        }else if($request->region == $request->region && $request->kategori == "Semua") {
+        }else if($request->region == 0 && $request->kategori == $request->kategori) {
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->whereBetween('created_at', [$start, $end])->get();
+        }
+        else if($request->region == $request->region && $request->kategori == "Semua") {
             $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
         }else {
             $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
         }
+
         return view('admin.keuangan.Keuangan', compact('data', 'region'));
     }
 

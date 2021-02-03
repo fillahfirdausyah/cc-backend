@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Keuangan</h3>
+                      <h3 class="card-title">Keuangan Region</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -111,10 +111,6 @@
                               <td colspan="6" class="text-center">Tidak ada data</td>
                           </tr>
                           @endforelse
-                          <tr>
-                            <td colspan="2">Total:</td>
-                            <td>-Rp.@convert($data->sum('jumlah'))</td>
-                          </tr>
                         </tbody>
                         {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
                       </table>
@@ -122,7 +118,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    {{-- <center>sshs</center> --}}
+                    {{-- <center>{{ $data->links() }}</center> --}}
                 </div>
               </div>
              </div>
@@ -195,7 +191,7 @@ $.ajax({
               pointStrokeColor    : 'rgba(60,141,188,1)',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : event
+              data                : mingguan
             },
             {
               label               : 'Event',
@@ -206,7 +202,7 @@ $.ajax({
               pointStrokeColor    : '#c1c7d1',
               pointHighlightFill  : '#fff',
               pointHighlightStroke: 'rgba(220,220,220,1)',
-              data                : mingguan
+              data                : event
             },
           ]
         }

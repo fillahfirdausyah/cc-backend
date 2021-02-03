@@ -540,10 +540,8 @@
                 </div>
                 <!-- post status end -->
             </div>
-        </div>
-        <!-- {{-- End container --}} -->
-    </div>
-    <!-- {{-- End COntainer --}} -->
+        </div>{{-- End container --}}
+    </div>{{-- End COntainer --}}
     @endif
     
 @endsection
