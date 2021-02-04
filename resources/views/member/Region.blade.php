@@ -29,9 +29,9 @@
 	    	<option selected>pilih</option>
 			@foreach($region as $r)
 	    	<option value="{{ $r->id }}">{{ $r->region }}</option>
-		 		@endforeach
+		 	@endforeach
 	  	</select>
-        <input type="submit" class="mb-1 edit-btn border" value="Tambah">
+        <button type="submit" class="edit-btn">Tambah</button>
 	</form>
 	</div>
 	<div class="w-100"></div>
@@ -64,8 +64,8 @@
 		                                    <h4>{{ $ur->region }}</h4>
 		                                </div>
 		                                <input type="hidden" name="uid" value="{{ $user->id }}">
-		                                <input type="hidden" name="region" value="{{ $ur->id}}">
-		                                <input type="submit" class="mb-1 btn-sm btn-danger border" value="Hapus" style="border-radius: 50px;">
+										<input type="hidden" name="region" value="{{ $ur->id}}">
+										<button type="submit" class="mb-1 btn-sm btn-danger">Hapus</button>
 		                            </form>
 		                         </div>
                             </div>

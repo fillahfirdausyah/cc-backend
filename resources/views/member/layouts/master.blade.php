@@ -483,7 +483,7 @@
             <div class="profile-menu-area secondary-navigation-style bg-white">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-2 col-md-2">
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
                                     <a href="profile.html">
@@ -492,7 +492,7 @@
                                 </figure>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 offset-lg-1">
+                        <div class="col-lg-7 col-md-7 offset-lg-1">
                             <div class="profile-menu-wrapper">
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
@@ -504,6 +504,7 @@
                                             <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}">Teman</a></li>
                                             @endif
                                             <li><a href="{{ '/member/daerah' }}">Daerah</a></li>
+                                            <li><a href="{{ '/member/kartu/iuran' }}">Kartu Iuran</a></li>
                                             <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
                                         </ul>
                                     </nav>

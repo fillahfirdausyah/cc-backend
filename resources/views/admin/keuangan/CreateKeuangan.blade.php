@@ -44,10 +44,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <select name="email" id="pilihan_email" class="form-control">
+                            <label>Nama</label>
+                            <select name="nama" id="pilihan_nama" class="form-control" onchange="getEmail()">
                             </select>
                         </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" id="email" name="email" class="form-control" placeholder="Email" readonly="true">
+                      </div>
                         <div class="form-group">
                           <label for="jumalah">Jumlah</label>
                           <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
@@ -78,8 +82,8 @@
 @push('js-page')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
-   function filter_nama(){
-    var region_id = $('#daerah').children("option:selected").val();
+  function filter_nama(){
+    let region_id = $('#daerah').children("option:selected").val();
 
       $.ajaxSetup({
         headers: {
@@ -93,7 +97,28 @@
         data: {id: region_id },
         dataType: "json",
         success: function(response){
-          $('#pilihan_email').html(response);
+          $('#pilihan_nama').html(response);
+        }
+      });
+  }
+
+  function getEmail() {
+
+    let userID = $('#pilihan_nama').children("option:selected").val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      
+      $.ajax({
+        url:'/admin/keuangan/getemail/',
+        type: 'post',
+        data: {id: userID },
+        dataType: "json",
+        success: function(response){
+          $('#email').val(response);
         }
       });
   }
