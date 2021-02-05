@@ -19,7 +19,7 @@ class CreateKeuangansTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('email');
             $table->string('nama');
-            $table->integer('jumlah');
+            $table->bigInteger('jumlah');
             $table->string('kategori')->nullable();
             $table->timestamps();
         });
