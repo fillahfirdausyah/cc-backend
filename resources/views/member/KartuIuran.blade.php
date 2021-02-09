@@ -14,26 +14,36 @@
                         <div class="tab-pane fade active show" id="one">
                             <div class="work-zone">
                                 <div class="author-desc-title d-flex">
-                                    <h6 class="author"><a href="profile.html">Kartu Iuran</a></h6>
+                                    <h6 class="author">Kartu Iuran</h6>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table m-0" id="table-daerah">
                                       <thead>
                                       <tr>
-                                        <th>Nama Region</th>
-                                        <th>Anggota</th>
-                                        <th>Aksi</th>
+                                        <th>No</th>
+                                        <th>Nama Member</th>
+                                        <th>Jumlah</th>
+                                        <th>Kategori</th>
+                                        <th>Tanggal</th>
+                                        <th>Status</th>
                                       </tr>
                                       </thead>
-                                      {{-- @foreach ($region as $reg) --}}
+                                      @foreach ($iuran as $i)
                                       <tbody>
                                       <tr>
-                                        <td>asdas</td>
-                                        <td>asdasd</td>
-                                        <td>asdsa</td>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $i->nama }}</td>
+                                        <td>-Rp.@convert($i->jumlah)</td>
+                                        <td>{{ $i->kategori }}</td>
+                                        <td>{{ date('d F y',strtotime($i->created_at)) }}</td>
+                                        @if ($i->status == 'Lunas')
+                                        <td><span class="badge badge-success">{{ $i->status }}</span></td>
+                                        @else
+                                        <td><span class="badge badge-danger">{{ $i->status }}</span></td>
+                                        @endif
                                       </tr>
                                     </tbody>
-                                      {{-- @endforeach --}}
+                                      @endforeach
                                     </table>
                                   </div>
                             </div>

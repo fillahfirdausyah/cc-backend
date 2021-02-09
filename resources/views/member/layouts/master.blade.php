@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/bootstrap.min.css') }}">
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/bicon.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Flat Icon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/flaticon.css') }}">
     <!-- audio & video player CSS -->

@@ -16,9 +16,10 @@ class KartuIuranController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $userRegion = Auth::user()->region()->get();
+        $userRegion = $user->region()->get();
+        $iuran = $user->keuangan()->get();
 
-        return view('member.KartuIuran', compact('user', 'userRegion'));
+        return view('member.KartuIuran', compact('user', 'userRegion', 'iuran'));
     }
 
     /**

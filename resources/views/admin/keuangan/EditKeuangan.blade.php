@@ -51,6 +51,13 @@
                           <input type="number" class="form-control" value="{{ $data->jumlah }}" name="jumlah" id="jumalah" placeholder="Rp..">
                         </div>
                         <div class="form-group">
+                          <label for="status">Status</label>
+                          <select name="status" class="form-control">
+                            <option>Lunas</option>
+                            <option>Pending</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
                             <label>Kategori</label>
                             <select name="kategori" class="form-control">
                               <option>Mingguan</option>

@@ -51,10 +51,17 @@
                         <div class="form-group">
                           <label>Email</label>
                           <input type="text" id="email" name="email" class="form-control" placeholder="Email" readonly="true">
-                      </div>
+                        </div>
                         <div class="form-group">
                           <label for="jumalah">Jumlah</label>
                           <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
+                        </div>
+                        <div class="form-group">
+                          <label for="status">Status</label>
+                          <select name="status" class="form-control">
+                            <option>Lunas</option>
+                            <option>Pending</option>
+                          </select>
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>

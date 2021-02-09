@@ -95,7 +95,8 @@ class KeuanganController extends Controller
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
             'nama'      => 'required',
-            'region'    => 'required'
+            'region'    => 'required',
+            'status'    => 'required'
         ]);
 
         $user = User::where('email', $request->email)->get();
@@ -110,6 +111,7 @@ class KeuanganController extends Controller
         $data->user_id   = $id;
         $data->nama      = $name;
         $data->jumlah    = $request->jumlah;
+        $data->status    = $request->status;
         $data->kategori  = $request->kategori;
         $data->email     = $request->email;
         $data->save();
@@ -178,7 +180,8 @@ class KeuanganController extends Controller
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
             'nama'      => 'required',
-            'region'    => 'required'
+            'region'    => 'required',
+            'status'    => 'required'
         ]);
 
         $user = User::where('email', $request->email)->get();
@@ -193,6 +196,7 @@ class KeuanganController extends Controller
         $data->user_id   = $uid;
         $data->nama      = $name;
         $data->jumlah    = $request->jumlah;
+        $data->status    = $request->status;
         $data->kategori  = $request->kategori;
         $data->email     = $request->email;
         $data->save();
