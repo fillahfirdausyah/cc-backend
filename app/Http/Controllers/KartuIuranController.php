@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Keuangan;
 
 class KartuIuranController extends Controller
 {
@@ -38,9 +39,34 @@ class KartuIuranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $regid)
     {
-        //
+
+        $this->validate($request, [
+            'nama'      => 'required',
+            'region'    => 'required',
+            'jumlah'    => 'required | numeric',
+            'kategori'  => 'required',
+            // 'bukti'     => 'required'
+        ]);
+
+        $user = User::where('email', $request->email)->get();
+
+        foreach ($user as $u) {
+            $id    = $u->id;
+        }
+
+        $data = new Keuangan;
+        $data->region_id = $regid; 
+        $data->user_id   = $id;
+        $data->nama      = $request->nama;
+        $data->jumlah    = $request->jumlah;
+        $data->status    = 'pending';
+        $data->kategori  = $request->kategori;
+        $data->email     = $request->email;
+        $data->save();
+
+        return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**

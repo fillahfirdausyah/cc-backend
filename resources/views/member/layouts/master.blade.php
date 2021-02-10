@@ -539,8 +539,8 @@
     <script src="{{ asset('assets/vendor/adda/js/vendor/jquery-3.3.1.min.js') }}"></script>
     <!-- Popper JS -->
     <script src="{{ asset('assets/vendor/adda/js/vendor/popper.min.js') }}"></script>
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/vendor/adda/js/vendor/bootstrap.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Slick Slider JS -->
     <script src="{{ asset('assets/vendor/adda/js/plugins/slick.min.js') }}"></script>
     <!-- nice select JS -->

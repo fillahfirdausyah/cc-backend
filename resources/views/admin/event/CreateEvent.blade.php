@@ -55,7 +55,6 @@
                               </div>
                               <div class="col-6">
                                 <label for="cover">Cover</label>
-                                {{-- <input type="file" class="form-control @error('cover') is-invalid @enderror" value="{{ old('cover') }}" name="cover" id="cover"> --}}
                                 <div class="custom-file">
                                   <input type="file" name="cover" class="custom-file-input" id="customFile">
                                   <label class="custom-file-label" for="customFile">Choose file</label>

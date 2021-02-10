@@ -111,6 +111,7 @@ Route::delete('/post/comment/delete/{id}', 'CommentpostController@destroy');
 
 // Iuran
 Route::get('/member/kartu/iuran', 'KartuIuranController@index');
+Route::post('/member/kartu/iuran/store/{regid}', 'KartuIuranController@store');
 
 // Region
 Route::post('/member/daerah/new', 'CrossregionController@create');
