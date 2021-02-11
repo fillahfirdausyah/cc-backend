@@ -34,6 +34,7 @@
                     <tr>
                       <th>Judul</th>
                       <th>Tanggal</th>
+                      <th>Kategori</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -42,6 +43,7 @@
                           <tr>
                               <td>{{ $d->judul }}</td>
                               <td>{{ $d->tanggal }}</td>
+                              <td>{{ $d->kategori }}</td>
                               <td>
                                 <a href="{{ '/admin/event/edit/'}}{{ $d->id }}">
                                   <i class="fas fa-edit" style="color: green"></i>

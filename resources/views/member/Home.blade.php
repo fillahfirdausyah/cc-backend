@@ -4,6 +4,49 @@
 @section('title', 'Home')
 
 @section('content')
+    <!-- Region if the user is a new member -->
+    @if($userRegion->count() <= 0)
+        <div class="row mb-2 mt-2 justify-content-center">
+            <div class="col-4 p-2 border border-info">
+            <p class="text-center">Click <button type="button" class="btn-sm btn-danger" data-toggle="modal" data-target="#modalPUregion"> Choose Region </button> before you get started</p>
+            </div>
+        </div>
+    @endif
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalPUregion">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-center">Welcome</h4>
+          </div>
+          <form action="/member/daerah/new" method="post">
+            @csrf
+          <div class="modal-body">
+            <p class="text-center">Please choose your region</p>
+            <div class="row justify-content-center">
+                <input type="hidden" name="uid" value="{{ $user->id }}">
+                <div class="col-6 input-group mb-3 justify-content-center">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Region</label>
+                    </div>
+                    <select name="region" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        @foreach($region as $r)
+                        <option value="{{ $r->id }}">{{ $r->region }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="col-2 btn ml-3 border" data-dismiss="modal">Close</button>
+            <input type="submit" class="col-2 btn mr-3 border" value="Save">
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Region if the user is a new member end  -->
+
     <div class="container">
         <div class="row">
             <div class="col-lg-3 order-2 order-lg-1">
@@ -148,7 +191,7 @@
                                 <li>
                                     <button class="post-comment">
                                         <i class="bi bi-chat-bubble"></i>
-                                        <span>41</span>
+                                        <span>{{ $p->comments->count() }}</span>
                                     </button>
                                 </li>
                                 <li>
@@ -160,6 +203,44 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="row">
+                        <form action="/post/comment" method="post">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $p->id }}">
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                            <label for="komen">Komen</label>
+                            <input type="text" name="comment" id="komen">
+                            <input type="submit" name="" value="kirim">
+                        </form>
+                    </div>
+                    @foreach($p->comments as $c)
+                        @foreach($c->user as $u)
+                            <div class="row mt-2 mb-2 border rounded-top p-1">
+                                <h6 class="author"><a href="">{{ $u->name }}</a></h6>
+                                <div class="post-content">
+                                    <p class="post-desc">{{ $c->comment }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form action="{{'/post/comment/delete/'}}{{$c->id}}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <input type="submit" name="" value="Hapus">
+                                </form>
+                            </div>
+                            <div class="row mt-2 mb-2">
+                            <form action="/post/comment" method="post">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $p->id }}">
+                                <input type="hidden" name="parent_id" value="{{ $c->id }}">
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                <label for="komen">Balas</label>
+                                <input type="text" name="comment" id="komen">
+                                <input type="submit" name="" value="kirim">
+                            </form>
+                            </div>
+                        @endforeach
+                    @endforeach
                 </div>
                 <!-- post status end -->
                 @endforeach

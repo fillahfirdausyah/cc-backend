@@ -23,6 +23,7 @@
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/dist/css/adminlte.min.css') }}" rel="stylesheet">
 
   @stack('css-asset')
 
@@ -112,10 +113,7 @@
                 <div class="member-img">
                   <img src="{{ asset($e->cover) }}" class="img-fluid" alt="">
                   <div class="social">
-                    <a href=""><i class="icofont-twitter"></i></a>
-                    <a href=""><i class="icofont-facebook"></i></a>
-                    <a href=""><i class="icofont-instagram"></i></a>
-                    <a href=""><i class="icofont-linkedin"></i></a>
+                    <p>{{ $e->kategori }}</p>
                   </div>
                 </div>
                 <div class="member-info">
@@ -123,6 +121,7 @@
                   <span>{{ date('d F y', strtotime($e->tanggal)) }}</span>
                 </div>
               </div>
+            </div>
             </div>
             @endforeach
           </div>

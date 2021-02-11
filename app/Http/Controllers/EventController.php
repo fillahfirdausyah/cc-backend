@@ -13,6 +13,12 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('privilege');
+    }
+
     public function index()
     {   
         $data = Event::all();
@@ -50,6 +56,7 @@ class EventController extends Controller
         $data = new Event;
         $data->judul    = $request->judul;
         $data->cover    = $imgName;
+        $data->kategori = $request->kategori;
         $data->content  = $request->content;
         $data->tanggal  = $request->tanggal;
         $data->slug      = Str::slug($request->judul);

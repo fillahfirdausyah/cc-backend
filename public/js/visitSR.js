@@ -20,15 +20,30 @@ $.ajaxSetup({
     }
 });
 
-//like
+//likeSR
 function like(){
   var like = 1;
-  // var user_id = $("#user_id").val();
+  var user_id = $("#user_id").val();
   var post_id = $("#post_id").val();
   $.ajax({
     url:"/showroom/like",
     method:"GET",
-    data:{ like:like, post_id:post_id },
+    data:{ like:like, post_id:post_id , user_id:user_id},
+    success: function(data){
+      $("#total_like").html(data);
+    }
+  });
+}
+
+//like
+function likeBengkel(){
+  var like = 1;
+  var user_id = $("#user_id").val();
+  var post_id = $("#post_id").val();
+  $.ajax({
+    url:"/showroom/likeBengkel",
+    method:"GET",
+    data:{ like:like, post_id:post_id , user_id:user_id},
     success: function(data){
       $("#total_like").html(data);
     }
