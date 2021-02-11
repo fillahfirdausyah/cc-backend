@@ -15,4 +15,14 @@ class Keuangan extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function bukti()
+    {
+        return $this->hasOne(BuktiIuran::class);
+    }
 }

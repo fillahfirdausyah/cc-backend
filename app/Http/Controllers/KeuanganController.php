@@ -20,7 +20,8 @@ class KeuanganController extends Controller
      */
     public function index()
     {
-        $data   = Keuangan::latest()->get();
+        $data   = Keuangan::whereBetween('created_at', 
+        [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()])->latest()->get();
         $region = Region::all(); 
 
         return view('admin.keuangan.Keuangan', compact('data', 'region'));
@@ -51,14 +52,9 @@ class KeuanganController extends Controller
         return response()->json(["data1" => $event_money, "data2" => $mingguan_money], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $route = "/admin/keuangan/store/";
+
         $region = Region::all();
         return view('admin.keuangan.CreateKeuangan', compact('region'));
     }
@@ -68,8 +64,9 @@ class KeuanganController extends Controller
         $region_id = $request->id;
         if($region_id != "kosong"){
             $user = Region::find($region_id)->user()->get();
+            $html = ["<option value='kosong'>Pilih....</option>"];
             foreach ($user as $u) {
-                $html[] = "<option value='".$u->email."'>".$u->email."</option>";
+                array_push($html, "<option value='".$u->id."'>".$u->name."</option>");
             }
         }else{
             $html[] = NULL;
@@ -78,32 +75,45 @@ class KeuanganController extends Controller
         return $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getEmail(Request $request)
+    {
+
+        $userID = $request->id;
+        if($userID != 'kosong') {
+            $email = User::find($userID)->email;
+        }else {
+            $email = '';
+        }
+        
+
+        return response()->json($email);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
-            'email'     => 'required | email',
-            'region'    => 'required'
+            'nama'      => 'required',
+            'region'    => 'required',
+            'status'    => 'required'
         ]);
 
-        $name = User::select('name')->where('email', $request->email)->get();
-        foreach ($name as $n) {
-            $nama = $n->name;
+        $user = User::where('email', $request->email)->get();
+
+        foreach ($user as $u) {
+            $id    = $u->id;
+            $name  = $u->name;
         }
 
         $data = new Keuangan;
         $data->region_id = $request->region; 
-        $data->nama      = $nama;
+        $data->user_id   = $id;
+        $data->nama      = $name;
         $data->jumlah    = $request->jumlah;
+        $data->status    = $request->status;
         $data->kategori  = $request->kategori;
-        $data->email     = $request->email; 
+        $data->email     = $request->email;
         $data->save();
 
         return redirect('/admin/keuangan/')->with('success', 'Data Berhasil Ditambahkan');
@@ -151,8 +161,9 @@ class KeuanganController extends Controller
     public function edit($id)
     {
         $data = Keuangan::find($id);
+        $region = Region::all();
 
-        return view('admin.keuangan.EditKeuangan', compact('data'));
+        return view('admin.keuangan.EditKeuangan', compact('data', 'region'));
     }
 
     /**
@@ -162,26 +173,32 @@ class KeuanganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $regid)
     {
+
         $this->validate($request, [
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
-            'email'     => 'required | email',
-            'region'    => 'required'
+            'nama'      => 'required',
+            'region'    => 'required',
+            'status'    => 'required'
         ]);
 
-        $name = User::select('name')->where('email', $request->email)->get();
-        foreach ($name as $n) {
-            $nama = $n->name;
+        $user = User::where('email', $request->email)->get();
+
+        foreach ($user as $u) {
+            $uid    = $u->id;
+            $name  = $u->name;
         }
-        
+
         $data = Keuangan::find($id);
-        $data->region_id = $request->region; 
-        $data->nama      = $nama;
+        $data->region_id = $request->regid; 
+        $data->user_id   = $uid;
+        $data->nama      = $name;
         $data->jumlah    = $request->jumlah;
+        $data->status    = $request->status;
         $data->kategori  = $request->kategori;
-        $data->email     = $request->email; 
+        $data->email     = $request->email;
         $data->save();
 
         return redirect('/admin/keuangan')->with('success', 'Data Berhasil Disimpan');

@@ -57,7 +57,7 @@
 $(function() {
     var machine = $("#lotteryMachine").lotteryMachine({
         containerRadius: 150,
-        waitInterval: 1500,
+        waitInterval: 250,
         playSound: true,
         callback: function(data){
           let hasil = data.toString();

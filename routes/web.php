@@ -69,17 +69,16 @@ Route::get('/admin/keuangan', 'KeuanganController@index');
 Route::get('/admin/keuangan/add', 'KeuanganController@create');
 Route::post('/admin/keuangan/store', 'KeuanganController@store');
 Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
-Route::post('/admin/keuangan/update/{id}', 'KeuanganController@update');
+Route::post('/admin/keuangan/update/{id}/{regid}', 'KeuanganController@update');
 Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
 Route::get('/admin/keuangan/details', 'KeuanganController@show');
 Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
 Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
+Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
 
 //Regional
 Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
 ////////////////////////
-
-
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
@@ -148,6 +147,10 @@ Route::get('/showroom/{id}-{slug}', 'VisitSRController@show');
 // Comment
 Route::post('/post/comment', 'CommentpostController@store');
 Route::delete('/post/comment/delete/{id}', 'CommentpostController@destroy');
+
+// Iuran
+Route::get('/member/kartu/iuran', 'KartuIuranController@index');
+Route::post('/member/kartu/iuran/store/{regid}', 'KartuIuranController@store');
 
 // Region
 Route::post('/member/daerah/new', 'CrossregionController@create');

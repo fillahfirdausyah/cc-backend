@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Edit')
+@section('title', 'Tambah Iuran')
     
 @section('content')
 <div class="content-wrapper">
@@ -27,30 +27,35 @@
               <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Catat Keuangan</h3>
+                      <h3 class="card-title">Edit Keuangan</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ '/admin/keuangan/update/' }}{{ $data->id }}" method="POST">
+                    <form role="form" action="{{ '/admin/keuangan/update/' }}{{ $data->id.'/' }}{{ $data->region->id }}" method="POST">
                       @csrf
                       <div class="card-body">
                         <div class="form-group">
                             <label>Region</label>
-                            <select id="daerah" name="region" class="form-control" onchange="filter_nama()">
-                              <option value="kosong">Pilih...</option>
-                              @foreach ($region as $reg)
-                                  <option value="{{ $reg->id }}">{{ $reg->region }}</option>
-                              @endforeach
-                            </select>
+                            <input type="text" name="region" class="form-control" readonly="true" value="{{ $data->region->region }}">
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <select name="email" id="pilihan_email" class="form-control">
-                            </select>
+                            <label>Nama</label>
+                            <input type="text" name="nama" class="form-control" readonly="true" value="{{ $data->user->name }}">
+                        </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" id="email" name="email" class="form-control" value="{{ $data->user->email }}" placeholder="Email" readonly="true">
                         </div>
                         <div class="form-group">
                           <label for="jumalah">Jumlah</label>
-                          <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
+                          <input type="number" class="form-control" value="{{ $data->jumlah }}" name="jumlah" id="jumalah" placeholder="Rp..">
+                        </div>
+                        <div class="form-group">
+                          <label for="status">Status</label>
+                          <select name="status" class="form-control">
+                            <option>Lunas</option>
+                            <option>Pending</option>
+                          </select>
                         </div>
                         <div class="form-group">
                             <label>Kategori</label>
@@ -60,9 +65,9 @@
                             </select>
                         </div>
                       <!-- /.card-body -->
-      
-                      <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -72,15 +77,14 @@
         </div>
     </section>
 </div>
-
+<script src></script>
 @endsection
-
 
 @push('js-page')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
-   function filter_nama(){
-    var region_id = $('#daerah').children("option:selected").val();
+  function filter_nama(){
+    let region_id = $('#daerah').children("option:selected").val();
 
       $.ajaxSetup({
         headers: {
@@ -94,7 +98,31 @@
         data: {id: region_id },
         dataType: "json",
         success: function(response){
-          $('#pilihan_email').html(response);
+          $('#pilihan_nama').html(response);
+        }
+      });
+  }
+
+  function getEmail() {
+
+    let userID = $('#pilihan_nama').children("option:selected").val();
+
+    console.log(userID);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      
+      $.ajax({
+        url:'/admin/keuangan/getemail/',
+        type: 'post',
+        data: {id: userID },
+        dataType: "json",
+        success: function(response){
+          console.log(response);
+          $('#email').val(response);
         }
       });
   }

@@ -82,6 +82,7 @@
                                 <th>Kategori</th>
                                 <th>Region</th>
                                 <th>Tanggal</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -97,6 +98,11 @@
                              <td>{{ $re->region }}</td>
                              @endforeach
                             <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
+                            @if ($d->status == 'Lunas')
+                            <td><span class="badge badge-success">{{ $d->status }}</span></td>
+                            @else
+                            <td><span class="badge badge-danger">{{ $d->status }}</span></td>
+                            @endif
                             <td>
                               <a href="{{ '/admin/keuangan/edit/'}}{{ $d->id }}">
                                 <i class="fas fa-edit" style="color: green"></i>
@@ -108,7 +114,7 @@
                           </tr>
                           @empty
                           <tr>
-                              <td colspan="6" class="text-center">Tidak ada data</td>
+                              <td colspan="8" class="text-center">Tidak ada data</td>
                           </tr>
                           @endforelse
                           <tr>
@@ -168,7 +174,6 @@ $.ajax({
   url: '/admin/keuangan/grafik',
   dataType: 'json',
   success: function(response){
-    // console.log(response)
     let event     = [];
     let bulan     = [];
     let mingguan  = [];
@@ -187,7 +192,7 @@ $.ajax({
           labels  : bulan,
           datasets: [
             {
-              label               : 'Iuran Mingguan',
+              label               : 'Mingguan',
               backgroundColor     : 'rgba(60,141,188,0.9)',
               borderColor         : 'rgba(60,141,188,0.8)',
               pointRadius         : false,
@@ -230,7 +235,6 @@ $.ajax({
         }]
       }
     }
-
     let lineChartCanvas = $('#lineChart').get(0).getContext('2d')
     let lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
     let lineChartData = jQuery.extend(true, {}, areaChartData)
@@ -242,7 +246,6 @@ $.ajax({
   }
 })
 })
-    
 
 function aksi(id){
       event.preventDefault();

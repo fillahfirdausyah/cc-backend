@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class ApiController extends Controller
 {
 
-    public function news()
+    public function news(Request $request)
     {
-       
+        $data = new News;
+        $data::find(2)->users()->post()-get();
 
-        // return response()->json(['Error' => 'Error Bro']);
+        return response()->json(['success', $data], 200); 
     }
 }
