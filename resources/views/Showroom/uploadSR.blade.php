@@ -36,10 +36,12 @@
 			        </ul>
 			    </div>
 			@endif
+			<input type="hidden" name="stok" value="Tersedia">
+			<input type="hidden" name="user_id" value="{{ $user }}">
 			<div class="form-row">
 				<div class="form-group col-md-2">
 	      		<label for="dagangan">Upload Apa nih?</label>
-	      		<select id="dagangan" class="form-control dagangan" name="dagangan" >
+	      		<select id="dagangan" class="form-control dagangan" name="kategori" >
 	        		<option value="mobil" selected>Mobil</option>
 	        		<option value="spare parts">Spare Parts</option>
 	      		</select>
@@ -65,7 +67,7 @@
 		    	<label for="image">Gambar</label>
 				<input type="file" class="form-control" id="image" name="gambar[]" value="{{ old('image') }}" multiple>
 		    </div>
-		    <input type="submit" class="btn btn-primary" name="POST">
+		    <input type="submit" class="btn btn-primary">
 		</form>
 	</div>
 </div>

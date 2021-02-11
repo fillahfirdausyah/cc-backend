@@ -49,7 +49,7 @@
                         <div class="header-top-navigation">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="index.html">home</a></li>
+                                    <li class="active"><a href="{{ '/member/home/' }}">home</a></li>
                                     <li class="msg-trigger"><a class="msg-trigger-btn" href="#a">message</a>
                                         <div class="message-dropdown" id="a">
                                             <div class="dropdown-title">
@@ -500,7 +500,10 @@
                                             <li><a href="{{ '/dashboard' }}">Timeline</a></li>
                                             <li><a href="{{ '/member/tentang' }}">Tentang</a></li>
                                             <li><a href="{{ '/member/galery' }}">Galery</a></li>
-                                            <li><a href="{{ '/member/teman' }}">Teman</a></li>
+                                            @if($userRegion->count() > 0)
+                                            <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}">Teman</a></li>
+                                            @endif
+                                            <li><a href="{{ '/member/daerah' }}">Daerah</a></li>
                                             <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
                                         </ul>
                                     </nav>

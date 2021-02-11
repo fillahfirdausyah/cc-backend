@@ -87,7 +87,7 @@ $.ajaxSetup({
 $('#search').keyup(function(){
     var query = $(this).val();     
     var _token = $('input[name="_token"]').val();
-    if(query != ''){
+    if(query != ' '){
       $.ajax({
         url:"/showroom/search",
         method:"post",

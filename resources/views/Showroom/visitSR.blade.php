@@ -22,6 +22,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-3">
+
+			<!-- Start Recommend -->
 			<div class="card mb-2 recommend_head">
 				<h4>Recomended</h4>
 			</div>
@@ -32,11 +34,14 @@
 					<hr>
 				@endforeach
 			</div>
+			<!-- End Recommend -->
+
 		</div>
 		<div class="col-8">
 			<div class="card">
 				<div class="container-fluid" style="background-color: #FAFAFA;">
-					<!-- Content -->
+
+					<!-- Start Content -->
 					<div>
 						@foreach($collect as $pict)
 						<div class="mySlide sliding">
@@ -51,13 +56,33 @@
 				</div>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-md-9 d-flex">
+						<div class="col-md-auto d-flex">
 						<div class="card-title"><h2><strong>{{ $SR->judul }}</strong></h2></div>	
 						</div>
-						<div class="col-md-3 d-flex">	
+					</div>
+					@if($SR->promo == NULL)
+						<p class="card-text" id="harga">Harga <strong>Rp.{{ $SR->harga }}</strong> <small>({{ $SR->stok }})</small></p>
+					@elseif($SR->promo != NULL)
+						<p class="card-text" id="harga">Harga <del><strong>Rp.{{ $SR->harga }}</strong></del> <small>({{ $SR->stok }})</small></p>
+						<p class="card-text">  <strong> Promo {{ $SR->promo }}%,  harga menjadi Rp.{{ $SR->harga*(100-$SR->promo)/100 }}</strong></p>
+					@endif
+					<div class="row">
+						@can('Update-sr', $SR)	
+						<div class="col-md-6 d-flex">
+						<a href="{{'/showroom/promo/'.$SR->id}}"><button class="btn-sm btn-info">Promo</button></a>
 						<form method="post" action="{{ url('/showroom/edit/'.$SR->id)}}">
 							@csrf
 							<input type="submit" class="btn-sm btn-success" name="" value="Edit">
+						</form>	
+						<form method="post" action="{{ '/showroom/stok/'.$SR->id}}">
+							@csrf
+							@if($SR->stok == "Tersedia")
+								<input type="hidden" name="stok" value="Habis">
+								<input class="btn-sm btn-warning" type="submit" value="Tandai Habis">
+							@elseif($SR->stok == "Habis")
+								<input type="hidden" name="stok" value="Tersedia">
+								<input class="btn-sm btn-warning" type="submit" value="Tandai Tersedia">
+							@endif
 						</form>
 						<form method="post" action="{{ route('delete',['id' => $SR->id]) }}">
 							@method('delete')
@@ -65,23 +90,29 @@
 							<input type="submit" class="btn-sm btn-danger" name="" value="Delete">
 						</form>
 						</div>
+						@endcan
 					</div>
-					<p class="card-text">Harga <strong>Rp.{{ $SR->harga }}</strong></p>
+					<hr>
 					<p class="card-text">{{ $SR->deskripsi }}</p>
 					<br>
 					<p class="card-text"><small>Last Updated {{ $SR->created_at }}</small></p>
-					<!-- LIKE -->
+					<!-- End Content -->
+
+					<!-- Start Like -->
 					<p class="card-text" class="like">
 						<input type="hidden" id="post_id" name="post_id" value="{{ $SR->id }}" class="form-control">
-						<input type="hidden" id="user_id" name="user_id" value="" class="form-control">
+						<input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}" class="form-control">
 						<button class="btn-sm btn-primary" onclick="like()"><span id="total_like" class="badge badge-primary" style="font-size: 12px;">{{ $likes }}</span> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
 					</p>
-					<!-- Comment -->
+					<!-- End Like -->
+
+					<!-- Start Fill Comment -->
 					<div class="card-footer">
 						<form  method="post" action="{{ url('/showroom/comment') }}">
 							@csrf
 							<div class="form-group">
 								<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
+								<input type="hidden" name="user_id" value="{{ $user->id }}" class="form-control">
 						    	<label for="comment">Komentar</label>
 						    	<textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
 						  	</div>
@@ -90,22 +121,26 @@
 						  	</div>
 						</form>
 					</div>
+					<!-- End Fill Comment -->
 				</div>
 			</div>
+
+			<!-- Show comment -->
 			<div class="sesi_komentar">Komentar</div>
 			<div class="field-comment">
 				<div class="card">
 					@if( $comment != NULL)
 						@foreach( $comment->comment as $com)
 						<div class="card-body">
-							<div class="card-title"><strong>Nama komentator</strong></div>
+							<div class="card-title"><strong>{{ $com->user->name }}</strong></div>
 							<p>{{ $com->comment }}</p>
-							<button class="btn btn-sm tombol_reply"> Balas </button>
+							<button class="btn btn-sm tombol_reply mb-2"> Balas </button>
 							<div class="reply">
 								<form method="post" action="{{url('/showroom/comment')}}">
 									@csrf
 									<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $com->id }}">
 									<input type="hidden" name="id" value="{{ $SR->id }}" class="form-control">
+									<input type="hidden" name="user_id" value="{{ $user->id }}" class="form-control">
 									<div class="form-group">
 									 	<textarea name="comment" placeholder="Balas..." cols="50" rows="3" id="reply_comment"></textarea>
 									</div>
@@ -116,7 +151,7 @@
 								</form>
 							</div>
 							@foreach( $com->child as $child)
-							<div class="card-title"><strong>Nama komentator pembalas</strong></div>
+							<div class="card-title"><strong>{{ $child->user->name }}</strong></div>
 							<div class="child_comment">
 								<blockquote>
 									<p>{{ $child->comment}}</p>	
@@ -130,6 +165,8 @@
 					@endif
 				</div>
 			</div>
+			<!-- End Show Comment -->
+
 		</div>
 	</div>
 </div>

@@ -15,6 +15,7 @@ class CreateCommentsShowroomTable extends Migration
     {
         Schema::create('comments_showroom', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->text('comment');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLikeTable extends Migration
+class CreateRegionUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateLikeTable extends Migration
      */
     public function up()
     {
-        Schema::create('like_showroom', function (Blueprint $table) {
+        Schema::create('region_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
-            $table->integer('like')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->integer('region_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateLikeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like');
+        Schema::dropIfExists('region_user');
     }
 }

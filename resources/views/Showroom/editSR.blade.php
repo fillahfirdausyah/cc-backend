@@ -36,10 +36,11 @@
 			        </ul>
 			    </div>
 			@endif
+			<input type="hidden" name="user_id" value="{{ $user->id }}">
 			<div class="form-row">
 				<div class="form-group col-md-2">
 	      		<label for="dagangan">Upload Apa nih?</label>
-	      		<select id="dagangan" class="form-control dagangan" name="dagangan" >
+	      		<select id="dagangan" class="form-control dagangan" name="kategori" >
 	        		<option value="mobil" selected>Mobil</option>
 	        		<option value="spare parts">Spare Parts</option>
 	      		</select>
@@ -47,13 +48,13 @@
 		     </div>
 		  	<div class="form-row">
 		    	<div class="form-group col-md-6">
-		      	<label for="inputEmail4">Judul</label>
+		      	<label for="title">Judul</label>
 		      	<input type="Text" class="form-control" id="title" name="judul" placeholder="judul" value="{{ old('title') }}">
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
-		    	<label for="inputAddress">Deskripsi</label>
-		    	<textarea type="text" id="description" class="form-control" id="inputAddress" name="deskripsi" placeholder="Deskripsi"></textarea>
+		    	<label for="deskripsi">Deskripsi</label>
+		    	<textarea type="text" id="description" class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi"></textarea>
 		  	</div>
 		  	<div class="form-row">
 			    <div class="form-group">
