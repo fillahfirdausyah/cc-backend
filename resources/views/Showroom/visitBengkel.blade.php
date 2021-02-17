@@ -14,7 +14,7 @@
 
 <header>
 	<div class="back" style="margin-left: ">
-		<a href="/showroom"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
+		<a href="/showroom/more/bengkel"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
 	</div>
 </header>
 <main>
@@ -23,16 +23,13 @@
 	<div class="row">
 		<div class="card col">
 			<div class="container" style="background-color: #FAFAFA;">
-
 				<!-- Start Content -->
-				<div>
-					@foreach($collect as $pict)
-					<div class="mySlide sliding">
-						<img width="100%" src="{{ asset('public/image/'.$pict) }}" height="350" style="margin-top: 20px;  margin-bottom: 5px;">
-					</div>
-					@endforeach
+				@foreach($collect as $pict)
+				<div class="mySlide sliding ">
+					<img src="{{ asset('public/image/'.$pict) }}" height="250" width="450" style="margin-top: 20px;  margin-bottom: 5px;">
 				</div>
-				<div class="row">
+				@endforeach
+				<div class="">
 				<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 				<a class="next" onclick="plusSlides(1)">&#10095;</a>
 				</div>
@@ -68,6 +65,8 @@
 				<p class="card-text"> Hari Buka : {{ $bengkel->hari }}</p>
 				<p class="card-text">Kontak 	: {{ $bengkel->kontak }}</p>
 				</small>
+
+				
 				<hr>
 				<p class="card-text">{{ $bengkel->layanan }}</p>
 				<p class="card-text"><small>Last Updated {{ $bengkel->created_at }}</small></p>

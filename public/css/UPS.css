@@ -25,3 +25,7 @@
 		position: relative;
 	}
 }
+
+select .region{
+	max-height: 100px;
+}

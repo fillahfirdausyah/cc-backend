@@ -121,6 +121,7 @@ Route::get('/showroom/promoSR/{id}', 'ShowroomController@createPromo');
 Route::post('/showroom/tambahPromo/{id}', 'ShowroomController@promo');
 Route::post('/showroom/stok/{id}', 'ShowroomController@stock');
 Route::get('/showroom/more/sr', 'ShowroomController@moreSR');
+Route::post('/showroom/more/sr/search', 'ShowroomController@searchSR');
 
 // Bengkel
 Route::get('/showroom/bengkel/promo/{id}', 'ShowroomController@createBengkelPromo');
@@ -129,6 +130,7 @@ Route::get('/showroom/bengkel/{id}', 'ShowroomController@editBengkel');
 Route::post('/showroom/bengkel/{id}', 'ShowroomController@editBengkel');
 Route::delete('/showroom/bengkel/{id}', 'ShowroomController@destroyBengkel');
 Route::get('/showroom/more/bengkel', 'ShowroomController@moreBengkel');
+Route::post('/showroom/more/bengkel/search', 'ShowroomController@searchBengkel');
 
 //Showroom Support
 Route::get('/showroom/like', 'VisitSRController@like');

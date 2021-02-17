@@ -18,29 +18,8 @@ use App\Models\Comments_SR;
 
 class ShowroomController extends Controller
 {
-    public function moreBengkel()
-    {
-        $convB = [];
-        $collectB = [];
-
-        $bengkel = Bengkel::with('daerah')->paginate(20);
-        if($bengkel != NULL){
-            foreach ($bengkel as $b) {
-                $convB[] = json_decode($b->gambar);
-            }
-
-            $count = count($convB);
-            for ($i=0; $i < $count; $i++) { 
-                $collectB[] = $convB[$i][0];
-            }
-        }
-
-        return view('.Showroom.MoreBengkel',compact('bengkel', 'collectB'));
-    }
-
     public function moreSR()
     {
-
         $convSR = [];
         $collectSR = [];
 
@@ -282,6 +261,28 @@ class ShowroomController extends Controller
         return redirect()->back();
     }
 
+    public function searchSR(Request $request)
+    {
+        $search = $request->search;
+
+        $convSR = [];
+        $collectSR = [];
+
+        $SR = SR::where('judul', 'like', $search)->paginate(20);
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $convSR[] = json_decode($sr->gambar);
+            }
+
+            $count = count($convSR);
+            for ($i=0; $i < $count; $i++) { 
+                $collectSR[] = $convSR[$i][0];
+            }
+        }
+
+        return view('.Showroom.MoreSR', compact('collectSR', 'SR'));
+    }
+
     public function destroy($id)
     {
         $SR = SR::find($id);
@@ -291,6 +292,26 @@ class ShowroomController extends Controller
     }
 
     // Bengkel
+    public function moreBengkel()
+    {
+        $convB = [];
+        $collectB = [];
+
+        $bengkel = Bengkel::with('daerah')->paginate(20);
+        if($bengkel != NULL){
+            foreach ($bengkel as $b) {
+                $convB[] = json_decode($b->gambar);
+            }
+
+            $count = count($convB);
+            for ($i=0; $i < $count; $i++) { 
+                $collectB[] = $convB[$i][0];
+            }
+        }
+
+        return view('.Showroom.MoreBengkel',compact('bengkel', 'collectB'));
+    }
+
     public function createBengkel()
     {
         $user = Auth::id();
@@ -377,7 +398,7 @@ class ShowroomController extends Controller
         $bengkel = Bengkel::find($id);
         $region = Region::all();
 
-        return view('/Showroom/uploadBengkel',compact('user', 'region', 'bengkel'));
+        return view('/Showroom/editBengkel',compact('user', 'region', 'bengkel'));
     }
 
     public function updateBengkel(Request $request, $id)
@@ -426,6 +447,31 @@ class ShowroomController extends Controller
         $bengkel->save();
 
         return redirect()->back();
+    }
+
+    public function searchBengkel(Request $request)
+    {
+        $search = $request->search;
+
+        $convB = [];
+        $collectB = [];
+
+        $bengkel = Bengkel::Where('nama', 'LIKE', $search)
+                    ->orWhereHas('daerah', function($q) use($search){
+                        $q->where('region', 'LIKE', $search);
+                    })->paginate(20);
+        if($bengkel != NULL){
+            foreach ($bengkel as $b) {
+                $convB[] = json_decode($b->gambar);
+            }
+
+            $count = count($convB);
+            for ($i=0; $i < $count; $i++) { 
+                $collectB[] = $convB[$i][0];
+            }
+        }
+
+        return view('.Showroom.MoreBengkel',compact('bengkel', 'collectB'));
     }
 
     public function destroyBengkel($id)

@@ -14,7 +14,7 @@
 
 <header>
 	<div class="back" style="margin-left: ">
-		<a href="/showroom"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
+		<a href="/showroom/more/sr"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
 	</div>
 </header>
 <main>
@@ -29,7 +29,7 @@
 			</div>
 			<div class="card recommend_body">
 				@foreach($recomendations as $recommend =>$key)
-					<div class="rekomendasi img-rounded"><img src="{{ asset('public/image/'.$recommend_img[$recommend]) }}"></div>
+					<div class="img-fluid rekomendasi img-rounded"><img src="{{ asset('public/image/'.$recommend_img[$recommend]) }}"></div>
 					<h5 class="card-title mt-2"><a href="{{'/showroom/'.$key->id.'-'.$key->slug }}">{{ $key->judul }}</a></h5>
 					<hr>
 				@endforeach
@@ -49,7 +49,7 @@
 						</div>
 						@endforeach
 					</div>
-					<div class="row">
+					<div class="">
 					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 					<a class="next" onclick="plusSlides(1)">&#10095;</a>
 					</div>

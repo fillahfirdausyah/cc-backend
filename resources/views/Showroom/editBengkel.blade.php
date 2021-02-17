@@ -7,13 +7,13 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
-<title>Upload Dagangan</title>
+<title>Edit Bengkel</title>
 </head>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/UPS.css') }}">
 <body>
 <header>
 	<div class="back">
-		<a href="/showroom"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
+		<a href="/showroom/more/bengkel"><img src="{{ asset('bootstrap-icons/arrow-left.svg')}}" width="60" height="40"></a>
 	</div>
 	<div class="container mb-3 mt-2">
 		<div class="card text-center" style="background-color:#007bff; color: #FAFAFA; ">
@@ -43,49 +43,47 @@
 			@endif
 			<input type="hidden" name="user_id" value="{{ $user }}">
 			<div class="form-row">
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-4">
 	      		<label for="region">Daerah</label>
-	      		<select id="region" class="form-control dagangan" name="region_id" >
+	      		<select class="form-control dagangan region" name="region_id" >
 	      			@foreach($region as $r)
 	        		<option value="{{ $r->id }}" selected>{{ $r->region }}</option>
 	        		@endforeach
 	      		</select>
 		      	</div>
-		     </div>
-		  	<div class="form-row">
-		    	<div class="form-group col-md-6">
+		    	<div class="form-group col-md-8">
 		      	<label for="nama">Nama</label>
 		      	<input type="Text" class="form-control" id="nama" name="nama" placeholder="Nama Bengkel">
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
 		    	<label for="layanan">Layanan</label>
-		    	<textarea type="text" id="description" class="form-control" id="layanan" name="layanan" placeholder="Deskripsi"></textarea>
+		    	<textarea type="text" rows="10" id="description" class="form-control" id="layanan" name="layanan" placeholder="Deskripsi"></textarea>
 		  	</div>
 		  	<div class="form-group">
 		    	<label for="alamat">Alamat</label>
 		    	<textarea type="text" id="description" class="form-control" id="alamat" name="alamat" placeholder="Alamat lengkap"></textarea>
 		  	</div>
-		  	<div class="form-group">
-		    	<label for="jambuka">Jam Buka</label>
-		    	<input type="time" class="form-control" id="jambuka" name="waktu_buka">
-		  	</div>
-		  	<div class="form-group">
-		    	<label for="jamtutup">Jam Tutup</label>
-		    	<input type="time" class="form-control" id="jamtutup" name="waktu_tutup">
-		  	</div>
 		  	<div class="form-row">
-			    <div class="form-group">
-		      	<label for="hari">Hari Buka</label>
-		      	<input type="text" class="form-control" id="hari" name="hari" placeholder="Contoh: Senin-Selasa">
+			    <div class="form-group col-md-6">
+			      	<label for="hari">Hari Buka</label>
+			      	<input type="text" class="form-control" id="hari" name="hari" placeholder="Contoh: Senin-Selasa">
+			    </div>
+			    <div class="form-group col-md-6">
+			      	<label for="kontak">Kontak</label>
+			      	<input type="text" class="form-control" id="kontak" name="kontak" placeholder="Nomor Telepon">
 			    </div>
 		    </div>
 		  	<div class="form-row">
-			    <div class="form-group">
-		      	<label for="kontak">Kontak</label>
-		      	<input type="text" class="form-control" id="kontak" name="kontak" placeholder="Nomor Telepon">
-			    </div>
-		    </div>
+				<div class="col-md-6">
+			    	<label for="jambuka">Jam Buka</label>
+		    		<input type="time" class="form-control" id="jambuka" name="waktu_buka">
+		    	</div>
+		    	<div class="col-md-6">	
+			    	<label for="jamtutup">Jam Tutup</label>
+			    	<input type="time" class="form-control" id="jamtutup" name="waktu_tutup">
+			    </div>	
+		  	</div>
 		    <div class="form-group">
 		    	<label for="gambar">Foto</label>
 				<input type="file" class="form-control" id="gambar" name="gambar[]" multiple>
