@@ -33,7 +33,7 @@
                       @error('image')
                             <div class="alert alert-danger">
                               {{ $message }}  
-                           </div>                                    
+                            </div>                                    
                         @enderror
                       <div class="card-body">
                         <div class="form-group">
@@ -41,11 +41,8 @@
                           <input type="text" name="judul" class="form-control" placeholder="Judul">
                         </div>
                         <div class="form-group">
-                          <label for="image">Image</label>
-                            <div class="custom-file">
-                              <input type="file" name="image" class="custom-file-input" id="customFile">
-                              <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
+                          <label for="image">Gambar</label>
+                          <input type="file" name="image" id="image">
                         </div>
                         <div>
                           <input type="submit" value="Tambah" class="btn btn-primary">
@@ -59,12 +56,3 @@
     </section>
 </div>
 @endsection
-
-@push('js-page')
-<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script> 
-<script>
-  $(document).ready(function () {
-    bsCustomFileInput.init();
-  });
-</script>   
-@endpush

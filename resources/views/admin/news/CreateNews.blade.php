@@ -61,11 +61,9 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="cover">Cover</label>
-                              <div class="custom-file">
-                                <input type="file" name="cover" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                              </div>
+                              <label for="image">Cover</label>
+                              <br>
+                              <input type="file" id="image" name="cover">
                             </div>
                           </div>  
                           <!-- /.card-body -->
@@ -82,12 +80,3 @@
 </div>
 
 @endsection
-
-@push('js-page')
-<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script> 
-<script>
-  $(document).ready(function () {
-    bsCustomFileInput.init();
-  });
-</script>   
-@endpush

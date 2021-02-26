@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="{{ asset('assets/img/pic-banner.svg') }}" class="img-fluid" alt="">
+            <img src="assets/img/fast_car.png" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
           </div>
           <div class="row">
             @foreach ($event as $e)
-            <div class="col-6 align-items-stretch">
+            <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
               <div class="member">
                 <div class="member-img">
                   <img src="{{ asset($e->cover) }}" class="img-fluid" alt="">
@@ -122,8 +122,8 @@
                 </div>
               </div>
             </div>
-             @endforeach
             </div>
+            @endforeach
           </div>
         </div>
       </section><!-- End Team Section -->
@@ -169,24 +169,22 @@
                 </div>
         
                 <div class="row portfolio-container">
-                  
-                  @foreach ($gallery as $g) 
+        
                   <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <div class="portfolio-wrap">
-                      <img src="{{ asset('image/Admin/Gallery/'.$g->gambar) }}" class="img-fluid" alt="">
+                      <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                       <div class="portfolio-info">
                         <h4>App 1</h4>
                         <p>App</p>
                         <div class="portfolio-links">
-                          <a href="{{ asset('image/Admin/Gallery/'.$g->gambar) }}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                          <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
                           <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  @endforeach
         
-                  {{-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <div class="portfolio-wrap">
                       <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
                       <div class="portfolio-info">
@@ -296,7 +294,7 @@
                         </div>
                       </div>
                     </div>
-                  </div> --}}
+                  </div>
         
                 </div>
         

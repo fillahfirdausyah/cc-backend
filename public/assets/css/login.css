@@ -1,9 +1,7 @@
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
     display: flex;
-    display: -webkit-flex; 
-    /* flex-direction: column; */
-  }
+    display: -webkit-flex; }
   
   /* @extend list-type-ulli; */
   list-type-ulli, .socials {
@@ -308,10 +306,6 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     margin-left: 75px;
     margin-right: 75px;
     padding-left: 34px; }
-
-    .signin-form .signup-image-link {
-      display: none;
-    }  
   
   .register-form {
     width: 100%; }
@@ -524,20 +518,17 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   @media screen and (max-width: 1200px) {
     .container {
       width: calc( 100% - 30px);
-      max-width: 100%; 
-    }
-    
-  }
+      max-width: 100%; } }
   @media screen and (min-width: 1024px) {
     .container {
       max-width: 1200px; } }
   @media screen and (max-width: 768px) {
     .signup-content, .signin-content {
-      flex-direction: column-reverse;
-      -moz-flex-direction: column-reverse;
-      -webkit-flex-direction: column-reverse;
-      -o-flex-direction: column-reverse;
-      -ms-flex-direction: column-reverse;
+      flex-direction: column;
+      -moz-flex-direction: column;
+      -webkit-flex-direction: column;
+      -o-flex-direction: column;
+      -ms-flex-direction: column;
       justify-content: center;
       -moz-justify-content: center;
       -webkit-justify-content: center;
@@ -559,20 +550,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
       -moz-order: 2;
       -webkit-order: 2;
       -o-order: 2;
-      -ms-order: 2; 
-    }
-
-    .regis-login {
-      margin-top: 25px;
-    }
-
-    .signin-form .signup-image-link {
-      display: block;
-    }  
-
-     .signin-image a {
-      display: none;
-    }
+      -ms-order: 2; }
   
     .signup-form, .signup-image, .signin-form, .signin-image {
       width: auto; }

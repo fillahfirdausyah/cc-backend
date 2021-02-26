@@ -25,14 +25,19 @@ class SR extends Model
    		return 'judul';
    }
 
+    public function user() 
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
     public function comment()
     {
-        return $this->hasMany('App\Models\Comments_SR', 'post_id')->whereNull('parent_id');
+        return $this->hasMany(Comments_SR::class, 'post_id')->whereNull('parent_id');
     }
 
     public function like()
     {
-        return $this->hasMany('App\Models\Like_SR', 'post_id');
+        return $this->hasMany(Like_SR::class, 'post_id');
     }
 
 }

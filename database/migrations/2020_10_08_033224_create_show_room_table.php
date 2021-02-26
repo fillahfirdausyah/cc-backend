@@ -15,15 +15,24 @@ class CreateShowRoomTable extends Migration
     {
         Schema::create('show_room', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->string('stok');
             $table->string('judul');
-            $table->string('slug');
-            $table->string('kategori');
-            $table->longtext('deskripsi');
-            $table->string('harga');
+            $table->integer('user_id')->unsigned();
             $table->integer('promo')->nullable();
+            $table->string('harga');
+            $table->string('stok');
+            $table->longtext('deskripsi');
+            $table->string('jenis');
+            $table->string('kondisi');
+            $table->integer('mesin');
+            $table->year('tahun');
+            $table->string('pemakaian');
+            $table->string('bahan_bakar');
+            $table->integer('tenaga');
+            $table->string('transmisi');
+            $table->string('warna');
+            $table->text('fitur')->default('-');
             $table->text('gambar');
+            $table->string('slug');
             $table->timestamps();
         });
     }

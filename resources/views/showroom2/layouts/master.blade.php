@@ -46,8 +46,8 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="cars.html">Cars</a></li>
+                            <li><a href="/showroom" class="active">Home</a></li>
+                            <li><a href="/showroom/more/car">Cars</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
                               
@@ -60,6 +60,7 @@
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                 </div>
                             </li>
+                            <li><a href="/tenant">Tenant</a></li> 
                             <li><a href="contact.html">Contact</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
