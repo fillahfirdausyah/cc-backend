@@ -203,7 +203,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <form action="/post/comment" method="post">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $p->id }}">
@@ -212,8 +212,8 @@
                             <input type="text" name="comment" id="komen">
                             <input type="submit" name="" value="kirim">
                         </form>
-                    </div>
-                    @foreach($p->comments as $c)
+                    </div> --}}
+                    {{-- @foreach($p->comments as $c)
                         @foreach($c->user as $u)
                             <div class="row mt-2 mb-2 border rounded-top p-1">
                                 <h6 class="author"><a href="">{{ $u->name }}</a></h6>
@@ -240,7 +240,7 @@
                             </form>
                             </div>
                         @endforeach
-                    @endforeach
+                    @endforeach --}}
                 </div>
                 <!-- post status end -->
                 @endforeach

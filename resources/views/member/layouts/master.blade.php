@@ -229,8 +229,8 @@
                     <div class="col-md-2">
                         <!-- brand logo start -->
                         <div class="brand-logo text-center">
-                            <a href="index.html">
-                                <img src="assets/images/logo/logo.png" alt="brand logo">
+                            <a href="{{ '/member/home' }}">
+                                <img src="{{ asset('assets/img/apple-touch-icon.png') }}" style="width: 35px;" alt="brand logo">
                             </a>
                         </div>
                         <!-- brand logo end -->

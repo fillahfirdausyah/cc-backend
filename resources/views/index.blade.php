@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
-            <img src="assets/img/fast_car.png" class="img-fluid" alt="">
+            <img src="{{ asset('assets/img/pic.svg') }}" class="img-fluid" alt="">
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
           </div>
           <div class="row">
             @foreach ($event as $e)
-            <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+            <div class="col-6 align-items-stretch">
               <div class="member">
                 <div class="member-img">
                   <img src="{{ asset($e->cover) }}" class="img-fluid" alt="">
@@ -122,8 +122,8 @@
                 </div>
               </div>
             </div>
+             @endforeach
             </div>
-            @endforeach
           </div>
         </div>
       </section><!-- End Team Section -->
