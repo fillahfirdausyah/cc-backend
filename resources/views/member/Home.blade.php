@@ -56,12 +56,12 @@
                         <h4 class="widget-title">{{ $user->name }}</h4>
                         <div class="widget-body">
                             <div class="about-author">
-                                <p>{{ $user->bio }}</p>
+                                <p>{{ $user->profile->bio }}</p>
                                 <ul class="author-into-list">
-                                    <li><a href="#"><i class="bi bi-office-bag"></i>{{ $user->pekerjaan }}</a></li>
+                                    <li><a href="#"><i class="bi bi-office-bag"></i>{{ $user->profile->pekerjaan }}</a></li>
                                     {{-- <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li> --}}
-                                    <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $user->alamat }}</a></li>
-                                    <li><a href="#"><i class="bi bi-heart-beat"></i>{{ $user->hobi }}</a></li>
+                                    <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $user->profile->alamat }}</a></li>
+                                    <li><a href="#"><i class="bi bi-heart-beat"></i>{{ $user->profile->hobi }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                         <div class="profile-thumb">
                             <a href="#">
                                 <figure class="profile-thumb-middle">
-                                    <img src="{{ $user->foto_profile }}" alt="profile picture">
+                                    <img src="{{ $user->profile->foto_profile }}" alt="profile picture">
                                 </figure>
                             </a>
                         </div>
@@ -87,12 +87,11 @@
                         <!-- share content box start -->
                         <div class="share-content-box w-100">
                             <form class="share-text-box">
-                                <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Bagikan Sesuatu" id="modal"></textarea>
+                                <textarea name="share" class="share-text-field" aria-disabled="true" placeholder="Bagikan Sesuatu" id="modal-first"></textarea>
                                 <a href="javascript:void(0)" class="btn-share">Share</a>
                             </form>
                         </div>
                         <!-- share content box end -->
-                        @foreach ($post as $p)
                         <!-- Modal start -->
                         {{-- Post --}}
                         <div class="modal fade" id="form-post" aria-labelledby="form-post">
@@ -117,7 +116,7 @@
                             </div>
                         </div>
                         {{-- Edit --}}
-                        <div class="modal fade" id="edit-post" aria-labelledby="form-post">
+                        {{-- <div class="modal fade" id="edit-post" aria-labelledby="form-post">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -137,9 +136,8 @@
                                    </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Modal end -->
-                        @endforeach
                     </div>
                 </div>
                 <!-- share box end -->
@@ -152,7 +150,7 @@
                         <div class="profile-thumb">
                             <a href="#">
                                 <figure class="profile-thumb-middle">
-                                    <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
+                                    <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
                                 </figure>
                             </a>
                         </div>
@@ -707,7 +705,7 @@
     });
 });
 
-    $('#modal').click(function() {
+    $('#modal-first').click(function() {
         $('#form-post').modal('show');
     });
 

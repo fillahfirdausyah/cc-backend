@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Profile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,6 +44,15 @@ class DatabaseSeeder extends Seeder
         ];
 
         User::insert($user);
+
+        User::find(2)->profile()->create([
+            'user_id' => 2,
+            'bio'     => 'Saya Pecinta Kucing',
+            'pekerjaan' => 'Programmer',
+            'alamat'    => 'Waringin Sari',
+            'hobi'      => 'Update Tech',
+        ]);
+
 
         User::find(1)->region()->create([
             'region' => 'Ponorogo'

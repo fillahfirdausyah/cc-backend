@@ -42,10 +42,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="content-box">
+                <div class="card content-box">
                     <div class="content-body">
                         <div class="row mt--30 photo-filter">
-                            {{-- <div class="col-sm-6 col-md-4 timeline upload folder">
+                            <div class="col-sm-6 col-md-4 timeline upload folder">
                                 <div class="photo-group active">
                                     <div class="gallery-toggle">
                                         <div class="gallery-overlay">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="col-sm-6 col-md-4 folder">
                                 <div class="photo-group">
                                     <div class="gallery-toggle">
