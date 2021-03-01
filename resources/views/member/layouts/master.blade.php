@@ -252,7 +252,7 @@
                                 <div class="profile-thumb-small">
                                     <a href="javascript:void(0)" class="profile-triger">
                                         <figure>
-                                            <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
+                                            <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                     <div class="profile-dropdown">
@@ -262,7 +262,7 @@
                                         </div>
                                         <div class="profile-body">
                                             <ul>
-                                                <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
+                                                <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                             </ul>
@@ -437,7 +437,7 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ asset($user->foto_profile) }}" alt="profile picture" class="rounded">
+                                <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture" class="rounded">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
@@ -447,7 +447,7 @@
                             </div>
                             <div class="profile-body">
                                 <ul>
-                                    <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
+                                    <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                 </ul>
@@ -477,7 +477,7 @@
 
         <div class="main-wraper">
             <!-- profile banner area start -->
-            <div class="profile-banner-large bg-img" data-bg="{{ asset($user->foto_sampul) }}">
+            <div class="profile-banner-large bg-img" data-bg="{{ asset($user->profile->foto_sampul) }}">
             </div>
             <!-- profile banner area end -->
 
@@ -489,7 +489,7 @@
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
                                     <a href="profile.html">
-                                        <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
+                                        <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
                                     </a>
                                 </figure>
                             </div>
@@ -499,15 +499,15 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li><a href="{{ '/dashboard' }}">Timeline</a></li>
-                                            <li><a href="{{ '/member/tentang' }}">Tentang</a></li>
-                                            <li><a href="{{ '/member/galery' }}">Galery</a></li>
+                                            <li><a href="{{ '/dashboard' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
+                                            <li><a href="{{ '/member/tentang' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
+                                            <li><a href="{{ '/member/galery' }}" title="Gallery"><i class="fas fa-lg fa-images"></i></a></li>
                                             @if($userRegion->count() > 0)
-                                            <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}">Teman</a></li>
+                                            <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}" title="Friends"><i class="fas fa-lg fa-users"></i></a></li>
                                             @endif
-                                            <li><a href="{{ '/member/daerah' }}">Daerah</a></li>
-                                            <li><a href="{{ '/member/kartu/iuran' }}">Kartu Iuran</a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
+                                            <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>
+                                            <li><a href="{{ '/member/kartu/iuran' }}" title="Dues Receipt"><i class="fas fa-lg fa-receipt"></i></a></li>
+                                            {{-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> --}}
                                         </ul>
                                     </nav>
                                 </div>

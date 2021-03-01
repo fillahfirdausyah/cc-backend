@@ -46,7 +46,7 @@
                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/showroom/autoshop">Autoshops</a>
-                                    <a class="dropdown-item" href="/showroom/spare-part">Spare Parts</a>
+                                    <a class="dropdown-item" href="/showroom/merchandise">Merchandise</a>
                                     <a class="dropdown-item" href="testimonials.html">Testimonials</a>
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>

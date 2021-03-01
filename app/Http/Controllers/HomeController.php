@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\News;
 use App\Models\Event;
@@ -31,6 +32,9 @@ class HomeController extends Controller
         $event   = Event::count();
         $user    = User::count();
         $region  = Region::all();
+
+        // dd(Auth::user());
+
         
         return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
     }

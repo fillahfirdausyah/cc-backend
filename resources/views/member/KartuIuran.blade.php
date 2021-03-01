@@ -11,7 +11,7 @@
             <div class="col-lg-9">
                 <div class="about-description">
                     <div class="tab-content">
-                        <div class="tab-pane fade active show" id="one">
+                        <div class="card tab-pane fade active show" id="one">
                             <div class="work-zone">
                                 <div class="author-desc-title d-flex justify-content-between">
                                     <h6 class="author">Kartu Iuran</h6>

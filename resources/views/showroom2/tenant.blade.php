@@ -5,9 +5,9 @@
 @section('content')
 <div class="row ">
 	<div class="col-2 sticky">
-		<a href="#autoShops" class="d-block btn">Autoshops</a>
-		<a href="#cars" class="d-block btn">Cars</a>
-		<a href="#merchandise" class="d-block btn">Merchandise</a>
+		<a href="#autoShops" class="d-block btn"><span>Autoshops</span></a>
+		<a href="#cars" class="d-block btn"><span>Cars</span></a>
+		<a href="#merchandise" class="d-block btn"><span>Merchandise</span></a>
 	</div>
 	<div class="col-9">
 

@@ -69,13 +69,17 @@
                    </div>
                    @endforeach
                    <div class="col-sm-12">
+
                       <form action="/showroom/autoshop/comment" method="post">
+                        @csrf
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <input type="hidden" name="post_id" value="{{ $bengkel->id }}">
                         <label>Tambahkan Ulasan</label>
                         <textarea class="form-control" name="comment"></textarea>
                         <button class="btn btn-primary">Tambah</button>
+
                       </form>
+
                    </div>
                 </div>
               </article>

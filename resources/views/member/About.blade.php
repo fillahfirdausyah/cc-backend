@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="about-description">
+                <div class="card about-description">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="one">
                             <div class="work-zone">

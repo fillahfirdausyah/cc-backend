@@ -12,6 +12,25 @@
                     <div class="page-title-inner">
                         <h4 class="page-title">Daerah ({{ $userRegion->count() }})</h4>
                     </div>
+					
+                    <div class="filter-menu">
+                        <button class="active" data-filter="*">all</button>
+                        <button data-filter=".timeline">terbaru</button>
+                        <button data-filter=".upload">banyak teman</button>
+                        <button data-filter=".folder">default</button>
+                    </div>
+                    <div class="post-settings-bar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div class="post-settings arrow-shape">
+                            <ul>
+                                <li><button>edit profile</button></li>
+                                <li><button>activity log</button></li>
+                                <li><button>embed adda</button></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,7 +39,7 @@
 <!-- sendary menu end -->
 <!-- Add region section-->
 <div class="row justify-content-center mt-20">
-	<div class="col-4 border text-center bg-light">
+	<div class="card col-4 border text-center bg-light">
 	<form class="form-inline" action="/member/daerah/new" method="post">
     @csrf
         <input type="hidden" name="uid" value="{{ $user->id }}">
@@ -57,7 +76,7 @@
                     <div class="row mt--20 friends-list just">
                             @foreach($userRegion as $ur)
                         	<div class="col-lg-3 col-sm-6 recently request text-center">
-	                            <div class="friend-list-view">
+	                            <div class="card friend-list-view">
 		                            <form action="/member/daerah/delete" method="post">
 		                                @csrf
 		                                <div class="profile-thumb">

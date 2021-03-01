@@ -81,7 +81,7 @@ class VisitSRController extends Controller
         ]);
 
             $comment = new CommentBengkel();
-            $comment->post_id = $request->id;
+            $comment->post_id = $request->post_id;
             $comment->user_id = $request->user_id;
             $comment->parent_id = $request->parent_id !='' ? $request->parent_id:NULL;
             $comment->comment = $request->comment;
