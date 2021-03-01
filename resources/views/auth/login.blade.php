@@ -12,7 +12,7 @@
 
 
     <!-- Main css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 </head>
 <body>
 	<div class="main">
@@ -59,6 +59,12 @@
                                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                             </div>
                         </form>
+                        <div class="regis-login">
+                            <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
+                            @if (Route::has('password.request'))
+                             <a class="signup-image-link" href="{{ route('password.request') }}">Lupa Password?</a>
+                             @endif
+                        </div>
                     </div>
                 </div>
             </div>
