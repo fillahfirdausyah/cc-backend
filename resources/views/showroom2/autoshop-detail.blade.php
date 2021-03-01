@@ -11,7 +11,6 @@
                 <div class="cta-content">
                     <br>
                     <br>
-                    <h2><em>Rp @convert($SR->harga)</em></h2>
                     <p>Lorem ipsum dolor sit amet, consectetur.</p>
                 </div>
             </div>
@@ -28,9 +27,9 @@
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">          
-            @foreach(json_decode($SR->gambar) as $sr)
+            @foreach(json_decode($bengkel->gambar) as $sr)
             <div class="carousel-item">
-              <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr) }}">
+              <img class="d-block w-100 active" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr) }}">
             </div>
             @endforeach
           </div>
@@ -50,7 +49,7 @@
         <div class="row" id="tabs">
           <div class="col-lg-4">
             <ul>
-              <li><a href='#tabs-1'><i class="fa fa-cog"></i> Testimoni</a></li>
+              <li><a href='#tabs-1'><i class="fa fa-cog"></i> Ulasan</a></li>
               <li><a href='#tabs-2'><i class="fa fa-info-circle"></i> Tentang Bengkel</a></li>
               <li><a href='#tabs-3'><i class="fa fa-plus-circle"></i> Layanan</a></li>
               <li><a href='#tabs-4'><i class="fa fa-phone"></i> Kontak & Alamat</a></li>
@@ -59,75 +58,42 @@
           <div class="col-lg-8">
             <section class='tabs-content' style="width: 100%;">
               <article id='tabs-1'>
-                <h4>Testimoni</h4>
+                <h4>Ulasan</h4>
 
                 <div class="row">
-                   <div class="col-sm-6">
-                        <label>Kondisi</label>
+                  @foreach($comment->comment as $c)
+                   <div class="col-sm-12">
+                        <label>{{ $c->user->name }}</label>
                    
-                        <p>{{ $SR->kondisi}}</p>
+                        <p>{{ $c->comment}}</p>
                    </div>
-                   
-                   <div class="col-sm-6">
-                        <label>Tahun</label>
-                   
-                        <p>{{ $SR->tahun }}</p>
-                   </div>
-
-                   <div class="col-sm-6">
-                        <label>Bahan Bakar</label>
-                   
-                        <p>{{ $SR->bahan_bakar }}</p>
-                   </div>
-
-                   <div class="col-sm-6">
-                        <label>Mesin</label>
-                   
-                        <p>{{ $SR->mesin }} cc</p>
-                   </div>
-
-                   <div class="col-sm-6">
-                        <label>Tenaga</label>
-                   
-                        <p>{{ $SR->tenaga }} hp</p>
-                   </div>
-
-
-                   <div class="col-sm-6">
-                        <label>Transmisi</label>
-                   
-                        <p>{{ $SR->transmisi}}</p>
-                   </div>
-
-                   <div class="col-sm-6">
-                        <label>Jenis</label>
-                   
-                        <p>{{ $SR->jenis }}</p>
-                   </div>
-
-                   <div class="col-sm-6">
-                        <label>Warna</label>
-                   
-                        <p>{{ $SR->warna }}</p>
+                   @endforeach
+                   <div class="col-sm-12">
+                      <form action="/showroom/autoshop/comment" method="post">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="post_id" value="{{ $bengkel->id }}">
+                        <label>Tambahkan Ulasan</label>
+                        <textarea class="form-control" name="comment"></textarea>
+                        <button class="btn btn-primary">Tambah</button>
+                      </form>
                    </div>
                 </div>
               </article>
               <article id='tabs-2'>
                 <h4>Tentang Bengkel</h4>
                 
-                <p>{{ $SR->deskripsi }}</p> 
+                <p>tentang</p> 
+                <p></p>
                </article>
               <article id='tabs-3'>
                 <h4>Layanan</h4>
 
-                <div class="row">
-                @if(count(json_decode($SR->fitur)) > 0)   
-                  @foreach(json_decode($SR->fitur) as $fitur)
+                <div class="row"> 
+                  @foreach(json_decode($bengkel->layanan) as $b)
                     <div class="col-sm-6">
-                        <p>{{ $fitur }}</p>
+                        <p>{{ $b }}</p>
                     </div>
                   @endforeach
-                @endif
                 </div>
               </article>
               <article id='tabs-4'>
@@ -137,12 +103,19 @@
                     <div class="col-sm-6">
                         <label>Nama</label>
 
-                        <p>{{ $tenant->name }}</p>
+                        <p>name </p>
                     </div>
                     <div class="col-sm-6">
                         <label>E-mail</label>
                         <p><a href="#">john@carsales.com</a></p>
                     </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>Alamat</label>
+                    <p>{{ $bengkel->alamat }}</p>
+                  </div>
                 </div>
               </article>
             </section>

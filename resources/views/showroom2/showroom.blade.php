@@ -92,47 +92,6 @@
     </div>
 </section>
 
-<!-- ***** AutoShops Starts ***** -->
-<section class="section" id="trainers">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="section-heading">
-                    <h2><em>AutoShops</em></h2>
-                    <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @foreach($bengkel as $item => $b)
-            <div class="col-lg-4">
-                <div class="trainer-item">
-                    <div class="image-thumb">
-                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectB[$item]) }}" height="300">
-                    </div>
-                    <div class="down-content">
-                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $b->nama }}</h4></a>
-
-                        <p>
-                            <i class="fa fa-location-arrow"></i> {{ $b->daerah->region }} &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_buka)->format('h:i')}}-
-                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_tutup)->format('h:i')}} &nbsp;&nbsp;&nbsp;
-                        </p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <br>
-
-        <div class="main-button text-center">
-            <a href="/showroom/more/car">View Cars</a>
-        </div>
-    </div>
-</section>
-<!-- ***** AutoShops Ends ***** -->
 
 <!-- ***** Call to Action Start ***** -->
 <section class="section section-bg" id="call-to-action" style="background-image: url({{ asset('assets/vendor/showroom/assets/images/banner-image-1-1920x500.jpg') }})">

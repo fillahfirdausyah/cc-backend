@@ -55,7 +55,7 @@ class VisitSRController extends Controller
         $like = LikeBengkel::select('like')->where('post_id', '=', $id)->get();
         $likes = count($like);
 
-        return view('Showroom.visitBengkel', compact( 'bengkel', 'collect', 'comment', 'likes','user'));   
+        return view('showroom2.autoshop-detail', compact( 'bengkel', 'comment', 'likes','user'));   
     }
 
     public function comment(Request $request)

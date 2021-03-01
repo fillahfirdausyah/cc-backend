@@ -17,6 +17,7 @@ class CreateShowRoomTable extends Migration
             $table->id();
             $table->string('judul');
             $table->integer('user_id')->unsigned();
+            $table->string('verified')->nullable();
             $table->integer('promo')->nullable();
             $table->string('harga');
             $table->string('stok');

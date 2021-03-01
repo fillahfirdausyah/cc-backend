@@ -33,20 +33,27 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="/showroom" class="active">Home</a></li>
-                            <li><a href="/showroom/more/car">Cars</a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cars</a>
                               
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="about.html">About Us</a>
-                                    <a class="dropdown-item" href="blog.html">Blog</a>
-                                    <a class="dropdown-item" href="team.html">Team</a>
+                                    <a class="dropdown-item" href="/showroom/more/car">Cars</a>
+                                    <a class="dropdown-item" href="/showroom/upload/car">Sell Cars</a>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Others</a>
+                              
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/showroom/autoshop">Autoshops</a>
+                                    <a class="dropdown-item" href="/showroom/spare-part">Spare Parts</a>
                                     <a class="dropdown-item" href="testimonials.html">Testimonials</a>
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                 </div>
                             </li>
                             <li><a href="/tenant">Tenant</a></li> 
+                            <li><a href="">Wishlist</a></li>
                             <li><a href="contact.html">Contact</a></li> 
                         </ul>        
                         <a class='menu-trigger'>

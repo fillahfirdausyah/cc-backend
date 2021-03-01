@@ -17,11 +17,23 @@ class TenantController extends Controller
 {
     public function index()
     {
-        $tenant = Tenant::where('user_id', Auth::id())->where('verifaction', true)->get();
+        $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->get();
+
         $SR = SR::where('user_id', Auth::id())->get();
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $convSR[] = json_decode($sr->gambar);
+            }
+
+            $count = count($convSR);
+            for ($i=0; $i < $count; $i++) { 
+                $collectSR[] = $convSR[$i][0];
+            }
+        }
+
         $bengkel = Bengkel::where('user_id', Auth::id())->get();
 
-        return view('showroom2.tenant');
+        return view('showroom2.tenant', compact('tenant', 'SR', 'collectSR', 'bengkel'));
     }
 
     public function create()
@@ -33,29 +45,33 @@ class TenantController extends Controller
 
     public function store(Request $request)
     {
-        $input_data = $request->all();
+        if (Tenant::where('user_id', $request->user_id != NULL)) {
+            $input_data = $request->all();
 
-        $validator = Validator::make($input_data, [
-            'nama' => 'required | min: 8',
-            'telepon' => 'required | numeric | digits_between: 10,13',
-            'email' => 'required | email',
-            'user_id' => 'required'
-        ]);
+            $validator = Validator::make($input_data, [
+                'nama' => 'required | min: 8',
+                'telepon' => 'required | numeric | digits_between: 10,13',
+                'email' => 'required | email',
+                'user_id' => 'required'
+            ]);
 
-        if ($validator->fails()) {
-            return redirect('/showroom/upload')
-                        ->withErrors($validator)
-                        ->withInput();
+            if ($validator->fails()) {
+                return redirect('/showroom/upload')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $t = new Tenant();
+            $t->nama = $request->nama;
+            $t->user_id = $request->user_id;
+            $t->email = $request->email;
+            $t->telepon = $request->telepon;
+            $t->save();
+
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('status', 'Anda Sudah terdaftar sebagai tenant');
         }
-
-        $t = new Tenant();
-        $t->nama = $request->nama;
-        $t->user_id = $request->user_id;
-        $t->email = $request->email;
-        $t->telepon = $request->telepon;
-        $t->save();
-
-        return redirect('/showroom');
     }
 
     /**

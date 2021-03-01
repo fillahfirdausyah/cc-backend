@@ -27,13 +27,16 @@
         <br>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">          
-            @foreach(json_decode($SR->gambar) as $sr)
-            <div class="carousel-item">
-              <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr) }}">
+            <div class="carousel-inner">
+              @foreach(json_decode($SR->gambar) as $sr)
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" alt="First slide">
+              </div>
+              @endforeach
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" alt="First slide">
+              </div>
             </div>
-            @endforeach
-          </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -46,7 +49,9 @@
         
         <br>
         <br>
-
+        <div class="row justify-content-end mb-3">
+          <button class="btn btn-primary"> Add to Wishlist <i class="fa fa-love"></i></button>
+        </div>
         <div class="row" id="tabs">
           <div class="col-lg-4">
             <ul>
@@ -121,7 +126,7 @@
                 <h4>Fitur Tambahan</h4>
 
                 <div class="row">
-                @if(count(json_decode($SR->fitur)) > 0)   
+                @if($SR->fitur != 0)   
                   @foreach(json_decode($SR->fitur) as $fitur)
                     <div class="col-sm-6">
                         <p>{{ $fitur }}</p>
@@ -151,5 +156,4 @@
     </div>
 </section>
 <!-- ***** Fleet Ends ***** -->
-
 @endsection

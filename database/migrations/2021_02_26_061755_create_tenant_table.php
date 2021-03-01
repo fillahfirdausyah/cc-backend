@@ -19,7 +19,7 @@ class CreateTenantTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->integer('telepon')->unique();
-            $table->string('verificated')->nullable();
+            $table->string('verified')->nullable();
             $table->timestamps();
         });
     }

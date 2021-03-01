@@ -1,49 +1,44 @@
 @extends('showroom2.layouts.visit')
 
-@section('title', 'Cars')
+@section('title', 'Autoshops')
     
 @section('content')
+<!-- ***** AutoShops Starts ***** -->
 <section class="section" id="trainers">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="section-heading">
-                    <h2>Featured <em>Cars</em></h2>
+                    <h2><em>AutoShops</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
                     <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($SR as $item => $sr)
+            @foreach($bengkel as $item => $b)
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
-                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectCar[$item]) }}" height="400">
+                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectB[$item]) }}" height="300">
                     </div>
                     <div class="down-content">
                         <span>
-                            <sup>Rp</sup>@convert($sr->harga)
+                            {{ $b->hari }}
                         </span>
-
-                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->judul }}</h4></a>
+                        <a href="{{ '/showroom/autoshop/'.$b->id.'-'.$b->slug }}"><h4>{{ $b->nama }}</h4></a>
 
                         <p>
-                        	<i class="fa fa-car"></i> {{ $sr->kondisi }} &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-cube"></i> {{ $sr->mesin }} cc &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-cog"></i> {{ $sr->transmisi }} &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-location-arrow"></i> {{ $b->daerah->region }} &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_buka)->format('h:i')}}-
+                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_tutup)->format('h:i')}} &nbsp;&nbsp;&nbsp;
                         </p>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-
-        <br>
-
-        <div class="main-button text-center">
-            {{ $SR->links() }}
-        </div>
     </div>
 </section>
+<!-- ***** AutoShops Ends ***** -->
 @endsection

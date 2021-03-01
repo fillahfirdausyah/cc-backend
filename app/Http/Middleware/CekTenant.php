@@ -21,9 +21,9 @@ class CekTenant
     {
         $tenant = Tenant::where('user_id', Auth::id())->first();
 
-        if($tenant->count() > 0 && $tenant->verificated == 'yes'){
+        if($tenant != NULL && $tenant->verified == 'yes'){
             return $next($request);
-        }else if($tenant->count() > 0 && $tenant->verificated == NULL) {
+        }else if($tenant != NULL && $tenant->verified == NULL) {
             return redirect('/tenant/register')->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');    
         }
 

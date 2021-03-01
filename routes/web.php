@@ -120,15 +120,15 @@ Route::post('/member/post/like/{id}', 'PostController@like');
 //tenant
 Route::middleware(['cektenant'])->group(function () { 
 	Route::get('/tenant', 'TenantController@index');
-	Route::get('/showroom/upload/bengkel', 'ShowroomController@createBengkel');
-	Route::Post('/showroom/upload/bengkel', 'ShowroomController@storeBengkel'); 
-	Route::get('/showroom/upload/car', 'ShowroomController@create');
-	Route::post('/showroom/upload/car', 'ShowroomController@store');
+	Route::get('/showroom/upload/autoshop', 'ShowroomController@createBengkel');
+	Route::Post('/showroom/upload/autoshop', 'ShowroomController@storeBengkel'); 
 });
 Route::get('/tenant/register', 'TenantController@create');
 Route::post('/tenant/register', 'TenantController@store');
 
 // Showroom
+Route::get('/showroom/upload/car', 'ShowroomController@create');
+Route::post('/showroom/upload/car', 'ShowroomController@store');
 Route::get('/showroom', 'ShowroomController@show');
 Route::post('/showroom/search', 'ShowroomController@search');
 Route::post('/showroom/category', 'ShowroomController@category');
@@ -146,15 +146,15 @@ Route::post('/showroom/bengkel/promo/{id}', 'ShowroomController@BengkelPromo');
 Route::get('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
 Route::post('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
 Route::delete('/showroom/bengkel/{id}', 'ShowroomController@destroyBengkel');
-Route::get('/showroom/more/bengkel', 'ShowroomController@moreBengkel');
+Route::get('/showroom/autoshop', 'ShowroomController@moreBengkel');
 
 //Showroom Support
 Route::get('/showroom/car/{id}-{slug}', 'VisitSRController@show');
 Route::get('/showroom/car/like', 'VisitSRController@like');
 Route::post('/showroom/car/comment', 'VisitSRController@comment');
-Route::get('/showroom/bengkel/{id}-{slug}', 'VisitSRController@showBengkel');
-Route::post('/showroom/bengkel/comment', 'VisitSRController@comment_bengkel');
-Route::get('/showroom/bengkel/like', 'VisitSRController@likeBengkel');
+Route::get('/showroom/autoshop/{id}-{slug}', 'VisitSRController@showBengkel');
+Route::post('/showroom/autoshop/comment', 'VisitSRController@comment_bengkel');
+Route::get('/showroom/autoshop/like', 'VisitSRController@likeBengkel');
 
 
 // Route::middleware(['cekpenjual'])->group(function () { 
