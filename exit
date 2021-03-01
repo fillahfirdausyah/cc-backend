@@ -1,0 +1,29 @@
+[33mcommit 777218981d0ffde96f1505a77cfde03a362c017f[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: warangkaer <yusrilbagas135@gmail.com>
+Date:   Mon Mar 1 11:30:52 2021 +0700
+
+    tambah tenant
+
+[33mcommit a8f8c5339096f5165ef08a0c2310ac347144bfbd[m
+Author: warangkaer <yusrilbagas135@gmail.com>
+Date:   Fri Feb 26 14:54:53 2021 +0700
+
+    showroom 2
+
+[33mcommit e5d0986069b889a563ca91941a95e28eabf33482[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Fri Feb 26 10:56:10 2021 +0700
+
+    fix working tree
+
+[33mcommit 337002a5b08f7dc135a9bfa7f89ce13e5ce21db5[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Fri Feb 26 10:29:41 2021 +0700
+
+    Improve UI home page, UI member and enhance query load time
+
+[33mcommit 282f5c93190e1727250b36aae43dc94538968a89[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Thu Feb 25 13:44:17 2021 +0700
+
+    Change UI for user verification and add Gallery section to Main Page

@@ -8,6 +8,6 @@ class UndianController extends Controller
 {
     public function index() 
     {
-        return view('admin.undian.UndianV2');
+        return view('admin.undian.Undian');
     }
 }
