@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\News;
 use App\Models\Event;
 use App\Models\Region;
-
 class HomeController extends Controller
 {
     /**

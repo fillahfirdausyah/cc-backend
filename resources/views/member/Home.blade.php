@@ -408,6 +408,7 @@
                                         <img src="assets/images/icons/plane.png" alt="">
                                     </button>
                                 </div>
+>>>>>>> 983d2ba6d2e3d142da90005565843c19458c6090
                             </div>
                         </li>
                         <li>
@@ -423,6 +424,7 @@
                             </div>
                         </li>
                     </ul>
+>>>>>>> 983d2ba6d2e3d142da90005565843c19458c6090
                 </div>
                 <div class="mobile-header-profile">
                     <!-- profile picture end -->

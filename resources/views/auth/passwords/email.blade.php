@@ -27,7 +27,7 @@
                         <figure><img src="{{ asset('assets/img/reset.png') }}" alt="sing up image"></figure>
                         <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
                         @if (Route::has('password.request'))
-                            <a class="signup-image-link" href="{{ '/login' }}">Login</a>
+                            <a class="signup-image-link" href="{{ route('password.request') }}">Lupa Password?</a>
                         @endif
                     </div>
 

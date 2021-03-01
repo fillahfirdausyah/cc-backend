@@ -18,47 +18,6 @@ use App\Models\Comments_SR;
 
 class ShowroomController extends Controller
 {
-    public function moreBengkel()
-    {
-        $convB = [];
-        $collectB = [];
-
-        $bengkel = Bengkel::with('daerah')->paginate(20);
-        if($bengkel != NULL){
-            foreach ($bengkel as $b) {
-                $convB[] = json_decode($b->gambar);
-            }
-
-            $count = count($convB);
-            for ($i=0; $i < $count; $i++) { 
-                $collectB[] = $convB[$i][0];
-            }
-        }
-
-        return view('showroom.MoreBengkel',compact('bengkel', 'collectB'));
-    }
-
-    public function moreSR()
-    {
-
-        $convSR = [];
-        $collectSR = [];
-
-        $SR = SR::paginate(20);
-        if($SR != NULL){
-            foreach ($SR as $sr) {
-                 $convSR[] = json_decode($sr->gambar);
-            }
-
-            $count = count($convSR);
-            for ($i=0; $i < $count; $i++) { 
-                $collectSR[] = $convSR[$i][0];
-            }
-        }
-
-        return view('showroom.MoreSR', compact('collectSR', 'SR'));
-    }
-
     public function show()
     {
         $convSR = [];
@@ -66,7 +25,7 @@ class ShowroomController extends Controller
         $convB = [];
         $collectB = [];
 
-        $bengkel = Bengkel::with('daerah')->take(20)->get();
+        $bengkel = Bengkel::with('daerah')->take(9)->get();
         if($bengkel != NULL){
             foreach ($bengkel as $b) {
                 $convB[] = json_decode($b->gambar);
@@ -78,7 +37,7 @@ class ShowroomController extends Controller
             }
         }
 
-        $SR = SR::take(20)->get();
+        $SR = SR::where('verified', 'yes')->take(20)->get();
         if($SR != NULL){
             foreach ($SR as $sr) {
                  $convSR[] = json_decode($sr->gambar);
@@ -90,15 +49,33 @@ class ShowroomController extends Controller
             }
         }
 
-        return view('showroom/ShowRoom', compact('bengkel','collectB','collectSR', 'SR'));
+        return view('showroom2.showroom', compact('bengkel','collectB','collectSR', 'SR'));
+    }
+    public function moreCar()
+    {
+        $convSR = [];
+        $collectCar = [];
+        $SR = SR::where('verified', 'yes')->paginate(20);
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $convSR[] = json_decode($sr->gambar);
+            }
+
+            $count = count($convSR);
+            for ($i=0; $i < $count; $i++) { 
+                $collectCar[] = $convSR[$i][0];
+            }
+        }
+
+        return view('showroom2.cars', compact('collectCar', 'SR'));
     }
 
     // Showroom
     public function create()
     {
-        $user = Auth::id();
+        $user = Auth::user();
 
-        return view('showroom/uploadSR', compact('user'));
+        return view('showroom2.upload-car', compact('user'));
     }
 
     public function store(Request $request)
@@ -109,9 +86,16 @@ class ShowroomController extends Controller
         'user_id' => 'required',
         'judul' => 'required',
         'deskripsi' => 'required',
-        'kategori' => 'required',
+        'jenis' => 'required',
         'stok' => 'required',
         'harga' => 'required|integer',
+        'kondisi' => 'required',
+        'mesin' => 'required',
+        'tahun' => 'required | numeric | min:1900 | max:2100',
+        'bahan_bakar' => 'required',
+        'tenaga' => 'required',
+        'transmisi' => 'required',
+        'warna' => 'required',
         'gambar' => 'required',
         'gambar.*' => 'mimes:jpg,png,jpeg',
         ]);
@@ -122,9 +106,15 @@ class ShowroomController extends Controller
                         ->withInput();
         }
 
+        if($request->fitur != NULL){
+            $fitur = explode(",", $request->fitur);
+        } else {
+            $fitur = NULL;
+        }
+
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'public/image'; 
-            $profileImage ="image-".$request->judul."-".rand(0000,9999).".".$file->extension();
+            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
@@ -134,13 +124,21 @@ class ShowroomController extends Controller
         $SR->judul = $request->judul;
         $SR->stok = $request->stok;
         $SR->deskripsi = $request->deskripsi;
-        $SR->kategori = $request->kategori;
+        $SR->jenis = $request->jenis;
         $SR->harga = $request->harga;
+        $SR->kondisi = $request->kondisi;
+        $SR->mesin = $request->mesin;
+        $SR->tahun = $request->tahun;
+        $SR->fitur = json_encode($fitur);
+        $SR->bahan_bakar = $request->bahan_bakar;
+        $SR->tenaga = $request->tenaga;
+        $SR->transmisi = $request->transmisi;
+        $SR->warna = $request->warna;
         $SR->gambar = json_encode($name);
         $SR->slug = Str::slug($request->judul, '-');
         $SR->save();
 
-        return redirect('/showroom')->with('status', 'data sudah berhasil ditambahkan!');
+        return redirect()->back()->with('status', 'data sudah berhasil ditambahkan!');
     }
 
 
@@ -162,33 +160,6 @@ class ShowroomController extends Controller
 
         return $output;
     }
-    
-     public function category(Request $request)
-    {
-        $category = $request->get('query');
-        
-        if($category == "All"){
-            $SR = SR::paginate(20);    
-        }else{
-            $SR = DB::table('show_room')->where('kategori', 'LIKE', "%{$category}%")->get();
-        }
-        
-        foreach ($SR as $sr) {
-             $conv[] = json_decode($sr->gambar);
-        }
-        $count = count($conv);
-        for ($i=0; $i < $count; $i++) { 
-            $collect[] = $conv[$i][0];
-        }
-
-        $output = "<div class='row'>";
-        foreach($SR as $sr => $key){
-            $output .= "<div class='col-md-4 card-group'><div class='card' style='padding: 5px; margin-top:10px;'><img class='card-img-top' src='../../../public/image/".$collect[$sr]."' width='250' height='180'><div class='card-body'><h4 class='card-title'><a href='/showroom/".$key->id."-".$key->slug."'> ".$key->judul." </a></h4><p class='card-text'><strong>Rp. ".$key->harga." </strong></p><p class='card-text'><small class='text-muted'>Updated on ".$key->created_at."</small></p></div></div></div>";   
-        }
-        $output .= "<div>";
-
-    return $output;
-    }
 
     public function edit($id)
     {
@@ -204,12 +175,19 @@ class ShowroomController extends Controller
         $input_data = $request->all();
 
         $validator = Validator::make($input_data, [
-        'judul' => 'required',
         'user_id' => 'required',
+        'judul' => 'required',
         'deskripsi' => 'required',
+        'jenis' => 'required',
         'stok' => 'required',
-        'kategori' => 'required',
         'harga' => 'required|integer',
+        'kondisi' => 'required',
+        'mesin' => 'required',
+        'tahun' => 'required | numeric | min:1900 | max:2100',
+        'bahan_bakar' => 'required',
+        'tenaga' => 'required',
+        'transmisi' => 'required',
+        'warna' => 'required',
         'gambar' => 'required',
         'gambar.*' => 'mimes:jpg,png,jpeg',
         ]);
@@ -220,9 +198,15 @@ class ShowroomController extends Controller
                         ->withInput();
         }
 
+        if($request->fitur != NULL){
+            $fitur = explode(",", $request->fitur);
+        } else {
+            $fitur = NULL;
+        }
+
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'public/image'; 
-            $profileImage ="image-".$request->judul."-".rand(0000,9999).".".$file->extension();
+            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
@@ -232,13 +216,22 @@ class ShowroomController extends Controller
         $SR->judul = $request->judul;
         $SR->stok = $request->stok;
         $SR->deskripsi = $request->deskripsi;
-        $SR->kategori = $request->kategori;
+        $SR->jenis = $request->jenis;
         $SR->harga = $request->harga;
+        $SR->kondisi = $request->kondisi;
+        $SR->mesin = $request->mesin;
+        $SR->tahun = $request->tahun;
+        $SR->fitur = json_encode($fitur);
+        $SR->bahan_bakar = $request->bahan_bakar;
+        $SR->tenaga = $request->tenaga;
+        $SR->transmisi = $request->transmisi;
+        $SR->warna = $request->warna;
         $SR->gambar = json_encode($name);
         $SR->slug = Str::slug($request->judul, '-');
         $SR->save();
+
         
-        return redirect('/showroom')->with('status', 'data sudah berhasil di Edit!');
+        return redirect()->back()->with('status', 'data sudah berhasil di Edit!');
         }
     }
 
@@ -291,12 +284,31 @@ class ShowroomController extends Controller
     }
 
     // Bengkel
+    public function moreBengkel()
+    {
+        $convB = [];
+        $collectB = [];
+
+        $bengkel = Bengkel::with('daerah')->paginate(20);
+        if($bengkel != NULL){
+            foreach ($bengkel as $b) {
+                $convB[] = json_decode($b->gambar);
+            }
+
+            $count = count($convB);
+            for ($i=0; $i < $count; $i++) { 
+                $collectB[] = $convB[$i][0];
+            }
+        }
+        return view('showroom2.autoshops',compact('bengkel', 'collectB'));
+    }
+
     public function createBengkel()
     {
         $user = Auth::id();
         $region = Region::all();
 
-        return view('/Showroom/uploadBengkel',compact('user', 'region'));
+        return view('showroom2.upload-autoshop',compact('user', 'region'));
     }
 
     public function storeBengkel(Request $request)
@@ -307,7 +319,7 @@ class ShowroomController extends Controller
             'nama' => 'required',
             'user_id' => 'required',
             'region_id' => 'required',
-            'kontak' => 'required | unique:App\Models\Bengkel,kontak | numeric | digits_between:10,13',
+            'kontak' => 'required | numeric | digits_between:10,13',
             'waktu_buka' => 'required',
             'waktu_tutup' => 'required',
             'hari' => 'required',
@@ -318,14 +330,14 @@ class ShowroomController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/bengkel')
+            return redirect('/showroom/upload/autoshop')
                         ->withErrors($validator)
                         ->withInput();
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'public/image'; 
-            $profileImage ="image-".$request->nama."-".rand(0000,9999).".".$file->extension();
+            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
@@ -339,12 +351,12 @@ class ShowroomController extends Controller
         $bengkel->waktu_tutup = $request->waktu_tutup;
         $bengkel->hari = $request->hari;
         $bengkel->alamat = $request->alamat;
-        $bengkel->layanan = $request->layanan;
+        $bengkel->layanan = json_encode(explode(",", $request->layanan));
         $bengkel->gambar = json_encode($name);
         $bengkel->slug = Str::slug($request->nama, '-');
         $bengkel->save();
 
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->back()->with('status', 'Data berhasil ditambahkan!');
     }
 
     public function createBengkelPromo($id)
@@ -395,18 +407,18 @@ class ShowroomController extends Controller
             'gambar' => 'required',
             'gambar.*' => 'mimes:jpg,png,jpeg',
             'alamat' => 'required | max:100',
-            'layanan' => 'required | max:200'
+            'layanan' => 'required | max:300'
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/bengkel')
+            return redirect('/showroom/upload/autoshop')
                         ->withErrors($validator)
                         ->withInput();
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'public/image'; 
-            $profileImage ="image-".$request->nama."-".rand(0000,9999).".".$file->extension();
+            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
@@ -420,7 +432,7 @@ class ShowroomController extends Controller
         $bengkel->waktu_tutup = $request->waktu_tutup;
         $bengkel->hari = $request->hari;
         $bengkel->alamat = $request->alamat;
-        $bengkel->layanan = $request->layanan;
+        $bengkel->layanan = json_encode(explode(",", $request->layanan));
         $bengkel->gambar = json_encode($name);
         $bengkel->slug = Str::slug($request->nama, '-');
         $bengkel->save();

@@ -117,40 +117,47 @@ Route::get('/post', 'PostController@index');
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');
 
+//tenant
+Route::middleware(['cektenant'])->group(function () { 
+	Route::get('/tenant', 'TenantController@index');
+	Route::get('/showroom/upload/autoshop', 'ShowroomController@createBengkel');
+	Route::Post('/showroom/upload/autoshop', 'ShowroomController@storeBengkel'); 
+});
+Route::get('/tenant/register', 'TenantController@create');
+Route::post('/tenant/register', 'TenantController@store');
+
 // Showroom
+Route::get('/showroom/upload/car', 'ShowroomController@create');
+Route::post('/showroom/upload/car', 'ShowroomController@store');
 Route::get('/showroom', 'ShowroomController@show');
-Route::get('/showroom/image', function(){ return "../../public/public/image/"; })->name('takeImage');
 Route::post('/showroom/search', 'ShowroomController@search');
 Route::post('/showroom/category', 'ShowroomController@category');
-Route::delete('/showroom/{id}', 'ShowroomController@destroy')->name('delete');
 Route::post('/showroom/edit/{id}', 'ShowroomController@edit');
 Route::post('/showroom/edit/proccess/{id}', 'ShowroomController@update');
 Route::get('/showroom/promoSR/{id}', 'ShowroomController@createPromo');
 Route::post('/showroom/tambahPromo/{id}', 'ShowroomController@promo');
 Route::post('/showroom/stok/{id}', 'ShowroomController@stock');
-Route::get('/showroom/more/sr', 'ShowroomController@moreSR');
+Route::get('/showroom/more/car', 'ShowroomController@moreCar');
+Route::delete('/showroom/car/{id}', 'ShowroomController@destroy');
 
 // Bengkel
 Route::get('/showroom/bengkel/promo/{id}', 'ShowroomController@createBengkelPromo');
 Route::post('/showroom/bengkel/promo/{id}', 'ShowroomController@BengkelPromo');
-Route::get('/showroom/bengkel/{id}', 'ShowroomController@editBengkel');
-Route::post('/showroom/bengkel/{id}', 'ShowroomController@editBengkel');
+Route::get('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
+Route::post('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
 Route::delete('/showroom/bengkel/{id}', 'ShowroomController@destroyBengkel');
-Route::get('/showroom/more/bengkel', 'ShowroomController@moreBengkel');
+Route::get('/showroom/autoshop', 'ShowroomController@moreBengkel');
 
 //Showroom Support
-Route::get('/showroom/like', 'VisitSRController@like');
-Route::get('/showroom/likeBengkel', 'VisitSRController@likeBengkel');
-Route::get('/showroom/bengkel/show/{id}-{slug}', 'VisitSRController@showBengkel');
-Route::post('/showroom/comment', 'VisitSRController@comment');
-Route::post('/showroom/commentbengkel', 'VisitSRController@comment_bengkel');
-Route::get('/showroom/{id}-{slug}', 'VisitSRController@show');
+Route::get('/showroom/car/{id}-{slug}', 'VisitSRController@show');
+Route::get('/showroom/car/like', 'VisitSRController@like');
+Route::post('/showroom/car/comment', 'VisitSRController@comment');
+Route::get('/showroom/autoshop/{id}-{slug}', 'VisitSRController@showBengkel');
+Route::post('/showroom/autoshop/comment', 'VisitSRController@comment_bengkel');
+Route::get('/showroom/autoshop/like', 'VisitSRController@likeBengkel');
+
 
 // Route::middleware(['cekpenjual'])->group(function () { 
-	Route::get('/showroom/upload/bengkel', 'ShowroomController@createBengkel');
-	Route::Post('/showroom/upload/bengkel', 'ShowroomController@storeBengkel'); 
-	Route::get('/showroom/upload', 'ShowroomController@create');
-	Route::post('/showroom/upload/proccess', 'ShowroomController@store');
 // });
 
 // Comment

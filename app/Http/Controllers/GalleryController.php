@@ -37,11 +37,12 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $this->validate($request, [
             'judul' => 'required',
             'image' => 'required | mimes:jpeg,jpg,png,svg'
         ]);
-
 
         $imgName = $request->judul . '-' . time() . '.' . $request->image->extension();
 

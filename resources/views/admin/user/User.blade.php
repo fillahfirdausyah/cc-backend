@@ -45,11 +45,14 @@
                             <td>{{ $d->name }}</td>
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
-                            <td> 
+                            <td>
                               @if ($d->email_verified_at == null)
-                              <span class="badge badge-danger"> Belum Terverifikasi </span>
+                                  Belum Terverifikasi
+                                  <a href="{{ '/admin/user/verify/' }}{{ $d->id }}">
+                                    <i class="fas fa-check" style="color: green"></i>
+                                  </a>
                               @else
-                              <span class="badge badge-success"> Terverifikasi </span>
+                                  Sudah Terverifikasi
                               @endif
                             </td>
                             <td>
@@ -60,12 +63,6 @@
                                 <a href="{{ '/admin/user/delete/'}}{{ $d->id }}" id="confirm" onclick="aksi({{$d->id}})">
                                   <i class="fas fa-trash-alt" style="color: red"></i>
                                 </a>
-                                |
-                                @if ($d->email_verified_at == null)
-                                <a href="{{ '/admin/user/verify/' }}{{ $d->id }}">
-                                  <i class="fas fa-user-check" style="color: green"></i>
-                                </a>  
-                                @endif
                             </td>
                         </tr>
                         
