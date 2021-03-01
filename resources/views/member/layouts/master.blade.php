@@ -229,8 +229,8 @@
                     <div class="col-md-2">
                         <!-- brand logo start -->
                         <div class="brand-logo text-center">
-                            <a href="{{ '/member/home' }}">
-                                <img src="{{ asset('assets/img/apple-touch-icon.png') }}" style="width: 35px;" alt="brand logo">
+                            <a href="index.html">
+                                <img src="assets/images/logo/logo.png" alt="brand logo">
                             </a>
                         </div>
                         <!-- brand logo end -->
@@ -262,7 +262,7 @@
                                         </div>
                                         <div class="profile-body">
                                             <ul>
-                                                <li><a href="#"><i class="flaticon-user"></i>Profile</a></li>
+                                                <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                             </ul>
@@ -447,7 +447,7 @@
                             </div>
                             <div class="profile-body">
                                 <ul>
-                                    <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
+                                    <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                 </ul>

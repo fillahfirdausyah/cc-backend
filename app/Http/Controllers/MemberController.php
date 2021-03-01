@@ -13,13 +13,17 @@ use App\Models\CommentPost;
 class MemberController extends Controller
 {
     public function index() {
-        $user    = Auth::user();
-        $userRegion = Auth::user()->region()->get();
-        $region = Region::all();
-        $post = Auth::user()->post()->with(['comments', 'comments.child', 'comments.user'])->get();
-        $like    = $user->like();
+        
+        $user = User::with('post')->get();
+        $pp = User::with('profile')->get();
 
-        return view('member.Home', compact('user', 'post', 'like', 'userRegion', 'region'));
+        // dd($pp);
+        
+        // foreach ($user as $p) {
+        //    dd( $p->profile->foto_profile); 
+        // }
+
+        return view('member.Home', compact('user', 'pp'));
     }
 
     public function about() {
@@ -49,7 +53,12 @@ class MemberController extends Controller
     }
 
     public function profile() {
-        $user = Auth::user();
-        return view('member.Profile', compact('user'));
+        $user    = Auth::user();
+        $userRegion = Auth::user()->region()->get();
+        $region = Region::all();
+        $post = Auth::user()->post()->with(['comments', 'comments.child', 'comments.user'])->get();
+        $like    = $user->like();
+
+        return view('member.Profile', compact('user', 'post', 'like', 'userRegion', 'region'));
     }
 }
