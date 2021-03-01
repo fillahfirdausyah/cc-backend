@@ -1,7 +1,7 @@
 @extends('member.layouts.master')
 
 
-@section('title', 'Home')
+@section('title', 'Profile')
 
 @section('content')
     <!-- Region if the user is a new member -->

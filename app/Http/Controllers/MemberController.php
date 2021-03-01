@@ -8,22 +8,24 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Region;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\News;
 use App\Models\CommentPost;
 
 class MemberController extends Controller
 {
     public function index() {
-        
-        $user = User::with('post')->get();
-        $pp = User::with('profile')->get();
+        $id = 2;
+        $user = Auth::user();
+        $post = Post::with('user')->latest()->get();
+        $news = News::all();
+        $region = Auth::user()->region()->get();
+        $friends = User::whereHas('region', function($q) use($id){
+            $q->where('region_id', $id);
+        })
+        ->where('id', '!=', $user->id)->get();
+        // dd($news);
 
-        // dd($pp);
-        
-        // foreach ($user as $p) {
-        //    dd( $p->profile->foto_profile); 
-        // }
-
-        return view('member.Home', compact('user', 'pp'));
+        return view('member.Home', compact('post', 'news', 'region', 'friends'));
     }
 
     public function about() {
