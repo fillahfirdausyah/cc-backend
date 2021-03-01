@@ -49,7 +49,7 @@
                                 <div class="photo-group active">
                                     <div class="gallery-toggle">
                                         <div class="gallery-overlay">
-                                            <img src="{{ asset($user->foto_profile) }}" alt="Photo Gallery">
+                                            <img src="{{ asset($user->profile->foto_profile) }}" alt="Photo Gallery">
                                             <div class="view-icon"></div>
                                         </div>
                                         <div class="photo-gallery-caption">
@@ -62,16 +62,18 @@
                                 <div class="photo-group">
                                     <div class="gallery-toggle">
                                         <div class="d-none product-thumb-large-view">
-                                            <img src="{{ asset($user->foto_profile) }}" alt="Photo Gallery">
-                                            <img src="{{ asset($user->foto_profile) }}" alt="Photo Gallery">
-                                            <img src="{{ asset($user->foto_profile) }}" alt="Photo Gallery">
+                                            @foreach ($gallery as $g)
+                                            @if ($g->foto != 'null')
+                                            <img src="{{ asset('image/Member/Post/'.$g->foto) }}" alt="Photo Gallery">
+                                            @endif
+                                            @endforeach
                                         </div>
                                         <div class="gallery-overlay">
-                                            <img src="{{ asset($user->foto_profile) }}" alt="Photo Gallery">
+                                            <img src="{{ asset('image/Member/Post/'.$g->foto) }}" alt="Photo Gallery">
                                             <div class="view-icon"></div>
                                         </div>
                                         <div class="photo-gallery-caption">
-                                            <h3 class="photos-caption">Adda Timeline (79)</h3>
+                                            <h3 class="photos-caption">Upload {{ $g->count() }}</h3>
                                         </div>
                                     </div>
                                 </div>

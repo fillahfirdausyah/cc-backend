@@ -40,14 +40,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {      
-        // $id = $request->id;
+        $this->validate($request, [
+            'content' => 'required',
+            'foto'    => 'mimes:jpeg,jpg,png,svg',
+       ]);
+
+       $imgName = 'null';
+
+        if($request->foto != null) {
+         $imgName = 'Post-' . time() . '.' . $request->foto->extension();
+         $request->foto->move(public_path('image/Member/Post'), $imgName);
+        }
 
         $post = new Post;
         $post->user_id  = Auth::user()->id;
         $post->content  = $request->content;
+        $post->foto = $imgName;
         $post->save();
 
-        return  response()->json('Success');
+        return  redirect('/member/home');
     }
 
     /**

@@ -24,7 +24,6 @@ class MemberController extends Controller
         })
         ->where('id', '!=', $user->id)->get();
         // dd($news);
-
         return view('member.Home', compact('post', 'news', 'region', 'friends'));
     }
 
@@ -38,8 +37,9 @@ class MemberController extends Controller
     public function galery() {
         $user = Auth::user();
         $userRegion = Auth::user()->region()->get();
+        $gallery = $user->post()->get();
 
-        return view('member.Galery', compact('user', 'userRegion'));
+        return view('member.Galery', compact('user', 'userRegion', 'gallery'));
     }
 
     public function friend($id) {

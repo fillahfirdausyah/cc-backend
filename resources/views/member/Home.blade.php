@@ -50,7 +50,7 @@
                         <div class="header-top-navigation">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="index.html">home</a></li>
+                                    <li class="active"><a href="{{ '/member/home/' }}">home</a></li>
                                     <li class="msg-trigger"><a class="msg-trigger-btn" href="#a">message</a>
                                         <div class="message-dropdown" id="a">
                                             <div class="dropdown-title">
@@ -408,7 +408,6 @@
                                         <img src="assets/images/icons/plane.png" alt="">
                                     </button>
                                 </div>
->>>>>>> 983d2ba6d2e3d142da90005565843c19458c6090
                             </div>
                         </li>
                         <li>
@@ -424,7 +423,6 @@
                             </div>
                         </li>
                     </ul>
->>>>>>> 983d2ba6d2e3d142da90005565843c19458c6090
                 </div>
                 <div class="mobile-header-profile">
                     <!-- profile picture end -->
@@ -548,9 +546,15 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form id="post-content" method="POST">
+                                            <form id="post-content" method="POST" action="{{ '/member/post/store/' }}" enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="modal-body custom-scroll">
                                                         <textarea name="content" class="share-field-big custom-scroll" placeholder="Katakan Sesuatu"></textarea>
+                                                        <label for="bukti">Upload Foto</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" name="foto" class="custom-file-input" id="customFile">
+                                                            <label class="custom-file-label" for="customFile">Pilih Foto</label>
+                                                        </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
@@ -566,7 +570,8 @@
                         <!-- share box end -->
 
                         @foreach ($post as $p)
-                        {{-- {{ dd($u->profile->foto_profile) }} --}}
+                        @if ($p->foto == 'null')
+                            {{-- {{ dd($u->profile->foto_profile) }} --}}
                         <!-- post status start -->
                         <div class="card">
                             <!-- post title start -->
@@ -635,6 +640,77 @@
                             </div>
                         </div>
                         <!-- post status end -->
+                        @else
+                        {{-- {{ dd($u->profile->foto_profile) }} --}}
+                        <!-- post status start -->
+                        <div class="card">
+                            <!-- post title start -->
+                            <div class="post-title d-flex align-items-center">
+                                <!-- profile picture end -->
+                                <div class="profile-thumb">
+                                    <a href="#">
+                                        <figure class="profile-thumb-middle">
+                                            <img src="{{ $p->user->profile->foto_profile }}" alt="profile picture">
+                                        </figure>
+                                    </a>
+                                </div>
+                                <!-- profile picture end -->
+
+                                <div class="posted-author">
+                                    <h6 class="author"><a href="profile.html">{{ $p->user->name }}</a></h6>
+                                    <span class="post-time">{{ \carbon\Carbon::parse($p->created_at)->diffForHumans() }}</span>
+                                </div>
+
+                                <div class="post-settings-bar">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <div class="post-settings arrow-shape">
+                                        <ul>
+                                            <li><button>copy link to adda</button></li>
+                                            <li><button>edit post</button></li>
+                                            <li><button>embed adda</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- post title start -->
+                            <div class="post-content">
+                                <p class="post-desc">
+                                    {{ $p->content }}
+                                </p>
+                                <div class="post-thumb-gallery">
+                                    <figure class="post-thumb img-popup">
+                                        <a href="{{ asset('image/Member/Post/'.$p->foto) }}">
+                                            <img src="{{ asset('image/Member/Post/'.$p->foto) }}" alt="post image">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="post-meta">
+                                    <button class="post-meta-like">
+                                        <i class="bi bi-heart-beat"></i>
+                                        <span>You and 201 people like this</span>
+                                        <strong>201</strong>
+                                    </button>
+                                    <ul class="comment-share-meta">
+                                        <li>
+                                            <button class="post-comment">
+                                                <i class="bi bi-chat-bubble"></i>
+                                                <span>41</span>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="post-share">
+                                                <i class="bi bi-share"></i>
+                                                <span>07</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- post status end -->
+                        @endif
                         @endforeach
 
                         <!-- post status start -->
@@ -1601,7 +1677,7 @@
     </footer> --}}
     <!-- footer area end -->
     <!-- footer area start -->
-    <footer class="d-block d-lg-none">
+    {{-- <footer class="d-block d-lg-none">
         <div class="footer-area reveal-footer">
             <div class="container">
                 <div class="row">
@@ -1709,7 +1785,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <!-- footer area end -->
 
     <!-- JS
@@ -1740,6 +1816,8 @@
  <!-- Main JS -->
  <script src="{{ asset('assets/vendor/adda/js/main.js') }}"></script>   
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+ {{-- Costume File --}}
+ <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script> 
 <script>
     $(document).ready(function () {
     $.ajaxSetup({
@@ -1753,30 +1831,34 @@
         $('#form-post').modal('show');
     });
 
-    if($('#form-post').length > 0) {
-        $('#post-content').validate({
-        submitHandler: function (form) {
-            let actionType = $('#tombol-post').val();
-            $('#tombol-post').html('Memposting....');
+    // if($('#form-post').length > 0) {
+    //     $('#post-content').validate({
+    //         submitHandler: function (form) {
+    //             let actionType = $('#tombol-post').val();
+    //             $('#tombol-post').html('Memposting....');
+    //             // let file = new FormData()
+    //             $.ajax({
+    //                 data: $('#post-content').serialize(),
+    //                 url:  '{{ '/member/post/store' }}',
+    //                 type: 'POST',
+    //                 dataType: 'json',
+    //                 success: function(data) {
+    //                     $('#post-content').trigger('reset');
+    //                     $('#form-post').modal('hide');
+    //                     $('#tombol-post').html('Post');
+    //                     location.reload();
+    //                 },
+    //                 error: function(data) {
+    //                     console.log('Error: ', data);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
 
-            $.ajax({
-                data: $('#post-content').serialize(),
-                url:  '{{ '/member/post/store' }}',
-                type: 'POST',
-                dataType: 'json',
-                success: function(data) {
-                    $('#post-content').trigger('reset');
-                    $('#form-post').modal('hide');
-                    $('#tombol-post').html('Post');
-                    location.reload();
-                },
-                error: function(data) {
-                    console.log('Error: ', data);
-                }
-            });
-        }
+    $(document).ready(function () {
+        bsCustomFileInput.init();
     });
-    }
 </script>
 
 </body>

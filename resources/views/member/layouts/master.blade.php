@@ -228,11 +228,11 @@
 
                     <div class="col-md-2">
                         <!-- brand logo start -->
-                        <div class="brand-logo text-center">
+                        {{-- <div class="brand-logo text-center">
                             <a href="index.html">
                                 <img src="assets/images/logo/logo.png" alt="brand logo">
                             </a>
-                        </div>
+                        </div> --}}
                         <!-- brand logo end -->
                     </div>
 
