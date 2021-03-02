@@ -101,6 +101,7 @@ Route::get('/member/home', 'MemberController@index')->middleware('auth');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman/{id}', 'MemberController@friend');
+Route::get('/member/home/teman/{id}', 'MemberController@homefriend');
 Route::get('/member/profile', 'MemberController@profile');
 
 // // DetailMember

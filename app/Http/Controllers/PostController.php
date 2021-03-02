@@ -58,7 +58,7 @@ class PostController extends Controller
         $post->foto = $imgName;
         $post->save();
 
-        return  redirect('/member/home');
+        return  redirect()->back();
     }
 
     /**

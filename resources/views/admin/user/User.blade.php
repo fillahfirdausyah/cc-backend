@@ -40,32 +40,34 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $d)
+                    @foreach ($data as $d) 
                         <tr>
                             <td>{{ $d->name }}</td>
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
                             <td>
-                              @if ($d->email_verified_at == null)
-                                  Belum Terverifikasi
-                                  <a href="{{ '/admin/user/verify/' }}{{ $d->id }}">
-                                    <i class="fas fa-check" style="color: green"></i>
-                                  </a>
+                              @if ($d->email_verified_at !== null)
+                              <span class="badge badge-success">Terverifikasi</span>
                               @else
-                                  Sudah Terverifikasi
+                              <span class="badge badge-danger">Belum Terverifikasi</span>
                               @endif
                             </td>
                             <td>
-                                <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
-                                  <i class="fas fa-edit" style="color: green"></i>
-                                </a>
-                                 | 
-                                <a href="{{ '/admin/user/delete/'}}{{ $d->id }}" id="confirm" onclick="aksi({{$d->id}})">
-                                  <i class="fas fa-trash-alt" style="color: red"></i>
-                                </a>
+                              @if ($d->email_verified_at !== null)
+                              <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
+                                <i class="fas fa-edit" style="color: green"></i>
+                              </a>
+                               | 
+                              <a href="{{ '/admin/user/delete/'}}" id="confirm" onclick="aksi({{$d->id}})">
+                                <i class="fas fa-trash-alt" style="color: red"></i>
+                              </a>
+                              @else
+                              <a href="{{ '/admin/user/verify/' }}{{ $d->id }}" title="Verivikasi">
+                                <i class="fas fa-user-check" style="color: green"></i>
+                              </a>
+                              @endif
                             </td>
                         </tr>
-                        
                     @endforeach
               
                     </tbody>
@@ -84,7 +86,7 @@
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
 @endpush
 
 @push('js-page')

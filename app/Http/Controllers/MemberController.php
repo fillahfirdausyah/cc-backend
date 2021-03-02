@@ -14,17 +14,13 @@ use App\Models\CommentPost;
 class MemberController extends Controller
 {
     public function index() {
-        $id = 2;
         $user = Auth::user();
+        $userRegion = Auth::user()->region()->get();
         $post = Post::with('user')->latest()->get();
         $news = News::all();
         $region = Auth::user()->region()->get();
-        $friends = User::whereHas('region', function($q) use($id){
-            $q->where('region_id', $id);
-        })
-        ->where('id', '!=', $user->id)->get();
-        // dd($news);
-        return view('member.Home', compact('post', 'news', 'region', 'friends'));
+
+        return view('member.Home', compact('post', 'news', 'region'));
     }
 
     public function about() {
@@ -42,15 +38,20 @@ class MemberController extends Controller
         return view('member.Galery', compact('user', 'userRegion', 'gallery'));
     }
 
-    public function friend($id) {
+    public function friend(Request $request, $id) {
+
+
         $user = Auth::user();
         $region = Region::all();
         $userRegion = Auth::user()->region()->get();
         $friends = User::whereHas('region', function($q) use($id){
                         $q->where('region_id', $id);
-                    })
-                    ->where('id', '!=', $user->id)->get();
-                    
+                    })->where('id', '!=', $user->id)->get();
+
+        if($request->ajax()) {
+            return $friends->load('profile');
+        }
+
         return view('member.Friend', compact('user', 'userRegion', 'friends', 'region'));
     }
 

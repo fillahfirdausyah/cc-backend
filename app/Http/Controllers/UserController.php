@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-
+use App\Models\Profile;
 class UserController extends Controller
 {
     /**
@@ -126,6 +126,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->email_verified_at = date('Y-m-d, H:i:s');
         $user->save();
+
+        $profile = new Profile;
+        $profile->user_id = $id;
+        $profile->save();
 
         return redirect('/admin/user/list')->with('success', 'User Terverifikasi');
     }

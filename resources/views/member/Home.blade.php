@@ -1236,7 +1236,7 @@
                                         @foreach ($region as $r)
                                         <li class="unorder-list">
                                             <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">{{ $r->region }}</a></h3>
+                                                <h3 class="list-title"><a href="" class="region-friend" data-regid={{ $r->id }}>{{ $r->region }}</a></h3>
                                             </div>
                                         </li>
                                         @endforeach
@@ -1244,39 +1244,10 @@
                                 </div>
                             </div>
                             <!-- widget single item end -->
-
-                            <!-- widget single item start -->
                             <div class="card widget-item">
                                 <h4 class="widget-title">Friends Zone</h4>
                                 <div class="widget-body">
-                                    <ul class="like-page-list-wrapper">
-                                        @foreach ($friends as $f)
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src="{{ $f->profile->foto_profile }}" alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">{{ $f->name }}</a></h3>
-                                                @if(Cache::has('is_online' . $f->id))
-                                                    <p style="color: green;">Online</p>
-                                                @else
-                                                    <p>Offline</p>
-                                                    {{ \Carbon\Carbon::parse($f->last_seen)->diffForHumans() }}
-                                                @endif
-                                            </div>
-                                            <button class="like-button">
-                                                <img class="heart" src="assets/images/icons/heart.png" alt="">
-                                                <img class="heart-color" src="assets/images/icons/heart-color.png" alt="">
-                                            </button>
-                                        </li>
-                                        @endforeach
+                                    <ul class="like-page-list-wrapper teman">
                                     </ul>
                                 </div>
                             </div>
@@ -1830,6 +1801,48 @@
     $('#modal-first').click(function() {
         $('#form-post').modal('show');
     });
+
+    $('.region-friend').on('click', function(event) {
+        event.preventDefault();
+        const regId = event.target.dataset['regid'];
+
+        $.ajax({
+            type: 'GET',
+            url: '{{ '/member/teman/' }}' + regId,
+            success: function(data) {
+                $('.teman').html("");
+                $.each(data, function(key, val) {
+                    let time = val.last_seen;
+                    let userID = val.id;
+                    console.log(time);
+                    $('.teman').append(`
+                        <li class="unorder-list">
+                            <!-- profile picture end -->
+                            <div class="profile-thumb">
+                                <a href="#">
+                                    <figure class="profile-thumb-small">
+                                        <img src="${val.profile.foto_profile}" alt="profile picture">
+                                    </figure>
+                                </a>
+                            </div>
+                            <!-- profile picture end -->
+
+                            <div class="unorder-list-info">
+                                <h3 class="list-title"><a href="#">${val.name}</a></h3>
+                                @if(Cache::has('is_online' . 2))
+                                    <p style="color: green;">Online</p>
+                                @else
+                                    <p>Offline</p> 
+                                @endif
+                            </div>
+                        </li>
+                    `)
+                })
+            }
+        });
+    });
+
+   
 
     // if($('#form-post').length > 0) {
     //     $('#post-content').validate({

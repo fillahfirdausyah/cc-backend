@@ -53,7 +53,7 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img src="{{ $f->foto_profile }}" alt="profile picture">
+                                            <img src="{{ $f->profile->foto_profile }}" alt="profile picture">
                                         </figure>
                                     </a>
                                 </div>
