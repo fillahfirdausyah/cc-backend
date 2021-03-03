@@ -477,7 +477,7 @@
 
         <div class="main-wraper">
             <!-- profile banner area start -->
-            <div class="profile-banner-large bg-img" data-bg="{{ asset($user->profile->foto_sampul) }}">
+            <div class="profile-banner-large bg-img" data-bg="{{ asset('image/Member/Profile/'.$user->profile->foto_sampul) }}">
             </div>
             <!-- profile banner area end -->
 

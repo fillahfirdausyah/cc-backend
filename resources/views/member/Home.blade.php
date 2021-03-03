@@ -506,7 +506,7 @@
                                 <div class="profile-banner">
                                     <figure class="profile-banner-small">
                                         <a href="{{ '/member/profile/' }}">
-                                            <img src="{{ Auth::user()->profile->foto_sampul }}" alt="">
+                                            <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_sampul) }}" alt="">
                                         </a>
                                         <a href="{{ '/member/profile/' }}" class="profile-thumb-2">
                                             <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" alt="">
