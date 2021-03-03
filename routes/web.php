@@ -106,8 +106,8 @@ Route::get('/member/profile', 'MemberController@profile');
 Route::get('/member/profile/details', 'MemberController@profile_details');
 Route::post('/member/edit/profile/{id}', 'MemberController@editProfile');
 
-// // DetailMember
-Route::get('/member/details/{username}', 'DetailMemberController@detail');
+// DetailMember
+Route::get('/member/profile/{username}', 'DetailMemberController@friendDetail');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');

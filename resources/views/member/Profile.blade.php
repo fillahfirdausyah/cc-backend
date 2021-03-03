@@ -59,7 +59,7 @@
                                 <p>{{ $user->profile->bio }}</p>
                                 <ul class="author-into-list">
                                     <li><a href="#"><i class="bi bi-office-bag"></i>{{ $user->profile->pekerjaan }}</a></li>
-                                    {{-- <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li> --}}
+                                    <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li>
                                     <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $user->profile->alamat }}</a></li>
                                     <li><a href="#"><i class="bi bi-heart-beat"></i>{{ $user->profile->hobi }}</a></li>
                                 </ul>
@@ -147,6 +147,7 @@
                 </div>
                 <!-- share box end -->
                 @foreach ($post as $p)
+                @if ($p->foto == 'null')
                 <!-- post status start -->
                 <div class="card" id="card-post">
                     <!-- post title start -->
@@ -155,7 +156,7 @@
                         <div class="profile-thumb">
                             <a href="#">
                                 <figure class="profile-thumb-middle">
-                                    <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
+                                    <img src="{{ asset('image/Member/Profile/'.$p->user->profile->foto_profile) }}" alt="profile picture">
                                 </figure>
                             </a>
                         </div>
@@ -188,7 +189,7 @@
                             <button class="post-meta-like" data-postid="{{ $p->id }}">
                                 <i class="bi bi-heart-beat"></i>
                                 <span class="countLike-{{ $p->id }}">{{ $like->where('post_id', $p->id)->count() }}</span>
-                                <strong>207</strong>
+                                <strong class="countLike-{{ $p->id }}">{{ $like->where('post_id', $p->id)->count() }}</strong>
                             </button>
                             <ul class="comment-share-meta">
                                 <li>
@@ -248,6 +249,74 @@
                     
                 </div>
                 <!-- post status end -->
+                @else 
+                <div class="card">
+                    <!-- post title start -->
+                    <div class="post-title d-flex align-items-center">
+                        <!-- profile picture end -->
+                        <div class="profile-thumb">
+                            <a href="#">
+                                <figure class="profile-thumb-middle">
+                                    <img src="{{ asset('image/Member/Profile/'.$p->user->profile->foto_profile) }}" alt="profile picture">
+                                </figure>
+                            </a>
+                        </div>
+                        <!-- profile picture end -->
+
+                        <div class="posted-author">
+                            <h6 class="author"><a href="{{ '/member/profile/' }}">{{ $p->user->name }}</a></h6>
+                            <span class="post-time">{{ \carbon\Carbon::parse($p->created_at)->diffForHumans() }}</span>
+                        </div>
+
+                        <div class="post-settings-bar">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <div class="post-settings arrow-shape">
+                                <ul>
+                                    <li><button>Copy link post</button></li>
+                                    <li><button onclick="editPost({{ $p->id }})">edit post</button></li>
+                                    <li><button onclick="hapusPost({{ $p->id }})">Hapus</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- post title start -->
+                    <div class="post-content">
+                        <p class="post-desc">
+                            {{ $p->content }}
+                        </p>
+                        <div class="post-thumb-gallery">
+                            <figure class="post-thumb img-popup">
+                                <a href="{{ asset('image/Member/Post/'.$p->foto) }}">
+                                    <img src="{{ asset('image/Member/Post/'.$p->foto) }}" alt="post image">
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="post-meta">
+                            <button class="post-meta-like" data-postid="{{ $p->id }}">
+                                <i class="bi bi-heart-beat"></i>
+                                <span class="countLike-{{ $p->id }}">{{ $like->where('post_id', $p->id)->count() }}</span>
+                                <strong class="countLike-{{ $p->id }}">{{ $like->where('post_id', $p->id)->count() }}</strong>
+                            </button>
+                            <ul class="comment-share-meta">
+                                <li>
+                                    <button class="post-comment">
+                                        <i class="bi bi-chat-bubble"></i>
+                                        <span>41</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="post-share">
+                                        <i class="bi bi-share"></i>
+                                        <span>07</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 @endforeach
             </div>
         </div>{{-- End container --}}

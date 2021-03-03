@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/bootstrap.min.css') }}">
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/bicon.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Flat Icon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/flaticon.css') }}">
     <!-- audio & video player CSS -->
@@ -226,11 +228,11 @@
 
                     <div class="col-md-2">
                         <!-- brand logo start -->
-                        <div class="brand-logo text-center">
+                        {{-- <div class="brand-logo text-center">
                             <a href="index.html">
                                 <img src="assets/images/logo/logo.png" alt="brand logo">
                             </a>
-                        </div>
+                        </div> --}}
                         <!-- brand logo end -->
                     </div>
 
@@ -250,17 +252,17 @@
                                 <div class="profile-thumb-small">
                                     <a href="javascript:void(0)" class="profile-triger">
                                         <figure>
-                                            <img src="{{ asset($auth->foto_profile) }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                     <div class="profile-dropdown">
                                         <div class="profile-head">
-                                            <h5 class="name"><a href="{{ '/member/home/' }}">{{ $auth->name }}</a></h5>
-                                            <a class="mail" href="#">{{ $auth->email }}</a>
+                                            <h5 class="name"><a href="#">{{ $user->name }}</a></h5>
+                                            <a class="mail" href="#">{{ $user->email }}</a>
                                         </div>
                                         <div class="profile-body">
                                             <ul>
-                                                <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
+                                                <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                             </ul>
@@ -435,17 +437,17 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ asset($auth->foto_profile) }}" alt="profile picture" class="rounded">
+                                <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture" class="rounded">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
                             <div class="profile-head">
-                                <h5 class="name"><a href="{{ '/member/home/' }}">{{ $auth->name }}</a></h5>
-                                <a class="mail" href="#">{{ $auth->email }}</a>
+                                <h5 class="name"><a href="#">{{ $user->name }}</a></h5>
+                                <a class="mail" href="#">{{ $user->email }}</a>
                             </div>
                             <div class="profile-body">
                                 <ul>
-                                    <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a></li>
+                                    <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                 </ul>
@@ -475,7 +477,7 @@
 
         <div class="main-wraper">
             <!-- profile banner area start -->
-            <div class="profile-banner-large bg-img" data-bg="{{ asset($user->foto_sampul) }}">
+            <div class="profile-banner-large bg-img" data-bg="{{ asset('image/Member/Profile/'.$user->profile->foto_sampul) }}">
             </div>
             <!-- profile banner area end -->
 
@@ -483,24 +485,25 @@
             <div class="profile-menu-area secondary-navigation-style bg-white">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-2 col-md-2">
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
                                     <a href="profile.html">
-                                        <img src="{{ asset($user->foto_profile) }}" alt="profile picture">
+                                        <img src="{{ asset('image/Member/Profile/'.$friends[0]->profile->foto_profile) }}" alt="profile picture">
                                     </a>
                                 </figure>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 offset-lg-1">
+                        <div class="col-lg-7 col-md-7 offset-lg-1">
                             <div class="profile-menu-wrapper">
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li><a href="{{ '/member/' }}{{ $user->username }}">Timeline</a></li>
-                                            <li><a href="{{ '/member/tentang/' }}{{ $user->username }}">Tentang</a></li>
-                                            <li><a href="{{ '/member/galery/' }}{{ $user->username }}">Galery</a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
+                                            <li><a href="{{ '/dashboard' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
+                                            <li><a href="{{ '/member/profile/details/' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
+                                            <li><a href="{{ '/member/galery' }}" title="Gallery"><i class="fas fa-lg fa-images"></i></a></li>
+                                            <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>
+                                            {{-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> --}}
                                         </ul>
                                     </nav>
                                 </div>
@@ -509,7 +512,6 @@
                     </div>
                 </div>
             </div>
-            <!-- profile menu area end -->
 
             @include('sweetalert::alert')
             @yield('content')
@@ -527,8 +529,8 @@
     <script src="{{ asset('assets/vendor/adda/js/vendor/jquery-3.3.1.min.js') }}"></script>
     <!-- Popper JS -->
     <script src="{{ asset('assets/vendor/adda/js/vendor/popper.min.js') }}"></script>
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/vendor/adda/js/vendor/bootstrap.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Slick Slider JS -->
     <script src="{{ asset('assets/vendor/adda/js/plugins/slick.min.js') }}"></script>
     <!-- nice select JS -->

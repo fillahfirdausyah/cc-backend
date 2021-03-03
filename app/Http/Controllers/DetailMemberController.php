@@ -10,16 +10,15 @@ use App\Models\User;
 
 class DetailMemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
+    public function friendDetail($username) {
+        
+        $user    = Auth::user();
+        $friends = User::where('username', $username)->get();
+        $data    = User::find($friends[0]->id);
+        $post    = $data->post()->get();
+        $like    = $data->like();
 
-    public function detail($username) {
-        $auth = Auth::user();
-        $user = User::where('username', $username)->first();
-        $post = $auth->post()->get();
-
-        return view('member.Detail', compact('user', 'post', 'auth'));
+        return view('member.Detail', compact('user', 'friends', 'post', 'like'));
     }
 }
