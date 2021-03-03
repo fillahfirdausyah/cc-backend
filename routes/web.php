@@ -103,6 +103,8 @@ Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman/{id}', 'MemberController@friend');
 Route::get('/member/home/teman/{id}', 'MemberController@homefriend');
 Route::get('/member/profile', 'MemberController@profile');
+Route::get('/member/profile/details', 'MemberController@profile_details');
+Route::post('/member/edit/profile/{id}', 'MemberController@editProfile');
 
 // // DetailMember
 Route::get('/member/details/{username}', 'DetailMemberController@detail');

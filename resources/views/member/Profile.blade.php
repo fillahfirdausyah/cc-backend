@@ -78,7 +78,7 @@
                         <div class="profile-thumb">
                             <a href="#">
                                 <figure class="profile-thumb-middle">
-                                    <img src="{{ $user->profile->foto_profile }}" alt="profile picture">
+                                    <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture">
                                 </figure>
                             </a>
                         </div>

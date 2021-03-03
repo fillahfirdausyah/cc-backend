@@ -20,8 +20,8 @@ class CreateProfilesTable extends Migration
             $table->string('pekerjaan')->default('-');
             $table->string('alamat')->default('-');
             $table->string('hobi')->default('-');
-            $table->string('foto_profile')->default('/image/Member/Profile/profile.png');
-            $table->string('foto_sampul')->default('/image/Member/Profile/sampul.jpeg');
+            $table->string('foto_profile')->default('profile.png');
+            $table->string('foto_sampul')->default('sampul.jpeg');
             $table->timestamps();
         });
     }

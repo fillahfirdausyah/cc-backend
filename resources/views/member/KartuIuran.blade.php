@@ -9,7 +9,7 @@
     <div class="container">
         <div class="d-flex justify-content-center">
             <div class="col-lg-9">
-                <div class="about-description">
+              <div class="about-description" style="background-color: transparent">
                     <div class="tab-content">
                         <div class="card tab-pane fade active show" id="one">
                             <div class="work-zone">

@@ -251,7 +251,7 @@
                                 <div class="profile-thumb-small">
                                     <a href="javascript:void(0)" class="profile-triger">
                                         <figure>
-                                            <img src="{{ Auth::user()->profile->foto_profile }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                     <div class="profile-dropdown">
@@ -429,7 +429,7 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ Auth::user()->profile->foto_profile }}" alt="profile picture">
+                                <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" alt="profile picture">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
@@ -458,7 +458,44 @@
     <!-- header area end -->
 
     <main>
-
+        @if ($userRegion->count() <= 0)
+             {{-- Modal Region --}}
+        <div class="modal fade" id="modalRegion" aria-labelledby="add-iuran">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pilih Region</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/member/daerah/new" method="post">
+                      @csrf
+                      <input type="hidden" name="uid" value="{{ Auth::user()->id }}">
+                        <div class="modal-body custom-scroll">
+                            <center>
+                                <h2>Hallo Selamat Datang</h2>
+                                <p>Anda belum memiliki region, silahkan pilih region anda terlebih dahulu</p>
+                            </center>
+                            <br>
+                          <div class="form-group">
+                            <select name="region" class="form-control" id="kategori">
+                                @foreach($region as $r)
+                                <option value="{{ $r->id }}">{{ $r->region }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="post-share-btn" data-dismiss="modal">cancel</button>
+                            <button type="submit" class="post-share-btn" id="tombol-post">tambah</button>
+                        </div>
+                   </form>
+                </div>
+            </div>
+          </div>
+        {{-- End Modal Region --}}
+        @endif
         <div class="main-wrapper pt-80">
             <div class="container">
                 <div class="row">
@@ -472,7 +509,7 @@
                                             <img src="{{ Auth::user()->profile->foto_sampul }}" alt="">
                                         </a>
                                         <a href="{{ '/member/profile/' }}" class="profile-thumb-2">
-                                            <img src="{{ Auth::user()->profile->foto_profile }}" alt="">
+                                            <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" alt="">
                                         </a>
                                     </figure>
                                     <div class="profile-desc text-center">
@@ -521,7 +558,7 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img src="{{ Auth::user()->profile->foto_profile }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                 </div>
@@ -580,14 +617,18 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img src="{{ $p->user->profile->foto_profile }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.$p->user->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
 
                                 <div class="posted-author">
-                                    <h6 class="author"><a href="profile.html">{{ $p->user->name }}</a></h6>
+                                    @if ($p->user->name == Auth::user()->name)
+                                    <h6 class="author"><a href="{{ '/member/profile/' }}">{{ $p->user->name }}</a></h6>
+                                    @else
+                                    <h6 class="author"><a href="{{ '/member/profile/' }}{{ $p->user->username }}">{{ $p->user->name }}</a></h6>
+                                    @endif
                                     <span class="post-time">{{ \carbon\Carbon::parse($p->created_at)->diffForHumans() }}</span>
                                 </div>
 
@@ -650,14 +691,18 @@
                                 <div class="profile-thumb">
                                     <a href="#">
                                         <figure class="profile-thumb-middle">
-                                            <img src="{{ $p->user->profile->foto_profile }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.$p->user->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
 
                                 <div class="posted-author">
-                                    <h6 class="author"><a href="profile.html">{{ $p->user->name }}</a></h6>
+                                    @if ($p->user->name == Auth::user()->name)
+                                    <h6 class="author"><a href="{{ '/member/profile/' }}">{{ $p->user->name }}</a></h6>
+                                    @else
+                                    <h6 class="author"><a href="{{ '/member/profile/' }}{{ $p->user->username }}">{{ $p->user->name }}</a></h6>
+                                    @endif
                                     <span class="post-time">{{ \carbon\Carbon::parse($p->created_at)->diffForHumans() }}</span>
                                 </div>
 
@@ -1233,7 +1278,7 @@
                                 <h4 class="widget-title">Daerah</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        @foreach ($region as $r)
+                                        @foreach ($userRegion as $r)
                                         <li class="unorder-list">
                                             <div class="unorder-list-info">
                                                 <h3 class="list-title"><a href="" class="region-friend" data-regid={{ $r->id }}>{{ $r->region }}</a></h3>
@@ -1257,7 +1302,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- Scroll to top start -->
@@ -1790,7 +1834,12 @@
  {{-- Costume File --}}
  <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script> 
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
+    $('#modalRegion').modal('show')
+
+    $('#kategori').removeAttr('style')
+    $('.nice-select').hide()
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1814,14 +1863,14 @@
                 $.each(data, function(key, val) {
                     let time = val.last_seen;
                     let userID = val.id;
-                    console.log(time);
+                    console.log(val);
                     $('.teman').append(`
                         <li class="unorder-list">
                             <!-- profile picture end -->
                             <div class="profile-thumb">
                                 <a href="#">
                                     <figure class="profile-thumb-small">
-                                        <img src="${val.profile.foto_profile}" alt="profile picture">
+                                        <img src="{{ asset('image/Member/Profile/') }}/${val.profile.foto_profile}" alt="profile picture">
                                     </figure>
                                 </a>
                             </div>

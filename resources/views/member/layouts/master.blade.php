@@ -252,7 +252,7 @@
                                 <div class="profile-thumb-small">
                                     <a href="javascript:void(0)" class="profile-triger">
                                         <figure>
-                                            <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
+                                            <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture">
                                         </figure>
                                     </a>
                                     <div class="profile-dropdown">
@@ -437,7 +437,7 @@
                     <div class="profile-thumb profile-setting-box">
                         <a href="javascript:void(0)" class="profile-triger">
                             <figure class="profile-thumb-middle">
-                                <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture" class="rounded">
+                                <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture" class="rounded">
                             </figure>
                         </a>
                         <div class="profile-dropdown text-left">
@@ -489,7 +489,7 @@
                             <div class="profile-picture-box">
                                 <figure class="profile-picture">
                                     <a href="profile.html">
-                                        <img src="{{ asset($user->profile->foto_profile) }}" alt="profile picture">
+                                        <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="profile picture">
                                     </a>
                                 </figure>
                             </div>
@@ -500,28 +500,22 @@
                                     <nav>
                                         <ul class="main-menu">
                                             <li><a href="{{ '/dashboard' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
-                                            <li><a href="{{ '/member/tentang' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
+                                            <li><a href="{{ '/member/profile/details/' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
                                             <li><a href="{{ '/member/galery' }}" title="Gallery"><i class="fas fa-lg fa-images"></i></a></li>
+                                            <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>
                                             @if($userRegion->count() > 0)
                                             <li><a href="{{ '/member/teman/' }}{{ $userRegion[0]->id}}" title="Friends"><i class="fas fa-lg fa-users"></i></a></li>
-                                            @endif
-                                            <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>
                                             <li><a href="{{ '/member/kartu/iuran' }}" title="Dues Receipt"><i class="fas fa-lg fa-receipt"></i></a></li>
+                                            @endif
                                             {{-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> --}}
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
-                                <button class="edit-btn">edit profile</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <!-- profile menu area end -->
 
             @include('sweetalert::alert')
             @yield('content')
