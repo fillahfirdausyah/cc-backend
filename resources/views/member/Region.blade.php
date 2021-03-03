@@ -98,3 +98,10 @@
 </div>
 <!-- end region list section -->
 @endsection
+
+@push('js-page')
+<script>
+    // $('.swal2-shown').hide();
+</script>
+    
+@endpush
