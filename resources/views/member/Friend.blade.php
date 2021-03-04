@@ -59,7 +59,7 @@
                                 </div>
                                 <!-- profile picture end -->
                                 <div class="posted-author">
-                                    <h6 class="author"><a href="{{ '/member/details/' }}{{ $f->username }}">{{ $f->name }}</a></h6>
+                                    <h6 class="author"><a href="{{ '/member/profile/' }}{{ $f->username }}">{{ $f->name }}</a></h6>
                                     @if(Cache::has('is_online' . $f->id))
                                         <p style="color: green;">Online</p>
                                     @else

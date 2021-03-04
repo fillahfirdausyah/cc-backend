@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <div class="secondary-menu-wrapper secondary-menu-2 bg-white">
                     <div class="page-title-inner">
-                        <h4 class="page-title">photos (120)</h4>
+                        <h4 class="page-title">Foto {{ $friends[0]->name }}</h4>
                     </div>
                     <div class="filter-menu">
                         <button class="active" data-filter="*">all</button>

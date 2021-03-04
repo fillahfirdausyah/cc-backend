@@ -35,6 +35,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ '/dashboard' }}" class="nav-link">Home</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block"><a href="{{ '/member/home' }}" class="nav-link">Social Network</a></li>
     </ul>
 
     <!-- Right navbar links -->

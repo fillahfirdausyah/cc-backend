@@ -261,13 +261,23 @@
                                         </div>
                                         <div class="profile-body">
                                             <ul>
+                                                @if (Auth::user()->role == 'admin')
+                                                <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
+                                                @endif
                                                 <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                             </ul>
                                             <ul>
                                                 <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
-                                                <li><a href="signup.html"><i class="flaticon-unlock"></i>Sing out</a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <i class="flaticon-unlock"></i>Logout
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                      @csrf
+                                                    </form> 
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -439,13 +449,23 @@
                             </div>
                             <div class="profile-body">
                                 <ul>
+                                    @if (Auth::user()->role == 'admin')
+                                    <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
+                                    @endif
                                     <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
                                 </ul>
                                 <ul>
                                     <li><a href="#"><i class="flaticon-settings"></i>Setting</a></li>
-                                    <li><a href="signup.html"><i class="flaticon-unlock"></i>Sing out</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="flaticon-unlock"></i>Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                          @csrf
+                                        </form> 
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -872,11 +892,6 @@ $(document).ready(function () {
 
                             <div class="unorder-list-info">
                                 <h3 class="list-title"><a href="/member/profile/${val.username}">${val.name}</a></h3>
-                                @if(Cache::has('is_online' . 2))
-                                    <p style="color: green;">Online</p>
-                                @else
-                                    <p>Offline</p> 
-                                @endif
                             </div>
                         </li>
                     `)
