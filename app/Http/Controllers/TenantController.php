@@ -18,7 +18,8 @@ class TenantController extends Controller
     public function index()
     {
         $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->get();
-
+        $convSR = [];
+        $collectSR = [];
         $SR = SR::where('user_id', Auth::id())->get();
         if($SR != NULL){
             foreach ($SR as $sr) {
