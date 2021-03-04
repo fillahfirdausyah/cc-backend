@@ -59,7 +59,7 @@
             </form>
           @else
           <form>
-              <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
+              <input type="hidden" id="produk_id" value="{{ $SR->id }}">
               <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
               <input type="hidden" id="jenis" name="jenis" value="car">
               <button class="btn btn-primary" id="wishlist-button" type="submit" onclick="wishlist()"><i class="fa fa-heart"></i> Add to Wishlist </button>
