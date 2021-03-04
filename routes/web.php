@@ -120,50 +120,6 @@ Route::get('/post', 'PostController@index');
 
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');
-
-//tenant
-Route::middleware(['cektenant'])->group(function () { 
-	Route::get('/tenant', 'TenantController@index');
-	Route::get('/showroom/upload/autoshop', 'ShowroomController@createBengkel');
-	Route::Post('/showroom/upload/autoshop', 'ShowroomController@storeBengkel'); 
-});
-Route::get('/tenant/register', 'TenantController@create');
-Route::post('/tenant/register', 'TenantController@store');
-
-// Showroom
-Route::get('/showroom/upload/car', 'ShowroomController@create');
-Route::post('/showroom/upload/car', 'ShowroomController@store');
-Route::get('/showroom', 'ShowroomController@show');
-Route::post('/showroom/search', 'ShowroomController@search');
-Route::post('/showroom/category', 'ShowroomController@category');
-Route::post('/showroom/edit/{id}', 'ShowroomController@edit');
-Route::post('/showroom/edit/proccess/{id}', 'ShowroomController@update');
-Route::get('/showroom/promoSR/{id}', 'ShowroomController@createPromo');
-Route::post('/showroom/tambahPromo/{id}', 'ShowroomController@promo');
-Route::post('/showroom/stok/{id}', 'ShowroomController@stock');
-Route::get('/showroom/more/car', 'ShowroomController@moreCar');
-Route::delete('/showroom/car/{id}', 'ShowroomController@destroy');
-
-// Bengkel
-Route::get('/showroom/bengkel/promo/{id}', 'ShowroomController@createBengkelPromo');
-Route::post('/showroom/bengkel/promo/{id}', 'ShowroomController@BengkelPromo');
-Route::get('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
-Route::post('/showroom/bengkel/edit/{id}', 'ShowroomController@editBengkel');
-Route::delete('/showroom/bengkel/{id}', 'ShowroomController@destroyBengkel');
-Route::get('/showroom/autoshop', 'ShowroomController@moreBengkel');
-
-//Showroom Support
-Route::get('/showroom/car/{id}-{slug}', 'VisitSRController@show');
-Route::get('/showroom/car/like', 'VisitSRController@like');
-Route::post('/showroom/car/comment', 'VisitSRController@comment');
-Route::get('/showroom/autoshop/{id}-{slug}', 'VisitSRController@showBengkel');
-Route::post('/showroom/autoshop/comment', 'VisitSRController@comment_bengkel');
-Route::get('/showroom/autoshop/like', 'VisitSRController@likeBengkel');
-
-
-// Route::middleware(['cekpenjual'])->group(function () { 
-// });
-
 // Comment
 Route::post('/post/comment', 'CommentpostController@store');
 Route::delete('/post/comment/delete/{id}', 'CommentpostController@destroy');
@@ -180,9 +136,57 @@ Route::get('/member/daerah', 'CrossregionController@index');
 // Like
 Route::post('/member/post/like/{id}', 'PostController@like');
 
+
+// ############################################################## //
+
+//tenant
+Route::middleware(['cektenant'])->group(function () { 
+	Route::get('/tenant', 'TenantController@index');
+	Route::get('/showroom/upload/autoshop', 'AutoshopController@create');
+	Route::post('/showroom/upload/autoshop', 'AutoshopController@store');
+	Route::get('/showroom/upload/merchandise', 'MerchandiseController@create') ;
+	Route::post('/showroom/upload/merchandise', 'MerchandiseController@store') ;
 });
+	Route::get('/showroom/upload/car', 'ShowroomController@create');
+	Route::post('/showroom/upload/car', 'ShowroomController@store');
+Route::get('/tenant/register', 'TenantController@create');
+Route::post('/tenant/register', 'TenantController@store');
+
+// Showroom
+Route::get('/showroom', 'ShowroomController@index');
+Route::get('/showroom/cars', 'ShowroomController@show');
+Route::get('/showroom/car/{id}-{slug}', 'ShowroomController@detail');
+Route::get('/showroom/car/edit/{id}', 'ShowroomController@edit');
+Route::post('/showroom/car/edit', 'ShowroomController@update');
+Route::delete('/showroom/car/{id}', 'ShowroomController@destroy');
+Route::get('/showroom/car/like', 'ShowroomController@like');
+Route::post('/showroom/car/comment', 'ShowroomController@comment');
+Route::post('/showroom/car/stok/{id}', 'ShowroomController@stock');
+
+// Autoshop
+Route::get('/showroom/autoshop', 'AutoshopController@index');
+Route::get('/showroom/autoshop/{id}-{slug}', 'AutoshopController@show');
+Route::get('/showroom/autoshop/edit/{id}', 'AutoshopController@edit');
+Route::post('/showroom/autoshop/edit', 'AutoshopController@update');
+Route::delete('/showroom/autoshop/{id}', 'AutoshopController@destroy');
+Route::post('/showroom/autoshop/comment', 'AutoshopController@comment');
+Route::get('/showroom/autoshop/like', 'AutoshopController@like');
+
+
+// Merchandise
+Route::get('/showroom/merchandise', 'MerchandiseController@index');
+Route::get('/showroom/merchandise/{id}-{slug}', 'MerchandiseController@show');
+Route::get('/showroom/merchandise/edit/{id}', 'MerchandiseController@edit');
+Route::post('/showroom/merchandise/edit', 'MerchandiseController@update');
+Route::delete('/showroom/merchandise/{id}', 'MerchandiseController@destroy');
+});
+
+
+//wishlist
+Route::get('/showroom/wishlist', 'WishlistController@index');
+Route::post('/showroom/wishlist', 'WishlistController@store');
+
+// Route::get('api/login', 'Api\ApiController@login');
 
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
-
-// Route::get('api/login', 'Api\ApiController@login');

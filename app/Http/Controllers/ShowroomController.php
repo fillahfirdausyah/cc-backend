@@ -10,33 +10,19 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
-use App\Models\Bengkel;
 use App\Models\Region;
+use App\Models\Merchandise;
 use App\Models\SR;
+use App\Models\Like_SR;
 use App\Models\Comments_SR;
 
 
 class ShowroomController extends Controller
 {
-    public function show()
+    public function index()
     {
         $convSR = [];
         $collectSR = [];
-        $convB = [];
-        $collectB = [];
-
-        $bengkel = Bengkel::with('daerah')->take(9)->get();
-        if($bengkel != NULL){
-            foreach ($bengkel as $b) {
-                $convB[] = json_decode($b->gambar);
-            }
-
-            $count = count($convB);
-            for ($i=0; $i < $count; $i++) { 
-                $collectB[] = $convB[$i][0];
-            }
-        }
-
         $SR = SR::where('verified', 'yes')->take(20)->get();
         if($SR != NULL){
             foreach ($SR as $sr) {
@@ -49,9 +35,10 @@ class ShowroomController extends Controller
             }
         }
 
-        return view('showroom2.showroom', compact('bengkel','collectB','collectSR', 'SR'));
+        return view('showroom2.showroom', compact('collectSR', 'SR'));
     }
-    public function moreCar()
+
+    public function show()
     {
         $convSR = [];
         $collectCar = [];
@@ -68,6 +55,24 @@ class ShowroomController extends Controller
         }
 
         return view('showroom2.cars', compact('collectCar', 'SR'));
+    }
+
+    public function detail($id)
+    {
+        // Authenticated User
+        $user = Auth::user();
+        
+        //show picts
+        $SR = SR::find($id);
+        //Seller User
+        $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
+
+        // show like
+        // $like = Like_SR::select('like')->where('post_id', '=', $id)->get();
+        // $likes = count($like);
+
+        // return view('showroom2.car-details', compact('SR','comment', 'likes','recomendations','user'));
+        return view('showroom2.car-details', compact('SR', 'user', 'tenant'));
     }
 
     // Showroom
@@ -141,37 +146,25 @@ class ShowroomController extends Controller
         return redirect()->back()->with('status', 'data sudah berhasil ditambahkan!');
     }
 
-
-    public function search(Request $request)
-    {
-        $search = $request->get('query');
-        if ($search != "") {
-            $data = DB::table('show_room')->where('judul', 'LIKE', "%{$search}%")
-                ->take(5)->get();
-            $output = "<ul class='list-group'>";
-            foreach($data as $row)
-            {
-            $output .= "<a href='/showroom/".$row->id."-".$row->slug."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
-            }
-            $output .= ".</ul>";
-        }else{
-            $output = NULL;
-        }
-
-        return $output;
-    }
-
-    public function edit($id)
+    public function edit($id, SR $sr)
     {
         $SR = SR::find($id);
+        if (! Gate::allows('ud-sr', $SR)) {
+            abort(403);
+        }else {
         $user = Auth::user();
 
-        return view('showroom/editSR', compact('user', 'SR'));
+        return view('showroom2.edit-car', compact('user', 'SR'));
+        }
     }
 
-    public function update(Request $request, $id, SR $sr)
+    public function update(Request $request)
     {
-        if (! Gate::allows('update-sr', $sr)) {
+        $sr = SR::find($request->id);
+        if (! Gate::allows('ud-sr', $sr)) {
+            abort(403);
+        } 
+
         $input_data = $request->all();
 
         $validator = Validator::make($input_data, [
@@ -211,7 +204,7 @@ class ShowroomController extends Controller
             $name[] = $profileImage;
         }
 
-        $SR = SR::find($id);
+        $SR = SR::find($request->id);
         $SR->user_id = $request->user_id;
         $SR->judul = $request->judul;
         $SR->stok = $request->stok;
@@ -232,7 +225,72 @@ class ShowroomController extends Controller
 
         
         return redirect()->back()->with('status', 'data sudah berhasil di Edit!');
+    }
+
+    public function destroy($id)
+    {
+        $sr = SR::find($id);
+        if (! Gate::allows('ud-sr', $sr)) {
+            abort(403);
         }
+
+        $sr->delete();
+
+        return redirect('/showroom');
+    }
+
+    public function comment(Request $request)
+    {
+        $this->validate($request, [
+            'comment' => 'required'
+        ]);
+
+            $comment = new Comments_SR();
+            $comment->post_id = $request->id;
+            $comment->user_id = $request->user_id;
+            $comment->parent_id = $request->parent_id !='' ? $request->parent_id:NULL;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+        return redirect()->back();   
+    }
+
+    public function like(Request $request)
+    {
+        if (Like_SR::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'))->count() < 1) {
+            $like = new Like_SR();
+            $like->like = $request->get('like');
+            $like->user_id = $request->get('user_id');
+            $like->post_id = $request->get('post_id');
+            $like->save(); 
+        }else{
+            $like = Like_SR::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'));
+            $like->delete();
+        }
+
+        $like = Like_SR::select('like')->where('post_id', '=', $request->get('post_id'))->get();
+        $likes = count($like);
+
+        echo $likes;  
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('query');
+        if ($search != "") {
+            $data = DB::table('show_room')->where('judul', 'LIKE', "%{$search}%")
+                ->take(5)->get();
+            $output = "<ul class='list-group'>";
+            foreach($data as $row)
+            {
+            $output .= "<a href='/showroom/".$row->id."-".$row->slug."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
+            }
+            $output .= ".</ul>";
+        }else{
+            $output = NULL;
+        }
+
+        return $output;
     }
 
     public function createPromo($id)
@@ -275,177 +333,5 @@ class ShowroomController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
-    {
-        $SR = SR::find($id);
-        $SR->delete();
-
-        return redirect('/showroom');
-    }
-
-    // Bengkel
-    public function moreBengkel()
-    {
-        $convB = [];
-        $collectB = [];
-
-        $bengkel = Bengkel::with('daerah')->paginate(20);
-        if($bengkel != NULL){
-            foreach ($bengkel as $b) {
-                $convB[] = json_decode($b->gambar);
-            }
-
-            $count = count($convB);
-            for ($i=0; $i < $count; $i++) { 
-                $collectB[] = $convB[$i][0];
-            }
-        }
-        return view('showroom2.autoshops',compact('bengkel', 'collectB'));
-    }
-
-    public function createBengkel()
-    {
-        $user = Auth::id();
-        $region = Region::all();
-
-        return view('showroom2.upload-autoshop',compact('user', 'region'));
-    }
-
-    public function storeBengkel(Request $request)
-    {
-        $input_data = $request->all();
-
-        $validator = Validator::make($input_data, [
-            'nama' => 'required',
-            'user_id' => 'required',
-            'region_id' => 'required',
-            'kontak' => 'required | numeric | digits_between:10,13',
-            'waktu_buka' => 'required',
-            'waktu_tutup' => 'required',
-            'hari' => 'required',
-            'gambar' => 'required',
-            'gambar.*' => 'mimes:jpg,png,jpeg',
-            'alamat' => 'required | max:100',
-            'layanan' => 'required | max:200'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/showroom/upload/autoshop')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
-            $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
-            $file->move($destinationPath, $profileImage);
-            $name[] = $profileImage;
-        }
-
-        $bengkel = new Bengkel();
-        $bengkel->nama = $request->nama;
-        $bengkel->user_id = $request->user_id;
-        $bengkel->region_id = $request->region_id;
-        $bengkel->kontak = $request->kontak;
-        $bengkel->waktu_buka = $request->waktu_buka;
-        $bengkel->waktu_tutup = $request->waktu_tutup;
-        $bengkel->hari = $request->hari;
-        $bengkel->alamat = $request->alamat;
-        $bengkel->layanan = json_encode(explode(",", $request->layanan));
-        $bengkel->gambar = json_encode($name);
-        $bengkel->slug = Str::slug($request->nama, '-');
-        $bengkel->save();
-
-        return redirect()->back()->with('status', 'Data berhasil ditambahkan!');
-    }
-
-    public function createBengkelPromo($id)
-    {
-        $bengkel = Bengkel::find($id);
-
-        return view('showroom.PromoBengkel', compact('bengkel'));
-    }
-
-    public function BengkelPromo(Request $request, $id, SR $sr)
-    {
-        if (! Gate::allows('update-sr', $sr)) {
-            $input_data = $request->all();
-
-            $validator = Validator::make($input_data, [
-                'promo' => 'required | integer'
-            ]);
-
-            $bengkel = Bengkel::find($id);
-            $bengkel->promo = $request->promo;
-            $bengkel->save();
-
-            return redirect()->back()->with('success', 'Promo berhasil Ditambahkan silahkan kembali!');
-        }
-    } 
-
-    public function editBengkel($id) 
-    {
-        $user = Auth::id();
-        $bengkel = Bengkel::find($id);
-        $region = Region::all();
-
-        return view('/Showroom/uploadBengkel',compact('user', 'region', 'bengkel'));
-    }
-
-    public function updateBengkel(Request $request, $id)
-    {
-        $input_data = $request->all();
-
-        $validator = Validator::make($input_data, [
-            'nama' => 'required',
-            'user_id' => 'required',
-            'region_id' => 'required',
-            'kontak' => 'required | numeric | unique:App\Models\Bengkel,kontak | digits_between:10,13',
-            'waktu_buka' => 'required',
-            'waktu_tutup' => 'required',
-            'hari' => 'required',
-            'gambar' => 'required',
-            'gambar.*' => 'mimes:jpg,png,jpeg',
-            'alamat' => 'required | max:100',
-            'layanan' => 'required | max:300'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('/showroom/upload/autoshop')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
-            $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
-            $file->move($destinationPath, $profileImage);
-            $name[] = $profileImage;
-        }
-
-        $bengkel = Bengkel::find($id);
-        $bengkel->nama = $request->nama;
-        $bengkel->user_id = $request->user_id;
-        $bengkel->region_id = $request->region_id;
-        $bengkel->kontak = $request->kontak;
-        $bengkel->waktu_buka = $request->waktu_buka;
-        $bengkel->waktu_tutup = $request->waktu_tutup;
-        $bengkel->hari = $request->hari;
-        $bengkel->alamat = $request->alamat;
-        $bengkel->layanan = json_encode(explode(",", $request->layanan));
-        $bengkel->gambar = json_encode($name);
-        $bengkel->slug = Str::slug($request->nama, '-');
-        $bengkel->save();
-
-        return redirect()->back();
-    }
-
-    public function destroyBengkel($id)
-    {
-        $bengkel = Bengkel::find($id);
-        $bengkel->delete();
-
-        return redirect('/showroom');
-    }
 
 }

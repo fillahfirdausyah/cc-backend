@@ -1,4 +1,4 @@
-@extends('showroom2.layouts.visit')
+@extends('showroom2.layouts.master')
 
 @section('title', 'Cars')
     

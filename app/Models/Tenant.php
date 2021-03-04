@@ -12,6 +12,6 @@ class Tenant extends Model
     protected $table = 'tenant';
 
     public function user(){
-    	return $this->hasOne(User::class, 'user_id', 'id');
+    	return $this->belongsTo(User::class);
     }
 }

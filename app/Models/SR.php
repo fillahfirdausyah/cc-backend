@@ -39,5 +39,10 @@ class SR extends Model
     {
         return $this->hasMany(Like_SR::class, 'post_id');
     }
+ 
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'produk_id', 'id');
+    }
 
 }

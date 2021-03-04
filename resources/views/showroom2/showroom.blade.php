@@ -63,7 +63,7 @@
         <br>
 
         <div class="main-button text-center">
-            <a href="/showroom/more/car">View Cars</a>
+            <a href="/showroom/cars">View Cars</a>
         </div>
     </div>
 </section>

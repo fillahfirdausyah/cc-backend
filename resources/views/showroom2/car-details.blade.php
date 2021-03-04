@@ -1,6 +1,6 @@
-@extends('showroom2.layouts.visit')
+@extends('showroom2.layouts.master')
 
-@section('title', 'Car Details')
+@section('title', 'Cars Details')
     
 @section('content')
 <!-- ***** Call to Action Start ***** -->
@@ -50,7 +50,21 @@
         <br>
         <br>
         <div class="row justify-content-end mb-3">
-          <button class="btn btn-primary"> Add to Wishlist <i class="fa fa-love"></i></button>
+          @can('ud-sr', $SR)
+            <div><a href="{{ '/showroom/car/edit/'.$SR->id }}"><button class="btn btn-success">Edit</button></a></div>
+            <form action="{{ '/showroom/car/'.$SR->id }}" method="post">
+              @csrf
+              @method('delete')
+              <input type="submit" class="btn btn-danger" value="Delete">
+            </form>
+          @else
+          <form>
+              <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
+              <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
+              <input type="hidden" id="jenis" name="jenis" value="car">
+              <button class="btn btn-primary" id="wishlist-button" type="submit" onclick="wishlist()"><i class="fa fa-heart"></i> Add to Wishlist </button>
+          </form>
+          @endcan
         </div>
         <div class="row" id="tabs">
           <div class="col-lg-4">

@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
@@ -42,7 +43,7 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">CC<em> Showroom</em></a>
+                        <a href="/showroom" class="logo">CC<em> Showroom</em></a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
@@ -51,8 +52,8 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cars</a>
                               
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/showroom/more/car">Cars</a>
-                                    <a class="dropdown-item" href="/showroom/upload/car">Sell Cars</a>
+                                    <a class="dropdown-item" href="/showroom/cars">Cars</a>
+                                    <a class="dropdown-item" href="/showroom/upload/car">Sell Car</a>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -67,7 +68,7 @@
                                 </div>
                             </li>
                             <li><a href="/tenant">Tenant</a></li> 
-                            <li><a href="#">Wishlist</a></li> 
+                            <li><a href="/showroom/wishlist">Wishlist & Bookmarks</a></li> 
                             <li><a href="contact.html">Contact</a></li> 
                         </ul>        
                         <a class='menu-trigger'>
@@ -80,9 +81,9 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-
+    <div style="margin-top: 100px;">
     @yield('content')
-    
+    </div>
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
@@ -114,6 +115,28 @@
     
     <!-- Global Init -->
     <script src="{{ asset('assets/vendor/showroom/assets/js/custom.js') }}"></script>
+    
+    <script type="text/javascript">
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function wishlist(){
+        var user_id = $("#user_id").val();
+        var produk_id = $("#produk_id").val();
+        var jenis = $("#jenis").val();
+        $.ajax({
+          url:"/showroom/wishlist",
+          method:"POST",
+          data:{ jenis:jenis, user_id:user_id , produk_id:produk_id},
+          success: function(){
+            $("#wishlist-button").css("display", "none");
+          }
+        });
+    }
+    </script>
   </body>
 </html>

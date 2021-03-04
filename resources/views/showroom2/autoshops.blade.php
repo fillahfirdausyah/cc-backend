@@ -1,4 +1,4 @@
-@extends('showroom2.layouts.visit')
+@extends('showroom2.layouts.master')
 
 @section('title', 'Autoshops')
     
@@ -30,8 +30,8 @@
 
                         <p>
                             <i class="fa fa-location-arrow"></i> {{ $b->daerah->region }} &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_buka)->format('h:i')}}-
-                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_tutup)->format('h:i')}} &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_buka)->format('h:i A')}} -
+                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->waktu_tutup)->format('h:i A')}} &nbsp;&nbsp;&nbsp;
                         </p>
                     </div>
                 </div>
