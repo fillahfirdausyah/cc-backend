@@ -25,4 +25,9 @@ class Region extends Model
     {
         return $this->belongsTo(Bengkel::class);
     }
+
+    public function merchandise()
+    {
+        return $this->hasOne(Merchandise::class);
+    }
 }

@@ -31,4 +31,10 @@ class Bengkel extends Model
         return $this->hasMany(LikeBengkel::class, 'post_id');
     }
 
+
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'produk_id', 'id');
+    }
+
 }

@@ -74,6 +74,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Bengkel::class);
     }
+
+    public function merchandise()
+    {
+        return $this->hasOne(Merchandise::class);
+    }
       
     public function keuangan()
     {
@@ -83,5 +88,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profile() 
     {
         return $this->hasOne(Profile::class); 
+    }
+
+    public function tenant() 
+    {
+        return $this->hasOne(Tenant::class); 
+    }
+
+    public function wishlist() 
+    {
+        return $this->hasOne(Wishlist::class); 
     }
 }

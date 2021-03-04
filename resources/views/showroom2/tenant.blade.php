@@ -1,4 +1,4 @@
-@extends('showroom2.layouts.visit')
+@extends('showroom2.layouts.master')
 
 @section('title', 'Tenant-Dashboard')
 
@@ -19,7 +19,9 @@
 						<h5 class="card-title">Autoshop Review</h5>
 					    <p class="card-text"><h3>8</h3></p>
 					</div>
-					<a href="/showroom/upload/autoshop" class="card-link">Add Autoshop</a>
+                    <div class="main-button">
+                        <a href="/showroom/upload/autoshop" class="card-link">Add Autoshop</a>
+                    </div>
 					<!-- <a href="">Edit Autoshop</a> -->
 				</div>
 			</div>
@@ -29,7 +31,9 @@
 						<h5 class="card-title">Merchandise Total</h5>
 					    <p class="card-text"><h3>6</h3></p>
 					</div>
-					<a href="#" class="card-link">Add Merchandise</a>
+                    <div class="main-button">
+						<a href="/showroom/upload/merchandise" class="card-link">Add Merchandise</a>
+                    </div>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -38,7 +42,9 @@
 						<h5 class="card-title">Cars Total</h5>
 					    <p class="card-text"><h3>6</h3></p>
 					</div>
-					<a href="/showroom/upload/car" class="card-link">Sell Cars</a>
+                    <div class="main-button">
+						<a href="/showroom/upload/car" class="card-link">Sell Cars</a>
+                    </div>
 				</div>
 			</div>
 		</div>

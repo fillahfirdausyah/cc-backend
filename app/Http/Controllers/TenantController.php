@@ -39,7 +39,6 @@ class TenantController extends Controller
     public function create()
     {
         $user = Auth::user();
-
         return view('showroom2.tenant-register', compact('user'));
     }
 
