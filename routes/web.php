@@ -143,10 +143,10 @@ Route::middleware(['cektenant'])->group(function () {
 	Route::get('/showroom/upload/merchandise', 'MerchandiseController@create') ;
 	Route::post('/showroom/upload/merchandise', 'MerchandiseController@store') ;
 });
-	Route::get('/showroom/upload/car', 'ShowroomController@create');
-	Route::post('/showroom/upload/car', 'ShowroomController@store');
 Route::get('/tenant/register', 'TenantController@create');
 Route::post('/tenant/register', 'TenantController@store');
+Route::get('/showroom/upload/car', 'ShowroomController@create');
+Route::post('/showroom/upload/car', 'ShowroomController@store');
 
 // Showroom
 Route::get('/showroom', 'ShowroomController@index');

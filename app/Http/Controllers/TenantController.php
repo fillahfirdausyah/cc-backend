@@ -55,7 +55,7 @@ class TenantController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return redirect('/showroom/upload')
+                return redirect('/tenant/register')
                             ->withErrors($validator)
                             ->withInput();
             }
@@ -67,7 +67,7 @@ class TenantController extends Controller
             $t->telepon = $request->telepon;
             $t->save();
 
-            return redirect()->back();
+            return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');;
         } else {
             return redirect()->back()->with('status', 'Anda Sudah terdaftar sebagai tenant');
         }

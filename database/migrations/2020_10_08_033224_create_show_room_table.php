@@ -26,7 +26,6 @@ class CreateShowRoomTable extends Migration
             $table->string('kondisi');
             $table->integer('mesin');
             $table->year('tahun');
-            $table->string('pemakaian');
             $table->string('bahan_bakar');
             $table->integer('tenaga');
             $table->string('transmisi');
