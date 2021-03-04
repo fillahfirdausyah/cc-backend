@@ -105,9 +105,10 @@ Route::get('/member/home/teman/{id}', 'MemberController@homefriend');
 Route::get('/member/profile', 'MemberController@profile');
 Route::get('/member/profile/details', 'MemberController@profile_details');
 Route::post('/member/edit/profile/{id}', 'MemberController@editProfile');
-
 // DetailMember
 Route::get('/member/profile/{username}', 'DetailMemberController@friendDetail');
+Route::get('/member/profile/details/{username}', 'DetailMemberController@friendProfileDetails');
+Route::get('/member/galery/{username}', 'DetailMemberController@friendGallery');
 
 // Post
 Route::get('/member/post/index', 'PostController@index');

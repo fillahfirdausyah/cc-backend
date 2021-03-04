@@ -1,4 +1,4 @@
-@extends('member.layouts.master')
+@extends('member.layouts.detail')
 
 @section('title', 'Galery')
 
@@ -49,7 +49,7 @@
                                 <div class="photo-group active">
                                     <div class="gallery-toggle">
                                         <div class="gallery-overlay">
-                                            <img src="{{ asset('image/Member/Profile/'.$user->profile->foto_profile) }}" alt="Photo Gallery">
+                                            <img src="{{ asset('image/Member/Profile/'.$friends[0]->profile->foto_profile) }}" alt="Photo Gallery">
                                             <div class="view-icon"></div>
                                         </div>
                                         <div class="photo-gallery-caption">
