@@ -24,14 +24,13 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="section-heading">
-                    <h2><em>Autoshop</em></h2>
+                    <h2><em>Auto shop</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($bengkel as $item => $b)
+            @forelse($bengkel as $item => $b)
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
@@ -39,20 +38,28 @@
                     </div>
                     <div class="down-content">
                         <span>
-                            {{ $b->bengkel->hari }}
+                            {{ $b->autoshop->hari }}
                         </span>
-                        <a href="{{ '/showroom/autoshop/'.$b->bengkel->id.'-'.$b->bengkel->slug }}"><h4>{{ $b->nama }}</h4></a>
+                        <a href="{{ '/showroom/autoshop/'.$b->autoshop->id.'-'.$b->autoshop->slug }}"><h4>{{ $b->autoshop->nama }}</h4></a>
 
                         <p>
-                            <i class="fa fa-location-arrow"></i> {{ $b->bengkel->daerah->region }} &nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->bengkel->waktu_buka)->format('h:i A')}} -
-                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->bengkel->waktu_tutup)->format('h:i A')}} &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-location-arrow"></i> {{ $b->autoshop->daerah->region }} &nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-clock-o"></i> {{\Carbon\Carbon::createFromFormat('H:i:s',$b->autoshop->waktu_buka)->format('h:i A')}} -
+                            {{\Carbon\Carbon::createFromFormat('H:i:s',$b->autoshop->waktu_tutup)->format('h:i A')}} &nbsp;&nbsp;&nbsp;
                         </p>
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
+    @empty
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6 align-self-center">
+                <h3><i class="fa fa-dropbox fa-5x" aria-hidden="true"></i><em> Waduh Kosong Nih </em></h3>
+            </div>
+        </div>
+    </div>
+    @endforelse
     </div>
 </section>
 <!-- ***** AutoShops Ends ***** -->
@@ -65,12 +72,11 @@
                 <div class="section-heading">
                     <h2>Featured <em>Cars</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($SR as $item => $sr)
+            @forelse($SR as $item => $sr)
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
@@ -91,13 +97,16 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
-
-        <br>
-
-        <div class="main-button text-center">
+    @empty
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6 align-self-center">
+                <h3><i class="fa fa-dropbox fa-5x" aria-hidden="true"></i><em> Waduh Kosong Nih </em></h3>
+            </div>
         </div>
+    </div>
+    @endforelse
     </div>
 </section>
 <!-- ***** Cars End *****-->
@@ -110,12 +119,11 @@
                 <div class="section-heading">
                     <h2><em>Merchandise</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            @foreach($merchan as $item => $m)
+            @forelse($merchan as $item => $m)
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
@@ -123,7 +131,7 @@
                     </div>
                     <div class="down-content">
                         <span>
-                            <sup>Rp</sup>@convert($m->harga)
+                            <sup>Rp</sup>@convert($m->merchandise->harga)
                         </span>
 
                         <a href="{{ '/showroom/merchandise/'.$m->merchandise->id.'-'.$m->merchandise->slug }}"><h4>{{ $m->merchandise->nama_produk }}</h4></a>
@@ -136,14 +144,17 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
-
-        <br>
-
-        <div class="main-button text-center">
+    @empty
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6 align-self-center">
+                <h3><i class="fa fa-dropbox fa-5x" aria-hidden="true"></i><em> Waduh Kosong Nih </em></h3>
+            </div>
         </div>
     </div>
+    @endforelse
+    </div>   
 </section>
 <!-- ***** Merchandise End ***** -->
 @endsection

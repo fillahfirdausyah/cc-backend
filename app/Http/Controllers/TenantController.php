@@ -68,7 +68,7 @@ class TenantController extends Controller
             $t->telepon = $request->telepon;
             $t->save();
 
-            return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');;
+            return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');
         } else {
             return redirect()->back()->with('status', 'Anda Sudah terdaftar sebagai tenant');
         }

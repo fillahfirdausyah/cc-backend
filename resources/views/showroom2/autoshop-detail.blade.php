@@ -1,10 +1,10 @@
 @extends('showroom2.layouts.master')
 
-@section('title', 'Autoshop Details')
+@section('title', 'Auto shop Details')
     
 @section('content')
 <!-- ***** Call to Action Start ***** -->
-<section class="section section-bg" id="call-to-action" style="background-image: url({{ asset('assets/vendor/showroom/assets/images/banner-image-1-1920x500.jpg') }})">
+<section class="section section-bg" id="call-to-action" style="background-image: url('{{asset('assets/img/autoshop.jpg')}}')">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -25,23 +25,23 @@
         <br>
         <br>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">          
-            @foreach(json_decode($bengkel->gambar) as $sr)
-            <div class="carousel-item">
-              <img class="d-block w-100 active" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr) }}">
-            </div>
-            @endforeach
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+      <!-- Slideshow container -->
+      <div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        @foreach(json_decode($bengkel->gambar) as $b)
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 3</div>
+          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$b)}}" style="width:100%">
+          <div class="text">Caption Text</div>
         </div>
+        @endforeach
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
         
         <br>
         <br>
@@ -60,12 +60,19 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if($wishlist == NULL)
             <form>
-                <input type="hidden" id="produk_id" value="{{ $bengkel->id }}">
+                <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
                 <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
-                <input type="hidden" id="jenis" name="jenis" value="autoshop">
-                <button class="btn btn-primary" id="wishlist-button" type="submit" onclick="wishlist()"><i class="fa fa-heart"></i> Add to Wishlist </button>
+                <input type="hidden" id="jenis" name="jenis" value="merchandise">
+                <button class="btn btn-primary" id="wishlist-button" onclick="event.preventDefault(); wishlist();"><i class="fa fa-bookmark"></i> Bookmarks </button>
             </form>
+            @else
+            <form>
+                <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
+                <button class="btn btn-danger" id="btn_dalete_wishlist" onclick="event.preventDefault(); delete_wishlist()">Delete from Bookmarks</button>
+            </form>
+            @endif
           @endcan
         </div>
 

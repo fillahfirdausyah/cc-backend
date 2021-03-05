@@ -184,6 +184,7 @@ Route::delete('/showroom/merchandise/{id}', 'MerchandiseController@destroy');
 //wishlist
 Route::get('/showroom/wishlist', 'WishlistController@index');
 Route::post('/showroom/wishlist', 'WishlistController@store');
+Route::delete('/showroom/wishlist', 'WishlistController@destroy');
 
 Route::get('/pusher', function() {
 	return view('pusherTest');

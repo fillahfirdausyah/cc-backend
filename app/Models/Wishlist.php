@@ -23,7 +23,7 @@ class Wishlist extends Model
 
     public function autoshop()
     {
-    	return $this->belongsTo(Autoshop::class);
+    	return $this->belongsTo(Bengkel::class, 'produk_id', 'id');
     }
 
     public function merchandise()

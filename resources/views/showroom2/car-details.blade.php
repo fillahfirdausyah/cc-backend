@@ -26,27 +26,24 @@
         <br>
         <br>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              @foreach(json_decode($SR->gambar) as $sr)
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" alt="First slide">
-              </div>
-              @endforeach
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" alt="First slide">
-              </div>
-            </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+      <!-- Slideshow container -->
+      <div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        @foreach(json_decode($SR->gambar) as $sr)
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 3</div>
+          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" style="width:100%; height: auto;">
+          <div class="text">Caption Text</div>
         </div>
-        
+        @endforeach
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <br>
+
         <br>
         <br>
         <div class="row justify-content-end mb-3">
@@ -58,12 +55,21 @@
               <input type="submit" class="btn btn-danger" value="Delete">
             </form>
           @else
-          <form>
-              <input type="hidden" id="produk_id" value="{{ $SR->id }}">
-              <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
-              <input type="hidden" id="jenis" name="jenis" value="car">
-              <button class="btn btn-primary" id="wishlist-button" type="submit" onclick="wishlist()"><i class="fa fa-heart"></i> Add to Wishlist </button>
-          </form>
+            <div class="wishlist-container">
+              @if($wishlist == NULL)
+              <form>
+                  <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
+                  <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
+                  <input type="hidden" id="jenis" name="jenis" value="merchandise">
+                  <button class="btn btn-primary" id="wishlist-button" onclick="wishlist();"><i class="fa fa-heart"></i> Add to Wishlist </button>
+              </form>
+              @else
+              <form>
+                  <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
+                  <button class="btn btn-danger" id="btn_dalete_wishlist" onclick="delete_wishlist()">Delete from Wishlist</button>
+              </form>
+              @endif
+            </div>
           @endcan
         </div>
         <div class="row" id="tabs">

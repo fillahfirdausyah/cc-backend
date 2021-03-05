@@ -47,7 +47,7 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/showroom" class="active">Home</a></li>
+                            <li><a href="/showroom">Home</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cars</a>
                               
@@ -65,11 +65,29 @@
                                     <a class="dropdown-item" href="testimonials.html">Testimonials</a>
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
+                                    <a class="dropdown-item" href="contact.html">Contact</a>
                                 </div>
                             </li>
-                            <li><a href="/tenant">Tenant</a></li> 
                             <li><a href="/showroom/wishlist">Wishlist & Bookmarks</a></li> 
-                            <li><a href="contact.html">Contact</a></li> 
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu">
+                                    <div class="row">
+                                        <div>
+                                            <p class="dropdown-item active">{{
+                                                Auth::user()->name
+                                            }}<br>{{ Auth::user()->email}}</p>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="/tenant">Tenant</a>
+                                    <a class="dropdown-item" href="">Website</a>
+                                    <a class="dropdown-item" href="/member/home">Social Network</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                      @csrf
+                                    </form> 
+                                </div>
+                            </li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -81,7 +99,7 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-    <div style="margin-top: 100px;">
+    <div>
     @yield('content')
     </div>
     <!-- ***** Footer Start ***** -->
@@ -118,6 +136,39 @@
     
     <script type="text/javascript">
 
+    //--- Start slideshow --------------------------------// 
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+    }
+    
+    //--- End slideshow --------------------------------//
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -130,13 +181,26 @@
         var jenis = $("#jenis").val();
         $.ajax({
           url:"/showroom/wishlist",
-          method:"POST",
+          method:"post",
           data:{ jenis:jenis, user_id:user_id , produk_id:produk_id},
           success: function(){
             $("#wishlist-button").css("display", "none");
           }
         });
     }
+
+    function delete_wishlist(){
+        var wishlist_id = $("#wishlist_id").val();
+        $.ajax({
+          url:"/showroom/wishlist",
+          method:"delete",
+          data:{ wishlist_id:wishlist_id},
+          success: function(){
+            $("#btn_dalete_wishlist").css("display", "none");
+          }
+        });
+    }
+
     </script>
   </body>
 </html>

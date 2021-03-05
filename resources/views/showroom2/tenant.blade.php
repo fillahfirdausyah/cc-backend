@@ -3,8 +3,23 @@
 @section('title', 'Tenant-Dashboard')
 
 @section('content')
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <video autoplay muted loop id="bg-video">
+        <source src="{{ asset('assets/vendor/showroom/assets/images/video.mp4') }}" type="video/mp4" />
+    </video>
+
+    {{-- <img src="{{ asset('assets/vendor/showroom/assets/images/product-5-720x480.jpg') }}" id="bg-video" alt=""> --}}
+
+    <div class="video-overlay header-text">
+        <div class="caption">
+            <h2><em>Tenant</em> <br> Panel</h2>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner Area End ***** -->
 <div class="row ">
-	<div class="col-2 sticky">
+	<div class="col-2 fixed">
 		<a href="#autoShops" class="d-block btn"><span>Autoshops</span></a>
 		<a href="#cars" class="d-block btn"><span>Cars</span></a>
 		<a href="#merchandise" class="d-block btn"><span>Merchandise</span></a>
@@ -16,11 +31,11 @@
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Autoshop Review</h5>
+						<h5 class="card-title">Auto shop Review</h5>
 					    <p class="card-text"><h3>8</h3></p>
 					</div>
                     <div class="main-button">
-                        <a href="/showroom/upload/autoshop" class="card-link">Add Autoshop</a>
+                        <a href="/showroom/upload/autoshop" class="card-link">Add Auto shop</a>
                     </div>
 					<!-- <a href="">Edit Autoshop</a> -->
 				</div>
