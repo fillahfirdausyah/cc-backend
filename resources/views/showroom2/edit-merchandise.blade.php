@@ -3,7 +3,21 @@
 @section('title', 'Edit-merchandise')
 
 @section('content')
-
+<!-- ***** Call to Action Start ***** -->
+<section class="section section-bg" id="call-to-action" style="background-image: url('{{asset('assets/img/merchandise.jpg')}}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="cta-content">
+                    <br>
+                    <br>
+                    <h2><em>Merchandise</em></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Call to Action End ***** -->
 <div class="container">
 	<div class="row justify-content-center mb-3">
 		<h3>Edit Merchandise</h3>	

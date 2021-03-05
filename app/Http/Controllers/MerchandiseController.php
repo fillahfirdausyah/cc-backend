@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\Models\User;
 use App\Models\Merchandise;
+use App\Models\Wishlist;
 use App\Models\Region;
+use App\Models\User;
 
 class MerchandiseController extends Controller
 {
@@ -36,8 +37,12 @@ class MerchandiseController extends Controller
 	public function show($id)
 	{
 		$merchan = Merchandise::find($id)->with('user.tenant')->first();
+        $wishlist = Wishlist::where('produk_id', $id)
+                            ->where('user_id', Auth::id())
+                            ->where('jenis', 'merchandise')
+                            ->first();
 
-		return view('showroom2.merchandise-detail', compact('merchan'));
+		return view('showroom2.merchandise-detail', compact('merchan', 'wishlist'));
 	}
 
     public function create()

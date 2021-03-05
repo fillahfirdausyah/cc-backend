@@ -106,8 +106,9 @@ class WishlistController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        
+        $wishlist = Wishlist::find($request->wishlist_id);
+        $wishlist->delete();
     }
 }

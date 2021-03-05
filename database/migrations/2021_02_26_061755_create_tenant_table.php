@@ -15,10 +15,10 @@ class CreateTenantTable extends Migration
     {
         Schema::create('tenant', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->string('nama');
             $table->string('email')->unique();
-            $table->integer('telepon')->unique();
+            $table->bigInteger('telepon')->unique();
             $table->string('verified')->nullable();
             $table->timestamps();
         });

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\CommentBengkel;
 use App\Models\LikeBengkel;
+use App\Models\Wishlist;
 use App\Models\Bengkel;
 use App\Models\User;
 use App\Models\Region;
@@ -43,12 +44,16 @@ class AutoshopController extends Controller
 
         //show comment
         $comment = Bengkel::with(['comment','comment.child', 'comment.user'])->where('id', $id)->first();
+        $wishlist = Wishlist::where('produk_id', $id)
+                            ->where('user_id', Auth::id())
+                            ->where('jenis', 'autoshop')
+                            ->first();
 
         //show like
         $like = LikeBengkel::select('like')->where('post_id', '=', $id)->get();
         $likes = count($like);
 
-        return view('showroom2.autoshop-detail', compact( 'bengkel', 'comment', 'likes','user'));  
+        return view('showroom2.autoshop-detail', compact( 'bengkel', 'comment', 'likes', 'user', 'wishlist'));  
     }
 
     public function create()

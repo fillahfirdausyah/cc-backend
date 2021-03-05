@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use App\Models\User;
-use App\Models\Region;
+use Illuminate\Support\Str;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Models\Merchandise;
-use App\Models\SR;
-use App\Models\Like_SR;
 use App\Models\Comments_SR;
+use App\Models\Wishlist;
+use App\Models\Region;
+use App\Models\Like_SR;
+use App\Models\User;
+use App\Models\SR;
 
 
 class ShowroomController extends Controller
@@ -66,13 +67,12 @@ class ShowroomController extends Controller
         $SR = SR::find($id);
         //Seller User
         $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
+        $wishlist = Wishlist::where('produk_id', $id)
+                            ->where('user_id', Auth::id())
+                            ->where('jenis', 'car')
+                            ->first();
 
-        // show like
-        // $like = Like_SR::select('like')->where('post_id', '=', $id)->get();
-        // $likes = count($like);
-
-        // return view('showroom2.car-details', compact('SR','comment', 'likes','recomendations','user'));
-        return view('showroom2.car-details', compact('SR', 'user', 'tenant'));
+        return view('showroom2.car-details', compact('SR', 'user', 'tenant', 'wishlist'));
     }
 
     // Showroom

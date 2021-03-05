@@ -18,7 +18,8 @@ class TenantController extends Controller
     public function index()
     {
         $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->get();
-
+        $convSR = [];
+        $collectSR = [];
         $SR = SR::where('user_id', Auth::id())->get();
         if($SR != NULL){
             foreach ($SR as $sr) {
@@ -67,7 +68,7 @@ class TenantController extends Controller
             $t->telepon = $request->telepon;
             $t->save();
 
-            return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');;
+            return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');
         } else {
             return redirect()->back()->with('status', 'Anda Sudah terdaftar sebagai tenant');
         }

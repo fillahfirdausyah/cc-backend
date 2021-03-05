@@ -4,13 +4,39 @@
     
 @section('content')
 <section class="section" id="trainers">
+    <!-- ***** Call to Action Start ***** -->
+    <section class="section section-bg" id="call-to-action" style="background-image: url('{{asset('assets/img/merchandise.jpg')}}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="cta-content">
+                        <br>
+                        <br>
+                        <h2><em>Merchandise</em></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Call to Action End ***** -->
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="section-heading">
                     <h2><em>Merchandise</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                    <form>
+                        <div class="form-group">
+                            <div class="form-row justify-content-center">
+                                <div class="col-6">
+                                <input type="text" class="form-control" name="search" placeholder="Search">
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
