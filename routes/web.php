@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -186,7 +185,18 @@ Route::delete('/showroom/merchandise/{id}', 'MerchandiseController@destroy');
 Route::get('/showroom/wishlist', 'WishlistController@index');
 Route::post('/showroom/wishlist', 'WishlistController@store');
 
+Route::get('/pusher', function() {
+	return view('pusherTest');
+});
+
+// Test Pusher
+Route::get('test', function() {
+	event(new App\Events\MyEvent('Hello World'));
+	return 'even terkirim';
+});
+
 // Route::get('api/login', 'Api\ApiController@login');
 
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
+
