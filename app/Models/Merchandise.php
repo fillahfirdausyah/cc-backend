@@ -16,6 +16,11 @@ class Merchandise extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function comment()
+    {
+        return $this->hasMany(CommentMerchandise::class, 'post_id');
+    }
+
     public function region()
     {
     	return $this->belongsTo(Region::class);
@@ -25,4 +30,12 @@ class Merchandise extends Model
     {
         return $this->hasMany(Wishlist::class, 'produk_id', 'id');
     }
+
+    public static function boot() {
+        parent::boot();
+    
+        static::deleting(function($bengkel) {
+            $bengkel->wishlist()->delete();
+        });
+    } 
 }

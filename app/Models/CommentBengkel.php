@@ -10,7 +10,7 @@ class CommentBengkel extends Model
     use HasFactory;
 
     protected $table = 'comment_bengkel';
-    protected $fillable = ['comment', 'parent_id', 'post_id'];
+    protected $fillable = ['comment', 'post_id'];
 
     public function comment(){
     	return $this->belongsTo(Bengkel::class);

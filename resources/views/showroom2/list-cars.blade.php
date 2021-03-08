@@ -1,6 +1,6 @@
 @extends('showroom2.layouts.master')
 
-@section('title', 'Cars')
+@section('title', 'List-Cars')
     
 @section('content')
 <section class="section" id="trainers">
@@ -10,10 +10,6 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
-                        <br>
-                        <br>
-                        <h2><em>Cars</em></h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
                     </div>
                 </div>
             </div>
@@ -24,21 +20,8 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="section-heading">
-                    <h2>Featured <em>Cars</em></h2>
+                    <h2><em>Your Cars</em></h2>
                     <img src="{{ asset('assets/vendor/showroom/assets/images/line-dec.png') }}" alt="">
-                    <form action="/showroom/search/car" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <div class="form-row justify-content-center">
-                                <div class="col-6">
-                                <input type="text" class="form-control" name="search" placeholder="Search">
-                                </div>
-                                <div class="col-1">
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

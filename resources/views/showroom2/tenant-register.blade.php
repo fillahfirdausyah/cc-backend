@@ -40,8 +40,9 @@
 	<form action="/tenant/register" method="post">
 		@csrf
 		<input type="hidden" name="user_id" value="{{ $user->id }}">
+		<input type="hidden" name="nama" value="{{ $user->name }}">
 		<div class="form-group">
-			<input type="text" class="form-control" name="nama" value="{{ $user->name }}" disabled>
+			<input type="text" class="form-control" value="{{ $user->name }}" disabled>
 		</div>
 		<div class="form-group">
 			<div class="form-row">

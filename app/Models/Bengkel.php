@@ -23,7 +23,7 @@ class Bengkel extends Model
 
     public function comment()
     {
-        return $this->hasMany(CommentBengkel::class, 'post_id')->whereNull('parent_id');
+        return $this->hasMany(CommentBengkel::class, 'post_id');
     }
 
     public function like()
@@ -37,4 +37,12 @@ class Bengkel extends Model
         return $this->hasMany(Wishlist::class, 'produk_id', 'id');
     }
 
+    public static function boot() {
+        parent::boot();
+    
+        static::deleting(function($bengkel) {
+            $bengkel->comment()->delete();
+            $bengkel->wishlist()->delete();
+        });
+    } 
 }

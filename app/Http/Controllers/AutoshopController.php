@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -35,12 +36,11 @@ class AutoshopController extends Controller
         return view('showroom2.autoshops',compact('bengkel', 'collectB'));
     }
 
-    public function show($id)
+    public function show($id, $slug)
     {
         $user = Auth::user();
-
         //show picts
-        $bengkel = Bengkel::find($id);
+        $bengkel = Bengkel::find($id)->where('slug', $slug)->first();
 
         //show comment
         $comment = Bengkel::with(['comment','comment.child', 'comment.user'])->where('id', $id)->first();
@@ -189,6 +189,29 @@ class AutoshopController extends Controller
         return redirect('/showroom');
     }
 
+    public function search(Request $request)
+    {
+        $convB = [];
+        $collectB = [];
+        $search = $request->search;
+
+        $bengkel = Bengkel::whereHas('daerah', function(Builder $q) use($search){
+                        $q->where('region', 'LIKE', $search);
+                    })->orWhere('nama', 'LIKE', $search)
+                    ->paginate(20);
+
+        if($bengkel != NULL){
+            foreach ($bengkel as $b) {
+                $convB[] = json_decode($b->gambar);
+            }
+
+            $count = count($convB);
+            for ($i=0; $i < $count; $i++) { 
+                $collectB[] = $convB[$i][0];
+            }
+        }
+        return view('showroom2.autoshops',compact('bengkel', 'collectB'));
+    }
     public function createPromo($id)
     {
         $bengkel = Bengkel::find($id);
@@ -222,9 +245,16 @@ class AutoshopController extends Controller
             $comment = new CommentBengkel();
             $comment->post_id = $request->post_id;
             $comment->user_id = $request->user_id;
-            $comment->parent_id = $request->parent_id !='' ? $request->parent_id:NULL;
             $comment->comment = $request->comment;
             $comment->save();
+
+        return redirect()->back();   
+    } 
+
+    public function deleteComment($id)
+    {
+        $comment = CommentBengkel::find($id);
+        $comment->delete();
 
         return redirect()->back();   
     } 

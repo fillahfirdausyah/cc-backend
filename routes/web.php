@@ -138,6 +138,8 @@ Route::post('/member/post/like/{id}', 'PostController@like');
 //tenant
 Route::middleware(['cektenant'])->group(function () { 
 	Route::get('/tenant', 'TenantController@index');
+	Route::get('/tenant/edit/{id}', 'TenantController@edit');
+	Route::post('/tenant/edit', 'TenantController@update');
 	Route::get('/showroom/upload/autoshop', 'AutoshopController@create');
 	Route::post('/showroom/upload/autoshop', 'AutoshopController@store');
 	Route::get('/showroom/upload/merchandise', 'MerchandiseController@create') ;
@@ -156,8 +158,8 @@ Route::get('/showroom/car/edit/{id}', 'ShowroomController@edit');
 Route::post('/showroom/car/edit', 'ShowroomController@update');
 Route::delete('/showroom/car/{id}', 'ShowroomController@destroy');
 Route::get('/showroom/car/like', 'ShowroomController@like');
-Route::post('/showroom/car/comment', 'ShowroomController@comment');
-Route::post('/showroom/car/stok/{id}', 'ShowroomController@stock');
+Route::get('/showroom/list/car', 'ShowroomController@list');
+Route::post('/showroom/search/car', 'ShowroomController@search');
 
 // Autoshop
 Route::get('/showroom/autoshop', 'AutoshopController@index');
@@ -166,7 +168,9 @@ Route::get('/showroom/autoshop/edit/{id}', 'AutoshopController@edit');
 Route::post('/showroom/autoshop/edit', 'AutoshopController@update');
 Route::delete('/showroom/autoshop/{id}', 'AutoshopController@destroy');
 Route::post('/showroom/autoshop/comment', 'AutoshopController@comment');
+Route::delete('/showroom/autoshop/comment/{$id}', 'AutoshopController@deleteComment');
 Route::get('/showroom/autoshop/like', 'AutoshopController@like');
+Route::post('/showroom/search/autoshop', 'AutoshopController@search');
 
 
 // Merchandise
@@ -175,6 +179,8 @@ Route::get('/showroom/merchandise/{id}-{slug}', 'MerchandiseController@show');
 Route::get('/showroom/merchandise/edit/{id}', 'MerchandiseController@edit');
 Route::post('/showroom/merchandise/edit', 'MerchandiseController@update');
 Route::delete('/showroom/merchandise/{id}', 'MerchandiseController@destroy');
+Route::post('/showroom/merchandise/comment', 'MerchandiseController@comment');
+Route::post('/showroom/search/merchandise', 'MerchandiseController@search');
 });
 
 

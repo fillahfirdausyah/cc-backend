@@ -80,7 +80,7 @@
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
-                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectCar[$item]) }}" height="400">
+                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectSR[$item]) }}" height="400">
                     </div>
                     <div class="down-content">
                         <span>

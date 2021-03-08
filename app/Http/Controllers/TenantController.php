@@ -17,7 +17,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->get();
+        $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->first();
         $convSR = [];
         $collectSR = [];
         $SR = SR::where('user_id', Auth::id())->get();
@@ -40,16 +40,18 @@ class TenantController extends Controller
     public function create()
     {
         $user = Auth::user();
+        
         return view('showroom2.tenant-register', compact('user'));
     }
 
     public function store(Request $request)
     {
-        if (Tenant::where('user_id', $request->user_id != NULL)) {
+        $tenant = Tenant::where('user_id', $request->user_id)->first();
+        if ($tenant == NULL) {
             $input_data = $request->all();
 
             $validator = Validator::make($input_data, [
-                'nama' => 'required | min: 8',
+                'nama' => 'required',
                 'telepon' => 'required | numeric | digits_between: 10,13',
                 'email' => 'required | email',
                 'user_id' => 'required'
@@ -70,42 +72,47 @@ class TenantController extends Controller
 
             return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');
         } else {
-            return redirect()->back()->with('status', 'Anda Sudah terdaftar sebagai tenant');
+            return redirect()->back()->withErrors('Anda Sudah terdaftar sebagai tenant/Anda Belum diverifikasi oleh Admin');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tenant  $tenant
-     * @return \Illuminate\Http\Response
-     */
     public function show(Tenant $tenant)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tenant  $tenant
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tenant $tenant)
+    public function edit($id)
     {
-        //
-    }
+        $tenant = Tenant::find($id);
+        $user = Auth::user();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tenant  $tenant
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tenant $tenant)
+        return view('showroom2.edit-tenant', compact('tenant', 'user'));
+    }
+    public function update(Request $request)
     {
-        //
+        $input_data = $request->all();
+
+        $validator = Validator::make($input_data, [
+            'nama' => 'required',
+            'telepon' => 'required | numeric | digits_between: 10,13',
+            'email' => 'required | email',
+            'user_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/tenant/register')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $t = Tenant::find($request->id);
+        $t->nama = $request->nama;
+        $t->user_id = $request->user_id;
+        $t->email = $request->email;
+        $t->telepon = $request->telepon;
+        $t->save();
+
+        return redirect()->back()->with('status', 'Edit Berhasil!');
     }
 
     /**
