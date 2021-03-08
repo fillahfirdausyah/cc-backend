@@ -89,6 +89,8 @@ class ShowroomController extends Controller
         //show picts
         $SR = SR::find($id)->where('slug', $slug)->first();
 
+        dd(json_decode($SR->gambar));
+
         //Seller User
         $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)
@@ -143,7 +145,7 @@ class ShowroomController extends Controller
 
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'assets/vendor/showroom/assets/images/'; 
-            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').".".$file->extension();
+            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
@@ -223,7 +225,7 @@ class ShowroomController extends Controller
 
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'assets/vendor/showroom/assets/images/'; 
-            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').".".$file->extension();
+            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }

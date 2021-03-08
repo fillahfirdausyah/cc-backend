@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\User;
 use App\Models\Bengkel;
+use App\Models\Merchandise;
 use App\Models\Region;
 use App\Models\SR;
 use App\Models\Comments_SR;
@@ -19,7 +21,14 @@ class TenantController extends Controller
     {
         $tenant = Tenant::where('user_id', Auth::id())->where('verified', 'yes')->first();
         $convSR = [];
-        $collectSR = [];
+        $collectSR = [];        
+        $convB = [];
+        $collectB = [];
+        $convM = [];
+        $collectM = [];
+
+
+
         $SR = SR::where('user_id', Auth::id())->get();
         if($SR != NULL){
             foreach ($SR as $sr) {
@@ -32,9 +41,36 @@ class TenantController extends Controller
             }
         }
 
-        $bengkel = Bengkel::where('user_id', Auth::id())->get();
+        $bengkel = Bengkel::whereHas('user', function(Builder $q){
+                        $q->where('user_id', Auth::id());
+                    })->get();
+        if($bengkel != NULL){
+            foreach ($bengkel as $b) {
+                $convB[] = json_decode($b->gambar);
+            }
 
-        return view('showroom2.tenant', compact('tenant', 'SR', 'collectSR', 'bengkel'));
+            $count = count($convB);
+            for ($i=0; $i < $count; $i++) { 
+                $collectB[] = $convB[$i][0];
+            }
+        }
+
+        $merchan = Merchandise::whereHas('user', function(Builder $q){
+                        $q->where('user_id', Auth::id());
+                    })->get();
+        if($merchan != NULL){
+            foreach ($merchan as $m) {
+                 $convM[] = json_decode($m->gambar);
+            }
+
+            $count = count($convM);
+            for ($i=0; $i < $count; $i++) { 
+                $collectM[] = $convM[$i][0];
+            }
+        }
+
+
+        return view('showroom2.tenant', compact('tenant', 'SR', 'collectSR', 'bengkel', 'collectB', 'merchan', 'collectM'));
     }
 
     public function create()
