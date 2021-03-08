@@ -2,14 +2,16 @@
 
 namespace App\Providers;
 
-use App\Policies\ShowroomPolicy;
-use App\Models\SR;
-use App\Models\Bengkel;
-use App\Models\Merchandise;
-use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Policies\ShowroomPolicy;
 use Laravel\Passport\Passport;
+use App\Models\CommentMerchandise;
+use App\Models\CommentBengkel;
+use App\Models\Merchandise;
+use App\Models\Bengkel;
+use App\Models\User;
+use App\Models\SR;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -44,7 +46,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('ud-merchan', function (User $user, Merchandise $merchandise) {
             return $user->id === $merchandise->user_id;
-        });        
+        });     
 
+        Gate::define('delcommer', function (User $user, Merchandise $merchandise) {
+            return $user->id === $merchandise->comment->user_id;
+        });   
     }
 }

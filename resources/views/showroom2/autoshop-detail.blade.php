@@ -61,16 +61,19 @@
                 </div>
             @endif
             @if($wishlist == NULL)
-            <form>
-                <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
-                <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
-                <input type="hidden" id="jenis" name="jenis" value="merchandise">
-                <button class="btn btn-primary" id="wishlist-button" onclick="event.preventDefault(); wishlist();"><i class="fa fa-bookmark"></i> Bookmarks </button>
+            <form action="/showroom/wishlist" method="post">
+              @csrf
+                <input type="hidden" id="produk_id" name="produk_id" value="{{ $bengkel->id }}">
+                <input type="hidden" id="user_id" name="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
+                <input type="hidden" id="jenis" name="jenis" value="autoshop">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-bookmark"></i> Add to Bookmark</button>
             </form>
             @else
-            <form>
+            <form action="/showroom/wishlist" method="post">
+              @method('delete')
+              @csrf
                 <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
-                <button class="btn btn-danger" id="btn_dalete_wishlist" onclick="event.preventDefault(); delete_wishlist()">Delete from Bookmarks</button>
+                <button class="btn btn-primary"><i class="fa fa-trash"></i> Delete from Bookmark</button>
             </form>
             @endif
           @endcan
@@ -133,6 +136,10 @@
                     <div class="col-sm-6">
                         <label>E-mail</label>
                         <p><a href="#">{{ $bengkel->user->tenant->email }}</a></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Nomor Telepon</label>
+                      <p>{{ $bengkel->kontak }}</p>
                     </div>
                 </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Models\CommentMerchandise;
 use App\Models\Merchandise;
 use App\Models\Wishlist;
 use App\Models\Region;
@@ -34,15 +35,17 @@ class MerchandiseController extends Controller
 		return view('showroom2.merchandise', compact('merchan', 'collectM'));
 	}
 
-	public function show($id)
+	public function show($id, $slug)
 	{
-		$merchan = Merchandise::find($id)->with('user.tenant')->first();
+		$merchan = Merchandise::find($id)->where('slug', $slug)->with('user.tenant')->first();
+        $comment = merchandise::with(['comment', 'comment.user'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)
                             ->where('user_id', Auth::id())
                             ->where('jenis', 'merchandise')
                             ->first();
+        $user = Merchandise::find($id)->user()->first();
 
-		return view('showroom2.merchandise-detail', compact('merchan', 'wishlist'));
+		return view('showroom2.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment'));
 	}
 
     public function create()
@@ -169,4 +172,51 @@ class MerchandiseController extends Controller
         return redirect('/showroom');
     }
 
+    public function search(Request $request)
+    {        
+        $convM = [];
+        $collectM = [];
+
+        $search = $request->search;
+
+        $merchan = Merchandise::where('nama_produk', 'LIKE', $search)->orWhere('kategori', 'LIKE', $search)->paginate(20);
+        if($merchan != NULL){
+            foreach ($merchan as $m) {
+                 $convM[] = json_decode($m->gambar);
+            }
+
+            $count = count($convM);
+            for ($i=0; $i < $count; $i++) { 
+                $collectM[] = $convM[$i][0];
+            }
+        }
+
+        return view('showroom2.merchandise', compact('merchan', 'collectM'));
+
+    }
+    public function comment(Request $request)
+    {
+        $this->validate($request, [
+            'comment' => 'required'
+        ]);
+
+            $comment = new CommentMerchandise();
+            $comment->post_id = $request->post_id;
+            $comment->user_id = $request->user_id;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+        return redirect()->back();   
+    } 
+
+    public function deleteComment($id)
+    {
+        $comment = CommentMerchandise::find($id);
+        if (! Gate::allows('del-commerc', $comment)) {
+            abort(403);
+        }
+        $comment->delete();
+
+        return redirect()->back();   
+    } 
 }

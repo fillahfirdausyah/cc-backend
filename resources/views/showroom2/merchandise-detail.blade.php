@@ -56,16 +56,19 @@
           </form>
           @else
             @if($wishlist == NULL)
-            <form>
-                <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
-                <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
+            <form action="/showroom/wishlist" method="post">
+              @csrf
+                <input type="hidden" id="produk_id" name="produk_id" value="{{ $merchan->id }}">
+                <input type="hidden" id="user_id" name="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
                 <input type="hidden" id="jenis" name="jenis" value="merchandise">
-                <button class="btn btn-primary" id="wishlist-button" onclick="event.preventDefault(); wishlist();"><i class="fa fa-heart"></i> Add to Wishlist </button>
+                <button class="btn btn-primary" type="submit"><i class="fa fa-heart"></i> Add to Wishlist </button>
             </form>
             @else
-            <form>
+            <form action="/showroom/wishlist" method="post">
+              @method('delete')
+              @csrf
                 <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
-                <button class="btn btn-danger" id="btn_dalete_wishlist" onclick="event.preventDefault(); delete_wishlist()">Delete from Wishlist</button>
+                <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> Delete from Wishlist</button>
             </form>
             @endif
           @endcan
@@ -111,15 +114,26 @@
                 <h4>Kontak</h4>
 
                 <div class="row">   
+
                     <div class="col-sm-6">
                         <label>Nama</label>
-
                         <p>{{ $merchan->user->tenant->nama  }} </p>
                     </div>
+
                     <div class="col-sm-6">
                         <label>E-mail</label>
-                        <p><a href="#">{{ $merchan->user->tenant->email }}</a></p>
+                        <p>{{ $merchan->user->tenant->email }}</p>
                     </div>
+
+                    <div class="col-sm-6">
+                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label>Telepon</label>
+                      <p>{{ $merchan->user->tenant->telepon }}</p>
+                    </div>
+
                 </div>
 
               </article>
@@ -128,7 +142,31 @@
               <article id='tabs-3'>
                 <h4>Ulasan</h4>
 
-                <p>lalala</p>
+                <div class="row">
+                  @foreach($comment->comment as $c)
+                   <div class="col-sm-12">
+                        <label>{{ $c->user->name }}</label>
+                   
+                        <p>{{ $c->comment}}</p>
+                        <form action="{{ '/showroom/merchandise/comment/'.$c->id}}" method="post">
+                          @method('delete')
+                          @csrf
+                        <button class="btn-sm btn-danger">Delete</button>
+                        </form>
+                   </div>
+                   @endforeach
+                   <div class="col-sm-12">
+                    <hr>
+                      <form action="/showroom/merchandise/comment" method="post">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="post_id" value="{{ $merchan->id }}">
+                        <div class="form-group">
+                            <label>Tambahkan Ulasan</label>
+                            <textarea class="form-control" name="comment"></textarea>
+                        </div>
+                          <button class="btn btn-primary">Tambah</button>
+                      </form>
 
                    </div>
                 </div>

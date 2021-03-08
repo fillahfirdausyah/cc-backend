@@ -45,4 +45,11 @@ class SR extends Model
         return $this->hasMany(Wishlist::class, 'produk_id', 'id');
     }
 
+    public static function boot() {
+        parent::boot();
+    
+        static::deleting(function($bengkel) {
+            $bengkel->wishlist()->delete();
+        });
+    } 
 }

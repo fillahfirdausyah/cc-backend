@@ -58,13 +58,37 @@ class ShowroomController extends Controller
         return view('showroom2.cars', compact('collectCar', 'SR'));
     }
 
-    public function detail($id)
+    public function list()
     {
-        // Authenticated User
-        $user = Auth::user();
+
+        $convSR = [];
+        $collectCar = [];
+        $SR = SR::whereHas('user', function($q){
+            $q->where('user_id', Auth::id());
+        })->paginate(20);
+
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $convSR[] = json_decode($sr->gambar);
+            }
+
+            $count = count($convSR);
+            for ($i=0; $i < $count; $i++) { 
+                $collectCar[] = $convSR[$i][0];
+            }
+        }
+
+        return view('showroom2.list-cars', compact('collectCar', 'SR'));
+    }
+
+    public function detail($id, $slug)
+    {
+        // User
+        $user = SR::find($id)->user()->first();
         
         //show picts
-        $SR = SR::find($id);
+        $SR = SR::find($id)->where('slug', $slug)->first();
+
         //Seller User
         $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)
@@ -248,7 +272,6 @@ class ShowroomController extends Controller
             $comment = new Comments_SR();
             $comment->post_id = $request->id;
             $comment->user_id = $request->user_id;
-            $comment->parent_id = $request->parent_id !='' ? $request->parent_id:NULL;
             $comment->comment = $request->comment;
             $comment->save();
 
@@ -276,62 +299,23 @@ class ShowroomController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->get('query');
-        if ($search != "") {
-            $data = DB::table('show_room')->where('judul', 'LIKE', "%{$search}%")
-                ->take(5)->get();
-            $output = "<ul class='list-group'>";
-            foreach($data as $row)
-            {
-            $output .= "<a href='/showroom/".$row->id."-".$row->slug."'><li class='list-group-item text-center' style='width=200px;'>".$row->judul."</li></a>";
+        $convSR = [];
+        $collectCar = [];
+        $search = $request->search;
+
+        $SR = SR::where('judul', 'LIKE', $search)->orWhere('jenis', 'LIKE', $search)->paginate(20);
+
+        if($SR != NULL){
+            foreach ($SR as $sr) {
+                 $convSR[] = json_decode($sr->gambar);
             }
-            $output .= ".</ul>";
-        }else{
-            $output = NULL;
+
+            $count = count($convSR);
+            for ($i=0; $i < $count; $i++) { 
+                $collectCar[] = $convSR[$i][0];
+            }
         }
 
-        return $output;
+        return view('showroom2.cars', compact('collectCar', 'SR'));
     }
-
-    public function createPromo($id)
-    {
-        $SR = SR::find($id);
-
-        return view('showroom.PromoSR', compact('SR'));
-    }
-
-    public function promo(Request $request, $id, SR $sr)
-    {
-        if (! Gate::allows('update-sr', $sr)) {
-            $input_data = $request->all();
-
-            $validator = Validator::make($input_data, [
-                'promo' => 'required | integer'
-            ]);
-
-            $SR = SR::find($id);
-            $SR->promo = $request->promo;
-            $SR->save();
-
-            return redirect()->back()->with('success', 'Promo berhasil Ditambahkan silahkan kembali!');
-        }
-    }
-
-    public function stock(Request $request,$id)
-    {
-
-        $input_data = $request->all();
-
-        $validator = Validator::make($input_data, [
-            'stok' => 'required'
-        ]);
-
-        $SR = SR::find($id);
-        $SR->stok = $request->stok;
-        $SR->save();
-
-        return redirect()->back();
-    }
-
-
 }

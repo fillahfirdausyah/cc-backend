@@ -20,6 +20,11 @@
 <!-- ***** Main Banner Area End ***** -->
 <div class="row ">
 	<div class="col-2 fixed">
+		<h2><p class="d-block text-center">{{ $tenant->nama }}</p></h2>
+		<h2><p class="d-block text-center">{{ $tenant->email }}</p></h2>
+		<h2><p class="d-block text-center">{{ $tenant->telepon }}</p></h2>
+		<a href="{{ '/tenant/edit/'.$tenant->id }}" class="btn d-block btn-success">Edit</a>
+		<hr>
 		<a href="#autoShops" class="d-block btn"><span>Autoshops</span></a>
 		<a href="#cars" class="d-block btn"><span>Cars</span></a>
 		<a href="#merchandise" class="d-block btn"><span>Merchandise</span></a>
@@ -31,7 +36,7 @@
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Auto shop Review</h5>
+						<h5 class="card-title">Auto shop</h5>
 					    <p class="card-text"><h3>8</h3></p>
 					</div>
                     <div class="main-button">

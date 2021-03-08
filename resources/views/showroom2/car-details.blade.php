@@ -56,19 +56,22 @@
             </form>
           @else
             <div class="wishlist-container">
-              @if($wishlist == NULL)
-              <form>
-                  <input type="hidden" id="produk_id" value="{{ $merchan->id }}">
-                  <input type="hidden" id="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
-                  <input type="hidden" id="jenis" name="jenis" value="merchandise">
-                  <button class="btn btn-primary" id="wishlist-button" onclick="wishlist();"><i class="fa fa-heart"></i> Add to Wishlist </button>
-              </form>
-              @else
-              <form>
-                  <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
-                  <button class="btn btn-danger" id="btn_dalete_wishlist" onclick="delete_wishlist()">Delete from Wishlist</button>
-              </form>
-              @endif
+            @if($wishlist == NULL)
+            <form action="/showroom/wishlist" method="post">
+              @csrf
+                <input type="hidden" id="produk_id" name="produk_id" value="{{ $SR->id }}">
+                <input type="hidden" id="user_id" name="user_id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
+                <input type="hidden" id="jenis" name="jenis" value="car">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-heart"></i> Add to Wishlist </button>
+            </form>
+            @else
+            <form action="/showroom/wishlist" method="post">
+              @method('delete')
+              @csrf
+                <input type="hidden" id="wishlist_id" name="id" value="{{ $wishlist->id }}">
+                <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> Delete from Wishlist</button>
+            </form>
+            @endif
             </div>
           @endcan
         </div>
@@ -157,17 +160,47 @@
               </article>
               <article id='tabs-4'>
                 <h4>Kontak</h4>
+                <div class="row">                   
+                  @if( $tenant != NULL)
 
-                <div class="row">   
                     <div class="col-sm-6">
                         <label>Nama</label>
-
                         <p>{{ $tenant->name }}</p>
                     </div>
+
                     <div class="col-sm-6">
                         <label>E-mail</label>
-                        <p><a href="#">john@carsales.com</a></p>
+                        <p><a href="#">{{ $tenant->email }}</a></p>
                     </div>
+
+                    <div class="col-sm-6">
+                      <label>Social Network</label>
+                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label>Telepon</label>
+                      <p>{{ $tenant->telepon }}</p>
+                    </div>
+
+                  @else
+
+                    <div class="col-sm-6">
+                        <label>Nama</label>
+                        <p>{{ $user->name }}</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label>E-mail</label>
+                        <p><a href="#">{{ $user->email }}</a></p>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label>Social Network</label>
+                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                    </div>
+
+                    @endif
                 </div>
               </article>
             </section>

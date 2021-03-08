@@ -89,6 +89,8 @@ class WishlistController extends Controller
         $w->produk_id = $request->produk_id;
         $w->jenis = $request->jenis;
         $w->save();
+
+        return redirect()->back();    
     }
 
     public function show($id)
