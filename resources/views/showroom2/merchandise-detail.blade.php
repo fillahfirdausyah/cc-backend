@@ -151,7 +151,9 @@
                         <form action="{{ '/showroom/merchandise/comment/'.$c->id}}" method="post">
                           @method('delete')
                           @csrf
+                       @if ($c->user->id == Auth::id())
                         <button class="btn-sm btn-danger">Delete</button>
+                       @endif
                         </form>
                    </div>
                    @endforeach
@@ -159,7 +161,7 @@
                     <hr>
                       <form action="/showroom/merchandise/comment" method="post">
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="post_id" value="{{ $merchan->id }}">
                         <div class="form-group">
                             <label>Tambahkan Ulasan</label>

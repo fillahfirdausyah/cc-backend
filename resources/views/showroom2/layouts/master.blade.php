@@ -66,12 +66,12 @@
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
+                                    <a class="dropdown-item" href="/showroom/wishlist">Wishlist & Bookmarks</a>
                                 </div>
                             </li>
-                            <li><a href="/showroom/wishlist">Wishlist & Bookmarks</a></li> 
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i></a>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu mr-5">
                                     <div class="row">
                                         <div>
                                             <p class="dropdown-item active">{{
@@ -137,36 +137,42 @@
     
     <script type="text/javascript">
 
+    let slide = document.getElementById("slide-show");
+
+    console.log(slide);
+
+    slide.classList.add('active');
+
     //--- Start slideshow --------------------------------// 
 
-    var slideIndex = 1;
-    showSlides(slideIndex);
+    // var slideIndex = 1;
+    // showSlides(slideIndex);
 
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
+    // // Next/previous controls
+    // function plusSlides(n) {
+    //   showSlides(slideIndex += n);
+    // }
 
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
+    // // Thumbnail image controls
+    // function currentSlide(n) {
+    //   showSlides(slideIndex = n);
+    // }
 
-    function showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-    }
+    // function showSlides(n) {
+    //   var i;
+    //   var slides = document.getElementsByClassName("mySlides");
+    //   var dots = document.getElementsByClassName("dot");
+    //   if (n > slides.length) {slideIndex = 1}
+    //   if (n < 1) {slideIndex = slides.length}
+    //   for (i = 0; i < slides.length; i++) {
+    //       slides[i].style.display = "none";
+    //   }
+    //   for (i = 0; i < dots.length; i++) {
+    //       dots[i].className = dots[i].className.replace(" active", "");
+    //   }
+    //   slides[slideIndex-1].style.display = "block";
+    //   dots[slideIndex-1].class += " active";
+    // }
     
     //--- End slideshow --------------------------------//
 

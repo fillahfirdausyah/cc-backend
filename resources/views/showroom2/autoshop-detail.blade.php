@@ -48,7 +48,7 @@
 
         <div class="row justify-content-end mb-3">
           @can('ud-bengkel', $bengkel)
-          <div><a href="{{ '/showroom/autoshop/edit/'.$bengkel->id }}"><button class="btn btn-success">Edit</button></a></div>
+          <div><a href="{{ '/showroom/autoshop/edit/'.$bengkel->id }}"><button class="btn btn-primary mr-2">Edit</button></a></div>
           <form action="{{ '/showroom/autoshop/'.$bengkel->id }}" method="post">
             @csrf
             @method('delete')

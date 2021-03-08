@@ -89,8 +89,6 @@ class ShowroomController extends Controller
         //show picts
         $SR = SR::find($id)->where('slug', $slug)->first();
 
-        dd(json_decode($SR->gambar));
-
         //Seller User
         $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)

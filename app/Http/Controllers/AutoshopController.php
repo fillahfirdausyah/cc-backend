@@ -43,7 +43,7 @@ class AutoshopController extends Controller
         $bengkel = Bengkel::find($id)->where('slug', $slug)->first();
 
         //show comment
-        $comment = Bengkel::with(['comment','comment.child', 'comment.user'])->where('id', $id)->first();
+        $comment = Bengkel::with(['comment', 'comment.user'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)
                             ->where('user_id', Auth::id())
                             ->where('jenis', 'autoshop')

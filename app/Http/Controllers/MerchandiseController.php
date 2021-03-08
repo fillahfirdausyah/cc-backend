@@ -212,9 +212,9 @@ class MerchandiseController extends Controller
     public function deleteComment($id)
     {
         $comment = CommentMerchandise::find($id);
-        if (! Gate::allows('del-commerc', $comment)) {
-            abort(403);
-        }
+        // if (! Gate::allows('del-commerc', $comment)) {
+        //     abort(403);
+        // }
         $comment->delete();
 
         return redirect()->back();   

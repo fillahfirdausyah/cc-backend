@@ -19,7 +19,7 @@
     </div>
 </section>
 <!-- ***** Call to Action End ***** -->
-<div class="container">
+<div class="container mt-3">
 	<div class="row justify-content-center mb-3">
 		<h3>Upload Mobil</h3>	
 	</div>
@@ -39,7 +39,7 @@
 	    </div>
 	@endif
 	
-	<form action="/showroom/upload/car" method="post" enctype="multipart/form-data">
+	<form action="{{ '/showroom/upload/car' }}" method="post" enctype="multipart/form-data">
 		@csrf
 
 		<input type="hidden" name="stok" value="Tersedia">
@@ -121,7 +121,7 @@
 	</form>
 </div>
 	<br>
-<div class="row">
+<div class="container">
 		<h3>Syarat & Ketentuan Berjualan di Showroom CC</h3>
 		<br>
 		<br>

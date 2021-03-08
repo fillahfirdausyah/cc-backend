@@ -45,6 +45,14 @@ class DatabaseSeeder extends Seeder
 
         User::insert($user);
 
+        User::find(1)->profile()->create([
+            'user_id' => 2,
+            'bio'     => 'Saya Pecinta Kucing',
+            'pekerjaan' => 'Programmer',
+            'alamat'    => 'Waringin Sari',
+            'hobi'      => 'Update Tech',
+        ]);
+        
         User::find(2)->profile()->create([
             'user_id' => 2,
             'bio'     => 'Saya Pecinta Kucing',
@@ -52,7 +60,14 @@ class DatabaseSeeder extends Seeder
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);
-
+        
+        User::find(3)->profile()->create([
+            'user_id' => 2,
+            'bio'     => 'Saya Pecinta Kucing',
+            'pekerjaan' => 'Programmer',
+            'alamat'    => 'Waringin Sari',
+            'hobi'      => 'Update Tech',
+        ]);
 
         User::find(1)->region()->create([
             'region' => 'Ponorogo'

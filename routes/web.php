@@ -184,6 +184,7 @@ Route::post('/showroom/merchandise/edit', 'MerchandiseController@update');
 Route::delete('/showroom/merchandise/{id}', 'MerchandiseController@destroy');
 Route::post('/showroom/merchandise/comment', 'MerchandiseController@comment');
 Route::post('/showroom/search/merchandise', 'MerchandiseController@search');
+Route::get('/showroom/merchandise/comment/{id}', 'MerchandiseController@deleteComment');
 });
 
 

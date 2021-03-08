@@ -18,7 +18,7 @@ class CreateTenantTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('nama');
             $table->string('email')->unique();
-            $table->bigInteger('telepon')->unique();
+            $table->string('telepon')->unique();
             $table->string('verified')->nullable();
             $table->timestamps();
         });

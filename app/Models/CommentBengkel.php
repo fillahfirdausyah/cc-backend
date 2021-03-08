@@ -20,14 +20,4 @@ class CommentBengkel extends Model
     {
     	return $this->hasOne(User::class,'id', 'user_id');
     }
-
-    public function child()
-    {
-        return $this->hasMany(CommentBengkel::class, 'parent_id');
-    }
-
-    public function childs()
-    {
-        return $this->belongsTo(CommentBengkel::class);
-    }
 }
