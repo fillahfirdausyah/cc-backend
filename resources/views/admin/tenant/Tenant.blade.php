@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Daftar User</h1>
+          <h1>Daftar User Tenant</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Daftar User</li>
+            <li class="breadcrumb-item active">Daftar User Tenant</li>
           </ol>
         </div>
       </div>
@@ -24,17 +24,16 @@
          <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Daftar User</h3>
+                  <h3 class="card-title">Daftar User Tenant</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                        <a href="{{ '/admin/user/add' }}" class="btn btn-primary">Tambah User</a>
                     <tr>
                       <th>Nama</th>
-                      <th>Email</th>
-                      <th>Role</th>
+                      <th>Email Tenant</th>
+                      <th>No Telepone</th>
                       <th>Status</th>
                       <th>Aksi</th>
                     </tr>
@@ -42,27 +41,27 @@
                     <tbody>
                     @foreach ($data as $d) 
                         <tr>
-                            <td>{{ $d->name }}</td>
+                            <td>{{ $d->nama }}</td>
                             <td>{{ $d->email }}</td>
-                            <td>{{ $d->role}}</td>
+                            <td>{{ $d->telepon}}</td>
                             <td>
-                              @if ($d->email_verified_at !== null)
+                              @if ($d->verified !== null)
                               <span class="badge badge-success">Terverifikasi</span>
                               @else
                               <span class="badge badge-danger">Belum Terverifikasi</span>
                               @endif
                             </td>
                             <td>
-                              @if ($d->email_verified_at !== null)
-                              <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
+                              @if ($d->verified !== null)
+                              <a href="#">
                                 <i class="fas fa-edit" style="color: green"></i>
                               </a>
                                | 
-                              <a href="{{ '/admin/user/delete/'}}" id="confirm" onclick="aksi({{$d->id}})">
+                              <a href="#" id="confirm" onclick="aksi({{$d->id}})">
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                               </a>
                               @else
-                              <a href="{{ '/admin/user/verify/' }}{{ $d->id }}" title="Verivikasi">
+                              <a href="{{ '/admin/user/tenant/verify/' }}{{ $d->id }}" title="Verivikasi">
                                 <i class="fas fa-user-check" style="color: green"></i>
                               </a>
                               @endif
@@ -119,10 +118,6 @@
         icon: 'warning',
         buttons: true,
         dangerMode: false,
-      }).then(function(result){
-        if(result){
-          window.location.href = url + id;
-        }
       });
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Tenant;
 class UserController extends Controller
 {
     /**
@@ -15,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::with('tenant')->get();
+
         return view('admin.user.User', ['data' => $data]);
     }
 

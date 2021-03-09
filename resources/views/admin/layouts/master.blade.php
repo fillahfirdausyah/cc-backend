@@ -158,13 +158,30 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item mt-2">
-            <a href="{{ '/admin/user/list' }}" class="nav-link active">
+          <li class="nav-item has-treeview mt-2" disabled>
+            <a href="admin/news" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/user/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Member</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/user/tenant' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tenant</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview mt-2" disabled>
             <a href="admin/news" class="nav-link active">
@@ -176,23 +193,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ '/admin/news/list' }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cars</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="{{ '/admin/event/list' }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Event</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ '/admin/gallery/list' }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Gallery</p>
-                </a>
-              </li> --}}
             </ul>
           </li>
           <li class="nav-item has-treeview mt-2">
