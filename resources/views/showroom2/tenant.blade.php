@@ -42,14 +42,13 @@
                     <div class="main-button">
                         <a href="/showroom/upload/autoshop" class="card-link">Add Auto shop</a>
                     </div>
-					<!-- <a href="">Edit Autoshop</a> -->
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Merchandise Total</h5>
-					    <p class="card-text"><h3>count</h3></p>
+					    <p class="card-text"><h3>{{ count($merchan) }}</h3></p>
 					</div>
                     <div class="main-button">
 						<a href="/showroom/upload/merchandise" class="card-link">Add Merchandise</a>
@@ -60,7 +59,7 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Cars Total</h5>
-					    <p class="card-text"><h3>6</h3></p>
+					    <p class="card-text"><h3>{{ count($SR) }}</h3></p>
 					</div>
                     <div class="main-button">
 						<a href="/showroom/upload/car" class="card-link">Sell Cars</a>
@@ -74,7 +73,7 @@
 		<div id="cars">
 			<div class="text-center"><h4>Cars</h4></div>
 			<div class="row">
-				@foreach($SR as $item => $sr)
+				@forelse($SR as $item => $sr)
 	            <div class="col-md-4">
 	                <div class="trainer-item">
 	                    <div class="image-thumb">
@@ -98,7 +97,15 @@
 	                    </div>
 	                </div>
 	            </div>
-	            @endforeach
+	            @empty
+	            <div class="container">
+	                <div class="row justify-content-md-center">
+	                    <div class="col-md-6 align-self-center">
+	                        <h3><i class="fa fa-dropbox fa-5x" aria-hidden="true"></i><em> Waduh Kosong Nih </em></h3>
+	                    </div>
+	                </div>
+	            </div>
+	            @endforelse
 			</div>
 		</div>
 		<!-- end cars -->
