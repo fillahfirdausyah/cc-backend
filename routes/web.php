@@ -14,14 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/showbaru', function() {
-	return view('showroom2.showroom');
-});
-
-Route::get('/car-details', function() {
-	return view('showroom2.car-details');
-});
-
 // Home //
 Route::get('/', 'IndexController@index');
 Route::get('/news/{slug}', 'IndexController@news');
@@ -86,10 +78,12 @@ Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
 
 //Regional
 Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
-////////////////////////
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
+
+// Showroom
+Route::get('/admin/showroom/acc/{id}', 'ShowroomController@accept');
 
 
 // ############################################################## //

@@ -166,6 +166,35 @@
               </p>
             </a>
           </li>
+          <li class="nav-item has-treeview mt-2" disabled>
+            <a href="admin/news" class="nav-link active">
+              <i class="nav-icon fas fa-car-side"></i>
+              <p>
+                Showroom
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/news/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cars</p>
+                </a>
+              </li>
+              {{-- <li class="nav-item">
+                <a href="{{ '/admin/event/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Event</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ '/admin/gallery/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Gallery</p>
+                </a>
+              </li> --}}
+            </ul>
+          </li>
           <li class="nav-item has-treeview mt-2">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-money-check-alt"></i>
@@ -237,7 +266,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- Pusher -->
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+{{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> --}}
 <script>
    // Enable pusher logging - don't include this in production
    Pusher.logToConsole = true;

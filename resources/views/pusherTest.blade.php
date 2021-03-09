@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
   <title>Pusher Test</title>
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script>
+  {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> --}}
+  {{-- <script>
 
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
@@ -15,7 +15,7 @@
     channel.bind('my-event', function(data) {
       alert(JSON.stringify(data));
     });
-  </script>
+  </script> --}}
 </head>
 <body>
   <h1>Pusher Test</h1>

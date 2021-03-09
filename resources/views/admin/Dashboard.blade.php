@@ -75,6 +75,56 @@
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <div class="card-header border-transparent">
+                    <h3 class="card-title">Postingan Mobil Baru</h3>
+    
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table m-0" id="table-acc-mobil">
+                        <thead>
+                        <tr>
+                          <th>Nama Penjual</th>
+                          <th>Mobil</th>
+                          <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        @foreach ($showroom as $show)
+                        <tbody>
+                        <tr id="{{ $show->id }}">
+                          <td>{{ $show->user->name }}</td>
+                          <td>{{ $show->judul }}</td>
+                          <td>
+                            <a href="{{ '/admin/region/delete/' }}" id="confirm" onclick="aksi()" class="btn btn-sm btn-primary">Lihat</a>
+                            <a href="{{ '/admin/showroom/acc/' }}" id="acc-button" onclick="aksiSetuju({{ $show->id }})" class="btn btn-sm btn-success">Setujui</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                        @endforeach
+                      </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer clearfix">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-tambah-daerah" class="btn btn-sm btn-info float-left">Tambah Daerah Baru</a>
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+              </div>
+            </div>
             </div>
             <div class="col-md-4">
               <!-- small box -->
@@ -196,9 +246,46 @@ $(function(){
     });
 });
 
+function aksiSetuju(id) {
+  event.preventDefault();
+  const url = document.getElementById('acc-button').getAttribute('href') + id
+  // console.log(url);
+  swal({
+        title: 'Yaking ingin menghapus?',
+        text: "Data akan dihapus permanen",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: false,
+      }).then(function(result){
+        if(result) {
+          $.ajax({
+            data: id,
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              let row = $("#table-acc-mobil > tbody > tr").attr("id");
+              row = data;
+              $("#"+row).remove();
+              $("#"+row).remove();
+                console.log(data, row);
+                swal({
+                  title: 'Berhasil',
+                  text: "Data Berhasil Terverifikasi",
+                  icon: 'success',
+                  buttons: false,
+                  dangerMode: false,
+                })
+            }
+          })
+        }
+      });
+}
+
 function aksi(id){
       event.preventDefault();
       const url = document.getElementById('confirm').getAttribute('href') + id
+      // console.log(url);
       swal({
         title: 'Yaking ingin menghapus?',
         text: "Data akan dihapus permanen",
