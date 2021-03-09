@@ -38,7 +38,9 @@
                         </span>
 
                         <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->judul }}</h4></a>
-
+                        @if($sr->verified == NULL)
+                            <p>Menunggu verifikasi admin</p>
+                        @endif
                         <p>
                         	<i class="fa fa-car"></i> {{ $sr->kondisi }} &nbsp;&nbsp;&nbsp;
                             <i class="fa fa-cube"></i> {{ $sr->mesin }} cc &nbsp;&nbsp;&nbsp;
