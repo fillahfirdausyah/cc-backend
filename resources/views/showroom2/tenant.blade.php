@@ -42,7 +42,6 @@
                     <div class="main-button">
                         <a href="/showroom/upload/autoshop" class="card-link">Add Auto shop</a>
                     </div>
-					<!-- <a href="">Edit Autoshop</a> -->
 				</div>
 			</div>
 			<div class="col-md-4">
