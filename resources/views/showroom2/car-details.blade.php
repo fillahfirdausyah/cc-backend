@@ -48,29 +48,13 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-      {{-- <!-- Slideshow container -->
-      <div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        @foreach(json_decode($SR->gambar) as $sr)
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" style="width:100%; height: auto;">
-          <div class="text">Caption Text</div>
-        </div>
-        @endforeach
-
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>  
-      </div> --}}
       <br>
 
         <br>
         <br>
         <div class="row justify-content-end mb-3">
           @can('ud-sr', $SR)
-            <div><a href="{{ '/showroom/car/edit/'.$SR->id }}"><button class="btn btn-success">Edit</button></a></div>
+            <div><a href="{{ '/showroom/car/edit/'.$SR->id }}"><button class="btn btn-primary mr-2">Edit</button></a></div>
             <form action="{{ '/showroom/car/'.$SR->id }}" method="post">
               @csrf
               @method('delete')
