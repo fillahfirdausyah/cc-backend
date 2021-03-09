@@ -505,7 +505,7 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li><a href="{{ '/dashboard' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
+                                            <li><a href="{{ '/member/home/' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
                                             <li><a href="{{ '/member/profile/details/' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
                                             <li><a href="{{ '/member/galery' }}" title="Gallery"><i class="fas fa-lg fa-images"></i></a></li>
                                             <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>
