@@ -167,7 +167,7 @@ class ShowroomController extends Controller
         $SR->slug = Str::slug($request->judul, '-');
         $SR->save();
 
-        return redirect()->back()->with('status', 'data sudah berhasil ditambahkan!');
+        return redirect()->back()->with('status', 'Berhasil ditambahkan!, silahkan tunggu verifikasi admin');
     }
 
     public function edit($id, SR $sr)

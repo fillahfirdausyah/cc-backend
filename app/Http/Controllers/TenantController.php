@@ -75,9 +75,17 @@ class TenantController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
+        $tenant = Tenant::where('user_id', Auth::id())->first();
+        if ($tenant != NULL && $tenant->verified == 'yes') {
+            return redirect('/tenant');
+        }else if($tenant != NULL && $tenant->verified == NULL){
+            return view('showroom2.tenant-register', compact('tenant'))->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu'); 
+        }else{
+            $user = Auth::user();
         
-        return view('showroom2.tenant-register', compact('user'));
+            return view('showroom2.tenant-register', compact('user', 'tenant'));
+        }
+        
     }
 
     public function store(Request $request)
