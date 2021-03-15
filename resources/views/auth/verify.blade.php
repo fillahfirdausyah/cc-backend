@@ -70,7 +70,7 @@
         @endif
         @endif
       </div>
-        <div class="p-3 bg-danger text-white text-center">Anda belum diverifikasi oleh admin, Mohon tunggu sampai admin menyetujui</div>
+        <div class="p-3 bg-danger text-white text-center">Anda belum verifikasi email, Mohon melakukan verifikasi email untuk melanjutkan</div>
     </header><!-- End Header -->
   
     <!-- ======= Hero Section ======= -->

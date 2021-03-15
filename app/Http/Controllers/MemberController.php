@@ -23,6 +23,11 @@ class MemberController extends Controller
     //     $userRegion2 = Auth::user()->region()->get();
     // }
 
+    public function verify() {
+        
+        return view('auth.verifyAdmin');
+    }
+
     public function index() {
         $user = Auth::user();
         $userRegion = Auth::user()->region()->get();
