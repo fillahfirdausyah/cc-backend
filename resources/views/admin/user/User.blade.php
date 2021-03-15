@@ -46,14 +46,14 @@
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
                             <td>
-                              @if ($d->email_verified_at !== null)
+                              @if ($d->verified !== null)
                               <span class="badge badge-success">Terverifikasi</span>
                               @else
                               <span class="badge badge-danger">Belum Terverifikasi</span>
                               @endif
                             </td>
                             <td>
-                              @if ($d->email_verified_at !== null)
+                              @if ($d->verified !== null)
                               <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
                                 <i class="fas fa-edit" style="color: green"></i>
                               </a>

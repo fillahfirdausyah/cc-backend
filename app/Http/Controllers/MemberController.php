@@ -19,13 +19,16 @@ class MemberController extends Controller
     // protected $userRegion2;
 
     // public function __construct() {
-    //     $user2    = Auth::user();
-    //     $userRegion2 = Auth::user()->region()->get();
+    //    $this->middleware('verifyAdmin');
     // }
 
     public function verify() {
         
         return view('auth.verifyAdmin');
+    }
+
+    public function verifyStore(Request $request) {
+        return $request;
     }
 
     public function index() {

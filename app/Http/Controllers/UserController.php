@@ -126,7 +126,7 @@ class UserController extends Controller
     public function verify($id)
     {
         $user = User::find($id);
-        $user->email_verified_at = date('Y-m-d, H:i:s');
+        $user->verified = 'yes';
         $user->save();
 
         $profile = new Profile;
