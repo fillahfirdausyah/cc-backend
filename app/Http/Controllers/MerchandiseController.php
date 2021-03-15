@@ -44,6 +44,7 @@ class MerchandiseController extends Controller
                             ->where('jenis', 'merchandise')
                             ->first();
         $user = Merchandise::find($id)->user()->first();
+        dd($user);
 
 		return view('showroom2.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment'));
 	}

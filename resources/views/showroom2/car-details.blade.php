@@ -219,7 +219,7 @@
 
                     <div class="col-sm-6">
                       <label>Social Network</label>
-                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                      <p><a href="{{ '/member/profile/details/'.$user->username }}">{{ $user->name }}</a></p>
                     </div>
 
                     @endif
