@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/perfect-scrollbar.css') }}">
     <!-- light gallery css -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/lightgallery.min.css') }}">
+    <!-- Bootstarp ICON -->
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"> --}}
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/style.css') }}">
 
