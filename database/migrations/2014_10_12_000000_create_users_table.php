@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username')->default('user'. time());
             $table->string('email')->unique();
+            $table->string('nopung')->default('G#-');
             $table->string('role')->default('member');
             $table->string('verified')->nullable();
             $table->timestamp('last_seen')->nullable();

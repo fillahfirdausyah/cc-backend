@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 'name'      => 'Prada Florista',
                 'email'     => 'prada@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-ADM',
                 'role'      => 'admin',
                 'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 'name'      => 'Fillah Firdausyah',
                 'email'     => 'fillah@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-2',
                 'role'      => 'member',
                 'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')
@@ -40,6 +42,7 @@ class DatabaseSeeder extends Seeder
                 'name'      => 'Vanka Valezka',
                 'email'     => 'vanka@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-3',
                 'role'      => 'bendahara',
                 'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')

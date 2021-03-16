@@ -29,6 +29,6 @@ class CreateCommentBengkelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_bengke');
+        Schema::dropIfExists('comment_bengkel');
     }
 }
