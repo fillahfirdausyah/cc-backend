@@ -93,7 +93,7 @@ Route::get('/admin/showroom/acc/{id}', 'ShowroomController@accept');
 // Member //
 // Home
 Route::get('/member/home', 'MemberController@index')->middleware('auth', 'verifyAdmin');
-Route::get('/member/home/verify', 'MemberController@verify');
+Route::get('/member/home/verify', 'MemberController@verify')->middleware('notVerified');
 Route::post('/member/home/verify/store', 'MemberController@verifyStore');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');

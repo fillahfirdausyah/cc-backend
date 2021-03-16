@@ -129,10 +129,6 @@ class UserController extends Controller
         $user->verified = 'yes';
         $user->save();
 
-        $profile = new Profile;
-        $profile->user_id = $id;
-        $profile->save();
-
         return redirect('/admin/user/list')->with('success', 'User Terverifikasi');
     }
 }

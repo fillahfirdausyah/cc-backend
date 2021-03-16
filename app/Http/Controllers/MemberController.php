@@ -24,11 +24,42 @@ class MemberController extends Controller
 
     public function verify() {
         
-        return view('auth.verifyAdmin');
+        $user = Auth::user()->profile;
+        if($user == null) {
+            return view('auth.verifyAdmin', compact('user'));
+        }
+
+        $alert = alert()->info('Data Diterima', 'Silahkan tunggu sampai Admin Verfikasi.');
+
+        return view('auth.verifyAdmin', compact('alert', 'user'));
     }
 
     public function verifyStore(Request $request) {
-        return $request;
+         $this->validate($request, [
+             'nama'     => 'required',
+             'email'    => 'required | email',
+             'domisili' => 'required',
+             'stnk'     => 'required | mimes:jpeg,jpg,png',
+             'jumlah'   => 'required | numeric',
+             'bukti'    => 'required | mimes:jpeg,jpg,png'
+
+         ]);
+
+         $imgName =  'STNK-' . $request->uid . '-' . time() . '.' . $request->stnk->extension();
+         $request->stnk->move(public_path('image/Member/Profile/Stnk'), $imgName);
+
+         $user = User::find($request->uid);
+         $user->nopung = 'G#-' . $request->uid;
+         $user->save();
+
+         $profile = new Profile;
+         $profile::find($request->uid);
+         $profile->user_id = $request->uid;
+         $profile->foto_stnk = $imgName;
+         $profile->save();
+        
+         return redirect('/member/home');
+
     }
 
     public function index() {

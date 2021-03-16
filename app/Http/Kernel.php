@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'privilege' => \App\Http\Middleware\Privilege::class,
         'cektenant' => \App\Http\Middleware\CekTenant::class,
         'verifyAdmin' => \App\Http\Middleware\VerifyAdmin::class,
+        'notVerified' => \App\Http\Middleware\NotVerified::class,
     ];
 }
