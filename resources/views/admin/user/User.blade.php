@@ -62,8 +62,8 @@
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                               </a>
                               @else
-                              <a href="{{ '/admin/user/verify/' }}{{ $d->id }}" title="Verivikasi">
-                                <i class="fas fa-user-check" style="color: green"></i>
+                              <a href="#" title="Verivikasi" class="lihatData">
+                                <i class="fas fa-eye" style="color: green"></i>
                               </a>
                               @endif
                             </td>
@@ -125,6 +125,11 @@
         }
       });
     }
+
+    $('.lihatData').click(function(e) {
+      e.preventDefault();
+      console.log('Tertekan');
+    })
 
   </script>
 @endpush

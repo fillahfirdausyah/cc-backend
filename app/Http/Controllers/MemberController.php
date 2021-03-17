@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cache; 
+use Illuminate\Support\Facades\Validator;
 use App\Models\Region;
 use App\Models\User;
 use App\Models\Profile;
@@ -35,7 +36,9 @@ class MemberController extends Controller
     }
 
     public function verifyStore(Request $request) {
-         $this->validate($request, [
+
+        // dd($request->uid);
+         $validator = Validator::make($request->all(), [
              'nama'     => 'required',
              'email'    => 'required | email',
              'domisili' => 'required',
@@ -44,6 +47,10 @@ class MemberController extends Controller
              'bukti'    => 'required | mimes:jpeg,jpg,png'
 
          ]);
+
+         if($validator->fails()) {
+            return back()->with('warning', $validator->messages()->all()[0]);
+         }
 
          $imgName =  'STNK-' . $request->uid . '-' . time() . '.' . $request->stnk->extension();
          $request->stnk->move(public_path('image/Member/Profile/Stnk'), $imgName);
@@ -54,6 +61,7 @@ class MemberController extends Controller
 
          $profile = new Profile;
          $profile::find($request->uid);
+         $profile->domisili = $request->domisili;
          $profile->user_id = $request->uid;
          $profile->foto_stnk = $imgName;
          $profile->save();

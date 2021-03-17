@@ -102,11 +102,8 @@
                         <form action="{{ '/member/home/verify/store' }}" method="post" enctype="multipart/form-data">
                           @csrf
                           <input type="hidden" name="uid" value="{{ Auth::user()->id }}">
-                            <div class="modal-body custom-scroll">
-                                <center>
-                                    <h2>Hallo Selamat Datang</h2>
-                                    <p>Anda belum melakukan verifikasi data. Verfikasi Untuk Melanjutkan</p>
-                                </center>
+                            <div class="modal-body">
+                                  <p class="text-center">Anda belum melakukan verifikasi data. Verfikasi Untuk Melanjutkan</p>
                                 <br>
                                 <div class="form-group">
                                     <label>Nama</label>
@@ -118,7 +115,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Domisili</label>
-                                    <input type="text" id="region" name="domisili" class="form-control" placeholder="Domisili....">
+                                    <input type="text" id="region" name="domisili" class="form-control" value="{{ old('domisili') }}" placeholder="Domisili....">
                                 </div>
                                 <div class="form-group">
                                     <label for="bukti">Foto STNK</label>
@@ -139,11 +136,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
-                                <button type="submit" class="btn btn-primary" id="tombol-post">tambah</button>
-                            </div>
-                       </form>
+                          </form>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+                              <button type="submit" class="btn btn-primary" id="tombol-post">Submit</button>
+                          </div>
                     </div>
                 </div>
               </div>

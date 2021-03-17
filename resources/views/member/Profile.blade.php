@@ -59,6 +59,7 @@
                                 <p>{{ $user->profile->bio }}</p>
                                 <ul class="author-into-list">
                                     <li><a href="#"><i class="bi bi-calendar"></i>{{ $user->nopung }}</a></li>
+                                    <li><a href="#"><i class="bi bi-home"></i>{{ $user->profile->domisili }}</a></li>
                                     <li><a href="#"><i class="bi bi-office-bag"></i>{{ $user->profile->pekerjaan }}</a></li>
                                     <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $user->profile->alamat }}</a></li>
                                     <li><a href="#"><i class="bi bi-heart-beat"></i>{{ $user->profile->hobi }}</a></li>
