@@ -218,4 +218,8 @@ class KeuanganController extends Controller
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function pengeluaran() {
+        return "Pengeluaran";
+    }
 }

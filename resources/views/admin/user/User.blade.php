@@ -32,7 +32,7 @@
                   </tr>
                   <tr>
                     <td><b>Iuran Pertama</b></td>
-                    <td>89898</td>
+                    <td>#</td>
                   </tr>
                   <tr>
                     <td><b>Bukti</b></td>
@@ -201,17 +201,17 @@
             <td>${data.region[0].region}</td>
           </tr>
           <tr>
-            <td><b>Foto STNK</b></td>
-            <td><b>:</b></td>
-            <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}"" class="img-thumbnail" alt=""></td>
-          </tr>
-          <tr>
             <td><b>Iuran Pertama</b></td>
             <td><b>:</b></td>
             <td>${data.keuangan[0].jumlah}</td>
           </tr>
           <tr>
-            <td><b>Bukti</b></td>
+            <td><b>Foto STNK</b></td>
+            <td><b>:</b></td>
+            <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}" class="img-thumbnail" alt=""></td>
+          </tr>
+          <tr>
+            <td><b>Bukti Transfer</b></td>
             <td><b>:</b></td>
             <td><img src="{{ asset('image/Member/Keuangan') }}/${data.keuangan[0].bukti}" class="img-thumbnail" alt=""></td>
           </tr>
@@ -221,6 +221,5 @@
         }
       })
     })
-
   </script>
 @endpush

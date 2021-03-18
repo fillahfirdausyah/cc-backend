@@ -211,7 +211,15 @@
               <li class="nav-item">
                 <a href="{{ '/admin/keuangan/' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Keuangan</p>
+                  <p>Pemasukan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/keuangan/pengeluaran' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengeluaran</p>
                 </a>
               </li>
             </ul>

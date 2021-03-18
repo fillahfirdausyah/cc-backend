@@ -78,9 +78,7 @@ Route::get('/admin/keuangan/details', 'KeuanganController@show');
 Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
 Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
 Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
-
-//Regional
-Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
+Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaran');
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
