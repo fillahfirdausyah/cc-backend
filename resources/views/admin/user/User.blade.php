@@ -20,11 +20,11 @@
                   <tbody id="userData">
                   <tr>
                     <td><b>Nama</b></td>
-                    <td>Fillah</td>
+                    <td>#</td>
                   </tr>
                   <tr>
                     <td><b>Domisili</b></td>
-                    <td>Jakarta</td>
+                    <td>#</td>
                   </tr>
                   <tr>
                     <td><b>Foto STNK</b></td>
@@ -186,29 +186,34 @@
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-          // console.log(data.keuangan)
+          // console.log(data.region)
           $('#modalData').modal('show');
 
           $('#userData').html(`
           <tr>
             <td><b>Nama</b></td>
+            <td><b>:</b></td>
             <td>${data.name}</td>
           </tr>
           <tr>
             <td><b>Domisili</b></td>
-            <td>${data.profile.domisili}</td>
+            <td><b>:</b></td>
+            <td>${data.region[0].region}</td>
           </tr>
           <tr>
             <td><b>Foto STNK</b></td>
+            <td><b>:</b></td>
             <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}"" class="img-thumbnail" alt=""></td>
           </tr>
           <tr>
             <td><b>Iuran Pertama</b></td>
-            <td>${data.keuangan.jumlah}</td>
+            <td><b>:</b></td>
+            <td>${data.keuangan[0].jumlah}</td>
           </tr>
           <tr>
             <td><b>Bukti</b></td>
-            <td><img src="" class="img-thumbnail" alt=""></td>
+            <td><b>:</b></td>
+            <td><img src="{{ asset('image/Member/Keuangan') }}/${data.keuangan[0].bukti}" class="img-thumbnail" alt=""></td>
           </tr>
           `)
 

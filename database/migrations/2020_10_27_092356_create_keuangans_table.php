@@ -22,6 +22,7 @@ class CreateKeuangansTable extends Migration
             $table->bigInteger('jumlah');
             $table->string('kategori')->nullable();
             $table->string('status');
+            $table->string('bukti');
             $table->timestamps();
         });
     }

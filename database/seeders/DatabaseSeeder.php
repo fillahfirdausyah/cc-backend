@@ -55,7 +55,6 @@ class DatabaseSeeder extends Seeder
             'user_id'   => 2,
             'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
-            'domisili'  => 'Ponorogo',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);
@@ -64,7 +63,6 @@ class DatabaseSeeder extends Seeder
             'user_id'   => 2,
             'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
-            'domisili'  => 'Manado',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);
@@ -73,7 +71,6 @@ class DatabaseSeeder extends Seeder
             'user_id'   => 2,
             'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
-            'domisili'  => 'Surabaya',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);

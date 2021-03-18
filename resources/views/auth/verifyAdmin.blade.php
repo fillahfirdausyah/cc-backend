@@ -115,7 +115,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Domisili</label>
-                                    <input type="text" id="region" name="domisili" class="form-control" value="{{ old('domisili') }}" placeholder="Domisili....">
+                                    <select name="region" class="form-control" id="kategori">
+                                      @foreach($region as $r)
+                                      <option value="{{ $r->id }}">{{ $r->region }}</option>
+                                      @endforeach
+                                  </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="bukti">Foto STNK</label>

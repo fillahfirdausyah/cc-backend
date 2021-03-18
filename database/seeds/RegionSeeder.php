@@ -16,9 +16,6 @@ class RegionSeeder extends Seeder
     {
         $region = [
             [
-                'region' => 'Pusat'
-            ],
-            [
                 'region' => 'Ponorogo'
             ],
             [

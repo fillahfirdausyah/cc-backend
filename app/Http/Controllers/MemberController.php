@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache; 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Models\Region;
 use App\Models\Keuangan;
 use App\Models\BuktiIuran;
@@ -28,22 +29,23 @@ class MemberController extends Controller
     public function verify() {
         
         $user = Auth::user()->profile;
+        $region = Region::all();
         if($user == null) {
-            return view('auth.verifyAdmin', compact('user'));
+            return view('auth.verifyAdmin', compact('user', 'region'));
         }
 
         $alert = alert()->info('Data Diterima', 'Silahkan tunggu sampai Admin Verfikasi.');
 
-        return view('auth.verifyAdmin', compact('alert', 'user'));
+        return view('auth.verifyAdmin', compact('alert', 'user', 'region'));
     }
 
     public function verifyStore(Request $request) {
 
-        // dd($request->uid);
+        // dd($request->region);
          $validator = Validator::make($request->all(), [
              'nama'     => 'required',
              'email'    => 'required | email',
-             'domisili' => 'required',
+             'region'   => 'required',
              'stnk'     => 'required | mimes:jpeg,jpg,png',
              'jumlah'   => 'required | numeric',
              'bukti'    => 'required | mimes:jpeg,jpg,png'
@@ -58,25 +60,27 @@ class MemberController extends Controller
          $request->stnk->move(public_path('image/Member/Profile/Stnk'), $imgName);
          
          $buktiIuran =  'BUKTI-' . $request->uid . '-' . time() . '.' . $request->bukti->extension();
-         $request->bukti->move(public_path('image/Member/Keuangan/'), $bukti);
+         $request->bukti->move(public_path('image/Member/Keuangan/'), $buktiIuran);
 
          $user = User::find($request->uid);
          $user->nopung = 'G#-' . $request->uid;
          $user->save();
 
+         $region = DB::table('region_user')->insert(['user_id' => $request->uid, 'region_id' => $request->region]);
+
          $keuangan = new Keuangan;
-         $keuangan->region_id = 4;
+         $keuangan->region_id = $request->region;
          $keuangan->user_id = $request->uid;
          $keuangan->email = $request->email;
          $keuangan->nama = $request->nama;
          $keuangan->jumlah = $request->jumlah;
          $keuangan->kategori = 'Iuran Pertama';
          $keuangan->status = 'pending';
+         $keuangan->bukti = $buktiIuran;
          $keuangan->save();
 
          $profile = new Profile;
          $profile::find($request->uid);
-         $profile->domisili = $request->domisili;
          $profile->user_id = $request->uid;
          $profile->foto_stnk = $imgName;
          $profile->save();

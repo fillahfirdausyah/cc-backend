@@ -18,7 +18,6 @@ class CreateProfilesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->text('bio')->nullable();
             $table->string('pekerjaan')->default('-');
-            $table->string('domisili');
             $table->string('alamat')->default('-');
             $table->string('hobi')->default('-');
             $table->string('foto_stnk')->nullable();
