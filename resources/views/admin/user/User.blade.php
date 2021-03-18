@@ -42,6 +42,11 @@
                 </table>
               </div>
             </div>
+            <form id="verifUser" action="#">
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" id="tombol-post">Verifikasi</button>
+            </div>
+            </form>
         </div>
     </div>
   </div>
@@ -181,9 +186,33 @@
         type: 'GET',
         dataType: 'json',
         success: function(data) {
+          // console.log(data.keuangan)
           $('#modalData').modal('show');
 
+          $('#userData').html(`
+          <tr>
+            <td><b>Nama</b></td>
+            <td>${data.name}</td>
+          </tr>
+          <tr>
+            <td><b>Domisili</b></td>
+            <td>${data.profile.domisili}</td>
+          </tr>
+          <tr>
+            <td><b>Foto STNK</b></td>
+            <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}"" class="img-thumbnail" alt=""></td>
+          </tr>
+          <tr>
+            <td><b>Iuran Pertama</b></td>
+            <td>${data.keuangan.jumlah}</td>
+          </tr>
+          <tr>
+            <td><b>Bukti</b></td>
+            <td><img src="" class="img-thumbnail" alt=""></td>
+          </tr>
+          `)
 
+          $('#verifUser').attr('action', '/admin/user/verify/' + uid);
         }
       })
     })

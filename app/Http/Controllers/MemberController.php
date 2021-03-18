@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache; 
 use Illuminate\Support\Facades\Validator;
 use App\Models\Region;
+use App\Models\Keuangan;
+use App\Models\BuktiIuran;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Post;
@@ -54,10 +56,23 @@ class MemberController extends Controller
 
          $imgName =  'STNK-' . $request->uid . '-' . time() . '.' . $request->stnk->extension();
          $request->stnk->move(public_path('image/Member/Profile/Stnk'), $imgName);
+         
+         $buktiIuran =  'BUKTI-' . $request->uid . '-' . time() . '.' . $request->bukti->extension();
+         $request->bukti->move(public_path('image/Member/Keuangan/'), $bukti);
 
          $user = User::find($request->uid);
          $user->nopung = 'G#-' . $request->uid;
          $user->save();
+
+         $keuangan = new Keuangan;
+         $keuangan->region_id = 4;
+         $keuangan->user_id = $request->uid;
+         $keuangan->email = $request->email;
+         $keuangan->nama = $request->nama;
+         $keuangan->jumlah = $request->jumlah;
+         $keuangan->kategori = 'Iuran Pertama';
+         $keuangan->status = 'pending';
+         $keuangan->save();
 
          $profile = new Profile;
          $profile::find($request->uid);

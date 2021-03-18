@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $data = $user->load('profile');
+        $data = $user->load('profile', 'keuangan');
 
         return response()->json($data);
     }
