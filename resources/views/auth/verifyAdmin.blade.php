@@ -136,11 +136,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
+                                <button type="submit" class="btn btn-primary" id="tombol-post">Submit</button>
+                            </div>
                           </form>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">cancel</button>
-                              <button type="submit" class="btn btn-primary" id="tombol-post">Submit</button>
-                          </div>
                     </div>
                 </div>
               </div>

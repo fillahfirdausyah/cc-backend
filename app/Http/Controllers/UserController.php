@@ -123,6 +123,15 @@ class UserController extends Controller
         return redirect('/admin/user/list')->with('info', 'Data Berhasil Dihapus');
     }
 
+    public function showData($id) {
+
+        $user = User::find($id);
+
+        $data = $user->load('profile');
+
+        return response()->json($data);
+    }
+
     public function verify($id)
     {
         $user = User::find($id);

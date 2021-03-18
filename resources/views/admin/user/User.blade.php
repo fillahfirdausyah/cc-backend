@@ -4,6 +4,48 @@
 
 @section('content')
 <div class="content-wrapper">
+
+  <div class="modal fade" id="modalData" aria-labelledby="add-iuran">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table m-0" id="table-acc-mobil">
+                  <tbody id="userData">
+                  <tr>
+                    <td><b>Nama</b></td>
+                    <td>Fillah</td>
+                  </tr>
+                  <tr>
+                    <td><b>Domisili</b></td>
+                    <td>Jakarta</td>
+                  </tr>
+                  <tr>
+                    <td><b>Foto STNK</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td><b>Iuran Pertama</b></td>
+                    <td>89898</td>
+                  </tr>
+                  <tr>
+                    <td><b>Bukti</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
     <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -62,7 +104,7 @@
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                               </a>
                               @else
-                              <a href="#" title="Verivikasi" class="lihatData">
+                              <a href="#" title="Verivikasi" data-uid="{{ $d->id }}" class="lihatData">
                                 <i class="fas fa-eye" style="color: green"></i>
                               </a>
                               @endif
@@ -126,9 +168,24 @@
       });
     }
 
-    $('.lihatData').click(function(e) {
+    let elLihatData = $('.lihatData');
+
+    elLihatData.click(function(e) {
       e.preventDefault();
-      console.log('Tertekan');
+      
+      uid = elLihatData.data('uid');
+      
+      $.ajax({
+        data: uid,
+        url: '/admin/user/showdata/' + uid,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          $('#modalData').modal('show');
+
+
+        }
+      })
     })
 
   </script>

@@ -56,6 +56,7 @@ Route::get('/admin/user/store', 'UserController@store');
 Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+Route::get('/admin/user/showdata/{id}', 'UserController@showData');
 Route::get('/admin/user/verify/{id}', 'UserController@verify');
 Route::get('/admin/user/tenant', 'TenantController@list');
 Route::get('/admin/user/tenant/verify/{id}', 'TenantController@verify');
