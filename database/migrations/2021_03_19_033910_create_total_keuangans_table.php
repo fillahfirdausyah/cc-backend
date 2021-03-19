@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKeuangansTable extends Migration
+class CreateTotalKeuangansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreateKeuangansTable extends Migration
      */
     public function up()
     {
-        Schema::create('keuangans', function (Blueprint $table) {
+        Schema::create('total_keuangans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('region_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('email');
-            $table->string('nama');
             $table->bigInteger('jumlah');
-            $table->string('kategori')->nullable();
-            $table->string('status');
-            $table->string('bukti')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ class CreateKeuangansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keuangans');
+        Schema::dropIfExists('total_keuangans');
     }
 }

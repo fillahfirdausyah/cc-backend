@@ -47,88 +47,13 @@
              <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Data Keuangan</h3>
+                  <h3 class="card-title">History Keuangan</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="{{ '/admin/keuangan/details' }}" method="GET">
-                    <a href="{{ '/admin/keuangan/add' }}" class="btn btn-primary">Tambah Data</a>
-                    <div class="input-group mb-3 col-sm-4 float-right">
-                      <select name="region" id="region" class="form-control">
-                        <option value="0">Semua</option>
-                        @foreach ($region as $reg)
-                        <option value="{{ $reg->id }}">{{ $reg->region }}</option>
-                        @endforeach
-                      </select>
-                        <select name="kategori" id="kategori" class="form-control">
-                          <option>Semua</option>
-                          <option>Mingguan</option>
-                          <option>Event</option>
-                        </select>
-                        <input type="text" id="created_at" name="date" class="form-control">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="submit">Filter</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="table-responsive">
-                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>E-mail</th>
-                                <th>Jumlah</th>
-                                <th>Kategori</th>
-                                <th>Region</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @forelse ($data as $d)
-                          <tr>
-                            <td>{{ $d->nama }}</td>
-                            <td>{{ $d->email }}</td>
-                            <td>-Rp.@convert($d->jumlah)</td>
-                            <td>{{ $d->kategori }}</td>
-                             <p hidden>{{ $r = \App\Models\Keuangan::find($d->id)->region()->get() }}</p>
-                             @foreach ($r as $re)
-                             <td>{{ $re->region }}</td>
-                             @endforeach
-                            <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
-                            @if ($d->status == 'Lunas')
-                            <td><span class="badge badge-success">{{ $d->status }}</span></td>
-                            @else
-                            <td><span class="badge badge-danger">{{ $d->status }}</span></td>
-                            @endif
-                            <td>
-                              <a href="{{ '/admin/keuangan/edit/'}}{{ $d->id }}">
-                                <i class="fas fa-edit" style="color: green"></i>
-                              </a>
-                              <a href="{{ '/admin/keuangan/delete/'}}"  id="confirm" class="ml-2" onclick="aksi({{ $d->id }})">
-                                <i class="fas fa-trash-alt" style="color: red"></i>
-                              </a>
-                            </td>
-                          </tr>
-                          @empty
-                          <tr>
-                              <td colspan="8" class="text-center">Tidak ada data</td>
-                          </tr>
-                          @endforelse
-                          <tr>
-                            <td colspan="2">Total:</td>
-                            <td>-Rp.@convert($data->sum('jumlah'))</td>
-                          </tr>
-                        </tbody>
-                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
-                      </table>
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
+                </div>
+                <!-- /.card-body -->
                   <div class="card-footer">
-                    {{-- <center>sshs</center> --}}
                 </div>
               </div>
              </div>
@@ -161,91 +86,58 @@
                 startDate: start,
                 endDate: end
             });
+
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
   })
 
- $(document).ready(function() {
-  $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-$.ajax({
-  url: '/admin/keuangan/grafik',
-  dataType: 'json',
-  success: function(response){
-    let event     = [];
-    let bulan     = [];
-    let mingguan  = [];
-
-    response.data1.forEach(element => {
-      event.push(element.amount_event);
-      bulan.push(element.months);
-    });
-
-
-    response.data2.forEach(element => {
-      mingguan.push(element.amount_mingguan);
-    });
-      
-    let areaChartData = {
-          labels  : bulan,
-          datasets: [
-            {
-              label               : 'Mingguan',
-              backgroundColor     : 'rgba(60,141,188,0.9)',
-              borderColor         : 'rgba(60,141,188,0.8)',
-              pointRadius         : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : mingguan
-            },
-            {
-              label               : 'Event',
-              backgroundColor     : 'rgba(210, 214, 222, 1)',
-              borderColor         : 'rgba(210, 214, 222, 1)',
-              pointRadius         : false,
-              pointColor          : 'rgba(210, 214, 222, 1)',
-              pointStrokeColor    : '#c1c7d1',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(220,220,220,1)',
-              data                : event
-            },
-          ]
-        }
-
-    let areaChartOptions = {
-      maintainAspectRatio : false,
-      responsive : true,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }],
-        yAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }]
+  let areaChartData = {
+        labels  : ['red','Yellow', 'Blue'],
+        datasets: [
+          // {
+          //   label               : 'Mingguan',
+          //   backgroundColor     : 'rgba(60,141,188,0.9)',
+          //   borderColor         : 'rgba(60,141,188,0.8)',
+          //   pointRadius         : false,
+          //   pointColor          : '#3b8bba',
+          //   pointStrokeColor    : 'rgba(60,141,188,1)',
+          //   pointHighlightFill  : '#fff',
+          //   pointHighlightStroke: 'rgba(60,141,188,1)',
+          //   data                : [324, 234, 54, 45]
+          // },
+          {
+            label               : 'Event',
+            backgroundColor     : 'rgba(210, 214, 222, 1)',
+            borderColor         : 'rgba(210, 214, 222, 1)',
+            pointRadius         : false,
+            pointColor          : 'rgba(210, 214, 222, 1)',
+            pointStrokeColor    : '#c1c7d1',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data                : [34, 54, 83]
+          },
+        ]
       }
+
+  let areaChartOptions = {
+    maintainAspectRatio : false,
+    responsive : true,
+    legend: {
+      display: true
     }
-    let lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    let lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-    let lineChartData = jQuery.extend(true, {}, areaChartData)
-    let lineChart = new Chart(lineChartCanvas, { 
-      type: 'bar',
-      data: lineChartData, 
-      options: lineChartOptions
-    })
   }
-})
-})
+  let lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+  let lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
+  let lineChartData = jQuery.extend(true, {}, areaChartData)
+  let lineChart = new Chart(lineChartCanvas, { 
+    type: 'doughnut',
+    data: lineChartData, 
+    options: lineChartOptions
+  })
+
 
 function aksi(id){
       event.preventDefault();

@@ -18,7 +18,7 @@ class Region extends Model
 
     public function keuangan()
     {
-        return $this->hasMany(Keuangan::class);
+        return $this->hasMany(Keuangan::class); 
     }
 
     public function bengkel()
@@ -29,5 +29,10 @@ class Region extends Model
     public function merchandise()
     {
         return $this->hasOne(Merchandise::class);
+    }
+
+    public function total()
+    {
+        return $this->hasMany(TotalKeuangan::class);
     }
 }

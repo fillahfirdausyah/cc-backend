@@ -31,7 +31,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ '/admin/keuangan/store' }}" method="POST">
+                    <form role="form" action="{{ '/admin/keuangan/pemasukan/store' }}" method="POST">
                       @csrf
                       <div class="card-body">
                         <div class="form-group">

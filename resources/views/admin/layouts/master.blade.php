@@ -18,7 +18,7 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Summernote -->
-  <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}"> --}}
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   @stack('css-page')
@@ -210,6 +210,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ '/admin/keuangan/' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Keuangan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/keuangan/pemasukan' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pemasukan</p>
                 </a>

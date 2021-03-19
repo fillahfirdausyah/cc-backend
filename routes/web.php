@@ -69,16 +69,17 @@ Route::get('/admin/region/delete/{id}', 'RegionController@destroy');
 // Keuangan
 // Nasional
 Route::get('/admin/keuangan', 'KeuanganController@index');
-Route::get('/admin/keuangan/add', 'KeuanganController@create');
-Route::post('/admin/keuangan/store', 'KeuanganController@store');
-Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
-Route::post('/admin/keuangan/update/{id}/{regid}', 'KeuanganController@update');
-Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
-Route::get('/admin/keuangan/details', 'KeuanganController@show');
+Route::get('/admin/keuangan/pemasukan/add', 'KeuanganController@create');
+Route::post('/admin/keuangan/pemasukan/store', 'KeuanganController@store');
+Route::get('/admin/keuangan/pemasukan/edit/{id}', 'KeuanganController@edit');
+Route::post('/admin/keuangan/pemasukan/update/{id}/{regid}', 'KeuanganController@update');
+Route::get('/admin/keuangan/pemasukan/delete/{id}', 'KeuanganController@destroy');
+Route::get('/admin/keuangan/pemasukan/details', 'KeuanganController@show');
 Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
 Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
 Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
-Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaran');
+Route::get('/admin/keuangan/pemasukan', 'KeuanganController@pemasukanIndex');
+Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaranIndex');
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');

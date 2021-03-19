@@ -116,7 +116,7 @@ class KeuanganController extends Controller
         $data->email     = $request->email;
         $data->save();
 
-        return redirect('/admin/keuangan/')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/keuangan/pemasukan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -219,7 +219,17 @@ class KeuanganController extends Controller
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
 
-    public function pengeluaran() {
-        return "Pengeluaran";
+    public function pemasukanIndex() {
+        $data   = Keuangan::whereBetween('created_at', 
+        [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()])->latest()->get();
+        $region = Region::all(); 
+
+        return view('admin.keuangan.Pemasukan', compact('data', 'region'));
+    }
+
+    public function pengeluaranIndex() {
+
+
+        return view('admin.keuangan.Pengeluaran');
     }
 }
