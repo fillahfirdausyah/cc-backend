@@ -44,19 +44,106 @@
                   </div>
                   <!-- /.card -->
              </div>
-             <div class="col-md-12">
+             <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">History Keuangan</h3>
+                  <h3 class="card-title">Total Semua</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                  <div class="table-responsive">
+                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($data as $d)
+                          <tr>
+                            <td>{{ $d->region->region }}</td>
+                            <td>-Rp.@convert($d->sum('jumlah'))</td>
+                            <td>Lorem ipsum dolor sit amet.</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
+                      </table>
+                    </div>
                 </div>
                 <!-- /.card-body -->
                   <div class="card-footer">
                 </div>
               </div>
              </div>
+             <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">History Keuangan</h3>  
+  
+                  <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+  
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Reason</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>183</td>
+                        <td>John Doe</td>
+                        <td>11-7-2014</td>
+                        <td><span class="tag tag-success">Approved</span></td>
+                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      </tr>
+                      <tr>
+                        <td>219</td>
+                        <td>Alexander Pierce</td>
+                        <td>11-7-2014</td>
+                        <td><span class="tag tag-warning">Pending</span></td>
+                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      </tr>
+                      <tr>
+                        <td>657</td>
+                        <td>Bob Doe</td>
+                        <td>11-7-2014</td>
+                        <td><span class="tag tag-primary">Approved</span></td>
+                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      </tr>
+                      <tr>
+                        <td>175</td>
+                        <td>Mike Doe</td>
+                        <td>11-7-2014</td>
+                        <td><span class="tag tag-danger">Denied</span></td>
+                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
           </div>
         </div>
     </section>
@@ -97,26 +184,19 @@
   let areaChartData = {
         labels  : ['red','Yellow', 'Blue'],
         datasets: [
-          // {
-          //   label               : 'Mingguan',
-          //   backgroundColor     : 'rgba(60,141,188,0.9)',
-          //   borderColor         : 'rgba(60,141,188,0.8)',
-          //   pointRadius         : false,
-          //   pointColor          : '#3b8bba',
-          //   pointStrokeColor    : 'rgba(60,141,188,1)',
-          //   pointHighlightFill  : '#fff',
-          //   pointHighlightStroke: 'rgba(60,141,188,1)',
-          //   data                : [324, 234, 54, 45]
-          // },
           {
             label               : 'Event',
-            backgroundColor     : 'rgba(210, 214, 222, 1)',
             borderColor         : 'rgba(210, 214, 222, 1)',
             pointRadius         : false,
             pointColor          : 'rgba(210, 214, 222, 1)',
-            pointStrokeColor    : '#c1c7d1',
-            pointHighlightFill  : '#fff',
+            backgroundColor     : 'rgba(210, 214, 222, 1)',
             pointHighlightStroke: 'rgba(220,220,220,1)',
+            weight              : 10,
+            backgroundColor     : [
+              '#6bf222',
+              '#7d1fdb',
+              '#f2187e',
+            ],
             data                : [34, 54, 83]
           },
         ]

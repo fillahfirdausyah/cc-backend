@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class TotalKeuangan extends Model
 {
@@ -14,5 +15,10 @@ class TotalKeuangan extends Model
     public function region()
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function keuangan()
+    {
+        return $this->belongsTo(Keuangan::class);
     }
 }

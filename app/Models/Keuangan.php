@@ -20,4 +20,9 @@ class Keuangan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function total()
+    {
+        return $this->hasMany(TotalKeuangan::class);
+    }
 }
