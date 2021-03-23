@@ -103,7 +103,7 @@
                           @csrf
                           <input type="hidden" name="uid" value="{{ Auth::user()->id }}">
                             <div class="modal-body">
-                                  <p class="text-center">Anda belum melakukan verifikasi data. Verfikasi Untuk Melanjutkan</p>
+                              <p class="text-center">Anda belum melakukan verifikasi data. Verfikasi Untuk Melanjutkan</p>
                                 <br>
                                 <div class="form-group">
                                     <label>Nama</label>

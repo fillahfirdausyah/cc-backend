@@ -197,7 +197,7 @@ class KeuanganController extends Controller
             $total->save();
         }
 
-        return redirect('/admin/pemasukan/keuangan')->with('success', 'Data Berhasil Disimpan');
+        return redirect('/admin/keuangan/pemasukan')->with('success', 'Data Berhasil Disimpan');
 
     }
 

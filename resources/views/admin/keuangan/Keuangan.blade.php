@@ -24,10 +24,10 @@
     <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Keuangan</h3>
+                      <h3 class="card-title">Grafik</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -79,7 +79,7 @@
                 </div>
               </div>
              </div>
-             <div class="col-md-6">
+             {{-- <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">History Keuangan</h3>  
@@ -143,7 +143,7 @@
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
-            </div>
+            </div> --}}
           </div>
         </div>
     </section>
@@ -184,12 +184,18 @@
   let chart = {!!json_encode($chart)!!}
   let reg = []
   let total = []
+  let warna = []
   chart.forEach(x => {
       reg.push(x.region)
       total.push(x.totalsemua)
   });
 
-  // console.log(reg)
+  for(let i = 0; i <= reg.length; i++) {
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    warna.push(`#${randomColor}`);
+  }
+
+  console.log(warna)
 
   let areaChartData = {
         labels  : reg,
@@ -202,11 +208,7 @@
             backgroundColor     : 'rgba(210, 214, 222, 1)',
             pointHighlightStroke: 'rgba(220,220,220,1)',
             weight              : 10,
-            backgroundColor     : [
-              '#6bf222',
-              '#7d1fdb',
-              '#f2187e',
-            ],
+            backgroundColor     : warna,
             data                : total
           },
         ]
