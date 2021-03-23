@@ -79,6 +79,8 @@ Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
 Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
 Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
 Route::get('/admin/keuangan/pemasukan', 'KeuanganController@pemasukanIndex');
+Route::get('/admin/keuangan/pemasukan/show/{id}', 'KeuanganController@pemasukanShow');
+Route::get('/admin/keuangan/pemasukan/verify/{id}/{regid}', 'KeuanganController@pemasukanVerify');
 Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaranIndex');
 
 // Undian

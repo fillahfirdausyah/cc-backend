@@ -4,6 +4,54 @@
     
 @section('content')
 <div class="content-wrapper">
+
+  <div class="modal fade" id="modalData" aria-labelledby="add-iuran">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table m-0" id="table-acc-mobil">
+                  <tbody id="keuanganData">
+                  <tr>
+                    <td><b>Nama</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Domisili</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Foto STNK</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td><b>Iuran Pertama</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Bukti</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+            <form id="verifKeuangan" action="#">
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" id="tombol-post">Verifikasi</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -80,9 +128,6 @@
                             <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
                             @if ($d->status == 'Lunas')
                             <td><span class="badge badge-success">{{ $d->status }}</span></td>
-                            @else
-                            <td><span class="badge badge-danger">{{ $d->status }}</span></td>
-                            @endif
                             <td>
                               <a href="{{ '/admin/keuangan/pemasukan/edit/'}}{{ $d->id }}">
                                 <i class="fas fa-edit" style="color: green"></i>
@@ -91,6 +136,14 @@
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                               </a>
                             </td>
+                            @else
+                            <td><span class="badge badge-danger">{{ $d->status }}</span></td>
+                            <td>
+                              <a href="#" title="Verivikasi" data-kid="{{ $d->id }}" class="lihatData">
+                                <i class="fas fa-eye" style="color: green"></i>
+                              </a>
+                            </td>
+                            @endif
                           </tr>
                           @empty
                           <tr>
@@ -132,102 +185,24 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
-  $(document).ready(function() {
-            let start = moment().startOf('month')
-            let end = moment().endOf('month')
+    $(document).ready(function() {
+              let start = moment().startOf('month')
+              let end = moment().endOf('month')
 
-            //INISIASI DATERANGEPICKER
-            $('#created_at').daterangepicker({
-                startDate: start,
-                endDate: end
-            });
-  })
+              //INISIASI DATERANGEPICKER
+              $('#created_at').daterangepicker({
+                  startDate: start,
+                  endDate: end
+              });
 
- $(document).ready(function() {
-  $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-$.ajax({
-  url: '/admin/keuangan/grafik',
-  dataType: 'json',
-  success: function(response){
-    let event     = [];
-    let bulan     = [];
-    let mingguan  = [];
-
-    response.data1.forEach(element => {
-      event.push(element.amount_event);
-      bulan.push(element.months);
-    });
-
-
-    response.data2.forEach(element => {
-      mingguan.push(element.amount_mingguan);
-    });
-      
-    let areaChartData = {
-          labels  : bulan,
-          datasets: [
-            {
-              label               : 'Mingguan',
-              backgroundColor     : 'rgba(60,141,188,0.9)',
-              borderColor         : 'rgba(60,141,188,0.8)',
-              pointRadius         : false,
-              pointColor          : '#3b8bba',
-              pointStrokeColor    : 'rgba(60,141,188,1)',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data                : mingguan
-            },
-            {
-              label               : 'Event',
-              backgroundColor     : 'rgba(210, 214, 222, 1)',
-              borderColor         : 'rgba(210, 214, 222, 1)',
-              pointRadius         : false,
-              pointColor          : 'rgba(210, 214, 222, 1)',
-              pointStrokeColor    : '#c1c7d1',
-              pointHighlightFill  : '#fff',
-              pointHighlightStroke: 'rgba(220,220,220,1)',
-              data                : event
-            },
-          ]
-        }
-
-    let areaChartOptions = {
-      maintainAspectRatio : false,
-      responsive : true,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }],
-        yAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }]
-      }
-    }
-    let lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    let lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-    let lineChartData = jQuery.extend(true, {}, areaChartData)
-    let lineChart = new Chart(lineChartCanvas, { 
-      type: 'bar',
-      data: lineChartData, 
-      options: lineChartOptions
+              $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+              });
     })
-  }
-})
-})
 
-function aksi(id){
+    function aksi(id){
       event.preventDefault();
       const url = document.getElementById('confirm').getAttribute('href')
       swal({
@@ -242,5 +217,59 @@ function aksi(id){
         }
       });
     }
+
+    let elLihatData = $('.lihatData');
+
+    elLihatData.click(function(e) {
+      e.preventDefault();
+
+      uid = elLihatData.data('kid');  
+      
+      $.ajax({
+        data: uid,
+        url: '/admin/keuangan/pemasukan/show/' + uid,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          // console.log(data.region.id)
+          $('#modalData').modal('show');
+
+          $('#keuanganData').html(`
+          <tr>
+            <td><b>Nama</b></td>
+            <td><b>:</b></td>
+            <td>${data.nama}</td>
+          </tr>
+          <tr>
+            <td><b>Email</b></td>
+            <td><b>:</b></td>
+            <td>${data.email}</td>
+          </tr>
+          <tr>
+            <td><b>Jumlah</b></td>
+            <td><b>:</b></td>
+            <td>${data.jumlah}</td>
+          </tr>
+          <tr>
+            <td><b>Kategori</b></td>
+            <td><b>:</b></td>
+            <td>${data.kategori}</td>
+          </tr>
+          <tr>
+            <td><b>Region</b></td>
+            <td><b>:</b></td>
+            <td>${data.region.region}</td>
+          </tr>
+          <tr>
+            <td><b>Bukti Transfer</b></td>
+            <td><b>:</b></td>
+            <td><img src="{{ asset('image/Member/Keuangan') }}/${data.bukti}" class="img-thumbnail" alt=""></td>
+          </tr>
+          `)
+          let regid = data.region.id;
+          $('#verifKeuangan').attr('action', '/admin/keuangan/pemasukan/verify/' + uid + '/' + regid);
+        }
+      })
+    })
 </script>  
 @endpush

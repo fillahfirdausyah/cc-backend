@@ -186,16 +186,7 @@ class KeuanganController extends Controller
         $data->status    = $request->status;
         $data->kategori  = $request->kategori;
         $data->email     = $request->email;
-        
-
-        if($data->status == 'Lunas') {
-            $data->save();
-            $total = new TotalKeuangan;
-            $total->region_id = $regid;
-            $total->keuangan_id = $data->id;
-            $total->jumlah = $request->jumlah;
-            $total->save();
-        }
+        $data->save();
 
         return redirect('/admin/keuangan/pemasukan')->with('success', 'Data Berhasil Disimpan');
 
@@ -210,19 +201,43 @@ class KeuanganController extends Controller
     public function destroy($id)
     {
         $data = Keuangan::find($id);
-        $total = TotalKeuangan::find($data->id);
+        $total = TotalKeuangan::where('keuangan_id', $data->id)->delete();
         $data->delete();
-        $total->delete();
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
 
     public function pemasukanIndex() {
         $data   = Keuangan::whereBetween('created_at', 
-        [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()])->latest()->get();
+        [\Carbon\Carbon::now()->startOfMonth(), \Carbon\Carbon::now()->endOfMonth()])->latest()->get();
         $region = Region::all(); 
 
         return view('admin.keuangan.Pemasukan', compact('data', 'region'));
+    }
+
+    public function pemasukanShow($id) {
+        $keuangan = Keuangan::find($id);
+
+        $data = $keuangan->load('region');
+
+        return response()->json($data);
+    }
+
+    public function pemasukanVerify($id, $regid) {
+        $data = Keuangan::find($id);
+
+        $data->status = 'Lunas';
+        
+        if($data->status == 'Lunas') {
+            $data->save();
+            $total = new TotalKeuangan;
+            $total->region_id = $regid;
+            $total->keuangan_id = $data->id;
+            $total->jumlah = $data->jumlah;
+            $total->save();
+        }
+
+        return redirect()->back()->with('success', 'Berhasil Diverifikasi');
     }
 
     public function pengeluaranIndex() {
