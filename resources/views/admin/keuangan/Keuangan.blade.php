@@ -58,15 +58,15 @@
                             <tr>
                                 <th>Region</th>
                                 <th>Total</th>
-                                <th>Aksi</th>
+                                {{-- <th>Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                           @foreach ($data as $d)
                           <tr>
-                            <td>{{ $d->region->region }}</td>
-                            <td>-Rp.@convert($d->sum('jumlah'))</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
+                            <td>{{ $d->region }}</td>
+                            <td>-Rp.@convert($d->totalsemua)</td>
+                            {{-- <td>{{ $d }}</td> --}}
                           </tr>
                           @endforeach
                         </tbody>
@@ -181,8 +181,18 @@
             });
   })
 
+  let chart = {!!json_encode($chart)!!}
+  let reg = []
+  let total = []
+  chart.forEach(x => {
+      reg.push(x.region)
+      total.push(x.totalsemua)
+  });
+
+  // console.log(reg)
+
   let areaChartData = {
-        labels  : ['red','Yellow', 'Blue'],
+        labels  : reg,
         datasets: [
           {
             label               : 'Event',
@@ -197,7 +207,7 @@
               '#7d1fdb',
               '#f2187e',
             ],
-            data                : [34, 54, 83]
+            data                : total
           },
         ]
       }

@@ -21,35 +21,11 @@ class KeuanganController extends Controller
      */
     public function index()
     {   
-        $data = TotalKeuangan::with('region')->groupBy('region_id')->selectRaw('sum(jumlah) as total, region_id')->pluck('total', 'region_id');
-        // $data   = TotalKeuangan::with('region')->get();
-        dd($data);
-        return view('admin.keuangan.Keuangan', compact('data'));
-    }
+        $data = Region::addSelect(['totalsemua' => TotalKeuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
+        ->groupBy('region_id')])->orderBy('totalsemua', 'DESC')->get();
+        $chart =$data->toArray();
 
-    public function graphic()
-    {
-
-        $event_money = Keuangan::select(
-                    DB::raw('sum(jumlah) as amount_event'),
-                    DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
-                        )
-                        ->where("kategori", "Event")
-                        ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                        ->groupBy('months')
-                        ->orderBy('created_at', 'asc')
-                        ->get();
-
-        $mingguan_money = Keuangan::select(
-                        DB::raw("sum(jumlah) as amount_mingguan"),
-                        DB::raw("DATE_FORMAT(created_at,'%M %Y') as month")
-                        )
-                        ->where("kategori", "Mingguan")
-                        ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                        ->groupBy("month")
-                        ->get();
-
-        return response()->json(["data1" => $event_money, "data2" => $mingguan_money], 200);
+        return view('admin.keuangan.Keuangan', compact('data', 'chart'));
     }
 
     public function create()
