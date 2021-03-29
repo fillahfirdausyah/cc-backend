@@ -106,15 +106,13 @@ class TenantController extends Controller
     public function create()
     {
         $tenant = Tenant::where('user_id', Auth::id())->first();
-        if ($tenant != NULL && $tenant->verified == 'yes') {
-            return redirect('/tenant');
-        }else if($tenant != NULL && $tenant->verified == NULL){
-            return view('showroom2.tenant.tenant-register', compact('tenant'))->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu'); 
-        }else{
+        if($tenant == NULL){
             $user = Auth::user();
         
             return view('showroom2.tenant.tenant-register', compact('user', 'tenant'));
         }
+
+        return redirect('/tenant')->with('tenant');
         
     }
 
@@ -152,9 +150,7 @@ class TenantController extends Controller
             $t->save();
 
             return redirect()->back()->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');
-        } else {
-            return redirect()->back()->withErrors('Anda Sudah terdaftar sebagai tenant/Anda Belum diverifikasi oleh Admin');
-        }
+        } 
     }
 
     public function show(Tenant $tenant)

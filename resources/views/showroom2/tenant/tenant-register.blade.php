@@ -28,17 +28,15 @@
 	        </ul>
 	    </div>
 	@endif
-	@if($tenant != NULL)
-		@if (session('status'))
-		    <div class="alert alert-success">
-		        {{ session('status') }}
-		    </div>
-		@endif
-	@else
 
 
 	<br>
 
+	@if($tenant != NULL)
+	    <div class="alert alert-success">
+	        {{ $status }}
+	    </div>
+	@else
 	<form action="/tenant/register" method="post">
 		@csrf
 		<input type="hidden" name="user_id" value="{{ $user->id }}">

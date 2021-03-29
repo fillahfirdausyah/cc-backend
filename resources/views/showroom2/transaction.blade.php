@@ -55,7 +55,7 @@
           <td colspan="2"><span class="badge badge-danger">Menunggu Konfirmasi (1x24jam)</span></td>
         @elseif($t->confirmed != NULL && $t->payment == NULL)
           <td colspan="2">
-            Silahkan Transfer ke {{$t->seller->tenant->rekening}}-{{$t->seller->tenant->bank}}<br>
+            Transfer ke {{$t->seller->tenant->rekening}}- a/n {{$t->seller->tenant->pemilik_rekening}}({{$t->seller->tenant->bank}})<br>
             <form method="post" action="/showroom/transfer" enctype="multipart/form-data" style="display: none;" id="bt-{{$t->id}}">
               @csrf
               <input type="hidden" name="id" value="{{ $t->id }}">
