@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="auth_id" content="{{ Auth::id() }}">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
@@ -44,20 +45,15 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/showroom" class="logo">CC<em> Showroom</em></a>
+
+                        
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/showroom">Home</a></li>
+                            <li><a href="/showroom"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                            <li><a href="/showroom/cars"><i class="fa fa-car" aria-hidden="true"></i> Cars</a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cars</a>
-                              
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/showroom/cars">Cars</a>
-                                    <a class="dropdown-item" href="/showroom/upload/car">Sell Car</a>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Others</a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list" aria-hidden="true"></i> Others</a>
                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/showroom/autoshop">Autoshops</a>
@@ -67,6 +63,15 @@
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
+<<<<<<< HEAD
+=======
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                <div class="dropdown-menu mr-5">
+                                    <a class="dropdown-item">Notifikasi 1</a>
+>>>>>>> 66b5d7e68357d18d86035f65c143162a1f310872
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -80,7 +85,7 @@
                                         </div>
                                     </div>
                                     <a class="dropdown-item" href="/tenant">Tenant</a>
-                                    <a class="dropdown-item" href="/showroom/list/car">Your Cars</a>
+                                    <a class="dropdown-item" href="/showroom/transaction">Transaction</a>
                                     <a class="dropdown-item" href="">Website</a>
                                     <a class="dropdown-item" href="/member/home">Social Network</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -117,6 +122,7 @@
         </div>
     </footer>
 
+    @stack('js')
     <!-- jQuery -->
     <script src="{{ asset('assets/vendor/showroom/assets/js/jquery-2.1.0.min.js') }}"></script>
 
@@ -134,53 +140,28 @@
     
     <!-- Global Init -->
     <script src="{{ asset('assets/vendor/showroom/assets/js/custom.js') }}"></script>
-    
     <script type="text/javascript">
-
-    let slide = document.getElementById("slide-show");
-
-    console.log(slide);
-
-    slide.classList.add('active');
-
-    //--- Start slideshow --------------------------------// 
-
-    // var slideIndex = 1;
-    // showSlides(slideIndex);
-
-    // // Next/previous controls
-    // function plusSlides(n) {
-    //   showSlides(slideIndex += n);
-    // }
-
-    // // Thumbnail image controls
-    // function currentSlide(n) {
-    //   showSlides(slideIndex = n);
-    // }
-
-    // function showSlides(n) {
-    //   var i;
-    //   var slides = document.getElementsByClassName("mySlides");
-    //   var dots = document.getElementsByClassName("dot");
-    //   if (n > slides.length) {slideIndex = 1}
-    //   if (n < 1) {slideIndex = slides.length}
-    //   for (i = 0; i < slides.length; i++) {
-    //       slides[i].style.display = "none";
-    //   }
-    //   for (i = 0; i < dots.length; i++) {
-    //       dots[i].className = dots[i].className.replace(" active", "");
-    //   }
-    //   slides[slideIndex-1].style.display = "block";
-    //   dots[slideIndex-1].class += " active";
-    // }
-    
-    //--- End slideshow --------------------------------//
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    function interest(){
+        document.getElementById('buy').style.display = 'block';
+        document.getElementById('interest').style.display = 'none';
+    }
+
+    function upload(id){
+        var i = id;
+        document.getElementById('bt-'+i).style.display = 'block';
+        document.getElementById('upload-'+i).style.display = 'none';
+    }
+
+
+    function myFunction(){
+        alert('yey');
+    }
 
     function wishlist(){
         var user_id = $("#user_id").val();
@@ -207,7 +188,6 @@
           }
         });
     }
-
     </script>
   </body>
 </html>

@@ -21,7 +21,7 @@ class CreateMerchandiseTable extends Migration
             $table->string('kategori');
             $table->string('kondisi', 6);
             $table->integer('stok');
-            $table->bigInteger('harga');
+            $table->decimal('harga', $precision = 19, $scale = 4);
             $table->text('deskripsi');
             $table->string('slug');
             $table->text('gambar');

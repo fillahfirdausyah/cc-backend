@@ -147,11 +147,14 @@ Route::middleware(['cektenant'])->group(function () {
 	Route::post('/showroom/upload/autoshop', 'AutoshopController@store');
 	Route::get('/showroom/upload/merchandise', 'MerchandiseController@create') ;
 	Route::post('/showroom/upload/merchandise', 'MerchandiseController@store') ;
+	Route::get('/showroom/upload/car', 'ShowroomController@create');
+	Route::post('/showroom/upload/car', 'ShowroomController@store');
 });
 Route::get('/tenant/register', 'TenantController@create');
 Route::post('/tenant/register', 'TenantController@store');
-Route::get('/showroom/upload/car', 'ShowroomController@create');
-Route::post('/showroom/upload/car', 'ShowroomController@store');
+Route::get('/tenant/car', 'TenantController@car');
+Route::get('/tenant/merchandise', 'TenantController@merchandise');
+Route::get('/tenant/autoshop', 'TenantController@autoshop');
 
 // Showroom
 Route::get('/showroom', 'ShowroomController@index');
@@ -197,6 +200,15 @@ Route::get('/pusher', function() {
 	return view('pusherTest');
 });
 
+// showroom Transaction
+Route::post('/showroom/interest', 'TransactionController@store');
+Route::post('/showroom/full', 'TransactionController@full');
+Route::get('/showroom/transaction', 'TransactionController@index');
+Route::post('/showroom/confirm', 'TransactionController@confirm');
+Route::post('/showroom/received', 'TransactionController@received');
+Route::post('/showroom/transfer', 'TransactionController@transfer');
+
+
 // Test Pusher
 Route::get('test', function() {
 	event(new App\Events\MyEvent('Hello World'));
@@ -207,4 +219,3 @@ Route::get('test', function() {
 
 Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'HomeController@index')->middleware('verified')->name('home');
-
