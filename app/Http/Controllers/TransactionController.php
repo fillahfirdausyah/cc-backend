@@ -74,12 +74,11 @@ class TransactionController extends Controller
 
     public function confirm(Request $request)
     {
-        // $t = Transaksi::find($request->id);
-        // $t->confirmed = Carbon::now();
-        // $t->save();
+        $t = Transaksi::find($request->id);
+        $t->confirmed = Carbon::now();
+        $t->save();
 
-        // event(new NotifBuyer(array($t)));
-        event(new NotifBuyer($t));
+        // event(new NotifBuyer($t));
         return redirect()->back();
     }
 
