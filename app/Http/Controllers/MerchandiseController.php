@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\CommentMerchandise;
 use App\Models\Merchandise;
+use App\Models\Transaksi;
 use App\Models\Wishlist;
 use App\Models\Region;
 use App\Models\User;
@@ -32,7 +33,7 @@ class MerchandiseController extends Controller
             }
         }
 
-		return view('showroom2.merchandise', compact('merchan', 'collectM'));
+		return view('showroom2.merchandise.merchandise', compact('merchan', 'collectM'));
 	}
 
 	public function show($id, $slug)
@@ -44,16 +45,16 @@ class MerchandiseController extends Controller
                             ->where('jenis', 'merchandise')
                             ->first();
         $user = Merchandise::find($id)->user()->first();
-        dd($user);
+        $transaction = Transaksi::where('item_id', $id)->first();
 
-		return view('showroom2.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment'));
+		return view('showroom2.merchandise.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment', 'transaction'));
 	}
 
     public function create()
     {
     	$user = Auth::id();
     	$region = Region::all();
-    	return view('showroom2.upload-merchandise', compact('user', 'region')); 
+    	return view('showroom2.merchandise.upload-merchandise', compact('user', 'region')); 
     }
 
     public function store(Request $request)
@@ -111,7 +112,7 @@ class MerchandiseController extends Controller
             abort(403);
         }
 
-        return view('showroom2.edit-merchandise', compact('user', 'region', 'merchan')); 
+        return view('showroom2.merchandise.edit-merchandise', compact('user', 'region', 'merchan')); 
     }
 
     public function update(Request $request, Merchandise $merchan)
@@ -170,7 +171,7 @@ class MerchandiseController extends Controller
         }
         $merchan->delete();
 
-        return redirect('/showroom');
+        return redirect('/showroom/merchandise');
     }
 
     public function search(Request $request)
@@ -192,7 +193,7 @@ class MerchandiseController extends Controller
             }
         }
 
-        return view('showroom2.merchandise', compact('merchan', 'collectM'));
+        return view('showroom2.merchandise.merchandise', compact('merchan', 'collectM'));
 
     }
     public function comment(Request $request)

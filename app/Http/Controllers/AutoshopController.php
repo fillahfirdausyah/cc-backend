@@ -33,7 +33,7 @@ class AutoshopController extends Controller
                 $collectB[] = $convB[$i][0];
             }
         }
-        return view('showroom2.autoshops',compact('bengkel', 'collectB'));
+        return view('showroom2.autoshop.autoshops',compact('bengkel', 'collectB'));
     }
 
     public function show($id, $slug)
@@ -53,7 +53,7 @@ class AutoshopController extends Controller
         $like = LikeBengkel::select('like')->where('post_id', '=', $id)->get();
         $likes = count($like);
 
-        return view('showroom2.autoshop-detail', compact( 'bengkel', 'comment', 'likes', 'user', 'wishlist'));  
+        return view('showroom2.autoshop.autoshop-detail', compact( 'bengkel', 'comment', 'likes', 'user', 'wishlist'));  
     }
 
     public function create()
@@ -61,7 +61,7 @@ class AutoshopController extends Controller
         $user = Auth::id();
         $region = Region::all();
 
-        return view('showroom2.upload-autoshop',compact('user', 'region'));
+        return view('showroom2.autoshop.upload-autoshop',compact('user', 'region'));
     }
 
     public function store(Request $request)
@@ -121,7 +121,7 @@ class AutoshopController extends Controller
         }
         $region = Region::all();
 
-        return view('showroom2.edit-autoshop',compact('user', 'region', 'bengkel'));
+        return view('showroom2.autoshop.edit-autoshop',compact('user', 'region', 'bengkel'));
     }
 
     public function update(Request $request)
@@ -210,31 +210,31 @@ class AutoshopController extends Controller
                 $collectB[] = $convB[$i][0];
             }
         }
-        return view('showroom2.autoshops',compact('bengkel', 'collectB'));
+        return view('showroom2.autoshop.autoshops',compact('bengkel', 'collectB'));
     }
-    public function createPromo($id)
-    {
-        $bengkel = Bengkel::find($id);
+    // public function createPromo($id)
+    // {
+    //     $bengkel = Bengkel::find($id);
 
-        return view('showroom.PromoBengkel', compact('bengkel'));
-    }
+    //     return view('showroom.PromoBengkel', compact('bengkel'));
+    // }
 
-    public function storePromo(Request $request, $id, SR $sr)
-    {
-        if (! Gate::allows('update-sr', $sr)) {
-            $input_data = $request->all();
+    // public function storePromo(Request $request, $id, SR $sr)
+    // {
+    //     if (! Gate::allows('update-sr', $sr)) {
+    //         $input_data = $request->all();
 
-            $validator = Validator::make($input_data, [
-                'promo' => 'required | integer'
-            ]);
+    //         $validator = Validator::make($input_data, [
+    //             'promo' => 'required | integer'
+    //         ]);
 
-            $bengkel = Bengkel::find($id);
-            $bengkel->promo = $request->promo;
-            $bengkel->save();
+    //         $bengkel = Bengkel::find($id);
+    //         $bengkel->promo = $request->promo;
+    //         $bengkel->save();
 
-            return redirect()->back()->with('success', 'Promo berhasil Ditambahkan silahkan kembali!');
-        }
-    }
+    //         return redirect()->back()->with('success', 'Promo berhasil Ditambahkan silahkan kembali!');
+    //     }
+    // }
 
     public function comment(Request $request)
     {
@@ -259,22 +259,22 @@ class AutoshopController extends Controller
         return redirect()->back();   
     } 
 
-    public function like(Request $request)
-    {
-        if (LikeBengkel::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'))->count() < 1) {
-            $like = new LikeBengkel();
-            $like->like = $request->get('like');
-            $like->user_id = $request->get('user_id');
-            $like->post_id = $request->get('post_id');
-            $like->save(); 
-        }else{
-            $like = LikeBengkel::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'));
-            $like->delete();
-        }
+    // public function like(Request $request)
+    // {
+    //     if (LikeBengkel::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'))->count() < 1) {
+    //         $like = new LikeBengkel();
+    //         $like->like = $request->get('like');
+    //         $like->user_id = $request->get('user_id');
+    //         $like->post_id = $request->get('post_id');
+    //         $like->save(); 
+    //     }else{
+    //         $like = LikeBengkel::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'));
+    //         $like->delete();
+    //     }
 
-        $like = LikeBengkel::select('like')->where('post_id', '=', $request->get('post_id'))->get();
-        $likes = count($like);
+    //     $like = LikeBengkel::select('like')->where('post_id', '=', $request->get('post_id'))->get();
+    //     $likes = count($like);
 
-        echo $likes;  
-    }
+    //     echo $likes;  
+    // }
 }

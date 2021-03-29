@@ -24,7 +24,7 @@ class ShowroomController extends Controller
     {
         $convSR = [];
         $collectSR = [];
-        $SR = SR::where('verified', 'yes')->take(20)->get();
+        $SR = SR::paginate(20);
         if($SR != NULL){
             foreach ($SR as $sr) {
                  $convSR[] = json_decode($sr->gambar);
@@ -43,7 +43,7 @@ class ShowroomController extends Controller
     {
         $convSR = [];
         $collectCar = [];
-        $SR = SR::where('verified', 'yes')->paginate(20);
+        $SR = SR::paginate(20);
         if($SR != NULL){
             foreach ($SR as $sr) {
                  $convSR[] = json_decode($sr->gambar);
@@ -55,30 +55,7 @@ class ShowroomController extends Controller
             }
         }
 
-        return view('showroom2.cars', compact('collectCar', 'SR'));
-    }
-
-    public function list()
-    {
-
-        $convSR = [];
-        $collectCar = [];
-        $SR = SR::whereHas('user', function($q){
-            $q->where('user_id', Auth::id());
-        })->paginate(20);
-
-        if($SR != NULL){
-            foreach ($SR as $sr) {
-                 $convSR[] = json_decode($sr->gambar);
-            }
-
-            $count = count($convSR);
-            for ($i=0; $i < $count; $i++) { 
-                $collectCar[] = $convSR[$i][0];
-            }
-        }
-
-        return view('showroom2.list-cars', compact('collectCar', 'SR'));
+        return view('showroom2.cars.cars', compact('collectCar', 'SR'));
     }
 
     public function detail($id, $slug)
@@ -96,7 +73,7 @@ class ShowroomController extends Controller
                             ->where('jenis', 'car')
                             ->first();
 
-        return view('showroom2.car-details', compact('SR', 'user', 'tenant', 'wishlist'));
+        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist'));
     }
 
     // Showroom
@@ -104,7 +81,7 @@ class ShowroomController extends Controller
     {
         $user = Auth::user();
 
-        return view('showroom2.upload-car', compact('user'));
+        return view('showroom2.cars.upload-car', compact('user'));
     }
 
     public function store(Request $request)
@@ -178,7 +155,7 @@ class ShowroomController extends Controller
         }else {
         $user = Auth::user();
 
-        return view('showroom2.edit-car', compact('user', 'SR'));
+        return view('showroom2.cars.edit-car', compact('user', 'SR'));
         }
     }
 
@@ -260,7 +237,7 @@ class ShowroomController extends Controller
 
         $sr->delete();
 
-        return redirect('/showroom');
+        return redirect('/showroom/cars');
     }
 
     public function comment(Request $request)
@@ -316,6 +293,6 @@ class ShowroomController extends Controller
             }
         }
 
-        return view('showroom2.cars', compact('collectCar', 'SR'));
+        return view('showroom2.cars.cars', compact('collectCar', 'SR'));
     }
 }

@@ -24,7 +24,7 @@ class CekTenant
         if($tenant != NULL && $tenant->verified == 'yes'){
             return $next($request);
         }else if($tenant != NULL && $tenant->verified == NULL) {
-            return redirect('/tenant/register', compact('tenant'))->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');    
+            return view('showroom2.tenant.tenant-register', ['tenant' => $tenant])->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');    
         }
 
         return redirect('/tenant/register');

@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+Broadcast::channel('notif-showroom.{to_id}', function ($user, $receiver_id) {
+    return (int) $user->id === (int) $to_id;
+});
