@@ -137,7 +137,7 @@
           <img src="{{ asset('image/Member/Profile/'.Auth::user()->profile->foto_profile) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->tenant->nama }}</a>
+          <a href="#" class="d-block">{{ Auth::user()->tenant->nama }} ({{ Auth::user()->tenant->tenant_id }})</a>
           <a href="{{'/tenant/edit/'.Auth::user()->tenant->id }}" class="btn-sm btn-success text-center">Edit</a>
         </div>
       </div>

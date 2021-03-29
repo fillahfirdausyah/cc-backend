@@ -141,7 +141,7 @@ class TenantController extends Controller
             }
 
             $t = new Tenant();
-            $t->tenant_id = "MIG".$request->user_id;
+            $t->tenant_id = "MIG-".$request->user_id;
             $t->nama = $request->nama;
             $t->user_id = $request->user_id;
             $t->email = $request->email;
