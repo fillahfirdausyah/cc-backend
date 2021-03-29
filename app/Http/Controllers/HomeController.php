@@ -37,19 +37,8 @@ class HomeController extends Controller
         $event    = Event::count();
         $user     = User::count();
         $region   = Region::all();
-        $showroom = SR::where('verified', NULL)->get();
-        if($showroom != NULL){
-            foreach ($showroom as $sr) {
-                 $convSR[] = json_decode($sr->gambar);
-            }
-
-            $count = count($convSR);
-            for ($i=0; $i < $count; $i++) { 
-                $collectSR[] = $convSR[$i][0];
-            }
-        }
 
         
-        return view('admin.Dashboard', compact('news', 'event', 'user', 'region', 'showroom', 'collectSR'));
+        return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
     }
 }

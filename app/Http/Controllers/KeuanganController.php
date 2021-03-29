@@ -21,10 +21,11 @@ class KeuanganController extends Controller
      */
     public function index()
     {   
-        $data = Region::addSelect(['totalsemua' => TotalKeuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
+        $data = Region::addSelect(['totalsemua' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
         ->groupBy('region_id')])->orderBy('totalsemua', 'DESC')->get();
-        $chart =$data->toArray();
-
+        // dd($data);
+        $chart = $data->toArray();
+        // dd($chart);
         return view('admin.keuangan.Keuangan', compact('data', 'chart'));
     }
 
@@ -240,9 +241,31 @@ class KeuanganController extends Controller
         return redirect()->back()->with('success', 'Berhasil Diverifikasi');
     }
 
+    // Pengeluaran
+
     public function pengeluaranIndex() {
 
 
-        return view('admin.keuangan.Pengeluaran');
+        return view('admin.keuangan.pengeluaran.Pengeluaran');
+    }
+
+    public function pengeluaranAdd() {
+        $region = Region::all();
+
+        return view('admin.keuangan.pengeluaran.Create', compact('region'));
+    }
+
+    public function getSaldo(Request $request) {
+        
+        $region = Region::find($request->id);
+
+        $data = $region->total()->get();
+
+        return response()->json($data);
+
+    }
+
+    public function pengeluaranStore(Request $request) {
+        dd($request);
     }
 }

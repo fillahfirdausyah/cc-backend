@@ -182,23 +182,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview mt-2" disabled>
-            <a href="admin/news" class="nav-link active">
-              <i class="nav-icon fas fa-car-side"></i>
-              <p>
-                Showroom
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cars</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item has-treeview mt-2">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-money-check-alt"></i>
