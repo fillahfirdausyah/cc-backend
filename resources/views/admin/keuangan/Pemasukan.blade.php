@@ -150,10 +150,6 @@
                               <td colspan="8" class="text-center">Tidak ada data</td>
                           </tr>
                           @endforelse
-                          <tr>
-                            <td colspan="2">Total:</td>
-                            <td>-Rp.@convert($data->sum('jumlah'))</td>
-                          </tr>
                         </tbody>
                         {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
                       </table>
@@ -231,7 +227,6 @@
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-          // console.log(data.region.id)
           $('#modalData').modal('show');
 
           $('#keuanganData').html(`

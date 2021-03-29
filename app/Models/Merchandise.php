@@ -31,6 +31,11 @@ class Merchandise extends Model
         return $this->hasMany(Wishlist::class, 'produk_id', 'id');
     }
 
+    public function transaction()
+    {
+        return $this->hasOne(Transaksi::class, 'item_id');
+    }
+
     public static function boot() {
         parent::boot();
     

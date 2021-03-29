@@ -119,7 +119,6 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-tambah-daerah" class="btn btn-sm btn-info float-left">Tambah Daerah Baru</a>
                   </div>
                   <!-- /.card-footer -->
                 </div>

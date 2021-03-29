@@ -99,4 +99,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Wishlist::class); 
     }
+
+    public function buyer()
+    {
+        return $this->hasOne(Transaksi::class, 'buyer_id');
+    }
+
+    public function seller()
+    {
+        return $this->hasOne(Transaksi::class, 'seller_id');
+    }
 }

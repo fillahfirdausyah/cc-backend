@@ -190,18 +190,15 @@
       total.push(x.totalsemua)
   });
 
-  for(let i = 0; i <= reg.length; i++) {
+  for(let i = 0; i < reg.length; i++) {
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
     warna.push(`#${randomColor}`);
   }
-
-  console.log(warna)
 
   let areaChartData = {
         labels  : reg,
         datasets: [
           {
-            label               : 'Event',
             borderColor         : 'rgba(210, 214, 222, 1)',
             pointRadius         : false,
             pointColor          : 'rgba(210, 214, 222, 1)',
@@ -229,22 +226,5 @@
     data: lineChartData, 
     options: lineChartOptions
   })
-
-
-function aksi(id){
-      event.preventDefault();
-      const url = document.getElementById('confirm').getAttribute('href')
-      swal({
-        title: 'Yaking ingin menghapus?',
-        text: "Data akan dihapus permanen",
-        icon: 'warning',
-        buttons: true,
-        dangerMode: false,
-      }).then(function(result){
-        if(result){
-         window.location.href = url + id;
-        }
-      });
-    }
 </script>  
 @endpush

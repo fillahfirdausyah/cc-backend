@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
 use App\Models\Tenant;
 
@@ -24,7 +25,7 @@ class CekTenant
         if($tenant != NULL && $tenant->verified == 'yes'){
             return $next($request);
         }else if($tenant != NULL && $tenant->verified == NULL) {
-            return redirect('/tenant/register', compact('tenant'))->with('status', 'silahkan tunggu verifikasi dari Admin terlebih dahulu');    
+            return response()->view('showroom2.tenant.tenant-register', ['tenant' => $tenant, 'status' => 'Silahkan tunggu verifikasi dari Admin terlebih dahulu']);    
         }
 
         return redirect('/tenant/register');
