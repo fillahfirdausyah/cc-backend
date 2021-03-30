@@ -24,10 +24,10 @@
     <section class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Grafik</h3>
+                      <h3 class="card-title">Grafik Total Pemasukan</h3>
       
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -44,10 +44,10 @@
                   </div>
                   <!-- /.card -->
              </div>
-             <div class="col-md-6">
+             <div class="col-md-4">
               <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">Total Semua</h3>
+                <div class="card-header" style="background-color: #2de060">
+                  <h3 class="card-title">Total Pendapatan</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -62,10 +62,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach ($data as $d)
+                          @foreach ($dataPemasukan as $d)
                           <tr>
                             <td>{{ $d->region }}</td>
-                            <td>-Rp.@convert($d->totalsemua)</td>
+                            <td style="color: #2de060">-Rp.@convert($d->totalPendapatan)</td>
                             {{-- <td>{{ $d }}</td> --}}
                           </tr>
                           @endforeach
@@ -79,6 +79,76 @@
                 </div>
               </div>
              </div>
+             <div class="col-md-4">
+              <div class="card">
+                <div class="card-header" style="background-color: red">
+                  <h3 class="card-title">Total Pengeluaran</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Total</th>
+                                {{-- <th>Aksi</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($dataPengeluaran as $d)
+                          <tr>
+                            <td>{{ $d->region }}</td>
+                            <td style="color: red">-Rp.@convert($d->totalPengeluaran)</td>
+                            {{-- <td>{{ $d }}</td> --}}
+                          </tr>
+                          @endforeach
+                        </tbody>
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
+                      </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                  <div class="card-footer">
+                </div>
+              </div>
+             </div> 
+             <div class="col-md-4">
+              <div class="card">
+                <div class="card-header" style="background-color: #42a4ff">
+                  <h3 class="card-title">Saldo Region</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Saldo</th>
+                                {{-- <th>Aksi</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($dataPemasukan as $d)
+                          <tr>
+                            <td>{{ $d->region }}</td>
+                            <td style="color: #42a4ff">-Rp.@convert($d->dataPemasukan)</td>
+                            {{-- <td>{{ $d }}</td> --}}
+                          </tr>
+                          @endforeach
+                        </tbody>
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
+                      </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                  <div class="card-footer">
+                </div>
+              </div>
+             </div> 
              {{-- <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
@@ -187,7 +257,7 @@
   let warna = []
   chart.forEach(x => {
       reg.push(x.region)
-      total.push(x.totalsemua)
+      total.push(x.totalPendapatan)
   });
 
   for(let i = 0; i < reg.length; i++) {

@@ -35,8 +35,8 @@
                       @csrf
                       <div class="card-body">
                         <div class="form-group">
-                            <label>Pengeluaran</label>
-                            <input type="text" class="form-control" name="pengeluaran" id="pengeluaran">
+                            <label>Nama Pengeluaran</label>
+                            <input type="text" class="form-control" name="nama" id="pengeluaran">
                         </div>
                         <div class="form-group">
                             <label>Region</label>
@@ -46,10 +46,6 @@
                                   <option value="{{ $reg->id }}">{{ $reg->region }}</option>
                               @endforeach
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Saldo Region</label>
-                            <input type="text" class="form-control" id="saldo" value="-Rp.@convert(0)" readonly>
                         </div>
                         <div class="form-group">
                           <label for="jumalah">Jumlah Pengeluaran</label>
@@ -102,7 +98,7 @@
             response.forEach(x => {
                res += x.jumlah
             });
-            $('#saldo').val(res).simpleMoneyFormat();
+            // $('#saldo').val(res).simpleMoneyFormat();
         }
       });
   }

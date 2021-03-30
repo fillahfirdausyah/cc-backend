@@ -57,20 +57,30 @@
                                 <th>Pengeluaran</th>
                                 <th>Jumlah</th>
                                 <th>Kategori</th>
-                                <th>Tanggal</th>
                                 <th>Region</th>
+                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                         <tr>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                             <td>Lorem ipsum dolor sit amet.</td>
-                         </tr>
+                          @forelse ($data as $d)
+                          <tr> 
+                            <td>{{ $d->nama }}</td>
+                            <td style="color: red">-Rp.@convert($d->jumlah)</td>
+                            <td>{{ $d->kategori }}</td>
+                            <p hidden>{{ $r = \App\Models\Keuangan::find($d->id)->region()->get() }}</p>
+                             @foreach ($r as $re)
+                             <td>{{ $re->region }}</td>
+                             @endforeach
+                            <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
+                            <td>Lorem ipsum dolor sit amet.</td>
+                          </tr>
+                          @empty
+                          <tr>
+                            <td>Tidak ada data</td>
+                          </tr>
+                          @endforelse
+                         
                         </tbody>
                       </table>
                     </div>

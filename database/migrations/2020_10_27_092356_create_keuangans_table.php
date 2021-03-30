@@ -16,12 +16,13 @@ class CreateKeuangansTable extends Migration
         Schema::create('keuangans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('region_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('email');
-            $table->string('nama');
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->string('tipe_transaksi')->nullable();
+            $table->string('email')->nullable();
+            $table->string('nama')->nullable();
             $table->bigInteger('jumlah');
             $table->string('kategori')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('bukti')->nullable();
             $table->timestamps();
         });

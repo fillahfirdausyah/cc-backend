@@ -16,7 +16,6 @@ class CreateTotalKeuangansTable extends Migration
         Schema::create('total_keuangans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('region_id')->unsigned();
-            $table->bigInteger('keuangan_id')->unsigned();
             $table->bigInteger('jumlah');
             $table->timestamps();
         });

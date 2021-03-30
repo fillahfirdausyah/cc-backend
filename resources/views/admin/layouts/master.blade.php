@@ -163,6 +163,7 @@
               <p>
                 User
                 <i class="right fas fa-angle-left"></i>
+                <span class="badge badge-danger notify-count">0</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -170,6 +171,7 @@
                 <a href="{{ '/admin/user/list' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Member</p>
+                
                 </a>
               </li>
             </ul>

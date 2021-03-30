@@ -84,7 +84,6 @@ Route::get('/admin/keuangan/pemasukan/verify/{id}/{regid}', 'KeuanganController@
 Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaranIndex');
 Route::get('/admin/keuangan/pengeluaran/add', 'KeuanganController@pengeluaranAdd');
 Route::post('/admin/keuangan/pengeluaran/store', 'KeuanganController@pengeluaranStore');
-Route::post('/admin/keuangan/getsaldo/', 'KeuanganController@getSaldo');
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
