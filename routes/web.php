@@ -212,9 +212,13 @@ Route::post('/showroom/transfer', 'TransactionController@transfer');
 
 
 // Test Pusher
-Route::get('test', function() {
-	event(new App\Events\MyEvent('Hello World'));
+Route::get('/pushnotif', function() {
+	event(new App\Events\KartuIuran('hello world'));
 	return 'even terkirim';
+});
+
+Route::get('/pushertest', function() {
+	return view('pusherTest');
 });
 
 // Route::get('api/login', 'Api\ApiController@login');

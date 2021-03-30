@@ -163,7 +163,7 @@
               <p>
                 User
                 <i class="right fas fa-angle-left"></i>
-                <span class="badge badge-danger notify-count">0</span>
+                <span class="badge badge-danger notify-count" data-count="0">0</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -271,21 +271,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- Pusher -->
-{{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> --}}
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
-   // Enable pusher logging - don't include this in production
-   Pusher.logToConsole = true;
+  let notifBadge = $('.notify-count');
 
-  let notifyCount = $('.notify-count');
+  if(notifBadge.data('count') <= 0) {
+    notifBadge.hide;
+  }
 
-  let pusher = new Pusher('056152f21466ab3e8829', {
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('056152f21466ab3e8829', {
     cluster: 'ap1'
   });
 
-  let channel = pusher.subscribe('kartu-iuran-baru');
-  channel.bind('kartu-notifikasi', function(data) {
-    console.log(data.message);
+  var channel = pusher.subscribe('channel-iuran');
+  channel.bind('event-iuran', function(data) {
+    alert(JSON.stringify(data));
   });
+   
 </script>
 @stack('js-asset')
 

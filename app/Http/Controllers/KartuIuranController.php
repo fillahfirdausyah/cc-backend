@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Keuangan;
+use App\Events\KartuIuran;
 
 class KartuIuranController extends Controller
 {
@@ -74,6 +75,8 @@ class KartuIuranController extends Controller
         $data->status    = 'pending';
         $data->bukti     = $buktiIuran;
         $data->save();
+
+        event(new KartuIuran($data));
 
         return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }

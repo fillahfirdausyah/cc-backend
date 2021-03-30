@@ -135,7 +135,7 @@
                           @foreach ($dataPemasukan as $d)
                           <tr>
                             <td>{{ $d->region }}</td>
-                            <td style="color: #42a4ff">-Rp.@convert($d->dataPemasukan)</td>
+                            <td style="color: #42a4ff">-Rp.@convert($d->totalPendapatan)</td>
                             {{-- <td>{{ $d }}</td> --}}
                           </tr>
                           @endforeach

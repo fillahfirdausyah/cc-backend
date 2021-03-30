@@ -11,6 +11,9 @@ use App\Models\Region;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
+class Saldo {
+    var $total = [];
+}
 
 class KeuanganController extends Controller
 {
@@ -24,20 +27,27 @@ class KeuanganController extends Controller
         $dataPemasukan = Region::addSelect(['totalPendapatan' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
         ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->orderBy('totalPendapatan', 'DESC')->get();
         $dataPengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
-        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();
-
-        $chart = $dataPemasukan->toArray();
-
-        $pemasukan = Region::addSelect(['totalPendapatan' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
-        ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->orderBy('totalPendapatan', 'DESC')->get();
-        $pengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
-        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();
+        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();   
         
-        $saldo = $pemasukan->sum('totalPendapatan') - $pengeluaran->sum('totalPengeluaran');
+        $chart  = $dataPemasukan->toArray();
+       
+        
 
-        dd($saldo);
+    //    $saldo = new Saldo;
 
-        return view('admin.keuangan.Keuangan', compact('chart', 'saldo', 'dataPemasukan', 'dataPengeluaran'));
+    //    foreach($dataPengeluaran as $index => $p) {
+    //            $saldo->total[$index] = ['region' => $p->region, 'saldo' => $p->totalPengeluaran];
+    //            // $l = $p->totalPengeluaran;
+    //     }
+
+    //    for($i = 0; $i < 5; $i++) {
+    //     $saldo->total[$i] = ['region' => 3 + $i, 'saldo' => 900 + $i];
+    //    }
+
+    //    dd($saldo);
+
+
+        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran'));
     }
 
     public function create()
