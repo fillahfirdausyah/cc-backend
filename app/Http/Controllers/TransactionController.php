@@ -68,17 +68,22 @@ class TransactionController extends Controller
         $t->amount = $request->amount;
         $t->save();
 
-        // event(new NotifSeller(array($t)));
+        $a = $t->toArray();
+
+        // event(new NotifSeller($a));
+        
+        // event(new NotifSeller($t));
         return redirect()->back()->with('status', 'Telah ditambahkan ke transaksi');
     }
 
     public function confirm(Request $request)
     {
-        $t = Transaksi::find($request->id);
+        $t = Transaksi::findOrFail($request->id);
         $t->confirmed = Carbon::now();
         $t->save();
-
-        // event(new NotifBuyer($t));
+        
+        event(new NotifBuyer($t));
+        // NotifBuyer::dispatch($t);
         return redirect()->back();
     }
 

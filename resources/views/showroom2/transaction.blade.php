@@ -102,19 +102,28 @@
 
 @endsection
 @push('js')
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  
-  // var pusher = new Pusher('5655f5e5ff7fea17d766', {
-  //   cluster: 'ap1'
-  // });
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    
+    Pusher.logToConsole = true;
+    var id = document.querySelector('meta[name="auth_id"]').content;
 
-  // var channel = pusher.subscribe('notif-showroom.'+4);
-  // channel.bind('NotifBuyer.'+4, function(data) {
-  //   console.log('yey');
-  //   // app.messages.push(JSON.stringify(data));
-  // });
+    var pusher = new Pusher('5655f5e5ff7fea17d766', {
+      cluster: 'ap1'
+    });
 
-</script>
+    var channel = pusher.subscribe('notif-buyer.'+id);
+    channel.bind('NotifBuyer', function(data) {
+      alert(JSON.stringify(data));
+    });
+    
+    // Vue application
+    const app = new Vue({
+      el: '#app',
+      data: {
+        messages: [],
+      },
+    });
+  </script>
 @endpush

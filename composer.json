@@ -17,7 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.4",
-        "pusher/pusher-php-server": "^5.0",
+        "pusher/pusher-php-server": "^4.1",
         "realrashid/sweet-alert": "^3.1"
     },
     "require-dev": {
