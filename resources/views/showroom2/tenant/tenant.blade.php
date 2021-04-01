@@ -146,12 +146,13 @@
   <script>
     Pusher.logToConsole = true;
     var id = document.querySelector('meta[name="user_id"]').content;
+
     var pusher = new Pusher('5655f5e5ff7fea17d766', {
       cluster: 'ap1'
     });
 
-    var channel = pusher.subscribe('notif-seller.'+id);
-    channel.bind('NotifSeller', function(data) {
+    var channel = pusher.subscribe('notif-seller');
+    channel.bind('Notif-Seller', function(data) {
       alert(JSON.stringify(data));
     });
 

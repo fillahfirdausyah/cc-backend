@@ -30,11 +30,17 @@ class NotifBuyer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('notif-buyer.'.$this->fields->buyer_id);
+        // return ['notif-buyer.'.$this->fields->buyer_id];
+        return ['notif-buyer'];
     }
 
-    public function broadcastWith()
+    public function broadcastAs()
     {
-        return ['message' => $this->fields->status];
+        return 'Notif-Buyer';
     }
+
+    // public function broadcastWith()
+    // {
+    //     return ['message' => $this->fields->status];
+    // }
 }

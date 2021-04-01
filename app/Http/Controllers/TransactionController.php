@@ -68,9 +68,7 @@ class TransactionController extends Controller
         $t->amount = $request->amount;
         $t->save();
 
-        $a = $t->toArray();
-
-        // event(new NotifSeller($a));
+        event(new NotifSeller($t));
         
         // event(new NotifSeller($t));
         return redirect()->back()->with('status', 'Telah ditambahkan ke transaksi');

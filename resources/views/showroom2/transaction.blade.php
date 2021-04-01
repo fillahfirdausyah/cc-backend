@@ -113,11 +113,16 @@
       cluster: 'ap1'
     });
 
-    var channel = pusher.subscribe('notif-buyer.'+id);
-    channel.bind('NotifBuyer', function(data) {
+    // var channel = pusher.subscribe('notif-buyer.'+id);
+    // channel.bind('NotifBuyer', function(data) {
+    //   alert(JSON.stringify(data));
+    // });
+    
+    var channel = pusher.subscribe('notif-buyer');
+    channel.bind('Notif-Buyer', function(data) {
       alert(JSON.stringify(data));
     });
-    
+
     // Vue application
     const app = new Vue({
       el: '#app',
