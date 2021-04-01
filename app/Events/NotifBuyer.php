@@ -19,6 +19,7 @@ class NotifBuyer implements ShouldBroadcast
 
     public function __construct($fields)
     {
+        
         $this->fields = $fields;
     }
 
@@ -29,13 +30,17 @@ class NotifBuyer implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('notif-showroom.'.$this->fields[0]->buyer_id);
-        return new PrivateChannel('notif-showroom.'.$this->fields->buyer_id);
+        // return ['notif-buyer.'.$this->fields->buyer_id];
+        return ['notif-buyer'];
     }
 
-    public function broadcastWith()
+    public function broadcastAs()
     {
-        $message = $this->fields;
-        return $message;
+        return 'Notif-Buyer';
     }
+
+    // public function broadcastWith()
+    // {
+    //     return ['message' => $this->fields->status];
+    // }
 }

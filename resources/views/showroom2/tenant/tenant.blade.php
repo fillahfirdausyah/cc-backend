@@ -64,6 +64,7 @@
 
 
         <div class="row">
+          <div id="notif"></div>
           <div class="container">
             <div class="table-responsive">
               <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
@@ -97,7 +98,7 @@
                       <form method="post" action="/showroom/confirm">
                         @csrf
                         <input type="hidden" name="id" value="{{ $t->id }}">
-                        <button type="submit" class="btn btn-success" onclick="myFunction()">Konfirmasi Barang Tersedia</button>
+                        <button type="submit" class="btn btn-success">Konfirmasi Barang Tersedia</button>
                       </form>
                     </td>
                     @else
@@ -136,36 +137,32 @@
           </div>
         </div>
     </section>
-
   </div>
 @endsection
 
 @push('js')
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  // function myFunction(){
-  //   console.log('yey');
-  // }
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Pusher.logToConsole = true;
+    var id = document.querySelector('meta[name="user_id"]').content;
 
-  // var pusher = new Pusher('5655f5e5ff7fea17d766', {
-  //   cluster: 'ap1'
-  // });
+    var pusher = new Pusher('5655f5e5ff7fea17d766', {
+      cluster: 'ap1'
+    });
 
-  // var channel = pusher.subscribe('notif-showroom.'+4);
-  // channel.bind('NotifBuyer.'+4, function(data) {
-  //   console.log('yey');
-  //   // app.messages.push(JSON.stringify(data));
-  // });
+    var channel = pusher.subscribe('notif-seller');
+    channel.bind('Notif-Seller', function(data) {
+      alert(JSON.stringify(data));
+    });
 
-  // // Vue application
-  //   const app = new Vue({
-  //     el: '#app',
-  //     data: {
-  //       messages: [],
-  //     },
-  //   });
-
-</script>
+    // Vue application
+    const app = new Vue({
+      el: '#app',
+      data: {
+        messages: [],
+      },
+    });
+  </script>
 
 @endpush

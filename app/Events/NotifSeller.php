@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Transaksi;
 
 class NotifSeller implements ShouldBroadcast
 {
@@ -29,12 +28,16 @@ class NotifSeller implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('notif-showroom.'.$this[0]->fields->seller_id);
+        return ['notif-seller.'.$this->fields->seller_id];
     }
 
-    public function broadcastWith()
+    public function broadcastAs()
     {
-        $message = $this[0]->fields;
-        return $message;
+        return 'Notif-Seller';
     }
+
+    // public function broadcastWith()
+    // {
+    //     return ['message' => $this->fields->status];
+    // }
 }
