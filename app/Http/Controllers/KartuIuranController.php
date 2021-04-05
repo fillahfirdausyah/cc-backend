@@ -68,6 +68,7 @@ class KartuIuranController extends Controller
         $data = new Keuangan;
         $data->region_id = $regid; 
         $data->user_id   = $id;
+        $data->tipe_transaksi = 'pemasukan';
         $data->email     = $request->email;
         $data->nama      = $request->nama;
         $data->jumlah    = $request->jumlah;

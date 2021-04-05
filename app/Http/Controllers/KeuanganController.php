@@ -11,9 +11,9 @@ use App\Models\Region;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
-class Saldo {
-    var $total = [];
-}
+// class Saldo {
+//     var $total = [];
+// }
 
 class KeuanganController extends Controller
 {
@@ -28,7 +28,10 @@ class KeuanganController extends Controller
         ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->orderBy('totalPendapatan', 'DESC')->get();
         $dataPengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
         ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();   
-        
+
+        $saldo = Region::addSelect(['Saldo' => Keuangan::selectRaw('jumlah')] ,'')->orderBy('Saldo', 'DESC')->get();
+
+        dd($saldo);
         $chart  = $dataPemasukan->toArray();
        
         
@@ -139,14 +142,14 @@ class KeuanganController extends Controller
         }
 
         if($request->region == 0 && $request->kategori == "Semua") {
-            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }else if($request->region == 0 && $request->kategori == $request->kategori) {
-            $data = Keuangan::latest()->where('kategori', $request->kategori)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }
         else if($request->region == $request->region && $request->kategori == "Semua") {
-            $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }else {
-            $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }
 
         return view('admin.keuangan.Pemasukan', compact('data', 'region'));
@@ -223,8 +226,7 @@ class KeuanganController extends Controller
     public function pemasukanIndex() {
         $data   = Keuangan::whereBetween('created_at', 
         [\Carbon\Carbon::now()->startOfMonth(), \Carbon\Carbon::now()->endOfMonth()])->where('tipe_transaksi', 'pemasukan')->latest()->get();
-        $region = Region::all(); 
-
+        $region = Region::all();
         return view('admin.keuangan.Pemasukan', compact('data', 'region'));
     }
 

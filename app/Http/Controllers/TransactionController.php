@@ -62,7 +62,7 @@ class TransactionController extends Controller
 
         $t = new Transaksi();
         $t->item_id = $request->item_id;
-        $t->seller_id = $request->seller_id;
+        $t->seller_id = $request->seller_id; 
         $t->buyer_id = $request->buyer_id;
         $t->category = 'merchandise';
         $t->amount = $request->amount;

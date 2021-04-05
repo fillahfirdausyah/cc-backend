@@ -109,7 +109,7 @@
     Pusher.logToConsole = true;
     var id = document.querySelector('meta[name="auth_id"]').content;
 
-    var pusher = new Pusher('5655f5e5ff7fea17d766', {
+    var pusher = new Pusher('056152f21466ab3e8829', {
       cluster: 'ap1'
     });
 

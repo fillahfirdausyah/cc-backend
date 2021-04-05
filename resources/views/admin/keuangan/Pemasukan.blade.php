@@ -147,7 +147,7 @@
                           </tr>
                           @empty
                           <tr>
-                              <td colspan="8" class="text-center">Tidak ada data</td>
+                              <td colspan="8" class="text-center">Tidak ada data bulan ini</td>
                           </tr>
                           @endforelse
                         </tbody>

@@ -46,7 +46,7 @@
              </div>
              <div class="col-md-4">
               <div class="card">
-                <div class="card-header" style="background-color: #2de060">
+                <div class="card-header">
                   <h3 class="card-title">Total Pendapatan</h3>
                 </div>
                 <!-- /.card-header -->
@@ -81,7 +81,7 @@
              </div>
              <div class="col-md-4">
               <div class="card">
-                <div class="card-header" style="background-color: red">
+                <div class="card-header">
                   <h3 class="card-title">Total Pengeluaran</h3>
                 </div>
                 <!-- /.card-header -->
@@ -116,7 +116,7 @@
              </div> 
              <div class="col-md-4">
               <div class="card">
-                <div class="card-header" style="background-color: #42a4ff">
+                <div class="card-header">
                   <h3 class="card-title">Saldo Region</h3>
                 </div>
                 <!-- /.card-header -->
