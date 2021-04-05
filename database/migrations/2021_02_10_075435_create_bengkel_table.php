@@ -27,6 +27,7 @@ class CreateBengkelTable extends Migration
             $table->text('promo')->nullable();
             $table->text('gambar');
             $table->string('slug');
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });
     }

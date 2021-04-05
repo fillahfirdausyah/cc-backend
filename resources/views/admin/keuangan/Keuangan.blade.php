@@ -133,11 +133,13 @@
                         </thead>
                         <tbody>
                           @foreach ($dataPemasukan as $d)
+                          @foreach ($dataPengeluaran as $p)
                           <tr>
                             <td>{{ $d->region }}</td>
-                            <td style="color: #42a4ff">-Rp.@convert($d->totalPendapatan)</td>
+                            <td style="color: #42a4ff">-Rp.@convert($d->totalPendapatan - $p->totalPengeluaran)</td>
                             {{-- <td>{{ $d }}</td> --}}
                           </tr>
+                          @endforeach
                           @endforeach
                         </tbody>
                         {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}

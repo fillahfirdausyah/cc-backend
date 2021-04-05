@@ -25,6 +25,7 @@ class CreateMerchandiseTable extends Migration
             $table->text('deskripsi');
             $table->string('slug');
             $table->text('gambar');
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });
     }

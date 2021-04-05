@@ -81,7 +81,7 @@ class MerchandiseController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $destinationPath = 'image/Tenant/merchandise/'; 
             $profileImage ="imageMerchandise-".Str::slug($request->nama, '-').rand(00000,99999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -138,7 +138,7 @@ class MerchandiseController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $$destinationPath = 'image/Tenant/merchandise/';  
             $profileImage ="imageMerchandise-".Str::slug($request->nama, '-').rand(00000,99999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -171,7 +171,7 @@ class MerchandiseController extends Controller
         }
         $merchan->delete();
 
-        return redirect('/showroom/merchandise');
+        return redirect()->back();
     }
 
     public function search(Request $request)

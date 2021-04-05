@@ -89,7 +89,7 @@ class AutoshopController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $destinationPath = 'image/Tenant/autoshop/'; 
             $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -149,7 +149,7 @@ class AutoshopController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $destinationPath = 'image/Tenant/autoshop/'; 
             $profileImage ="imageBengkel-".Str::slug($request->nama, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -186,7 +186,7 @@ class AutoshopController extends Controller
         }
         $bengkel->delete();
 
-        return redirect('/showroom');
+        return redirect()->back();
     }
 
     public function search(Request $request)

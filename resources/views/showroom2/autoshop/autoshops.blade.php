@@ -47,7 +47,7 @@
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
-                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectB[$item]) }}" height="300">
+                        <img src="{{ asset('image/Tenant/autoshop/'.$collectB[$item]) }}" height="300">
                     </div>
                     <div class="down-content">
                         <span>

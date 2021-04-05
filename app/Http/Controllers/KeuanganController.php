@@ -28,10 +28,7 @@ class KeuanganController extends Controller
         ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->orderBy('totalPendapatan', 'DESC')->get();
         $dataPengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
         ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();   
-
-        $saldo = Region::addSelect(['Saldo' => Keuangan::selectRaw('jumlah')] ,'')->orderBy('Saldo', 'DESC')->get();
-
-        dd($saldo);
+        
         $chart  = $dataPemasukan->toArray();
        
         

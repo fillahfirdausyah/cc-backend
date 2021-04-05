@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class SR extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'show_room';
     protected $fillable = [ 'judul', 
@@ -19,6 +20,7 @@ class SR extends Model
     						'dagangan',
     						'slug'
     						];
+    protected $dates = ['deleted_at'];
 
 
    public function getRouteKeyName(){

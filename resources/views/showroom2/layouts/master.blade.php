@@ -137,6 +137,9 @@
     <script src="{{ asset('assets/vendor/showroom/assets/js/imgfix.min.js') }}"></script> 
     <script src="{{ asset('assets/vendor/showroom/assets/js/mixitup.js') }}"></script> 
     <script src="{{ asset('assets/vendor/showroom/assets/js/accordions.js') }}"></script>
+
+    <!-- pusher -->
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     
     <!-- Global Init -->
     <script src="{{ asset('assets/vendor/showroom/assets/js/custom.js') }}"></script>
@@ -145,6 +148,24 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+
+
+    Pusher.logToConsole = true;
+    var id = document.querySelector('meta[name="auth_id"]').content;
+
+    var pusher = new Pusher('056152f21466ab3e8829', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('notif-buyer'+id);
+    channel.bind('Notif-Buyer', function(data) {
+      alert(JSON.stringify(data));
+    });
+
+    var channel = pusher.subscribe('notif-seller'+id);
+    channel.bind('Notif-Seller', function(data) {
+      alert(JSON.stringify(data));
     });
 
     function interest(){

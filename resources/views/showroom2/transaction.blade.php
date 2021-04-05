@@ -23,8 +23,12 @@
 <section class="section" id="trainers">
   <div class="container-fluid">
 
+  @if (session('status'))
+      <div class="alert alert-success">
+          {{ session('status') }}
+      </div>
+  @endif
   <div class="table-responsive">
-  <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
   <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -100,6 +104,7 @@
 </section>
 <!-- ***** Fleet Ends ***** -->
 
+<<<<<<< HEAD
 @endsection
 @push('js')
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -132,3 +137,6 @@
     });
   </script>
 @endpush
+=======
+@endsection
+>>>>>>> d0ecd41263cbcd9e6c77c3994378f6919b2cd602
