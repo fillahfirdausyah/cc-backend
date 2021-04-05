@@ -71,7 +71,7 @@ class TransactionController extends Controller
         event(new NotifSeller($t));
         
         // event(new NotifSeller($t));
-        return redirect()->back()->with('status', 'Telah ditambahkan ke transaksi');
+        return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');
     }
 
     public function confirm(Request $request)

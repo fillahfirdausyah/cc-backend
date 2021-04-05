@@ -119,7 +119,7 @@ class ShowroomController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $destinationPath = 'image/Tenant/car/';  
             $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -199,7 +199,7 @@ class ShowroomController extends Controller
         }
 
         foreach ($request->file('gambar') as $file) { 
-            $destinationPath = 'assets/vendor/showroom/assets/images/'; 
+            $destinationPath = 'image/Tenant/car/';  
             $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
@@ -237,7 +237,7 @@ class ShowroomController extends Controller
 
         $sr->delete();
 
-        return redirect('/showroom/cars');
+        return redirect()->back();
     }
 
     public function comment(Request $request)

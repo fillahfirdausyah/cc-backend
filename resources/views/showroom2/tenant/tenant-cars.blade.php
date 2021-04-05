@@ -9,7 +9,7 @@
       <div class="card">
         <div class="trainer-item">
             <div class="image-thumb">
-                <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectCar[$item]) }}" height="400" width="100%">
+                <img src="{{ asset('image/Tenant/car/'.$collectCar[$item]) }}" height="400" width="100%">
             </div>
             <div class="card-body">
               <div class="down-content">

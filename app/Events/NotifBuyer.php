@@ -31,7 +31,7 @@ class NotifBuyer implements ShouldBroadcast
     public function broadcastOn()
     {
         // return ['notif-buyer.'.$this->fields->buyer_id];
-        return ['notif-buyer'];
+        return ['notif-buyer.'.$this->fields->buyer_id];
     }
 
     public function broadcastAs()

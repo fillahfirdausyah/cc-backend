@@ -25,6 +25,6 @@ class Transaksi extends Model
 
     public function item()
     {
-        return $this->belongsTo(Merchandise::class, 'item_id');
+        return $this->belongsTo(Merchandise::class, 'item_id')->withTrashed();
     }
 }
