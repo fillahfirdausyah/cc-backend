@@ -32,7 +32,7 @@
         @foreach(json_decode($merchan->gambar) as $m)
         <div class="mySlides fade">
           <div class="numbertext">1 / 3</div>
-          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$m)}}" style="width:100%">
+          <img src="{{ asset('image/Tenant/merchandise/'.$m)}}" style="width:100%">
           <div class="text">Caption Text</div>
         </div>
         @endforeach
@@ -102,11 +102,6 @@
 
                   @cannot('ud-merchan', $merchan)
                      <div class="col-sm-12">
-                      @if (session('status'))
-                          <div class="alert alert-success">
-                              {{ session('status') }}
-                          </div>
-                      @endif
                       <form method="post" action="/showroom/interest" style="display: none;" id="buy">
                         @csrf
                         <input type="hidden" name="buyer_id" value="{{ Auth::id() }}">

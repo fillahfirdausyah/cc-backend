@@ -32,7 +32,7 @@
         @foreach(json_decode($bengkel->gambar) as $b)
         <div class="mySlides fade">
           <div class="numbertext">1 / 3</div>
-          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$b)}}" style="width:100%">
+          <img src="{{ asset('image/Tenant/autoshop/'.$b)}}" style="width:100%">
           <div class="text">Caption Text</div>
         </div>
         @endforeach

@@ -35,7 +35,7 @@
           <div class="carousel-inner">
             @foreach(json_decode($SR->gambar) as $sr)
             <div class="carousel-item" id="slide-show">
-              <img class="d-block w-100" src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" alt="First slide">
+              <img class="d-block w-100" src="{{ asset('image/Tenant/car/'.$sr)}}" alt="First slide">
             </div>
             @endforeach
           </div>

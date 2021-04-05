@@ -32,6 +32,7 @@ class CreateShowRoomTable extends Migration
             $table->text('fitur')->default('-');
             $table->text('gambar');
             $table->string('slug');
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->timestamps();
         });
     }

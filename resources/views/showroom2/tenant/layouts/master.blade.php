@@ -225,6 +225,21 @@
 <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- Pusher -->
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+<script>
+  Pusher.logToConsole = true;
+  var id = document.querySelector('meta[name="user_id"]').content;
+
+  var pusher = new Pusher('056152f21466ab3e8829', {
+    cluster: 'ap1'
+  });
+
+  var channel = pusher.subscribe('notif-seller.'+id);
+  channel.bind('Notif-Seller', function(data) {
+    alert(JSON.stringify(data));
+  });
+
+</script>
 @stack('js')
 </body>
 </html>

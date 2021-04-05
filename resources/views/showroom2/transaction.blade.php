@@ -23,8 +23,12 @@
 <section class="section" id="trainers">
   <div class="container-fluid">
 
+  @if (session('status'))
+      <div class="alert alert-success">
+          {{ session('status') }}
+      </div>
+  @endif
   <div class="table-responsive">
-  <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
   <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -101,34 +105,3 @@
 <!-- ***** Fleet Ends ***** -->
 
 @endsection
-@push('js')
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-    
-    Pusher.logToConsole = true;
-    var id = document.querySelector('meta[name="auth_id"]').content;
-
-    var pusher = new Pusher('5655f5e5ff7fea17d766', {
-      cluster: 'ap1'
-    });
-
-    // var channel = pusher.subscribe('notif-buyer.'+id);
-    // channel.bind('NotifBuyer', function(data) {
-    //   alert(JSON.stringify(data));
-    // });
-    
-    var channel = pusher.subscribe('notif-buyer');
-    channel.bind('Notif-Buyer', function(data) {
-      alert(JSON.stringify(data));
-    });
-
-    // Vue application
-    const app = new Vue({
-      el: '#app',
-      data: {
-        messages: [],
-      },
-    });
-  </script>
-@endpush
