@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\DB;
 
 class KeuanganController extends Controller
 {
+    public $userVerified;
+    function __construct() {
+        $this->userVerified = User::where('verified', NULL);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,17 +48,20 @@ class KeuanganController extends Controller
                             'Pengeluaran' => $pengeluaran[$i]];
         }
 
-    //    dd($saldo);
+        $userVerified = $this->userVerified;
+
+    //    dd($this->userVerified);
 
 
-        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran', 'saldo'));
+        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran', 'saldo', 'userVerified'));
     }
 
     public function create()
     {
 
         $region = Region::all();
-        return view('admin.keuangan.CreateKeuangan', compact('region'));
+        $userVerified = $this->userVerified;
+        return view('admin.keuangan.CreateKeuangan', compact('region', 'userVerified'));
     }
 
     public function filter_name(Request $request)
@@ -148,7 +156,9 @@ class KeuanganController extends Controller
             $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }
 
-        return view('admin.keuangan.Pemasukan', compact('data', 'region'));
+        $userVerified = $this->userVerified;
+
+        return view('admin.keuangan.Pemasukan', compact('data', 'region', 'userVerified'));
     }
 
     /**
@@ -223,7 +233,8 @@ class KeuanganController extends Controller
         $data   = Keuangan::whereBetween('created_at', 
         [\Carbon\Carbon::now()->startOfMonth(), \Carbon\Carbon::now()->endOfMonth()])->where('tipe_transaksi', 'pemasukan')->latest()->get();
         $region = Region::all();
-        return view('admin.keuangan.Pemasukan', compact('data', 'region'));
+        $userVerified = $this->userVerified;
+        return view('admin.keuangan.Pemasukan', compact('data', 'region', 'userVerified'));
     }
 
     public function pemasukanShow($id) {
@@ -248,14 +259,14 @@ class KeuanganController extends Controller
     public function pengeluaranIndex() {
 
         $data = Keuangan::where('tipe_transaksi', 'pengeluaran')->get();
-
-        return view('admin.keuangan.pengeluaran.Pengeluaran', compact('data'));
+        $userVerified = $this->userVerified;
+        return view('admin.keuangan.pengeluaran.Pengeluaran', compact('data', 'userVerified'));
     }
 
     public function pengeluaranAdd() {
         $region = Region::all();
-
-        return view('admin.keuangan.pengeluaran.Create', compact('region'));
+        $userVerified = $this->userVerified;
+        return view('admin.keuangan.pengeluaran.Create', compact('region', 'userVerified'));
     }
 
     public function getSaldo(Request $request) {

@@ -19,6 +19,11 @@ use App\Models\Transaksi;
 
 class TenantController extends Controller
 {
+    public $userVerified;
+    function __construct() {
+        $this->userVerified = User::where('verified', NULL);
+    }
+
     public function index()
     {
         // User tenant
@@ -200,8 +205,8 @@ class TenantController extends Controller
 
     public function list() {
         $data = Tenant::with('user')->get();
-
-        return view('admin.tenant.Tenant', compact('data'));
+        $userVerified = $this->userVerified;
+        return view('admin.tenant.Tenant', compact('data', 'userVerified'));
     }
 
     public function verify($id) {

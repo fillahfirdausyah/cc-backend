@@ -17,8 +17,9 @@ class UserController extends Controller
     public function index()
     {
         $data = User::with('tenant')->get();
+        $userVerified = User::where('verified', NULL);
 
-        return view('admin.user.User', ['data' => $data]);
+        return view('admin.user.User', compact('data', 'userVerified'));
     }
 
     /**

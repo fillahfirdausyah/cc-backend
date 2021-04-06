@@ -104,9 +104,9 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>{{ $user }}</h3>
+                  <h3>{{ $user->count() }}</h3>
 
-                  <p>Junlah User</p>
+                  <p>Jumlah User</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person"></i>

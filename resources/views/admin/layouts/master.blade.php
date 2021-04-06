@@ -41,7 +41,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
           <span class="badge badge-danger navbar-badge">1</span>
@@ -66,7 +66,7 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
-      </li>
+      </li> --}}
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -158,14 +158,25 @@
             </ul>
           </li>
           <li class="nav-item has-treeview mt-2" disabled>
+            @if ($userVerified->count() <= 0)
             <a href="admin/news" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
                 <i class="right fas fa-angle-left"></i>
-                <span class="badge badge-danger notify-count" data-count="0">0</span>
+                {{-- <span class="badge badge-danger notify-count" data-count="0">0</span> --}}
               </p>
             </a>
+            @else
+            <a href="admin/news" class="nav-link active">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                User
+                <i class="right fas fa-angle-left"></i>
+                <span class="badge badge-danger notify-count" data-count="0">{{ $userVerified->count() }}</span>
+              </p>
+            </a>
+            @endif
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ '/admin/user/list' }}" class="nav-link">

@@ -139,7 +139,7 @@
                           </tr>
                           @endforeach
                         </tbody>
-                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}} 
                       </table>
                     </div>
                 </div>

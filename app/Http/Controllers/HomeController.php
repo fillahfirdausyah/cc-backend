@@ -33,12 +33,14 @@ class HomeController extends Controller
         $convSR = [];
         $collectSR = [];
 
-        $news     = News::count();
-        $event    = Event::count();
-        $user     = User::count();
-        $region   = Region::all();
+        $news         = News::count();
+        $event        = Event::count();
+        $user         = User::all();
+        $userVerified = $user->where('verified', NULL);
+        $region       = Region::all();
 
+        // dd($userVerified->count());
         
-        return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
+        return view('admin.Dashboard', compact('news', 'event', 'user', 'region', 'userVerified'));
     }
 }
