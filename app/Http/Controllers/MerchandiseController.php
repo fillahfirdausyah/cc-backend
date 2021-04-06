@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Events\NotifSeller;
 use App\Models\CommentMerchandise;
 use App\Models\Merchandise;
 use App\Models\Transaksi;
@@ -45,9 +46,8 @@ class MerchandiseController extends Controller
                             ->where('jenis', 'merchandise')
                             ->first();
         $user = Merchandise::find($id)->user()->first();
-        $transaction = Transaksi::where('item_id', $id)->first();
 
-		return view('showroom2.merchandise.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment', 'transaction'));
+		return view('showroom2.merchandise.merchandise-detail', compact('merchan', 'wishlist', 'user', 'comment'));
 	}
 
     public function create()
@@ -196,6 +196,7 @@ class MerchandiseController extends Controller
         return view('showroom2.merchandise.merchandise', compact('merchan', 'collectM'));
 
     }
+
     public function comment(Request $request)
     {
         $this->validate($request, [
@@ -221,4 +222,34 @@ class MerchandiseController extends Controller
 
         return redirect()->back();   
     } 
+
+    public function transaction(Request $request)
+    {
+
+        $input_data = $request->all();
+        $validator = Validator::make($input_data, [
+            'amount' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $merchan = Merchandise::find($item_id);
+
+        $t = new Transaksi;
+        $t->seller_id = $request->seller_id;
+        $t->buyer_id = $request->buyer_id;
+        $t->amount = $request->amount;
+
+        $merchan->transaction()->save($t);
+
+        event(new NotifSeller($merchan));
+        
+        // event(new NotifSeller($t));
+        return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');
+    }
 }

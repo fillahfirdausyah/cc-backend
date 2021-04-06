@@ -36,7 +36,6 @@
     </div>
     <!-- ***** Preloader End ***** -->
     
-    
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -179,36 +178,55 @@
         document.getElementById('upload-'+i).style.display = 'none';
     }
 
+    $(document).ready(function() {
+        var buyer_id = document.querySelector('meta[name="auth_id"]').content;
 
-    function myFunction(){
-        alert('yey');
-    }
-
-    function wishlist(){
-        var user_id = $("#user_id").val();
-        var produk_id = $("#produk_id").val();
-        var jenis = $("#jenis").val();
-        $.ajax({
-          url:"/showroom/wishlist",
-          method:"post",
-          data:{ jenis:jenis, user_id:user_id , produk_id:produk_id},
-          success: function(){
-            $("#wishlist-button").css("display", "none");
-          }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-    }
 
-    function delete_wishlist(){
-        var wishlist_id = $("#wishlist_id").val();
         $.ajax({
-          url:"/showroom/wishlist",
-          method:"delete",
-          data:{ wishlist_id:wishlist_id},
-          success: function(){
-            $("#btn_delete_wishlist").css("display", "none");
-          }
+            url : '/showroom/notification/list',
+            method : 'post',
+            data : {buyer_id:buyer_id},
+            success :function(data){
+                console.log(data);
+            }
         });
-    }
+    });
+
+
+    // function myFunction(){
+    //     alert('yey');
+    // }
+
+    // function wishlist(){
+    //     var user_id = $("#user_id").val();
+    //     var produk_id = $("#produk_id").val();
+    //     var jenis = $("#jenis").val();
+    //     $.ajax({
+    //       url:"/showroom/wishlist",
+    //       method:"post",
+    //       data:{ jenis:jenis, user_id:user_id , produk_id:produk_id},
+    //       success: function(){
+    //         $("#wishlist-button").css("display", "none");
+    //       }
+    //     });
+    // }
+
+    // function delete_wishlist(){
+    //     var wishlist_id = $("#wishlist_id").val();
+    //     $.ajax({
+    //       url:"/showroom/wishlist",
+    //       method:"delete",
+    //       data:{ wishlist_id:wishlist_id},
+    //       success: function(){
+    //         $("#btn_delete_wishlist").css("display", "none");
+    //       }
+    //     });
+    // }
     </script>
   </body>
 </html>

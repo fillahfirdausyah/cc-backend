@@ -47,6 +47,11 @@ class SR extends Model
         return $this->hasMany(Wishlist::class, 'produk_id', 'id');
     }
 
+    public function transaction()
+    {
+        return $this->morphOne(Transaksi::class, 'transactionable');
+    }
+
     public static function boot() {
         parent::boot();
     
