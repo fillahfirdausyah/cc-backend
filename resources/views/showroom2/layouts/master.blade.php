@@ -62,12 +62,15 @@
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
+<<<<<<< HEAD
+=======
                                 </div>
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
                                 <div class="dropdown-menu mr-5">
                                     <a class="dropdown-item">Notifikasi 1</a>
+>>>>>>> 66b5d7e68357d18d86035f65c143162a1f310872
                                 </div>
                             </li>
                             <li class="dropdown">

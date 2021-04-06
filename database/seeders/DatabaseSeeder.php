@@ -24,21 +24,27 @@ class DatabaseSeeder extends Seeder
                 'name'      => 'Prada Florista',
                 'email'     => 'prada@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-ADM',
                 'role'      => 'admin',
+                'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')
             ],
             [
                 'name'      => 'Fillah Firdausyah',
                 'email'     => 'fillah@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-2',
                 'role'      => 'member',
+                'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')
             ],
             [
                 'name'      => 'Vanka Valezka',
                 'email'     => 'vanka@maillei.net',
                 'password'  =>  Hash::make('laskar22'),
+                'nopung'    => 'G#-3',
                 'role'      => 'bendahara',
+                'verified'  => 'yes',
                 'email_verified_at' => date('d-m-y')
             ]
         ];
@@ -46,24 +52,24 @@ class DatabaseSeeder extends Seeder
         User::insert($user);
 
         User::find(1)->profile()->create([
-            'user_id' => 2,
-            'bio'     => 'Saya Pecinta Kucing',
+            'user_id'   => 2,
+            'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);
         
         User::find(2)->profile()->create([
-            'user_id' => 2,
-            'bio'     => 'Saya Pecinta Kucing',
+            'user_id'   => 2,
+            'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',
         ]);
         
         User::find(3)->profile()->create([
-            'user_id' => 2,
-            'bio'     => 'Saya Pecinta Kucing',
+            'user_id'   => 2,
+            'bio'       => 'Saya Pecinta Kucing',
             'pekerjaan' => 'Programmer',
             'alamat'    => 'Waringin Sari',
             'hobi'      => 'Update Tech',

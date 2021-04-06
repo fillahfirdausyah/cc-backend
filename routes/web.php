@@ -56,7 +56,10 @@ Route::get('/admin/user/store', 'UserController@store');
 Route::get('/admin/user/edit/{id}', 'UserController@edit');
 Route::post('/admin/user/update/{id}', 'UserController@update');
 Route::get('/admin/user/delete/{id}', 'UserController@destroy');
+Route::get('/admin/user/showdata/{id}', 'UserController@showData');
 Route::get('/admin/user/verify/{id}', 'UserController@verify');
+Route::get('/admin/user/tenant', 'TenantController@list');
+Route::get('/admin/user/tenant/verify/{id}', 'TenantController@verify');
 
 //Region
 Route::post('/admin/region/store', 'RegionController@store');
@@ -66,29 +69,36 @@ Route::get('/admin/region/delete/{id}', 'RegionController@destroy');
 // Keuangan
 // Nasional
 Route::get('/admin/keuangan', 'KeuanganController@index');
-Route::get('/admin/keuangan/add', 'KeuanganController@create');
-Route::post('/admin/keuangan/store', 'KeuanganController@store');
-Route::get('/admin/keuangan/edit/{id}', 'KeuanganController@edit');
-Route::post('/admin/keuangan/update/{id}/{regid}', 'KeuanganController@update');
-Route::get('/admin/keuangan/delete/{id}', 'KeuanganController@destroy');
-Route::get('/admin/keuangan/details', 'KeuanganController@show');
+Route::get('/admin/keuangan/pemasukan/add', 'KeuanganController@create');
+Route::post('/admin/keuangan/pemasukan/store', 'KeuanganController@store');
+Route::get('/admin/keuangan/pemasukan/edit/{id}', 'KeuanganController@edit');
+Route::post('/admin/keuangan/pemasukan/update/{id}/{regid}', 'KeuanganController@update');
+Route::get('/admin/keuangan/pemasukan/delete/{id}', 'KeuanganController@destroy');
+Route::get('/admin/keuangan/pemasukan/details', 'KeuanganController@show');
 Route::get('/admin/keuangan/grafik', 'KeuanganController@graphic');
 Route::post('/admin/keuangan/nama/', 'KeuanganController@filter_name');
 Route::post('/admin/keuangan/getemail', 'KeuanganController@getEmail');
-
-//Regional
-Route::get('/admin/keuangan/{region}', 'KeuanganRegionalController@index');
-////////////////////////
+Route::get('/admin/keuangan/pemasukan', 'KeuanganController@pemasukanIndex');
+Route::get('/admin/keuangan/pemasukan/show/{id}', 'KeuanganController@pemasukanShow');
+Route::get('/admin/keuangan/pemasukan/verify/{id}/{regid}', 'KeuanganController@pemasukanVerify');
+Route::get('/admin/keuangan/pengeluaran', 'KeuanganController@pengeluaranIndex');
+Route::get('/admin/keuangan/pengeluaran/add', 'KeuanganController@pengeluaranAdd');
+Route::post('/admin/keuangan/pengeluaran/store', 'KeuanganController@pengeluaranStore');
 
 // Undian
 Route::get('/admin/undian', 'UndianController@index');
+
+// Showroom
+Route::get('/admin/showroom/acc/{id}', 'ShowroomController@accept');
 
 
 // ############################################################## //
 
 // Member //
 // Home
-Route::get('/member/home', 'MemberController@index')->middleware('auth');
+Route::get('/member/home', 'MemberController@index')->middleware('auth', 'verifyAdmin');
+Route::get('/member/home/verify', 'MemberController@verify')->middleware('notVerified');
+Route::post('/member/home/verify/store', 'MemberController@verifyStore');
 Route::get('/member/tentang', 'MemberController@about');
 Route::get('/member/galery', 'MemberController@galery');
 Route::get('/member/teman/{id}', 'MemberController@friend');
@@ -204,9 +214,13 @@ Route::post('/showroom/notification/list', 'TransactionController@notification')
 
 
 // Test Pusher
-Route::get('test', function() {
-	event(new App\Events\MyEvent('Hello World'));
+Route::get('/pushnotif', function() {
+	event(new App\Events\KartuIuran('hello world'));
 	return 'even terkirim';
+});
+
+Route::get('/pushertest', function() {
+	return view('pusherTest');
 });
 
 // Route::get('api/login', 'Api\ApiController@login');

@@ -31,7 +31,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" action="{{ '/admin/keuangan/update/' }}{{ $data->id.'/' }}{{ $data->region->id }}" method="POST">
+                    <form role="form" action="{{ '/admin/keuangan/pemasukan/update/' }}{{ $data->id.'/' }}{{ $data->region->id }}" method="POST">
                       @csrf
                       <div class="card-body">
                         <div class="form-group">

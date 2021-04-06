@@ -16,28 +16,18 @@ class KartuIuran implements ShouldBroadcast
 
     public $message;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
     public function __construct($message)
     {
         $this->message = $message;
     }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+    
     public function broadcastOn()
-  {
-      return ['kartu-iuran-baru'];
-  }
+    {
+        return ['channel-iuran'];
+    }
 
-  public function broadcastAs()
-  {
-      return 'kartu-notifikasi';
-  }
+    public function broadcastAs()
+    {
+        return 'event-iuran';
+    }
 }

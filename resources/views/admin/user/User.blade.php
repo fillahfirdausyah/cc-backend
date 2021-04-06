@@ -4,6 +4,53 @@
 
 @section('content')
 <div class="content-wrapper">
+
+  <div class="modal fade" id="modalData" aria-labelledby="add-iuran">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table m-0" id="table-acc-mobil">
+                  <tbody id="userData">
+                  <tr>
+                    <td><b>Nama</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Domisili</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Foto STNK</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td><b>Iuran Pertama</b></td>
+                    <td>#</td>
+                  </tr>
+                  <tr>
+                    <td><b>Bukti</b></td>
+                    <td><img src="" class="img-thumbnail" alt=""></td>
+                  </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+            <form id="verifUser" action="#">
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" id="tombol-post">Verifikasi</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
     <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -35,7 +82,7 @@
                       <th>Nama</th>
                       <th>Email</th>
                       <th>Role</th>
-                      <th>Status Verifikasi.</th>
+                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -46,14 +93,14 @@
                             <td>{{ $d->email }}</td>
                             <td>{{ $d->role}}</td>
                             <td>
-                              @if ($d->email_verified_at !== null)
+                              @if ($d->verified !== null)
                               <span class="badge badge-success">Terverifikasi</span>
                               @else
                               <span class="badge badge-danger">Belum Terverifikasi</span>
                               @endif
                             </td>
                             <td>
-                              @if ($d->email_verified_at !== null)
+                              @if ($d->verified !== null)
                               <a href="{{ '/admin/user/edit/'}}{{ $d->id }}">
                                 <i class="fas fa-edit" style="color: green"></i>
                               </a>
@@ -62,8 +109,8 @@
                                 <i class="fas fa-trash-alt" style="color: red"></i>
                               </a>
                               @else
-                              <a href="{{ '/admin/user/verify/' }}{{ $d->id }}" title="Verivikasi">
-                                <i class="fas fa-user-check" style="color: green"></i>
+                              <a href="#" title="Verivikasi" data-uid="{{ $d->id }}" class="lihatData">
+                                <i class="fas fa-eye" style="color: green"></i>
                               </a>
                               @endif
                             </td>
@@ -126,5 +173,53 @@
       });
     }
 
+    let elLihatData = $('.lihatData');
+
+    elLihatData.click(function(e) {
+      e.preventDefault();
+      
+      uid = elLihatData.data('uid');
+      
+      $.ajax({
+        data: uid,
+        url: '/admin/user/showdata/' + uid,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          // console.log(data.region)
+          $('#modalData').modal('show');
+
+          $('#userData').html(`
+          <tr>
+            <td><b>Nama</b></td>
+            <td><b>:</b></td>
+            <td>${data.name}</td>
+          </tr>
+          <tr>
+            <td><b>Domisili</b></td>
+            <td><b>:</b></td>
+            <td>${data.region[0].region}</td>
+          </tr>
+          <tr>
+            <td><b>Iuran Pertama</b></td>
+            <td><b>:</b></td>
+            <td>${data.keuangan[0].jumlah}</td>
+          </tr>
+          <tr>
+            <td><b>Foto STNK</b></td>
+            <td><b>:</b></td>
+            <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}" class="img-thumbnail" alt=""></td>
+          </tr>
+          <tr>
+            <td><b>Bukti Transfer</b></td>
+            <td><b>:</b></td>
+            <td><img src="{{ asset('image/Member/Keuangan') }}/${data.keuangan[0].bukti}" class="img-thumbnail" alt=""></td>
+          </tr>
+          `)
+
+          $('#verifUser').attr('action', '/admin/user/verify/' + uid);
+        }
+      })
+    })
   </script>
 @endpush

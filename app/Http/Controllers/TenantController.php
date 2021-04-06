@@ -198,12 +198,21 @@ class TenantController extends Controller
         return redirect()->back()->with('status', 'Edit Berhasil!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tenant  $tenant
-     * @return \Illuminate\Http\Response
-     */
+    public function list() {
+        $data = Tenant::with('user')->get();
+
+        return view('admin.tenant.Tenant', compact('data'));
+    }
+
+    public function verify($id) {
+        $data = Tenant::find($id);
+
+        $data->verified = 'yes';
+        $data->save();
+
+        return redirect()->back()->with('success', 'User Tenant Terverifikasi');
+    }
+
     public function destroy(Tenant $tenant)
     {
         //

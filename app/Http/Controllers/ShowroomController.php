@@ -326,4 +326,13 @@ class ShowroomController extends Controller
 
         return view('showroom2.cars.cars', compact('collectCar', 'SR'));
     }
+
+    public function accept($id) {
+        $data = SR::find($id);
+
+        $data->verified = 'yes';
+        $data->save();
+
+        return response()->json($id);
+    }
 }

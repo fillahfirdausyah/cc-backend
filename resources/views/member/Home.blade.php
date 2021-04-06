@@ -849,7 +849,7 @@
  <script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script> 
 <script>
 $(document).ready(function () {
-    $('#modalRegion').modal('show')
+    // $('#modalRegion').modal('show')
 
     $('#kategori').removeAttr('style')
     $('.nice-select').hide()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentBengkelTable extends Migration
+class CreatePengeluaransTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCommentBengkelTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_bengkel', function (Blueprint $table) {
+        Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
-            $table->text('comment');
+            $table->bigInteger('region_id')->unsigned();
+            $table->string('pengeluaran');
+            $table->bigInteger('jumlah');
+            $table->string('kategori');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCommentBengkelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_bengkel');
+        Schema::dropIfExists('pengeluarans');
     }
 }

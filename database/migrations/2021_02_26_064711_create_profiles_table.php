@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('pekerjaan')->default('-');
             $table->string('alamat')->default('-');
             $table->string('hobi')->default('-');
+            $table->string('foto_stnk')->nullable();
             $table->string('foto_profile')->default('profile.png');
             $table->string('foto_sampul')->default('sampul.jpeg');
             $table->timestamps();

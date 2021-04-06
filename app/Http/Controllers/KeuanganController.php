@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Keuangan;
+use App\Models\TotalKeuangan;
 use App\Models\User;
 use App\Models\Region;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
+// class Saldo {
+//     var $total = [];
+// }
 
 class KeuanganController extends Controller
 {
@@ -19,37 +23,30 @@ class KeuanganController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data   = Keuangan::whereBetween('created_at', 
-        [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()])->latest()->get();
-        $region = Region::all(); 
+    {   
+        $dataPemasukan = Region::addSelect(['totalPendapatan' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
+        ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->get();
+        $dataPengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
+        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->get();   
+        
+        $chart  = $dataPemasukan->toArray();
 
-        return view('admin.keuangan.Keuangan', compact('data', 'region'));
-    }
+        $saldo = array();
+        $pengeluaran = array();
 
-    public function graphic()
-    {
+        foreach($dataPengeluaran as $png) {
+            $pengeluaran[] = ['region' => $png->region, 'pengeluaran' => $png->totalPengeluaran];
+        }
 
-        $event_money = Keuangan::select(
-                    DB::raw('sum(jumlah) as amount_event'),
-                    DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
-                        )
-                        ->where("kategori", "Event")
-                        ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                        ->groupBy('months')
-                        ->orderBy('created_at', 'asc')
-                        ->get();
+        foreach ($dataPemasukan as $i => $pm) {
+                $saldo[] = ['Pemasukan'   => ['region' => $pm->region, 'pendapatan' => $pm->totalPendapatan],
+                            'Pengeluaran' => $pengeluaran[$i]];
+        }
 
-        $mingguan_money = Keuangan::select(
-                        DB::raw("sum(jumlah) as amount_mingguan"),
-                        DB::raw("DATE_FORMAT(created_at,'%M %Y') as month")
-                        )
-                        ->where("kategori", "Mingguan")
-                        ->where("created_at", ">", \Carbon\Carbon::now()->subMonths(1))
-                        ->groupBy("month")
-                        ->get();
+    //    dd($saldo);
 
-        return response()->json(["data1" => $event_money, "data2" => $mingguan_money], 200);
+
+        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran', 'saldo'));
     }
 
     public function create()
@@ -107,16 +104,18 @@ class KeuanganController extends Controller
         }
 
         $data = new Keuangan;
-        $data->region_id = $request->region; 
-        $data->user_id   = $id;
-        $data->nama      = $name;
-        $data->jumlah    = $request->jumlah;
-        $data->status    = $request->status;
-        $data->kategori  = $request->kategori;
-        $data->email     = $request->email;
+        $data->region_id        = $request->region; 
+        $data->user_id          = $id;
+        $data->tipe_transaksi   = 'pemasukan';
+        $data->nama             = $name;
+        $data->jumlah           = $request->jumlah;
+        $data->status           = $request->status;
+        $data->kategori         = $request->kategori;
+        $data->email            = $request->email;
         $data->save();
 
-        return redirect('/admin/keuangan/')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/admin/keuangan/pemasukan')->with('success', 'Data Berhasil Ditambahkan');
+
     }
 
     /**
@@ -139,17 +138,17 @@ class KeuanganController extends Controller
         }
 
         if($request->region == 0 && $request->kategori == "Semua") {
-            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }else if($request->region == 0 && $request->kategori == $request->kategori) {
-            $data = Keuangan::latest()->where('kategori', $request->kategori)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }
         else if($request->region == $request->region && $request->kategori == "Semua") {
-            $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }else {
-            $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->get();
+            $data = Keuangan::latest()->where('kategori', $request->kategori)->where('region_id', $request->region)->whereBetween('created_at', [$start, $end])->where('tipe_transaksi', 'pemasukan')->get();
         }
 
-        return view('admin.keuangan.Keuangan', compact('data', 'region'));
+        return view('admin.keuangan.Pemasukan', compact('data', 'region'));
     }
 
     /**
@@ -201,7 +200,7 @@ class KeuanganController extends Controller
         $data->email     = $request->email;
         $data->save();
 
-        return redirect('/admin/keuangan')->with('success', 'Data Berhasil Disimpan');
+        return redirect('/admin/keuangan/pemasukan')->with('success', 'Data Berhasil Disimpan');
 
     }
 
@@ -214,8 +213,78 @@ class KeuanganController extends Controller
     public function destroy($id)
     {
         $data = Keuangan::find($id);
+        $total = TotalKeuangan::where('keuangan_id', $data->id)->delete();
         $data->delete();
 
         return redirect()->back()->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function pemasukanIndex() {
+        $data   = Keuangan::whereBetween('created_at', 
+        [\Carbon\Carbon::now()->startOfMonth(), \Carbon\Carbon::now()->endOfMonth()])->where('tipe_transaksi', 'pemasukan')->latest()->get();
+        $region = Region::all();
+        return view('admin.keuangan.Pemasukan', compact('data', 'region'));
+    }
+
+    public function pemasukanShow($id) {
+        $keuangan = Keuangan::find($id);
+
+        $data = $keuangan->load('region');
+
+        return response()->json($data);
+    }
+
+    public function pemasukanVerify($id, $regid) {
+        $data = Keuangan::find($id);
+
+        $data->status = 'Lunas';
+        $data->save();
+
+        return redirect()->back()->with('success', 'Berhasil Diverifikasi');
+    }
+
+    // Pengeluaran
+
+    public function pengeluaranIndex() {
+
+        $data = Keuangan::where('tipe_transaksi', 'pengeluaran')->get();
+
+        return view('admin.keuangan.pengeluaran.Pengeluaran', compact('data'));
+    }
+
+    public function pengeluaranAdd() {
+        $region = Region::all();
+
+        return view('admin.keuangan.pengeluaran.Create', compact('region'));
+    }
+
+    public function getSaldo(Request $request) {
+        
+        $region = Region::find($request->id);
+
+        $data = $region->total()->get();
+
+        return response()->json($data);
+
+    }
+
+    public function pengeluaranStore(Request $request) {
+        $this->validate($request, [
+            'nama'      => 'required',
+            'region'    => 'required',
+            'jumlah'    => 'required | numeric',
+            'kategori'  => 'required',
+        ]);
+
+        $data = new Keuangan;
+        $data->region_id        = $request->region;
+        $data->tipe_transaksi   = 'pengeluaran';
+        $data->nama             = $request->nama;
+        $data->jumlah           = $request->jumlah;
+        $data->kategori         = $request->kategori;
+        $data->save();
+
+        return redirect('/admin/keuangan/pengeluaran')->with('success', 'Data Berhasil Ditambahkan');
+    }
+
 }

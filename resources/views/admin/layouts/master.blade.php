@@ -18,7 +18,7 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Summernote -->
-  <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/summernote/summernote-bs4.css') }}"> --}}
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   @stack('css-page')
@@ -157,13 +157,32 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item mt-2">
-            <a href="{{ '/admin/user/list' }}" class="nav-link active">
+          <li class="nav-item has-treeview mt-2" disabled>
+            <a href="admin/news" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
+                <i class="right fas fa-angle-left"></i>
+                <span class="badge badge-danger notify-count" data-count="0">0</span>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/user/list' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Member</p>
+                
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/user/tenant' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tenant</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview mt-2">
             <a href="#" class="nav-link active">
@@ -178,6 +197,22 @@
                 <a href="{{ '/admin/keuangan/' }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Keuangan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/keuangan/pemasukan' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pemasukan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ '/admin/keuangan/pengeluaran' }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengeluaran</p>
                 </a>
               </li>
             </ul>
@@ -238,19 +273,24 @@
 <!-- Pusher -->
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script>
-   // Enable pusher logging - don't include this in production
-   Pusher.logToConsole = true;
+  let notifBadge = $('.notify-count');
 
-  let notifyCount = $('.notify-count');
+  if(notifBadge.data('count') <= 0) {
+    notifBadge.hide;
+  }
 
-  let pusher = new Pusher('056152f21466ab3e8829', {
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('056152f21466ab3e8829', {
     cluster: 'ap1'
   });
 
-  let channel = pusher.subscribe('kartu-iuran-baru');
-  channel.bind('kartu-notifikasi', function(data) {
-    console.log(data.message);
+  var channel = pusher.subscribe('channel-iuran');
+  channel.bind('event-iuran', function(data) {
+    alert(JSON.stringify(data));
   });
+   
 </script>
 @stack('js-asset')
 

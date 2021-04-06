@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class CekRole
+class VerifyAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,13 +17,11 @@ class CekRole
      */
     public function handle(Request $request, Closure $next)
     {
-       $user = Auth::user();
-       if($user->role == 'admin') {
-            return $next($request);
-       }else if($user->role == 'bendahara') {
-            return $next($request);
-       }
-       
-       return redirect()->to('/member/home/verify/');
+        $user = Auth::user();
+        if($user->verified == 'yes') {
+            return $next($request); 
+        }
+        
+        return redirect('/member/home/verify/');
     }
 }

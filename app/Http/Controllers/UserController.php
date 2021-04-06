@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Tenant;
 class UserController extends Controller
 {
     /**
@@ -15,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::with('tenant')->get();
+
         return view('admin.user.User', ['data' => $data]);
     }
 
@@ -121,15 +123,24 @@ class UserController extends Controller
         return redirect('/admin/user/list')->with('info', 'Data Berhasil Dihapus');
     }
 
+    public function showData($id) {
+
+        $user = User::find($id);
+
+        if($user->profile == null) {
+            return "Belum ada  data";
+        }
+
+        $data = $user->load('profile', 'keuangan', 'region');
+
+        return response()->json($data);
+    }
+
     public function verify($id)
     {
         $user = User::find($id);
-        $user->email_verified_at = date('Y-m-d, H:i:s');
+        $user->verified = 'yes';
         $user->save();
-
-        $profile = new Profile;
-        $profile->user_id = $id;
-        $profile->save();
 
         return redirect('/admin/user/list')->with('success', 'User Terverifikasi');
     }
