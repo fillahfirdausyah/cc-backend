@@ -148,6 +148,19 @@
                    
                         <p>{{ $SR->warna }}</p>
                    </div>
+
+                  @cannot('ud-sr', $SR)
+                     <div class="col-sm-12">
+                      <form method="post" action="/showroom/interest/car">
+                        @csrf
+                        <input type="hidden" name="buyer_id" value="{{ Auth::id() }}">
+                        <input type="hidden" name="seller_id" value="{{ $SR->user->id }}">
+                        <input type="hidden" name="item_id" value="{{ $SR->id }}">
+                        <input type="hidden" name="amount" value="1">
+                        <button type="submit" class="btn btn-lg btn-primary minat" style="width: 100%;">Beli</button>
+                      </form>
+                     </div>
+                  @endcan
                   
                 </div>
               </article>

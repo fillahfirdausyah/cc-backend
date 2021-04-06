@@ -27,4 +27,9 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Merchandise::class, 'item_id')->withTrashed();
     }
+
+    public function transactionable()
+    {
+        return $this->morphTo();
+    }
 }

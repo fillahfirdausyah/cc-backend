@@ -102,7 +102,7 @@
 
                   @cannot('ud-merchan', $merchan)
                      <div class="col-sm-12">
-                      <form method="post" action="/showroom/interest" style="display: none;" id="buy">
+                      <form method="post" action="/showroom/interest/merchandise" style="display: none;" id="buy">
                         @csrf
                         <input type="hidden" name="buyer_id" value="{{ Auth::id() }}">
                         <input type="hidden" name="seller_id" value="{{ $merchan->user->id }}">

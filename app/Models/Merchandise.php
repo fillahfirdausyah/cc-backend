@@ -35,7 +35,7 @@ class Merchandise extends Model
 
     public function transaction()
     {
-        return $this->hasOne(Transaksi::class, 'item_id');
+        return $this->morphOne(Transaksi::class, 'transactionable');
     }
 
     public static function boot() {

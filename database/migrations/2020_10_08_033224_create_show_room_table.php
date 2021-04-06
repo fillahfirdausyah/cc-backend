@@ -15,7 +15,7 @@ class CreateShowRoomTable extends Migration
     {
         Schema::create('show_room', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
+            $table->string('nama_produk');
             $table->integer('user_id')->unsigned();
             $table->integer('promo')->nullable();
             $table->decimal('harga', $precision = 19, $scale = 4);

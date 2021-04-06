@@ -15,12 +15,12 @@ class CreateTransaksisTable extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('buyer_id');
             $table->unsignedBigInteger('seller_id');
-            $table->date('confirmed')->nullable();
+            $table->unsignedBigInteger('transactionable_id');
+            $table->string('transactionable_type');
             $table->bigInteger('amount');
-            $table->string('category');
+            $table->date('confirmed')->nullable();
             $table->text('payment')->nullable();
             $table->string('status')->default('pending');
             $table->date('received')->nullable();
