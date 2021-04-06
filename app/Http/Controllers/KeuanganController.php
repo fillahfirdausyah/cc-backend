@@ -25,29 +25,28 @@ class KeuanganController extends Controller
     public function index()
     {   
         $dataPemasukan = Region::addSelect(['totalPendapatan' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
-        ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->orderBy('totalPendapatan', 'DESC')->get();
+        ->Where('status', 'Lunas')->where('tipe_transaksi', 'pemasukan')->groupBy('region_id')])->get();
         $dataPengeluaran = Region::addSelect(['totalPengeluaran' => Keuangan::selectRaw('sum(jumlah) as total')->whereColumn('region_id', 'regions.id')
-        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->orderBy('totalPengeluaran', 'DESC')->get();   
+        ->where('tipe_transaksi', 'pengeluaran')->groupBy('region_id')])->get();   
         
         $chart  = $dataPemasukan->toArray();
-       
-        
 
-    //    $saldo = new Saldo;
+        $saldo = array();
+        $pengeluaran = array();
 
-    //    foreach($dataPengeluaran as $index => $p) {
-    //            $saldo->total[$index] = ['region' => $p->region, 'saldo' => $p->totalPengeluaran];
-    //            // $l = $p->totalPengeluaran;
-    //     }
+        foreach($dataPengeluaran as $png) {
+            $pengeluaran[] = ['region' => $png->region, 'pengeluaran' => $png->totalPengeluaran];
+        }
 
-    //    for($i = 0; $i < 5; $i++) {
-    //     $saldo->total[$i] = ['region' => 3 + $i, 'saldo' => 900 + $i];
-    //    }
+        foreach ($dataPemasukan as $i => $pm) {
+                $saldo[] = ['Pemasukan'   => ['region' => $pm->region, 'pendapatan' => $pm->totalPendapatan],
+                            'Pengeluaran' => $pengeluaran[$i]];
+        }
 
     //    dd($saldo);
 
 
-        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran'));
+        return view('admin.keuangan.Keuangan', compact('chart', 'dataPemasukan', 'dataPengeluaran', 'saldo'));
     }
 
     public function create()

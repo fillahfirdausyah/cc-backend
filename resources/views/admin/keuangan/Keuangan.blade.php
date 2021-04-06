@@ -132,14 +132,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @foreach ($dataPemasukan as $d)
-                          @foreach ($dataPengeluaran as $p)
+                          @foreach ($saldo as $i => $s)
                           <tr>
-                            <td>{{ $d->region }}</td>
-                            <td style="color: #42a4ff">-Rp.@convert($d->totalPendapatan - $p->totalPengeluaran)</td>
-                            {{-- <td>{{ $d }}</td> --}}
+                            <td>{{ $s['Pemasukan']['region'] }}</td>
+                            <td style="color: #42a4ff">-Rp.@convert($s['Pemasukan']['pendapatan'] - $s['Pengeluaran']['pengeluaran'])</td>
                           </tr>
-                          @endforeach
                           @endforeach
                         </tbody>
                         {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}}
