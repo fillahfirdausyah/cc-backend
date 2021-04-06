@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use App\Events\NotifSeller;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Merchandise;
 use App\Models\Comments_SR;
+use App\Models\Transaksi;
 use App\Models\Wishlist;
 use App\Models\Region;
 use App\Models\Like_SR;
@@ -90,7 +92,7 @@ class ShowroomController extends Controller
 
         $validator = Validator::make($input_data, [
         'user_id' => 'required',
-        'judul' => 'required',
+        'nama_produk' => 'required',
         'deskripsi' => 'required',
         'jenis' => 'required',
         'stok' => 'required',
@@ -120,14 +122,14 @@ class ShowroomController extends Controller
 
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'image/Tenant/car/';  
-            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
+            $profileImage ="imageCar-".$request->nama_produk."-".Str::slug($request->nama_produk, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
 
         $SR = new SR();
         $SR->user_id = $request->user_id;
-        $SR->judul = $request->judul;
+        $SR->nama_produk = $request->nama_produk;
         $SR->stok = $request->stok;
         $SR->deskripsi = $request->deskripsi;
         $SR->jenis = $request->jenis;
@@ -141,7 +143,7 @@ class ShowroomController extends Controller
         $SR->transmisi = $request->transmisi;
         $SR->warna = $request->warna;
         $SR->gambar = json_encode($name);
-        $SR->slug = Str::slug($request->judul, '-');
+        $SR->slug = Str::slug($request->nama_produk, '-');
         $SR->save();
 
         return redirect()->back()->with('status', 'Berhasil ditambahkan!, silahkan tunggu verifikasi admin');
@@ -170,7 +172,7 @@ class ShowroomController extends Controller
 
         $validator = Validator::make($input_data, [
         'user_id' => 'required',
-        'judul' => 'required',
+        'nama_produk' => 'required',
         'deskripsi' => 'required',
         'jenis' => 'required',
         'stok' => 'required',
@@ -200,14 +202,14 @@ class ShowroomController extends Controller
 
         foreach ($request->file('gambar') as $file) { 
             $destinationPath = 'image/Tenant/car/';  
-            $profileImage ="imageCar-".$request->judul."-".Str::slug($request->judul, '-').rand(0000,9999).".".$file->extension();
+            $profileImage ="imageCar-".$request->nama_produk."-".Str::slug($request->nama_produk, '-').rand(0000,9999).".".$file->extension();
             $file->move($destinationPath, $profileImage);
             $name[] = $profileImage;
         }
 
         $SR = SR::find($request->id);
         $SR->user_id = $request->user_id;
-        $SR->judul = $request->judul;
+        $SR->nama_produk = $request->nama_produk;
         $SR->stok = $request->stok;
         $SR->deskripsi = $request->deskripsi;
         $SR->jenis = $request->jenis;
@@ -221,7 +223,7 @@ class ShowroomController extends Controller
         $SR->transmisi = $request->transmisi;
         $SR->warna = $request->warna;
         $SR->gambar = json_encode($name);
-        $SR->slug = Str::slug($request->judul, '-');
+        $SR->slug = Str::slug($request->nama_produk, '-');
         $SR->save();
 
         
@@ -255,6 +257,35 @@ class ShowroomController extends Controller
         return redirect()->back();   
     }
 
+    public function transaction(Request $request)
+    {
+        $input_data = $request->all();
+        $validator = Validator::make($input_data, [
+            'amount' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $SR = SR::find($request->item_id);
+
+        $t = new Transaksi;
+        $t->seller_id = $request->seller_id;
+        $t->buyer_id = $request->buyer_id;
+        $t->amount = $request->amount;
+
+        $SR->transaction()->save($t);
+
+        event(new NotifSeller($SR));
+        
+        // event(new NotifSeller($t));
+        return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');
+    }
+
     public function like(Request $request)
     {
         if (Like_SR::where('post_id', $request->get('post_id'))->where('user_id', $request->get('user_id'))->count() < 1) {
@@ -280,7 +311,7 @@ class ShowroomController extends Controller
         $collectCar = [];
         $search = $request->search;
 
-        $SR = SR::where('judul', 'LIKE', $search)->orWhere('jenis', 'LIKE', $search)->paginate(20);
+        $SR = SR::where('nama_produk', 'LIKE', $search)->orWhere('jenis', 'LIKE', $search)->paginate(20);
 
         if($SR != NULL){
             foreach ($SR as $sr) {

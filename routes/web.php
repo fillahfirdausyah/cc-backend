@@ -193,12 +193,14 @@ Route::get('/pusher', function() {
 });
 
 // showroom Transaction
-Route::post('/showroom/interest', 'TransactionController@store');
+Route::post('/showroom/interest/merchandise', 'MerchandiseController@transaction');
+Route::post('/showroom/interest/car', 'ShowroomController@transaction');
 Route::post('/showroom/full', 'TransactionController@full');
 Route::get('/showroom/transaction', 'TransactionController@index');
 Route::post('/showroom/confirm', 'TransactionController@confirm');
 Route::post('/showroom/received', 'TransactionController@received');
 Route::post('/showroom/transfer', 'TransactionController@transfer');
+Route::post('/showroom/notification/list', 'TransactionController@notification');
 
 
 // Test Pusher

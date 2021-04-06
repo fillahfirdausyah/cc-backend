@@ -40,14 +40,14 @@
             <div class="col-lg-4">
                 <div class="trainer-item">
                     <div class="image-thumb">
-                        <img src="{{ asset('assets/vendor/showroom/assets/images/'.$collectSR[$item]) }}" height="400">
+                        <img src="{{ asset('image/Tenant/car/'.$collectSR[$item]) }}" height="400">
                     </div>
                     <div class="down-content">
                         <span>
                             <sup>Rp</sup> @convert($sr->harga) 
                         </span>
 
-                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->judul }}</h4></a>
+                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->nama_produk }}</h4></a>
 
                         <p>
                             <i class="fa fa-car"></i> {{ $sr->kondisi }} &nbsp;&nbsp;&nbsp;

@@ -88,10 +88,10 @@
                  @forelse($transaksi as $t)
                   <tr>
                     <td>{{ $t->buyer->name }}</td>
-                    <td>{{ $t->item->nama_produk }}</td>
-                    <td>{{ $t->item->id }}</td>
+                    <td>{{ $t->transactionable->nama_produk }}</td>
+                    <td>{{ $t->transactionable->id }}</td>
                     <td>{{ $t->amount }}</td>
-                    <td>Rp. @convert((int)$t->item->harga*$t->amount)</td>                    
+                    <td>Rp. @convert((int)$t->transactionable->harga*$t->amount)</td>                    
                     <td>{{ date('d F y',strtotime($t->created_at)) }}</td>
                     @if($t->confirmed == NULL)
                     <td colspan="3">

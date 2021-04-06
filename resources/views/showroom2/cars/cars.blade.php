@@ -54,7 +54,7 @@
                             <sup>Rp</sup>@convert($sr->harga)
                         </span>
 
-                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->judul }}</h4></a>
+                        <a href="{{ '/showroom/car/'.$sr->id.'-'.$sr->slug }}"><h4>{{ $sr->nama_produk }}</h4></a>
 
                         <p>
                         	<i class="fa fa-car"></i> {{ $sr->kondisi }} &nbsp;&nbsp;&nbsp;

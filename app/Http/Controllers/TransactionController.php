@@ -27,7 +27,7 @@ class TransactionController extends Controller
     {
         $transaction = Transaksi::whereHas('buyer', function(Builder $q){
                             $q->where('buyer_id', Auth::id());
-                        })->with(['item', 'seller'])->get();
+                        })->with(['transactionable', 'seller'])->get();
         return view('showroom2.transaction', compact('transaction'));
     }
 
@@ -61,10 +61,9 @@ class TransactionController extends Controller
         }
 
         $t = new Transaksi();
-        $t->item_id = $request->item_id;
+        $t->transactionable_id = $request->item_id;
         $t->seller_id = $request->seller_id;
         $t->buyer_id = $request->buyer_id;
-        $t->category = 'merchandise';
         $t->amount = $request->amount;
         $t->save();
 
@@ -139,5 +138,12 @@ class TransactionController extends Controller
                     ->whereNull('confirmed')
                     ->whereNull('payment')
                     ->delete();   
+    }
+
+    public function notification(Request $request)
+    {
+        $notif = Transaksi::where('buyer_id', $request->buyer_id)->get();
+
+        return response()->json(['data' => $notif]);
     }
 }
