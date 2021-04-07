@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   @auth
-    <meta name="user_id" content="{{ Auth::id() }}">
+  <meta name="user_id" content="{{ Auth::id() }}">
   @endauth
 
   <!-- Font Awesome -->
@@ -69,19 +69,14 @@
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" id="notif-new-banner" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
+          <div class="notif-item"></div>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="/tenant" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
       <li class="nav-item">
@@ -227,7 +222,7 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 <script>
-  Pusher.logToConsole = true;
+  // Pusher.logToConsole = true;
   var id = document.querySelector('meta[name="user_id"]').content;
 
   var pusher = new Pusher('056152f21466ab3e8829', {
@@ -236,7 +231,35 @@
 
   var channel = pusher.subscribe('notif-seller.'+id);
   channel.bind('Notif-Seller', function(data) {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
+    '<a href="/tenant" class="dropdown-item"><i class="fas fa-envelope mr-2"></i> id pembelian "'+data[0].id +'" status:'+ value[0].status+'</a>'
+    $('#notif-new-banner').append('<span class="badge badge-warning navbar-badge">new</span>');
+  });
+
+  $(document).ready(function() {
+      var seller_id = document.querySelector('meta[name="user_id"]').content;
+
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+          url : '/showroom/notification/tenant',
+          method : 'post',
+          data : {seller_id:seller_id},
+          success :function(data){
+            console.log(data);
+            // if (data.isEmpty) {
+            //   $('.notif-item').html('<a href="#" class="dropdown-item">Data Kosong</a>');
+            // }else{
+            //   $.each(data, function(key, value){
+            //     $('.notif-item').append('<a href="/tenant" class="dropdown-item"><i class="fas fa-envelope mr-2"></i>id pembelian "'+value[0].id +'" status:'+ value[0].status+'</a>');
+            //   });
+            // }
+          }
+      });
   });
 
 </script>

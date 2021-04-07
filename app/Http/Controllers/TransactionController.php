@@ -140,9 +140,16 @@ class TransactionController extends Controller
                     ->delete();   
     }
 
-    public function notification(Request $request)
+    public function notifBuyer(Request $request)
     {
-        $notif = Transaksi::where('buyer_id', $request->buyer_id)->get();
+        $notif = Transaksi::where('buyer_id', $request->buyer_id)->with('transactionable')->get();
+
+        return response()->json(['data' => $notif]);
+    }
+
+    public function notifSeller(Request $request)
+    {
+        $notif = Transaksi::where('seller_id', $request->seller_id)->with('transactionable')->get();
 
         return response()->json(['data' => $notif]);
     }
