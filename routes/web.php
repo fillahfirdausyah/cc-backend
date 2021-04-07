@@ -200,7 +200,8 @@ Route::get('/showroom/transaction', 'TransactionController@index');
 Route::post('/showroom/confirm', 'TransactionController@confirm');
 Route::post('/showroom/received', 'TransactionController@received');
 Route::post('/showroom/transfer', 'TransactionController@transfer');
-Route::post('/showroom/notification/list', 'TransactionController@notification');
+Route::post('/showroom/notification/list', 'TransactionController@notifBuyer');
+Route::post('/showroom/notification/tenant', 'TransactionController@notifSeller');
 
 
 // Test Pusher

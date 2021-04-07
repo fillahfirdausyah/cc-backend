@@ -66,8 +66,9 @@
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
-                                <div class="dropdown-menu mr-5">
-                                    <a class="dropdown-item">Notifikasi 1</a>
+                                <div class="dropdown-menu mr-5 notif-item">
+                                    <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksi</strong></a>
+                                    <hr>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -104,6 +105,7 @@
     <div>
     @yield('content')
     </div>
+    <div class="lala"></div>
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
@@ -156,13 +158,13 @@
 
     var channel = pusher.subscribe('notif-buyer'+id);
     channel.bind('Notif-Buyer', function(data) {
-      alert(JSON.stringify(data));
+        $('.notif-item').append('<a class="dropdown-item">status '+data[0].transactionable.nama_produk +':'+ value[0].status+'</a>');
     });
 
-    var channel = pusher.subscribe('notif-seller'+id);
-    channel.bind('Notif-Seller', function(data) {
-      alert(JSON.stringify(data));
-    });
+    // var channel = pusher.subscribe('notif-seller'+id);
+    // channel.bind('Notif-Seller', function(data) {
+    //   alert(JSON.stringify(data));
+    // });
 
     function interest(){
         document.getElementById('buy').style.display = 'block';
@@ -189,7 +191,10 @@
             method : 'post',
             data : {buyer_id:buyer_id},
             success :function(data){
-                console.log(data);
+                // console.log(data);
+                $.each(data, function(key, value){
+                    $('.notif-item').append('<a class="dropdown-item">status '+value[0].transactionable.nama_produk +':'+ value[0].status+'</a>');
+                });
             }
         });
     });
