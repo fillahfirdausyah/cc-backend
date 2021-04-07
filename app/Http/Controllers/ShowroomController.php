@@ -74,8 +74,9 @@ class ShowroomController extends Controller
                             ->where('user_id', Auth::id())
                             ->where('jenis', 'car')
                             ->first();
+        $gambar = json_decode($SR->gambar, true);
 
-        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist'));
+        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist', 'gambar'));
     }
 
     // Showroom

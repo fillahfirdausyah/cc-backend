@@ -25,46 +25,31 @@
     <div class="container">
         <br>
         <br>
-
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
+        <div id="carouselExampleControls" style="width: 70%; margin: auto;" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100 img-fluid" src="{{ asset('image/Tenant/car/'.$gambar[0])}}" alt="First slide">
+            </div>
             @foreach(json_decode($SR->gambar) as $sr)
-            <div class="carousel-item" id="slide-show">
-              <img class="d-block w-100" src="{{ asset('image/Tenant/car/'.$sr)}}" alt="First slide">
+            <div class="carousel-item">
+              <img class="d-block w-100 img-fluid" src="{{ asset('image/Tenant/car/'.$sr)}}" alt="First slide">
             </div>
             @endforeach
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
         </div>
-      <br>
-
+        <br>
         <br>
         <br>
         <div class="row justify-content-end mb-3">
-<<<<<<< HEAD:resources/views/showroom2/car-details.blade.php
-          @can('ud-sr', $SR)
-            <div><a href="{{ '/showroom/car/edit/'.$SR->id }}"><button class="btn btn-primary mr-2">Edit</button></a></div>
-            <form action="{{ '/showroom/car/'.$SR->id }}" method="post">
-              @csrf
-              @method('delete')
-              <input type="submit" class="btn btn-danger" value="Delete">
-            </form>
-          @else
-=======
           @cannot('ud-sr', $SR)
->>>>>>> 66b5d7e68357d18d86035f65c143162a1f310872:resources/views/showroom2/cars/car-details.blade.php
             <div class="wishlist-container">
             @if($wishlist == NULL)
             <form action="/showroom/wishlist" method="post">
