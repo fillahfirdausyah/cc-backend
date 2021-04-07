@@ -29,9 +29,9 @@ class CrossregionController extends Controller
 
         if($user_region->count() <= 0){
 	        $Crossregion = DB::table("region_user")->insert(['user_id' => $user_id, 'region_id' => $region_id]);
-	        return redirect()->back()->with('success', 'd');
+	        return redirect()->back()->with('success', 'Berhasil');
         }else{
-        	return redirect()->back()->with('danger', "You are already a member in this region!");
+        	return redirect()->back()->with('danger', "Kamu sudah jadi member di region ini!");
         }
     }
 

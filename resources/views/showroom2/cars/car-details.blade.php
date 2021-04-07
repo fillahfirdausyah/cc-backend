@@ -48,28 +48,23 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-      {{-- <!-- Slideshow container -->
-      <div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        @foreach(json_decode($SR->gambar) as $sr)
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" style="width:100%; height: auto;">
-          <div class="text">Caption Text</div>
-        </div>
-        @endforeach
-
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>  
-      </div> --}}
       <br>
 
         <br>
         <br>
         <div class="row justify-content-end mb-3">
+<<<<<<< HEAD:resources/views/showroom2/car-details.blade.php
+          @can('ud-sr', $SR)
+            <div><a href="{{ '/showroom/car/edit/'.$SR->id }}"><button class="btn btn-primary mr-2">Edit</button></a></div>
+            <form action="{{ '/showroom/car/'.$SR->id }}" method="post">
+              @csrf
+              @method('delete')
+              <input type="submit" class="btn btn-danger" value="Delete">
+            </form>
+          @else
+=======
           @cannot('ud-sr', $SR)
+>>>>>>> 66b5d7e68357d18d86035f65c143162a1f310872:resources/views/showroom2/cars/car-details.blade.php
             <div class="wishlist-container">
             @if($wishlist == NULL)
             <form action="/showroom/wishlist" method="post">
@@ -204,7 +199,7 @@
 
                     <div class="col-sm-6">
                       <label>Social Network</label>
-                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                      <p><a href="{{ '/member/profile/details/'.$user->username }}">{{ $user->name }}</a></p>
                     </div>
 
                     <div class="col-sm-6">

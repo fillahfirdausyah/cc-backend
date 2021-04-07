@@ -74,7 +74,6 @@
               </div>
               <!-- /.card-footer -->
             </div>
-            <!-- /.card -->
             </div>
             <div class="col-md-4">
               <!-- small box -->
@@ -105,9 +104,9 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>{{ $user }}</h3>
+                  <h3>{{ $user->count() }}</h3>
 
-                  <p>Junlah User</p>
+                  <p>Jumlah User</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person"></i>
@@ -199,6 +198,7 @@ $(function(){
 function aksi(id){
       event.preventDefault();
       const url = document.getElementById('confirm').getAttribute('href') + id
+      // console.log(url);
       swal({
         title: 'Yaking ingin menghapus?',
         text: "Data akan dihapus permanen",

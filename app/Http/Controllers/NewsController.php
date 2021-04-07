@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\News;
-
+use App\Models\User;
 class NewsController extends Controller
 {
     /**
@@ -16,7 +16,8 @@ class NewsController extends Controller
     public function index()
     {
         $data = News::all();
-        return view('admin.news.News', compact('data'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.news.News', compact('data', 'userVerified'));
     }
 
     /**

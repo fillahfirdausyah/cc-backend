@@ -25,6 +25,6 @@ class CekRole
             return $next($request);
        }
        
-       return redirect()->to('/member/home');
+       return redirect()->to('/member/home/verify/');
     }
 }
