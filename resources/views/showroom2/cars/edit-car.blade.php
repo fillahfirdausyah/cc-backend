@@ -48,7 +48,7 @@
 		<div class="form-group">
 			<div class="form-row">
 				<div class="col">
-					<input type="text" class="form-control" name="judul" placeholder="Nama Produk" value="{{ $SR->judul }}">
+					<input type="text" class="form-control" name="nama_produk" placeholder="Nama Produk" value="{{ $SR->judul }}">
 				</div>
 				<div class="col">
 					<input type="number" class="form-control" name="harga" placeholder="Harga" value="{{ $SR->harga }}">
