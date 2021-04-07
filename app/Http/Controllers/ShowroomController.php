@@ -281,9 +281,9 @@ class ShowroomController extends Controller
         $t->buyer_id = $request->buyer_id;
         $t->amount = $request->amount;
 
-        $SR->transaction()->save($t);
-
-        event(new NotifSeller($SR));
+        $data = $SR->transaction()->save($t);
+        
+        event(new NotifSeller($data));
         
         // event(new NotifSeller($t));
         return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');

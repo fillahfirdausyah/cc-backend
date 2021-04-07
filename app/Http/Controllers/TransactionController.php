@@ -66,20 +66,21 @@ class TransactionController extends Controller
         $t->buyer_id = $request->buyer_id;
         $t->amount = $request->amount;
         $t->save();
-
         event(new NotifSeller($t));
         
         // event(new NotifSeller($t));
         return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');
     }
-
+    
     public function confirm(Request $request)
     {
         $t = Transaksi::findOrFail($request->id);
         $t->confirmed = Carbon::now();
         $t->save();
         
-        event(new NotifBuyer($t));
+        $data = $t->load('transactionable');
+
+        event(new NotifBuyer($data));
         // NotifBuyer::dispatch($t);
         return redirect()->back();
     }
@@ -144,7 +145,7 @@ class TransactionController extends Controller
     {
         $notif = Transaksi::where('buyer_id', $request->buyer_id)->with('transactionable')->get();
 
-        return response()->json(['data' => $notif]);
+        return response()->json($notif);
     }
 
     public function notifSeller(Request $request)

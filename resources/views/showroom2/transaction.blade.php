@@ -105,34 +105,3 @@
 <!-- ***** Fleet Ends ***** -->
 
 @endsection
-@push('js')
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-    
-    Pusher.logToConsole = true;
-    var id = document.querySelector('meta[name="auth_id"]').content;
-
-    var pusher = new Pusher('056152f21466ab3e8829', {
-      cluster: 'ap1'
-    });
-
-    // var channel = pusher.subscribe('notif-buyer.'+id);
-    // channel.bind('NotifBuyer', function(data) {
-    //   alert(JSON.stringify(data));
-    // });
-    
-    var channel = pusher.subscribe('notif-buyer');
-    channel.bind('Notif-Buyer', function(data) {
-      alert(JSON.stringify(data));
-    });
-
-    // Vue application
-    const app = new Vue({
-      el: '#app',
-      data: {
-        messages: [],
-      },
-    });
-  </script>
-@endpush

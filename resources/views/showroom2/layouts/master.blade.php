@@ -62,12 +62,12 @@
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
                                 </div>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
                                 <div class="dropdown-menu mr-5 notif-item">
                                     <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksis</strong></a>
                                     <hr>
-                                </div>
-                                <div class="dropdown-menu mr-5">
-                                    <a class="dropdown-item">Notifikasi 1</a>
                                 </div>
                             </li>
                             <li class="dropdown">
@@ -148,16 +148,17 @@
     });
 
 
-    Pusher.logToConsole = true;
+    // Pusher.logToConsole = true;
     var id = document.querySelector('meta[name="auth_id"]').content;
 
     var pusher = new Pusher('056152f21466ab3e8829', {
       cluster: 'ap1'
     });
 
-    var channel = pusher.subscribe('notif-buyer'+id);
+    var channel = pusher.subscribe('notif-buyer.'+id);
     channel.bind('Notif-Buyer', function(data) {
-        $('.notif-item').append('<a class="dropdown-item">status '+data[0].transactionable.nama_produk +':'+ value[0].status+'</a>');
+        $('.notif-item').append(`<a class="dropdown-item">status ${data.fields.transactionable.nama_produk}</a>`);
+        // console.table(JSON.stringify(data.fields));
     });
 
     // var channel = pusher.subscribe('notif-seller'+id);
@@ -190,9 +191,10 @@
             method : 'post',
             data : {buyer_id:buyer_id},
             success :function(data){
-                // console.log(data);
-                $.each(data, function(key, value){
-                    $('.notif-item').append('<a class="dropdown-item">status '+value[0].transactionable.nama_produk +':'+ value[0].status+'</a>');
+                console.log(data);
+                data.forEach(x => {
+                    $('.notif-item').append(`<a class="dropdown-item">status ${x.transactionable.nama_produk} : ${x.status}</a>`);
+                    // console.log(x);
                 });
             }
         });
