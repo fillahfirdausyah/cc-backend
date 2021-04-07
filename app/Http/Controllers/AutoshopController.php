@@ -83,7 +83,8 @@ class AutoshopController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/autoshop')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -143,7 +144,8 @@ class AutoshopController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/autoshop')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }

@@ -75,7 +75,8 @@ class MerchandiseController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/merchandise')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -132,7 +133,8 @@ class MerchandiseController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload/merchandise')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
