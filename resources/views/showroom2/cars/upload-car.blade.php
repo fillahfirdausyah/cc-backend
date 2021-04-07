@@ -12,7 +12,7 @@
                     <br>
                     <br>
                     <h2><em>Cars</em></h2>
-                    <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
 	    </div>
 	@endif
 	
-	<form action="{{ '/showroom/upload/car' }}" method="post" enctype="multipart/form-data">
+	<form action="{{ '/showroom/upload/car' }}" method="POST" enctype="multipart/form-data">
 		@csrf
 
 		<input type="hidden" name="stok" value="Tersedia">
@@ -117,7 +117,6 @@
 		<div class="form-group">
 			<input type="submit" class="btn btn-primary" value="Tambah">
 		</div>
-
 	</form>
 </div>
 	<br>
