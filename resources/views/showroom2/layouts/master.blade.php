@@ -67,7 +67,7 @@
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
                                 <div class="dropdown-menu mr-5 notif-item">
-                                    <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksi</strong></a>
+                                    <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksis</strong></a>
                                     <hr>
                                 </div>
                             </li>
