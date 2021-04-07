@@ -109,7 +109,8 @@ class ShowroomController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/showroom/upload')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -189,7 +190,8 @@ class ShowroomController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/upload')
+            return redirect()
+                        ->back()
                         ->withErrors($validator)
                         ->withInput();
         }
