@@ -63,7 +63,7 @@
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
                                 <div class="dropdown-menu mr-5 notif-item">
-                                    <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksi</strong></a>
+                                    <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksis</strong></a>
                                     <hr>
                                 <div class="dropdown-menu mr-5">
                                     <a class="dropdown-item">Notifikasi 1</a>
