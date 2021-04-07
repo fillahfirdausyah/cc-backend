@@ -53,7 +53,6 @@
                             <li><a href="/showroom/cars"><i class="fa fa-car" aria-hidden="true"></i> Cars</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list" aria-hidden="true"></i> Others</a>
-                              
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/showroom/autoshop">Autoshops</a>
                                     <a class="dropdown-item" href="/showroom/merchandise">Merchandise</a>
@@ -62,9 +61,11 @@
                                     <a class="dropdown-item" href="faq.html">FAQ</a>
                                     <a class="dropdown-item" href="terms.html">Terms</a>
                                     <a class="dropdown-item" href="contact.html">Contact</a>
+                                </div>
                                 <div class="dropdown-menu mr-5 notif-item">
                                     <a class="dropdown-item" href="/showroom/transaction"><strong>Lihat semua Transaksi</strong></a>
                                     <hr>
+                                </div>
                                 <div class="dropdown-menu mr-5">
                                     <a class="dropdown-item">Notifikasi 1</a>
                                 </div>

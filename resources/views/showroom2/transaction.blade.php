@@ -104,7 +104,6 @@
 </section>
 <!-- ***** Fleet Ends ***** -->
 
-<<<<<<< HEAD
 @endsection
 @push('js')
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -137,6 +136,3 @@
     });
   </script>
 @endpush
-=======
-@endsection
->>>>>>> d0ecd41263cbcd9e6c77c3994378f6919b2cd602
