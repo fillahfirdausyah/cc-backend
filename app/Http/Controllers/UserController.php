@@ -129,7 +129,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user->profile == null) {
-            return "Belum ada  data";
+            return 0;
         }
 
         $data = $user->load('profile', 'keuangan', 'region');

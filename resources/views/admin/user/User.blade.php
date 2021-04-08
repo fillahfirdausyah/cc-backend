@@ -186,38 +186,47 @@
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-          // console.log(data.region)
-          $('#modalData').modal('show');
+          if(data !== 0) {
+            $('#modalData').modal('show');
 
-          $('#userData').html(`
-          <tr>
-            <td><b>Nama</b></td>
-            <td><b>:</b></td>
-            <td>${data.name}</td>
-          </tr>
-          <tr>
-            <td><b>Domisili</b></td>
-            <td><b>:</b></td>
-            <td>${data.region[0].region}</td>
-          </tr>
-          <tr>
-            <td><b>Iuran Pertama</b></td>
-            <td><b>:</b></td>
-            <td>${data.keuangan[0].jumlah}</td>
-          </tr>
-          <tr>
-            <td><b>Foto STNK</b></td>
-            <td><b>:</b></td>
-            <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}" class="img-thumbnail" alt=""></td>
-          </tr>
-          <tr>
-            <td><b>Bukti Transfer</b></td>
-            <td><b>:</b></td>
-            <td><img src="{{ asset('image/Member/Keuangan') }}/${data.keuangan[0].bukti}" class="img-thumbnail" alt=""></td>
-          </tr>
-          `)
+            $('#userData').html(`
+            <tr>
+              <td><b>Nama</b></td>
+              <td><b>:</b></td>
+              <td>${data.name}</td>
+            </tr>
+            <tr>
+              <td><b>Domisili</b></td>
+              <td><b>:</b></td>
+              <td>${data.region[0].region}</td>
+            </tr>
+            <tr>
+              <td><b>Iuran Pertama</b></td>
+              <td><b>:</b></td>
+              <td>${data.keuangan[0].jumlah}</td>
+            </tr>
+            <tr>
+              <td><b>Foto STNK</b></td>
+              <td><b>:</b></td>
+              <td><img src="{{ asset('image/Member/Profile/Stnk') }}/${data.profile.foto_stnk}" class="img-thumbnail" alt=""></td>
+            </tr>
+            <tr>
+              <td><b>Bukti Transfer</b></td>
+              <td><b>:</b></td>
+              <td><img src="{{ asset('image/Member/Keuangan') }}/${data.keuangan[0].bukti}" class="img-thumbnail" alt=""></td>
+            </tr>
+            `)
 
-          $('#verifUser').attr('action', '/admin/user/verify/' + uid);
+            $('#verifUser').attr('action', '/admin/user/verify/' + uid);
+          }else {
+            swal({
+              title: 'Belum Ada Data',
+              text: "User ini belum menginput data",
+              icon: 'warning',
+              buttons: false,
+              dangerMode: false,
+            })
+          }
         }
       })
     })
