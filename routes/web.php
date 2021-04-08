@@ -203,6 +203,9 @@ Route::post('/showroom/transfer', 'TransactionController@transfer');
 Route::post('/showroom/notification/list', 'TransactionController@notifBuyer');
 Route::post('/showroom/notification/tenant', 'TransactionController@notifSeller');
 
+Route::get('/test', function(){
+	return view('showroom2.transaction2');
+});
 
 // Test Pusher
 Route::get('test', function() {

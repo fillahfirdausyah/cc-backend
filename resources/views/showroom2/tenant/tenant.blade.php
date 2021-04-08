@@ -72,6 +72,7 @@
               <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
+                        <th>id Pembelian</th>
                         <th>Pembeli</th>
                         <th>Nama barang</th>
                         <th>ID barang</th>
@@ -87,6 +88,7 @@
                  
                  @forelse($transaksi as $t)
                   <tr>
+                    <td>{{ $t->id }}</td>
                     <td>{{ $t->buyer->name }}</td>
                     <td>{{ $t->transactionable->nama_produk }}</td>
                     <td>{{ $t->transactionable->id }}</td>
@@ -109,7 +111,7 @@
                       @endif
                       <td>{{ $t->status }}</td>
                       <td>
-                        @if($t->status == 'pending' && $t->payment != NULL)
+                        @if($t->status == 'Bukti bayar dikirim' && $t->payment != NULL)
                         <form method="post" action="/showroom/full">
                           @csrf
                           <input type="hidden" name="transaction_id" value="{{ $t->id }}">
@@ -131,7 +133,7 @@
                   @endforelse
 
                 </tbody>
-                {{-- <p class="mt-2">Halaman: {{ $transaksi->currentPage() }}</p> --}}
+                {{ $transaksi->links() }}
               </table>
             </div>
           </div>
