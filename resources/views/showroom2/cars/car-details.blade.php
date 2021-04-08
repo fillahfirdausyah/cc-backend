@@ -135,6 +135,7 @@
                    </div>
 
                   @cannot('ud-sr', $SR)
+                    @if($transaction == NULL)
                      <div class="col-sm-12">
                       <form method="post" action="/showroom/interest/car">
                         @csrf
@@ -145,6 +146,11 @@
                         <button type="submit" class="btn btn-lg btn-primary minat" style="width: 100%;">Beli</button>
                       </form>
                      </div>
+                     @else
+                      <div class="alert alert-success" style="width: 100%;">
+                          Item ini sudah ditambahkan di Transaksi anda
+                      </div>
+                    @endif
                   @endcan
                   
                 </div>
