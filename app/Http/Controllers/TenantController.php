@@ -19,6 +19,11 @@ use App\Models\Transaksi;
 
 class TenantController extends Controller
 {
+    public $userVerified;
+    function __construct() {
+        $this->userVerified = User::where('verified', NULL);
+    }
+
     public function index()
     {
         // User tenant
@@ -198,12 +203,21 @@ class TenantController extends Controller
         return redirect()->back()->with('status', 'Edit Berhasil!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tenant  $tenant
-     * @return \Illuminate\Http\Response
-     */
+    public function list() {
+        $data = Tenant::with('user')->get();
+        $userVerified = $this->userVerified;
+        return view('admin.tenant.Tenant', compact('data', 'userVerified'));
+    }
+
+    public function verify($id) {
+        $data = Tenant::find($id);
+
+        $data->verified = 'yes';
+        $data->save();
+
+        return redirect()->back()->with('success', 'User Tenant Terverifikasi');
+    }
+
     public function destroy(Tenant $tenant)
     {
         //

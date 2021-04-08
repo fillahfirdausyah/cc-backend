@@ -70,7 +70,14 @@
         @endif
         @endif
       </div>
-        <div class="p-3 bg-danger text-white text-center">Anda belum diverifikasi oleh admin, Mohon tunggu sampai admin menyetujui</div>
+        <div class="p-3 bg-danger text-white text-center">Anda belum verifikasi email, Mohon melakukan verifikasi email untuk melanjutkan</p>
+          <form action="{{ route('verification.resend') }}" method="POST">
+            @csrf
+            <p style="display: inline">belum menerima?</p>
+            {{-- <a href="">kirim ulang</a> --}}
+            <button class="btn btn-outline-secondary" type="submit">kirim ulang</button>
+          </form>
+        </div>
     </header><!-- End Header -->
   
     <!-- ======= Hero Section ======= -->

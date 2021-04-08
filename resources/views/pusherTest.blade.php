@@ -11,14 +11,14 @@
       cluster: 'ap1'
     });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
+    var channel = pusher.subscribe('channel-iuran');
+    channel.bind('event-iuran', function(data) {
       alert(JSON.stringify(data));
     });
   </script>
 </head>
 <body>
-  <h1>Pusher Test</h1>
+  <h1>Pusher Test Kartu</h1>
   <p>
     Try publishing an event to channel <code>my-channel</code>
     with event name <code>my-event</code>.

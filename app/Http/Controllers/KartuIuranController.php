@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Keuangan;
+use App\Events\KartuIuran;
 
 class KartuIuranController extends Controller
 {
@@ -42,13 +44,17 @@ class KartuIuranController extends Controller
     public function store(Request $request, $regid)
     {
 
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'nama'      => 'required',
             'region'    => 'required',
             'jumlah'    => 'required | numeric',
             'kategori'  => 'required',
-            // 'bukti'     => 'required'
+            'bukti'     => 'required | mimes:jpeg,jpg,png'
         ]);
+
+        if($validator->fails()) {
+            return back()->with('warning', $validator->messages()->all()[0]);
+         }
 
         $user = User::where('email', $request->email)->get();
 
@@ -56,15 +62,22 @@ class KartuIuranController extends Controller
             $id    = $u->id;
         }
 
+        $buktiIuran =  'BUKTI-' . $request->uid . '-' . time() . '.' . $request->bukti->extension();
+         $request->bukti->move(public_path('image/Member/Keuangan/'), $buktiIuran);
+
         $data = new Keuangan;
         $data->region_id = $regid; 
         $data->user_id   = $id;
+        $data->tipe_transaksi = 'pemasukan';
+        $data->email     = $request->email;
         $data->nama      = $request->nama;
         $data->jumlah    = $request->jumlah;
-        $data->status    = 'pending';
         $data->kategori  = $request->kategori;
-        $data->email     = $request->email;
+        $data->status    = 'pending';
+        $data->bukti     = $buktiIuran;
         $data->save();
+
+        event(new KartuIuran($data));
 
         return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }

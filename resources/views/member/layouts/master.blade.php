@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Flat Icon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/flaticon/flaticon.css') }}">
     <!-- audio & video player CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/plyr.css') }}">
     <!-- Slick CSS -->
@@ -34,6 +35,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/perfect-scrollbar.css') }}">
     <!-- light gallery css -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/lightgallery.min.css') }}">
+    <!-- Bootstarp ICON -->
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"> --}}
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/style.css') }}">
 
@@ -265,6 +268,7 @@
                                                 @if (Auth::user()->role == 'admin')
                                                 <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
                                                 @endif
+                                                <li><a href="{{ '/showroom' }}"><i class="flaticon-car"></i>Showroom</a></li>
                                                 <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
@@ -453,6 +457,7 @@
                                     @if (Auth::user()->role == 'admin')
                                     <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
                                     @endif
+                                    <li><a href="{{ '/showroom' }}"><i class="flaticon-car">Showroom</i></a></li>
                                     <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
@@ -505,7 +510,7 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li><a href="{{ '/dashboard' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
+                                            <li><a href="{{ '/member/home/' }}" title="Home"><i class="fas fa-lg fa-home"></i></a></li>
                                             <li><a href="{{ '/member/profile/details/' }}" title="About Me"><i class="fas fa-lg fa-user"></i></a></li>
                                             <li><a href="{{ '/member/galery' }}" title="Gallery"><i class="fas fa-lg fa-images"></i></a></li>
                                             <li><a href="{{ '/member/daerah' }}" title="Region"><i class="fas fa-lg fa-city"></i></a></li>

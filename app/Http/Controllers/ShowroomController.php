@@ -74,8 +74,9 @@ class ShowroomController extends Controller
                             ->where('user_id', Auth::id())
                             ->where('jenis', 'car')
                             ->first();
+        $gambar = json_decode($SR->gambar, true);
 
-        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist'));
+        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist', 'gambar'));
     }
 
     // Showroom
@@ -280,9 +281,9 @@ class ShowroomController extends Controller
         $t->buyer_id = $request->buyer_id;
         $t->amount = $request->amount;
 
-        $SR->transaction()->save($t);
-
-        event(new NotifSeller($SR));
+        $data = $SR->transaction()->save($t);
+        
+        event(new NotifSeller($data));
         
         // event(new NotifSeller($t));
         return redirect('/showroom/transaction')->with('status', 'Telah ditambahkan ke transaksi');
@@ -327,5 +328,14 @@ class ShowroomController extends Controller
         }
 
         return view('showroom2.cars.cars', compact('collectCar', 'SR'));
+    }
+
+    public function accept($id) {
+        $data = SR::find($id);
+
+        $data->verified = 'yes';
+        $data->save();
+
+        return response()->json($id);
     }
 }

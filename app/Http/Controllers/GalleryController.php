@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\User;
 
 class GalleryController extends Controller
 {
@@ -15,8 +16,8 @@ class GalleryController extends Controller
     public function index()
     {
         $gallery = Gallery::take(10)->get();
-
-        return view('admin.gallery.Gallery', compact('gallery'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.gallery.Gallery', compact('gallery', 'userVerified'));
     }
 
     /**

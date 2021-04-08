@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Event;
+use App\Models\User;
 
 class EventController extends Controller
 {
@@ -22,7 +23,8 @@ class EventController extends Controller
     public function index()
     {   
         $data = Event::all();
-        return view('admin.event.Event', compact('data'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.event.Event', compact('data', 'userVerified'));
     }
 
     /**

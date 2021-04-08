@@ -25,47 +25,27 @@
     <div class="container">
         <br>
         <br>
-
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
+        <div id="carouselExampleControls" style="width: 70%; margin: auto;" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100 img-fluid" src="{{ asset('image/Tenant/car/'.$gambar[0])}}" alt="First slide">
+            </div>
             @foreach(json_decode($SR->gambar) as $sr)
-            <div class="carousel-item" id="slide-show">
-              <img class="d-block w-100" src="{{ asset('image/Tenant/car/'.$sr)}}" alt="First slide">
+            <div class="carousel-item">
+              <img class="d-block w-100 img-fluid" src="{{ asset('image/Tenant/car/'.$sr)}}" alt="First slide">
             </div>
             @endforeach
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
         </div>
-      {{-- <!-- Slideshow container -->
-      <div class="slideshow-container">
-
-        <!-- Full-width images with number and caption text -->
-        @foreach(json_decode($SR->gambar) as $sr)
-        <div class="mySlides fade">
-          <div class="numbertext">1 / 3</div>
-          <img src="{{ asset('assets/vendor/showroom/assets/images/'.$sr)}}" style="width:100%; height: auto;">
-          <div class="text">Caption Text</div>
-        </div>
-        @endforeach
-
-        <!-- Next and previous buttons -->
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>  
-      </div> --}}
-      <br>
-
+        <br>
         <br>
         <br>
         <div class="row justify-content-end mb-3">
@@ -204,7 +184,7 @@
 
                     <div class="col-sm-6">
                       <label>Social Network</label>
-                      <p><a href="{{ '/member/details/'.$user->username }}">{{ $user->name }}</a></p>
+                      <p><a href="{{ '/member/profile/details/'.$user->username }}">{{ $user->name }}</a></p>
                     </div>
 
                     <div class="col-sm-6">

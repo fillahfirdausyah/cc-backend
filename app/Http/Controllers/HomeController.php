@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\News;
 use App\Models\Event;
 use App\Models\Region;
+use App\Models\SR;
+
 class HomeController extends Controller
 {
     /**
@@ -27,15 +29,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $news    = News::count();
-        $event   = Event::count();
-        $user    = User::count();
-        $region  = Region::all();
+    {   
+        $convSR = [];
+        $collectSR = [];
 
-        // dd(Auth::user());
+        $news         = News::count();
+        $event        = Event::count();
+        $user         = User::all();
+        $userVerified = $user->where('verified', NULL);
+        $region       = Region::all();
 
+        // dd($userVerified->count());
         
-        return view('admin.Dashboard', compact('news', 'event', 'user', 'region'));
+        return view('admin.Dashboard', compact('news', 'event', 'user', 'region', 'userVerified'));
     }
 }

@@ -222,18 +222,23 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 <script>
-  // Pusher.logToConsole = true;
+  Pusher.logToConsole = true;
   var id = document.querySelector('meta[name="user_id"]').content;
 
+  // console.log(id);
+
   var pusher = new Pusher('056152f21466ab3e8829', {
-    cluster: 'ap1'
+      cluster: 'ap1'
   });
 
   var channel = pusher.subscribe('notif-seller.'+id);
   channel.bind('Notif-Seller', function(data) {
     // alert(JSON.stringify(data));
-    '<a href="/tenant" class="dropdown-item"><i class="fas fa-envelope mr-2"></i> id pembelian "'+data[0].id +'" status:'+ value[0].status+'</a>'
+    $('.notif-item').append(`
+    <a href="/tenant" class="dropdown-item"><i class="fas fa-envelope mr-2"></i> id pembelian ${data.fields.id}</a>
+    `)
     $('#notif-new-banner').append('<span class="badge badge-warning navbar-badge">new</span>');
+    console.log(data);
   });
 
   $(document).ready(function() {
@@ -250,7 +255,7 @@
           method : 'post',
           data : {seller_id:seller_id},
           success :function(data){
-            console.log(data);
+            // console.log(data);
             // if (data.isEmpty) {
             //   $('.notif-item').html('<a href="#" class="dropdown-item">Data Kosong</a>');
             // }else{
