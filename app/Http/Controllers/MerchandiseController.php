@@ -240,7 +240,7 @@ class MerchandiseController extends Controller
                         ->withInput();
         }
 
-        $merchan = Merchandise::find($request->item_id);
+        $merchan = Merchandise::find($item_id);
 
         $t = new Transaksi;
         $t->seller_id = $request->seller_id;
