@@ -59,7 +59,6 @@
                                 <th>Kategori</th>
                                 <th>Region</th>
                                 <th>Tanggal</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,7 +72,6 @@
                              <td>{{ $re->region }}</td>
                              @endforeach
                             <td>{{ date('d F y',strtotime($d->created_at)) }}</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
                           </tr>
                           @empty
                           <tr>

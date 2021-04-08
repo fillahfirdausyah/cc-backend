@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Tambah Iuran')
+@section('title', 'Tambah Pengeluaran')
     
 @section('content')
 <div class="content-wrapper">
@@ -48,8 +48,12 @@
                             </select>
                         </div>
                         <div class="form-group">
+                          <label for="saldo">Saldo Region</label>
+                          <input type="number" class="form-control" id="saldo" readonly>
+                        </div>
+                        <div class="form-group">
                           <label for="jumalah">Jumlah Pengeluaran</label>
-                          <input type="number" class="form-control" name="jumlah" id="jumalah" placeholder="Rp..">
+                          <input type="number" class="form-control" name="jumlah" max="0" id="jumlah" placeholder="Rp..">
                         </div>
                         <div class="form-group">
                             <label>Kategori Pengeluaran</label>
@@ -95,10 +99,12 @@
         dataType: "json",
         success: function(response){
             let res = 0;
-            response.forEach(x => {
+            response.keuangan.forEach(x => {
                res += x.jumlah
             });
-            // $('#saldo').val(res).simpleMoneyFormat();
+            $('#saldo').val(res);
+            $('#jumlah').attr('max', res);
+            // console.log(res)
         }
       });
   }

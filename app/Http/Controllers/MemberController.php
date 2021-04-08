@@ -71,6 +71,7 @@ class MemberController extends Controller
          $keuangan = new Keuangan;
          $keuangan->region_id = $request->region;
          $keuangan->user_id = $request->uid;
+         $keuangan->tipe_transaksi = 'pemasukan';
          $keuangan->email = $request->email;
          $keuangan->nama = $request->nama;
          $keuangan->jumlah = $request->jumlah;

@@ -273,7 +273,8 @@ class KeuanganController extends Controller
         
         $region = Region::find($request->id);
 
-        $data = $region->total()->get();
+        $data = $region->load('keuangan');
+        // return $data;
 
         return response()->json($data);
 
