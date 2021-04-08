@@ -25,10 +25,26 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $convT = [];
+        $collectT = [];
+
         $transaction = Transaksi::whereHas('buyer', function(Builder $q){
                             $q->where('buyer_id', Auth::id());
-                        })->with(['transactionable', 'seller'])->get();
-        return view('showroom2.transaction', compact('transaction'));
+                        })->with(['transactionable', 'seller'])->paginate(10);
+
+        if($transaction != NULL){
+            foreach ($transaction as $t) {
+                $convT[] = json_decode($t->transactionable->gambar);
+            }
+
+            $count = count($convT);
+            for ($i=0; $i < $count; $i++) { 
+                $collectT[] = $convT[$i][0];
+            }
+        }
+
+        // return view('showroom2.transaction', compact('transaction', 'collectT'));
+        return view('showroom2.transaction2', compact('transaction', 'collectT'));
     }
 
     /**
@@ -76,6 +92,7 @@ class TransactionController extends Controller
     {
         $t = Transaksi::findOrFail($request->id);
         $t->confirmed = Carbon::now();
+        $t->status = "dikonfirmasi";
         $t->save();
         
         $data = $t->load('transactionable');
@@ -90,8 +107,9 @@ class TransactionController extends Controller
         $t = Transaksi::find($request->id);
         $t->received = Carbon::now();
         $t->status = 'diterima';
-        // event(new NotifSeller(array($t)));
         $t->save();
+
+        event(new NotifSeller($t));
 
         return redirect()->back();
     }
@@ -104,9 +122,10 @@ class TransactionController extends Controller
 
         $t = Transaksi::find($request->id);
         $t->payment = $profileImage;
+        $t->status = "Bukti bayar dikirim";
         $t->save();
 
-        // event(new NotifSeller(array($t)));
+        event(new NotifSeller($t));
 
         return redirect()->back();
     }
@@ -121,7 +140,7 @@ class TransactionController extends Controller
         $t->status = 'lunas & dikirim';
         $t->save();
 
-        // event(new NotifBuyer(array($t)));
+        event(new NotifBuyer($t));
 
         return redirect()->back();
     }
@@ -134,11 +153,6 @@ class TransactionController extends Controller
 
             return redirect()->back();
         }
-
-        $transaksi = Transaksi::where('created_at', '>=',Carbon::now()->subMinutes(1440)->toDateTimeString())
-                    ->whereNull('confirmed')
-                    ->whereNull('payment')
-                    ->delete();   
     }
 
     public function notifBuyer(Request $request)
