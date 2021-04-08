@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Flat Icon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/vendor/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/flaticon/flaticon.css') }}">
     <!-- audio & video player CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/adda/css/plugins/plyr.css') }}">
     <!-- Slick CSS -->
@@ -264,6 +265,7 @@
                                                 @if (Auth::user()->role == 'admin')
                                                 <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
                                                 @endif
+                                                <li><a href="{{ '/showroom' }}"><i class="flaticon-car"></i>Showroom</a></li>
                                                 <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                                 <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                                 <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
@@ -452,6 +454,7 @@
                                     @if (Auth::user()->role == 'admin')
                                     <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
                                     @endif
+                                    <li><a href="{{ '/showroom' }}"><i class="flaticon-car"></i>Showroom</a></li>
                                     <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>
