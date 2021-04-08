@@ -75,7 +75,7 @@
             @csrf
             <p style="display: inline">belum menerima?</p>
             {{-- <a href="">kirim ulang</a> --}}
-            <button class="btn btn-warning" type="submit">kirim ulang</button>
+            <button class="btn btn-outline-secondary" type="submit">kirim ulang</button>
           </form>
         </div>
     </header><!-- End Header -->
