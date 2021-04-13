@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview mt-2" disabled>
-            <a href="admin/news" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Content
@@ -159,7 +159,7 @@
           </li>
           <li class="nav-item has-treeview mt-2" disabled>
             @if ($userVerified->count() <= 0)
-            <a href="admin/news" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
@@ -168,7 +168,7 @@
               </p>
             </a>
             @else
-            <a href="admin/news" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User
