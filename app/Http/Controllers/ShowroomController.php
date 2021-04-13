@@ -67,7 +67,6 @@ class ShowroomController extends Controller
         
         //show picts
         $SR = SR::find($id)->where('slug', $slug)->first();
-
         //Seller User
         $tenant = SR::with(['user.tenant'])->where('id', $id)->first();
         $wishlist = Wishlist::where('produk_id', $id)
@@ -75,8 +74,12 @@ class ShowroomController extends Controller
                             ->where('jenis', 'car')
                             ->first();
         $gambar = json_decode($SR->gambar, true);
+        $transaction = Transaksi::where('transactionable_id', $id)
+                                ->where('transactionable_type', "App\Models\SR")
+                                ->where('buyer_id', Auth::id())
+                                ->first();
 
-        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist', 'gambar'));
+        return view('showroom2.cars.car-details', compact('SR', 'user', 'tenant', 'wishlist', 'gambar', 'transaction'));
     }
 
     // Showroom
