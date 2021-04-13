@@ -47,6 +47,40 @@
              <div class="col-md-4">
               <div class="card">
                 <div class="card-header">
+                  <h3 class="card-title">Saldo Region</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Saldo</th>
+                                {{-- <th>Aksi</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($saldo as $i => $s)
+                          <tr>
+                            <td>{{ $s['Pemasukan']['region'] }}</td>
+                            <td style="color: #42a4ff">-Rp.@convert($s['Pemasukan']['pendapatan'] - $s['Pengeluaran']['pengeluaran'])</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}} 
+                      </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                  <div class="card-footer">
+                </div>
+              </div>
+             </div> 
+             <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
                   <h3 class="card-title">Total Pendapatan</h3>
                 </div>
                 <!-- /.card-header -->
@@ -113,41 +147,7 @@
                   <div class="card-footer">
                 </div>
               </div>
-             </div> 
-             <div class="col-md-4">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">Saldo Region</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <!-- TAMPILKAN DATA YANG BERHASIL DIFILTER -->
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Region</th>
-                                <th>Saldo</th>
-                                {{-- <th>Aksi</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($saldo as $i => $s)
-                          <tr>
-                            <td>{{ $s['Pemasukan']['region'] }}</td>
-                            <td style="color: #42a4ff">-Rp.@convert($s['Pemasukan']['pendapatan'] - $s['Pengeluaran']['pengeluaran'])</td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                        {{-- <p class="mt-2">Halaman: {{ $data->currentPage() }}</p> --}} 
-                      </table>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                  <div class="card-footer">
-                </div>
-              </div>
-             </div> 
+             </div>
              {{-- <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
