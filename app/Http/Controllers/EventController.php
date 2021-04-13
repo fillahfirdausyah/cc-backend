@@ -34,7 +34,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('admin.event.CreateEvent');
+        $userVerified = User::where('verified', NULL);
+        return view('admin.event.CreateEvent', compact('userVerified'));
     }
 
     /**
@@ -87,8 +88,8 @@ class EventController extends Controller
     public function edit($id)
     {
         $data = Event::find($id);
-
-        return view('admin.event.EditEvent', compact('data'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.event.EditEvent', compact('data', 'userVerified'));
     }
 
     /**

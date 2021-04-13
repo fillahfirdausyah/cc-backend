@@ -27,7 +27,8 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('admin.gallery.CreateGallery');
+        $userVerified = User::where('verified', NULL);
+        return view('admin.gallery.CreateGallery', compact('userVerified'));
     }
 
     /**

@@ -27,7 +27,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.CreateNews');
+        $userVerified = User::where('verified', NULL);
+        return view('admin.news.CreateNews', compact('userVerified'));
     }
 
     /**
@@ -72,8 +73,8 @@ class NewsController extends Controller
     public function show($slug)
     {
         $data = News::where('slug', $slug)->first();
-
-        return view('admin.news.Show', compact('data'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.news.Show', compact('data', 'userVerified'));
     }
 
     /**
@@ -85,8 +86,8 @@ class NewsController extends Controller
     public function edit($id)
     {
         $data = News::find($id);
-
-        return view('admin.news.EditNews', compact('data'));
+        $userVerified = User::where('verified', NULL);
+        return view('admin.news.EditNews', compact('data', 'userVerified'));
     }
 
     /**
