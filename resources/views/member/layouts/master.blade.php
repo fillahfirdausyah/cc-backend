@@ -457,7 +457,7 @@
                                     @if (Auth::user()->role == 'admin')
                                     <li><a href="{{ '/dashboard' }}"><i class="flaticon-controls"></i>Admin Panel</a></li>
                                     @endif
-                                    <li><a href="{{ '/showroom' }}"><i class="flaticon-car">Showroom</i></a></li>
+                                    <li><a href="{{ '/showroom' }}"><i class="flaticon-car"></i>Showroom</a></li>
                                     <li><a href="{{ '/member/profile/' }}"><i class="flaticon-user"></i>Profile</a></li>
                                     <li><a href="#"><i class="flaticon-message"></i>Inbox</a></li>
                                     <li><a href="#"><i class="flaticon-document"></i>Activity</a></li>

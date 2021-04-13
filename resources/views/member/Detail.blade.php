@@ -16,6 +16,7 @@
                             <div class="about-author">
                                 <p>{{ $f->profile->bio }}</p>
                                 <ul class="author-into-list">
+                                    <li><a href="#"><i class="bi bi-calendar"></i>{{ $f->nopung }}</a></li>
                                     <li><a href="#"><i class="bi bi-office-bag"></i>{{ $f->profile->pekerjaan }}</a></li>
                                     {{-- <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li> --}}
                                     <li><a href="#"><i class="bi bi-location-pointer"></i>{{ $f->profile->alamat }}</a></li>
