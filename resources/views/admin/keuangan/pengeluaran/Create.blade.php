@@ -97,14 +97,23 @@
         type: 'post',
         data: {id: region_id },
         dataType: "json",
-        success: function(response){
-            let res = 0;
-            response.keuangan.forEach(x => {
-               res += x.jumlah
+        success: function(res){
+            let pemasukan = 0;
+            let pengeluaran = 0;
+            let saldo = 0;
+            res.keuangan.forEach(x => {
+               if(x.tipe_transaksi === 'pemasukan') {
+                pemasukan += x.jumlah
+               }
+
+               if(x.tipe_transaksi === 'pengeluaran') {
+                 pengeluaran += x.jumlah
+               }
             });
-            $('#saldo').val(res);
-            $('#jumlah').attr('max', res);
-            // console.log(res)
+            saldo = pemasukan - pengeluaran;
+            $('#saldo').val(saldo);
+            $('#jumlah').attr('max', saldo);
+            console.log(saldo)
         }
       });
   }
